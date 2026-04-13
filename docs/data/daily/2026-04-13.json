@@ -1,6 +1,6 @@
 {
   "date": "2026-04-13",
-  "generated_at": "2026-04-13T21:52:17.124982+00:00",
+  "generated_at": "2026-04-13T22:07:28.179013+00:00",
   "papers": [
     {
       "id": "2604.09547v1",
@@ -19,7 +19,9 @@
       "url": "http://arxiv.org/abs/2604.09547v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09547v1",
       "score": 9.0,
-      "abstract_zh": "Tango 提出了一种新的视觉信号优化框架，用于高效视频大语言模型。它通过**多样性驱动策略**改进了基于注意力的令牌选择，并引入 **ST-RoPE** 以保留时空几何结构，解决了现有剪枝方法对注意力分布处理不当和聚类产生碎片化的问题。"
+      "abstract_zh": "Tango 提出了一种新的高效视频大语言模型（Video LLM）框架，通过结合**多样性驱动的策略**改进了基于注意力的Token选择，并引入**时空旋转位置编码（ST-RoPE）**来保留几何结构。该方法解决了现有Token剪枝策略在注意力分布处理和聚类结构保持上的局限性，从而更有效地利用视觉信号。",
+      "figure_url": "https://arxiv.org/html/2604.09547v1/x1.png",
+      "figure_caption": "Limitations of two typical pre-LLM token pruning approaches. (Top Right) Top-k selection fails to fully capture the attention distribution, which is spatially multimodal and long-tailed in magnitude. (Bottom Right) Direct similarity-based clustering can result in noisy representations."
     },
     {
       "id": "2604.09531v1",
@@ -40,7 +42,7 @@
       "url": "http://arxiv.org/abs/2604.09531v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09531v1",
       "score": 9.0,
-      "abstract_zh": "VisionFoundry 提出了一种**任务驱动的合成数据生成流水线**，仅需任务关键词即可利用 LLM 和 T2I 模型自动生成 VQA 数据，无需人工标注。该方法的核心贡献是**构建了 VisionFoundry-10K 数据集**，用于有效提升视觉语言模型（VLMs）在空间理解等底层视觉感知任务上的性能。"
+      "abstract_zh": "VisionFoundry 提出了一种**任务驱动的合成数据生成流水线**，仅需任务关键词即可利用 LLM 和 T2I 模型生成高质量的合成图像和 VQA 数据。该方法**无需人工标注或参考图像**，成功构建了包含 10 个任务的 10K 合成数据集，旨在**增强 VLM 在空间理解等底层视觉感知任务上的能力**。"
     },
     {
       "id": "2604.09529v1",
@@ -59,7 +61,9 @@
       "url": "http://arxiv.org/abs/2604.09529v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09529v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了 **VL-Calibration** 框架，通过强化学习将大型视觉语言模型（LVLMs）的置信度解耦为**视觉置信度**和**推理置信度**。 核心贡献在于解决了现有方法无法区分感知和推理错误的问题，并引入了内在视觉确定性估计来监督视觉置信度，以提高高风险应用中的模型可靠性。"
+      "abstract_zh": "该论文提出 **VL-Calibration** 框架，通过强化学习将大型视觉语言模型（LVLMs）的置信度解耦为**视觉置信度和推理置信度**。 核心贡献在于解决了现有方法无法区分视觉感知错误和推理错误的问题，从而提高了模型在高风险场景下的可靠性。",
+      "figure_url": "https://arxiv.org/html/2604.09529v1/figure/first_image.png",
+      "figure_caption": "The baseline method (upper) makes overconfident assumptions. Instead, our method (lower) decouples confidence into visual and reasoning confidence, with clear identification of uncertainty sources and improved calibration."
     },
     {
       "id": "2604.09527v1",
@@ -80,7 +84,7 @@
       "url": "http://arxiv.org/abs/2604.09527v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09527v1",
       "score": 6.0,
-      "abstract_zh": "该论文提出了一种**基于稀疏点轨迹的逐步推理**方法，用于预测开放集未来场景动态。其核心是一个**自回归扩散模型**，通过建模不确定性增长，实现了对**数千种多样化未来**的高效、快速滚动预测，克服了传统密集预测方法的局限性。"
+      "abstract_zh": "该论文提出了一种**基于稀疏点轨迹的逐步推理**方法，用于预测开放集未来场景动态。其核心是通过**自回归扩散模型**，以短步长推进轨迹并显式建模不确定性增长，从而**高效生成数千种多样化的未来场景**。"
     },
     {
       "id": "2604.09480v1",
@@ -99,7 +103,9 @@
       "url": "http://arxiv.org/abs/2604.09480v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09480v1",
       "score": 8.0,
-      "abstract_zh": "Online3R通过引入**可学习的轻量级视觉提示**到冻结的几何基础模型中，实现了对新场景的在线适应性重建。它采用**局部-全局自监督学习策略**，利用中间结果和稀疏关键帧的约束来解决在线更新中缺乏真实标签和效率的问题，从而有效解决了序列重建中的不一致性。"
+      "abstract_zh": "Online3R通过引入**可学习的轻量级视觉提示**到冻结的几何基础模型中，实现了场景的**在线适应性学习**。它采用**局部-全局自监督学习策略**，利用中间结果和稀疏关键帧的约束，解决了在线更新中**缺乏真实标签和效率**的问题，从而**有效解决序列重建的不一致性**。",
+      "figure_url": "https://arxiv.org/html/2604.09480v1/x1.png",
+      "figure_caption": "Overview of our proposed Online3R. The core of our Online3R lies in constructing self-supervised methods and online prompt tuning, enabling the model to adapt to the current scene and ensuring consistent reconstruction results. We leverage a local consistency loss derived from temporally fused geometry to enhance the accuracy of subsequent predictions, and a global consistency loss that enforces geometric invariance across distant views to mitigate long-term drift, guaranteeing both consistency and efficiency."
     },
     {
       "id": "2604.09478v1",
@@ -117,7 +123,7 @@
       "url": "http://arxiv.org/abs/2604.09478v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09478v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种**增量语义辅助的室内高保真网格重建方法**。它通过**视觉基础模型对每帧RGB图像进行语义标注，并将这些标签增量地投影和融合到LiDAR里程计地图中**，最终利用**语义感知的TSDF融合**生成高质量网格。这解决了LiDAR稀疏性和漂移导致的几何重建问题。"
+      "abstract_zh": "该论文提出了一种**增量语义辅助的室内高保真网格重建方法**。它通过**视觉基础模型为每个新的RGB帧直接打标签**，并将这些标签**增量地投影和融合到激光雷达惯性里程计地图**中，最终利用**语义感知的TSDF融合**生成高质量网格。此方法**保留了激光雷达的几何精度，并利用视觉语义解决了稀疏性和漂移导致的边界几何模糊问题**。"
     },
     {
       "id": "2604.09437v1",
@@ -134,7 +140,7 @@
       "url": "http://arxiv.org/abs/2604.09437v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09437v1",
       "score": 6.0,
-      "abstract_zh": "AdaCubic提出了一种自适应的立方正则化优化器，通过求解一个带立方约束的辅助优化问题来动态调整立方项的权重。它利用Hutchinson方法近似Hessian矩阵以降低计算成本，并保持了立方正则化牛顿法的局部收敛保证。该方法在多领域实验中表现优异，且无需超参数精调，具有很强的实用性。"
+      "abstract_zh": "AdaCubic提出了一种**自适应的立方正则化优化器**，通过求解一个带立方约束的辅助优化问题来动态调整正则化项的权重。它利用Hutchinson方法近似Hessian矩阵以降低计算成本，并**保持了立方正则化牛顿法的局部收敛保证**。该方法在多领域实验中表现优异，且**无需超参数精调**，具有很强的实用性。"
     },
     {
       "id": "2604.09436v1",
@@ -151,7 +157,9 @@
       "url": "http://arxiv.org/abs/2604.09436v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09436v1",
       "score": 8.0,
-      "abstract_zh": "SCoRe 是一种**训练无关**的生成后处理方法，用于从在噪声数据上训练的扩散模型中生成清晰图像。它利用扩散模型的谱偏置，通过**频率截止**抑制高频噪声，并利用**SDEdit**基于理论映射的初始化时间步来**再生**干净的高频细节。该方法显著提升了生成质量。"
+      "abstract_zh": "SCoRe 是一种**训练无关**的生成时方法，用于从在噪声图像上训练的扩散模型中生成清晰图像。它利用扩散模型的**谱偏置**，通过**频率截止**抑制高频噪声，并利用**SDEdit**根据理论映射（基于 RAPSD）重新生成干净的高频细节。这显著提高了生成质量，优于现有基线。",
+      "figure_url": "https://arxiv.org/html/2604.09436v1/x1.png",
+      "figure_caption": "Impact of a dataset containing noisy training images on the generated results. Images in red boxes are clean examples; all others are noisy."
     },
     {
       "id": "2604.09429v1",
@@ -172,7 +180,7 @@
       "url": "http://arxiv.org/abs/2604.09429v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09429v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出“Rays as Pixels”模型，一个视频扩散模型（VDM），**联合学习视频帧和相机轨迹的分布**。它通过**解耦自-交叉注意力机制**，将相机表示为“射线像素”（raxels）并与视频帧一起去噪，从而**统一解决了相机轨迹预测、联合生成和新视角渲染**等任务。"
+      "abstract_zh": "该论文提出了一种名为“Rays as Pixels”的视频扩散模型（VDM），它将相机轨迹表示为“射线像素”（raxels）并与视频帧一起学习联合分布。该模型通过解耦的自-交叉注意力机制，统一解决了从视频预测相机轨迹、从图像联合生成视频和轨迹，以及根据目标轨迹生成视频这三个任务。"
     },
     {
       "id": "2604.09426v1",
@@ -193,7 +201,7 @@
       "url": "http://arxiv.org/abs/2604.09426v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09426v1",
       "score": 6.0,
-      "abstract_zh": "该论文采用**基于经验的共同设计方法**，与盲人和低视力（BLV）用户合作，开发了一个**多模态的、无需视觉的3D数据可视化工具原型**。核心贡献在于通过迭代比较触觉和数字原型，确定了**参考声化、立体和体积音频**等经验验证的功能，以提高BLV用户对3D数据的分析准确性和学习能力。"
+      "abstract_zh": "该论文采用**基于经验的共同设计方法**，邀请盲人和低视力（BLV）用户参与，迭代比较了触觉探针和数字原型。核心贡献是**开发了一个多模态的、无需视觉的3D数据可视化工具原型**，集成了参考声化、立体和体积音频等功能，经验证能提高分析准确性和可学习性。"
     },
     {
       "id": "2604.09425v1",
@@ -210,7 +218,9 @@
       "url": "http://arxiv.org/abs/2604.09425v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09425v1",
       "score": 9.0,
-      "abstract_zh": "该论文系统研究了视觉语言模型（VLMs）中图像令牌（tokens）的必要性。研究发现，视觉表征在浅层后迅速收敛到一个低复杂度状态，后续层变化不大，表明**深层持续处理图像令牌的计算开销是低效的**。核心贡献在于揭示了视觉信息在模型深度中的演化规律，暗示可以优化模型结构。"
+      "abstract_zh": "该论文系统研究了视觉语言模型（VLMs）中图像Token处理的必要性。研究发现，视觉表征在浅层后迅速收敛到一个低复杂度状态，后续层变化有限，表明深层持续处理图像Token的计算开销可能不必要。",
+      "figure_url": "https://arxiv.org/html/2604.09425v1/pictures/teaser4.png",
+      "figure_caption": "When is visual depth necessary in vision language models? We investigate a) stabilization of image tokens, b) layer-wise functional interchangeability, c) task-dependent utility, d) recoverability after truncation, e) reasoning-chain sensitivity. Our results reveal that image representations stabilize early, but their necessity depends on task and reasoning demands."
     },
     {
       "id": "2604.09415v1",
@@ -232,7 +242,7 @@
       "url": "http://arxiv.org/abs/2604.09415v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09415v1",
       "score": 6.0,
-      "abstract_zh": "PhysInOne是一个包含200万个视频的大规模合成数据集，旨在解决物理学习数据稀缺问题。它覆盖了71种基础物理现象，并提供全面的3D几何、语义和物理属性标注。该数据集能有效提升AI模型在物理感知视频生成、未来预测和属性估计等任务中的物理合理性。"
+      "abstract_zh": "PhysInOne是一个包含200万个视频的大规模合成数据集，旨在解决物理学习数据稀缺问题。它覆盖了71种物理现象，并提供详尽的3D几何、运动和物理属性标注。该数据集能有效提升基础模型在物理感知视频生成、未来预测和属性估计等任务中的物理合理性。"
     },
     {
       "id": "2604.09405v1",
@@ -249,7 +259,7 @@
       "url": "http://arxiv.org/abs/2604.09405v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09405v1",
       "score": 7.0,
-      "abstract_zh": "EGLOCE 是一种**无需训练**的方法，通过在推理过程中**引导潜在向量**来实现概念擦除。它使用**排斥能量**将生成过程推离目标概念，同时利用**保留能量**确保与原始提示的语义一致性。该方法有效且不损害模型性能。"
+      "abstract_zh": "EGLOCE 提出了一种**无需训练**的方法，通过在推理过程中**引导潜空间**来擦除特定概念。它利用**排斥能量**使生成远离目标概念，同时用**保留能量**确保与原提示的语义一致性。该方法有效且避免了重新训练或损害其他概念保真度的问题。"
     },
     {
       "id": "2604.09370v1",
@@ -268,7 +278,9 @@
       "url": "http://arxiv.org/abs/2604.09370v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09370v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种名为“Cluster-First Labelling”的自动化流程，用于对组织全玻片图像（WSI）中的组织成分进行分割和形态聚类。该方法首先分割、提取特征并对形态相似的对象进行聚类，然后让人工标注员仅对代表性簇进行标记，从而**极大地减少了人工标注的工作量**。"
+      "abstract_zh": "该论文提出了一种名为“Cluster-First Labelling”的自动化流程，用于对组织全玻片图像（WSIs）中的组织成分进行分割和形态聚类。该方法通过**先聚类后标注**的范式，利用深度学习分割和降维聚类技术，将人工标注对象从单个结构转变为代表性簇，**极大地减少了人工标注的工作量**。",
+      "figure_url": "https://arxiv.org/html/2604.09370v1/figures/pipeline_comp2.png",
+      "figure_caption": "Pipeline architecture. WSI slides ( .ndpi ) are tiled into 512 × 512 512\\times 512 patches, quality-filtered, segmented with Cellpose-SAM, embedded with ResNet-50, reduced via UMAP, and clustered with DBSCAN. Optional downstream stages annotate images, extract representative tiles per cluster, and invoke a multimodal LLM for experimental classification."
     },
     {
       "id": "2604.09368v1",
@@ -288,7 +300,9 @@
       "url": "http://arxiv.org/abs/2604.09368v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09368v1",
       "score": 7.0,
-      "abstract_zh": "该论文提出**FixATE**方法，通过将**视觉-语言模型（VLM）的内部视觉注意力**与用户的**真实眼动追踪数据**对齐，来提升LLM用户模拟器的保真度。核心贡献在于利用个体化的视觉注意力模式，使模拟器能更真实地感知和响应推荐界面的视觉布局，从而更准确地预测用户点击行为。"
+      "abstract_zh": "该论文提出**FixATE**方法，通过将**视觉-语言模型（VLM）的内部视觉注意力与用户特定的眼动追踪数据对齐**，来改进推荐系统用户模拟的保真度。核心贡献在于证明了**基于个人注视模式的调优能有效捕捉用户对推荐布局的视觉偏好**，从而实现更真实的用户行为模拟。",
+      "figure_url": "https://arxiv.org/html/2604.09368v1/x1.png",
+      "figure_caption": "Figure 1 . The difference of the perception of recommendations between real users and LLM-based user simulators."
     },
     {
       "id": "2604.09366v1",
@@ -307,7 +321,9 @@
       "url": "http://arxiv.org/abs/2604.09366v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09366v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种鲁棒的4D视觉几何Transformer，通过**熵引导的子空间投影**和**局部一致性驱动的几何纯化**来解耦动态与静态场景成分。其核心贡献在于引入了**不确定性感知的先验**，通过信息论和空间约束来提高动态场景重建的准确性和鲁棒性。"
+      "abstract_zh": "该论文提出了一种鲁棒的4D视觉几何Transformer，通过**熵引导的子空间投影**分离动态和静态成分，并利用**局部一致性驱动的几何纯化**消除结构噪声。其核心贡献在于引入**不确定性感知的先验**，通过异方差最大似然估计来提高动态场景重建的准确性和鲁棒性。",
+      "figure_url": "https://arxiv.org/html/2604.09366v1/x1.png",
+      "figure_caption": "Overview of the proposed framwwork."
     },
     {
       "id": "2604.09330v1",
@@ -327,7 +343,9 @@
       "url": "http://arxiv.org/abs/2604.09330v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09330v1",
       "score": 7.0,
-      "abstract_zh": "VAG提出了一种基于流匹配（flow-matching）的双流框架，用于联合生成视频和动作，同时受到视觉和语言的条件约束。该方法通过同步两个分支的去噪过程，解决了现有模型中视频-动作对齐不强和效率低下的问题。其核心贡献是提供了一种高效、对齐的合成数据生成范式，以支持具身智能体的策略学习。"
+      "abstract_zh": "VAG提出了一种基于流匹配（flow-matching）的双流框架，用于联合生成视频和动作，同时受到视觉和语言的条件约束。该方法通过同步两个分支的去噪过程，实现了视频和动作之间更强的对齐，有效解决了现有模型中视频-动作不一致或生成效率低下的问题。",
+      "figure_url": "https://arxiv.org/html/2604.09330v1/x1.png",
+      "figure_caption": "Illustration and capabilities of VAG. (a) We train our dual-stream video-action generation model using teleoperated robot trajectories. (b) Given an initial frame and a language instruction, the model can synchronously generate aligned video–action data pairs. (c) The generated data can be used to train robot policies for improved generalization. (d) The actions generated by the model can also be applied for real-world robot replay. The successful task execution demonstrates that the model holds the potential to function as a policy."
     },
     {
       "id": "2604.09324v1",
@@ -345,7 +363,9 @@
       "url": "http://arxiv.org/abs/2604.09324v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09324v1",
       "score": 7.0,
-      "abstract_zh": "该论文提出**SFGS**方法，利用**空间三平面和时间六平面**捕捉动态特征，并通过**结构感知高斯模块**实现姿态依赖的细节重建。其核心贡献在于能从单目视频中重建出**表情丰富且拓扑一致**的全身三维人体化身，尤其提升了对手部和面部精细形变的建模能力。"
+      "abstract_zh": "该论文提出了**结构感知细粒度高斯泼溅（SFGS）**方法，利用空间三平面和时间六平面捕捉动态特征。其核心贡献在于设计了**结构感知高斯模块**以精确捕捉姿态依赖的细节，并引入**残差精炼模块**以优化手部变形，从而实现从单目视频中重建逼真且拓扑一致的表情丰富的人体化身。",
+      "figure_url": "https://arxiv.org/html/2604.09324v1/x1.png",
+      "figure_caption": "Limitation of conventional human gaussian splatting methods. The second row shows the error between the reconstructed 3D avatar from the corresponding input image in the first row and the 3D ground truth, with darker colors indicating larger reconstruction errors. The hand exhibits the largest reconstruction error across the entire body."
     },
     {
       "id": "2604.09305v1",
@@ -361,7 +381,9 @@
       "url": "http://arxiv.org/abs/2604.09305v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09305v1",
       "score": 7.0,
-      "abstract_zh": "VAGNet 提出了一种基于深度学习的方法，利用**全局场景特征**而非耗时的逐对象特征，从行车记录仪视频中**实时预测交通事故**。其核心贡献在于实现了高效且准确的视觉事故预警。"
+      "abstract_zh": "VAGNet 提出了一种基于深度神经网络的方法，利用**全局场景特征**而非耗时的逐对象特征，从行车记录仪视频中**实时预测交通事故**。其核心贡献在于实现了高效且准确的视觉事故预警。",
+      "figure_url": "https://arxiv.org/html/2604.09305v1/diagrams/vagnet_diagram.png",
+      "figure_caption": "Architecture of the proposed VAGNet accident anticipation framework."
     },
     {
       "id": "2604.09280v1",
@@ -381,7 +403,9 @@
       "url": "http://arxiv.org/abs/2604.09280v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09280v1",
       "score": 7.0,
-      "abstract_zh": "该论文提出了一种名为 **AMO-ENE** 的端到端多组学融合模型，用于预测 HPV 阳性口咽癌的治疗结局。核心方法是利用 **注意力机制** 整合 **CT 影像（通过半监督分割和特征提取）** 与临床数据，以实现 **淋巴结外侵犯 (ENE) 状态的自动化评估**。其贡献在于提供了一种克服手动分割困难、提高 ENE 预测准确性的新工具。"
+      "abstract_zh": "该论文提出**AMO-ENE**，一个基于**注意力机制的多组学融合模型**，用于**预测HPV相关口咽癌的治疗结局**。\n\n核心方法是利用**3D半监督分割模型**自动识别和勾画淋巴结外侵犯（ENE），并结合**影像组学和深度特征**进行预测。\n\n主要贡献在于提供了一个**端到端的全自动流程**，克服了手动分割的限制，以更准确地评估ENE状态并预测临床结果。",
+      "figure_url": "https://arxiv.org/html/2604.09280v1/introduction_Figure_V3.png",
+      "figure_caption": "Illustration for iENE status grading system. Nodes are presented with white borders, red healthy tissue background and black tumoral content. Grade 0 indicates metastatic pathological node with no signs of extension. Grade 1 indicates extension through the nodal capsule into surrounding fat. Grade 2 characterizes coalescent nodal masses with loss of internodal planes. Grade 3 is defined by overt invasion of surrounding structures and tissues. In case of multiple ENE, the maximum grade is reported."
     },
     {
       "id": "2604.09258v1",
@@ -400,7 +424,7 @@
       "url": "http://arxiv.org/abs/2604.09258v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09258v1",
       "score": 6.0,
-      "abstract_zh": "该论文研究了预训练模型在不同数据源上的损失函数最小值是否“共同”（common minima）。作者发现标准优化器常收敛到分散的最小值，并提出 **Nexus** 方法来引导模型收敛到更接近的共同最小值，从而**提升下游任务的泛化能力**。"
+      "abstract_zh": "该论文研究了预训练损失函数的优化几何，发现标准优化器易导致任务特定最小点分散，影响泛化能力。**Nexus** 旨在通过优化策略，促使模型收敛到任务特定最小点**相近**的公共极小值点，从而提升下游任务的泛化性能。"
     },
     {
       "id": "2604.09227v1",
@@ -418,7 +442,9 @@
       "url": "http://arxiv.org/abs/2604.09227v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09227v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种**无需训练**的方法，用于生成与高分辨率（HR）图像具有**感知一致性**的低分辨率（LR）预览图。核心方法是引入**零对合条件（commutator-zero condition）**来确保LR-HR的感知一致性，从而实现高效的工作流程，使用户能在生成昂贵的HR图像前筛选出满意的候选。"
+      "abstract_zh": "该论文提出了一种**无需训练**的方法，通过引入**“零对易子条件”**来确保低分辨率（LR）预览图与高分辨率（HR）图像在**感知上的一致性**。核心贡献是提供了一种**高效的工作流程**，允许用户在生成昂贵的HR图像前，快速筛选出具有良好潜力的LR预览图。",
+      "figure_url": "https://arxiv.org/html/2604.09227v1/x1.png",
+      "figure_caption": "Motivation of Preview Generation. Most users of generative AI usually produce diverse candidate images through repeated trials from multiple seeds (or prompts) to obtain a desired result. Our goal is to accelerate this workflow by generating low-resolution images that share the same content as their high-resolution counterparts but can be produced much faster in a training-free manner."
     },
     {
       "id": "2604.09213v1",
@@ -435,7 +461,9 @@
       "url": "http://arxiv.org/abs/2604.09213v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09213v1",
       "score": 9.0,
-      "abstract_zh": "SHIFT 提出了一种轻量级框架，通过在推理时**靶向操纵 DiT 扩散模型中间激活层**来控制概念移除或风格迁移。它学习动态的**引导向量**，以抑制不需要的概念，同时保持图像质量和提示的其余内容，无需耗时再训练。"
+      "abstract_zh": "SHIFT 提出了一种轻量级框架，通过在推理时**有针对性地操纵 DiT 扩散模型中间层的激活**来实现概念移除。它学习动态的**引导向量**，能有效抑制不需要的视觉概念，同时保持图像质量，并可用于风格迁移或对象修改，无需耗时再训练。",
+      "figure_url": "https://arxiv.org/html/2604.09213v1/x1.png",
+      "figure_caption": "Double-stream block."
     },
     {
       "id": "2604.09201v1",
@@ -454,7 +482,7 @@
       "url": "http://arxiv.org/abs/2604.09201v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09201v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了CT-1模型，一个专用的视觉-语言-相机模型，用于实现精确的相机可控视频生成。它通过在频域使用小波正则化损失来学习复杂的相机轨迹分布，并将这些轨迹整合到扩散模型中，从而实现与用户意图对齐的空间感知相机控制。"
+      "abstract_zh": "该论文提出 **CT-1 模型**，一个**视觉-语言-相机模型**，用于实现精确的**相机可控视频生成**。它通过**小波正则化损失**学习复杂的相机轨迹分布，并将这些轨迹整合到扩散模型中，从而实现与用户意图一致的空间推理和相机控制。"
     }
   ],
   "hacker_news": [
@@ -465,7 +493,7 @@
       "score": 389,
       "created_at": "2026-04-13T02:53:10Z",
       "comments_url": "https://news.ycombinator.com/item?id=47747017",
-      "summary_zh": "苹果被低估的AI战略，可能因其生态系统优势，在AI竞争中意外成为赢家。"
+      "summary_zh": "苹果被低估的AI战略，可能因其生态系统优势，最终在AI竞争中意外胜出。"
     },
     {
       "id": 47751032,
@@ -474,7 +502,7 @@
       "score": 172,
       "created_at": "2026-04-13T12:29:39Z",
       "comments_url": "https://news.ycombinator.com/item?id=47751032",
-      "summary_zh": "**人工智能或标志着数字浪潮的终结，而非下一波科技创新。**"
+      "summary_zh": "**人工智能或将终结数字浪潮，而非开启新的技术飞跃。**"
     },
     {
       "id": 47745120,
@@ -492,7 +520,16 @@
       "score": 125,
       "created_at": "2026-04-13T15:41:08Z",
       "comments_url": "https://news.ycombinator.com/item?id=47753643",
-      "summary_zh": "Claude.ai 出现宕机，用户暂时无法访问。"
+      "summary_zh": "Claude.ai 目前服务中断，用户暂时无法访问。"
+    },
+    {
+      "id": 47758028,
+      "title": "Stanford report highlights growing disconnect between AI insiders and everyone",
+      "url": "https://techcrunch.com/2026/04/13/stanford-report-highlights-growing-disconnect-between-ai-insiders-and-everyone-else/",
+      "score": 74,
+      "created_at": "2026-04-13T21:25:38Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47758028",
+      "summary_zh": "斯坦福报告揭示：人工智能圈内人与公众的认知差距日益扩大。"
     },
     {
       "id": 47752402,
@@ -501,7 +538,7 @@
       "score": 62,
       "created_at": "2026-04-13T14:21:29Z",
       "comments_url": "https://news.ycombinator.com/item?id=47752402",
-      "summary_zh": "扎克伯格正秘密开发一个AI“分身”，或将用于替代他出席会议。"
+      "summary_zh": "扎克伯格正秘密开发一个AI“分身”，或将代他出席会议。"
     },
     {
       "id": 47748123,
@@ -510,86 +547,74 @@
       "score": 58,
       "created_at": "2026-04-13T05:56:49Z",
       "comments_url": "https://news.ycombinator.com/item?id=47748123",
-      "summary_zh": "AI裁员潮来临，预示着技术进步可能带来就业结构性冲击。"
+      "summary_zh": "AI裁员潮来袭，企业或因过度依赖技术而陷入困境。"
     }
   ],
   "jobs": [
     {
       "title": "Postdoctoral Research Associate in Computational Bioengineering",
       "url": "https://www.jobs.ac.uk/job/DRE440/postdoctoral-research-associate-in-computational-bioengineering/",
-      "description": "Queen Mary University of London - Centre for Bioengineering, Blizard Institute, and Barts Cancer Institute.&lt;br /&gt;Salary: £38,419 to £51,755 per annum.",
+      "description": "About the Role This is an exciting position where applicants are invited to join a multi-disciplinary team of bioengineers, biomedical scientists, and computer scientists working together at Queen Mary across the Centre for Bioengineering, Blizard Institute, and Barts Cancer Institute. The project will investigate the mechanisms through which breast cancer invades and colonises bone tissue using in silico models to replicate disease. We are particularly interested in the effects of exercise on the development of bone lesions, and the potential role played by mechanosensitive osteocyte cells in this condition. You will evaluate their interactions by building in silico models to establish the relationship between mechanical loading, cell imaging, in vivo micro-CT, and spatial transcriptomics, identifying the key mechanisms governing this process. About You We are looking to appoint a European Research Council-funded PDRA with a background in bioinformatics and computational biomechanics. The ideal candidate will have a computer science, biomedical sciences or bioengineering background, with experience of interdisciplinary research and experience of bioinformatics analyses. Alternatively, you could be an engineer with biomechanical or other relevant skills in inflammation and pathology, though with experience of handling large datasets. About the School The School of Engineering and Materials Science (SEMS) is a large, research-intensive School within the Faculty of Science and Engineering, comprising over 110 academic staff and a vibrant community of approximately 2,700 undergraduate and taught postgraduate students, alongside more than 250 PhD researchers. The School is supported by a dedicated team of administrative and technical professionals, creating a strong and collaborative higher education environment. SEMS is one of the UK’s leading research-intensive universities, recognised for delivering world-class education and impactful research. The School offers a dynamic and interdisciplinary research culture, ranked 7th overall in the UK for research excellence in REF2021, and 2nd nationally for world-leading research outputs. About Queen Mary At Queen Mary University of London, we believe that a diversity of ideas helps us achieve the previously unthinkable. Throughout our history, we’ve fostered social justice and improved lives through academic excellence. And we continue to live and breathe this spirit today, not because it’s simply ‘the right thing to do’ but for what it helps us achieve and the intellectual brilliance it delivers. We continue to embrace diversity of thought and opinion in everything we do, in the belief that when views collide, disciplines interact, and perspectives intersect, truly original thought takes form. Benefits We offer competitive salaries, access to a generous pension scheme, 30 days’ leave per annum (pro-rata for part-time/fixed-term), a season ticket loan scheme and access to a comprehensive range of personal and professional development opportunities. In addition, we offer a range of work life balance and family friendly, inclusive employment policies, flexible working arrangements, and campus facilities. Queen Mary’s commitment to our diverse and inclusive community is embedded in our appointments processes. Reasonable adjustments will be made at each stage of the recruitment process for any candidate with a disability. We are open to considering applications from candidates wishing to work flexibly. £38,419 to £51,755 per annum.",
       "posted_date": "",
       "source": "jobs.ac.uk Research",
-      "deadline": "",
-      "requirements_zh": "根据您提供的职位描述信息，提取结果如下：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 职位名称为“计算生物工程博士后研究员”，暗示需要具备计算生物工程相关的专业知识和研究经验。",
+      "deadline": "2026-05-11T00:00:00+00:00",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 需具备构建**in silico 模型**的能力，以模拟乳腺癌侵袭骨组织机制，并整合**机械载荷、细胞成像、体内微CT和空间转录组学**数据进行评估。",
       "relevance_score": 8.0,
-      "institution": ""
+      "institution": "Queen Mary University of London",
+      "location": "",
+      "salary": "GBP38419.00-GBP51755.00 YEAR"
     },
     {
       "title": "Research Associate, Centre for Emerging Technology and Security",
       "url": "https://www.jobs.ac.uk/job/DRE443/research-associate-centre-for-emerging-technology-and-security/",
-      "description": "The Alan Turing Institute&lt;br /&gt;Salary: £45,000 to £50,000 per annum",
+      "description": "HOURS: 36 CLOSES: Thursday 30 April at 23:59 (London, UK BST) The Alan Turing Institute Named in honour of Alan Turing, the Institute is a place for inspiring, exciting work and we need passionate, sharp, and innovative people who want to use their skills to contribute to our mission to make great leaps in data science and AI research to change the world for the better. Please find more information about us here BACKGROUND In 2022, the Alan Turing Institute launched the Centre for Emerging Technology and Security (CETaS), which is part of the Institute’s Defence and National Security Grand Challenge. The Centre’s mission is to strengthen UK security through pioneering research and insights on emerging technologies. We help to protect the UK by: Enabling innovation - Advising the national security community on the effective and responsible use of AI capabilities Assessing global threats and opportunities - Such as insights on geopolitical competition or threats from AI-enabled disinformation Shaping policy - Such as understanding public attitudes, developing frameworks, or advising on legislative changes The successful candidate will work across a range of research projects relating to emerging technology and national security, engaging with stakeholders across the UK government, academia and the private sector. They will gain experience in designing and delivering high-quality mixed-methods research for an external audience, relationship building with senior national security decision-makers and contribute directly to high-profile impactful public research reports. The successful candidate will be a highly motivated and collaborative researcher, who will work closely with researchers from CETaS and other organisations. Eligibility for Security Check (SC) clearance is a requirement for this role. Eligibility criteria and further information on the process can be found on the UK Government security vetting website. DUTIES AND AREAS OF RESPONSIBILITY Develop and present high-quality academic research on topics related to emerging technology and national security Articulate the findings and implications of this research to a non-expert policy audience, through various channels, both written and verbal Review and quality control written outputs produced by other researchers, both at the Turing and externally Co-organise CETaS events to inform and showcase research findings Support the work of policymakers, regulators and others by providing advice, attending workshops and giving presentations Please see our portal for a full breakdown of the Job Description. Terms and Conditions This post is offered on a fixed term basis, at an annual salary of £45,000 – 50,000 plus excellent benefits, including flexible working and family friendly policies, Employee-only benefits guide | The Alan Turing Institute The Alan Turing Institute is based at the British Library, in the heart of London’s Knowledge Quarter. We expect staff to come to our office at least 4 days per month. Some roles may require more days in the office; the hiring manager will be able to confirm this during the interview. Application procedure Please see our jobs portal (via the ' Apply ' button above) for full details on how to apply and the interview process. Equality Diversity and Inclusion We are committed to making sure our recruitment process is accessible and inclusive. This includes making reasonable adjustments for candidates who have a disability or long-term condition. Please contact us at adjustments@turing.ac.uk to find out how we can assist you. £45,000 to £50,000 per annum",
       "posted_date": "",
       "source": "jobs.ac.uk Research",
-      "deadline": "",
-      "requirements_zh": "根据您提供的职位描述信息，提取结果如下：\n\n1. **截止日期：** 未提供\n2. **主要技术要求：** 未提供（职位描述中仅包含职位名称、机构和薪资信息，缺乏具体的技术要求描述。）",
-      "relevance_score": 6.0,
-      "institution": ""
-    },
-    {
-      "title": "Postdoctoral Research Associate",
-      "url": "https://www.jobs.ac.uk/job/DRB880/postdoctoral-research-associate/",
-      "description": "Queen Mary University of London - Blizard Institute&lt;br /&gt;Salary: £38,419 to £46,618 per annum.",
-      "posted_date": "",
-      "source": "jobs.ac.uk Research",
-      "deadline": "",
-      "requirements_zh": "根据您提供的职位描述片段：\n\n1. **截止日期（如有）：** 未提供\n2. **主要技术要求（不超过80字）：** 未提供（该片段仅包含职位名称、机构和薪资信息，未包含具体的技术要求或职责描述。）",
+      "deadline": "2026-04-30T00:00:00+00:00",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 2024年4月30日 23:59 (伦敦，英国BST)\n2. **主要技术要求：** 职位描述中未明确列出具体的技术要求（如编程语言、软件或特定技术栈），仅提及需要“数据科学和人工智能研究”的技能，并致力于“新兴技术”的研究。",
       "relevance_score": 8.0,
-      "institution": ""
+      "institution": "The Alan Turing Institute",
+      "location": "",
+      "salary": "GBP45000.00-GBP50000.00 YEAR"
     },
     {
       "title": "Postdoctoral Research Associate in Computational Bioengineering",
       "url": "https://www.jobs.ac.uk/job/DRE440/postdoctoral-research-associate-in-computational-bioengineering/",
-      "description": "Queen Mary University of London - Centre for Bioengineering, Blizard Institute, and Barts Cancer Institute.&lt;br /&gt;Salary: £38,419 to £51,755 per annum.",
+      "description": "About the Role This is an exciting position where applicants are invited to join a multi-disciplinary team of bioengineers, biomedical scientists, and computer scientists working together at Queen Mary across the Centre for Bioengineering, Blizard Institute, and Barts Cancer Institute. The project will investigate the mechanisms through which breast cancer invades and colonises bone tissue using in silico models to replicate disease. We are particularly interested in the effects of exercise on the development of bone lesions, and the potential role played by mechanosensitive osteocyte cells in this condition. You will evaluate their interactions by building in silico models to establish the relationship between mechanical loading, cell imaging, in vivo micro-CT, and spatial transcriptomics, identifying the key mechanisms governing this process. About You We are looking to appoint a European Research Council-funded PDRA with a background in bioinformatics and computational biomechanics. The ideal candidate will have a computer science, biomedical sciences or bioengineering background, with experience of interdisciplinary research and experience of bioinformatics analyses. Alternatively, you could be an engineer with biomechanical or other relevant skills in inflammation and pathology, though with experience of handling large datasets. About the School The School of Engineering and Materials Science (SEMS) is a large, research-intensive School within the Faculty of Science and Engineering, comprising over 110 academic staff and a vibrant community of approximately 2,700 undergraduate and taught postgraduate students, alongside more than 250 PhD researchers. The School is supported by a dedicated team of administrative and technical professionals, creating a strong and collaborative higher education environment. SEMS is one of the UK’s leading research-intensive universities, recognised for delivering world-class education and impactful research. The School offers a dynamic and interdisciplinary research culture, ranked 7th overall in the UK for research excellence in REF2021, and 2nd nationally for world-leading research outputs. About Queen Mary At Queen Mary University of London, we believe that a diversity of ideas helps us achieve the previously unthinkable. Throughout our history, we’ve fostered social justice and improved lives through academic excellence. And we continue to live and breathe this spirit today, not because it’s simply ‘the right thing to do’ but for what it helps us achieve and the intellectual brilliance it delivers. We continue to embrace diversity of thought and opinion in everything we do, in the belief that when views collide, disciplines interact, and perspectives intersect, truly original thought takes form. Benefits We offer competitive salaries, access to a generous pension scheme, 30 days’ leave per annum (pro-rata for part-time/fixed-term), a season ticket loan scheme and access to a comprehensive range of personal and professional development opportunities. In addition, we offer a range of work life balance and family friendly, inclusive employment policies, flexible working arrangements, and campus facilities. Queen Mary’s commitment to our diverse and inclusive community is embedded in our appointments processes. Reasonable adjustments will be made at each stage of the recruitment process for any candidate with a disability. We are open to considering applications from candidates wishing to work flexibly. £38,419 to £51,755 per annum.",
       "posted_date": "",
       "source": "jobs.ac.uk CS",
-      "deadline": "",
-      "requirements_zh": "根据您提供的职位描述信息，提取结果如下：\n\n1. **截止日期：** 未提供\n2. **主要技术要求：** 职位名称为“计算生物工程博士后研究员”，暗示需要具备计算生物工程相关的专业知识和研究经验。",
+      "deadline": "2026-05-11T00:00:00+00:00",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 未提及。\n2. **主要技术要求：** 需具备构建**in silico模型**（计算模型）的能力，以模拟乳腺癌侵袭骨组织、研究运动影响及机械敏感性骨细胞的作用，并整合机械负荷、细胞成像、micro-CT和空间转录组学数据。",
       "relevance_score": 8.0,
-      "institution": ""
+      "institution": "Queen Mary University of London",
+      "location": "",
+      "salary": "GBP38419.00-GBP51755.00 YEAR"
     },
     {
       "title": "Research Associate, Centre for Emerging Technology and Security",
       "url": "https://www.jobs.ac.uk/job/DRE443/research-associate-centre-for-emerging-technology-and-security/",
-      "description": "The Alan Turing Institute&lt;br /&gt;Salary: £45,000 to £50,000 per annum",
+      "description": "HOURS: 36 CLOSES: Thursday 30 April at 23:59 (London, UK BST) The Alan Turing Institute Named in honour of Alan Turing, the Institute is a place for inspiring, exciting work and we need passionate, sharp, and innovative people who want to use their skills to contribute to our mission to make great leaps in data science and AI research to change the world for the better. Please find more information about us here BACKGROUND In 2022, the Alan Turing Institute launched the Centre for Emerging Technology and Security (CETaS), which is part of the Institute’s Defence and National Security Grand Challenge. The Centre’s mission is to strengthen UK security through pioneering research and insights on emerging technologies. We help to protect the UK by: Enabling innovation - Advising the national security community on the effective and responsible use of AI capabilities Assessing global threats and opportunities - Such as insights on geopolitical competition or threats from AI-enabled disinformation Shaping policy - Such as understanding public attitudes, developing frameworks, or advising on legislative changes The successful candidate will work across a range of research projects relating to emerging technology and national security, engaging with stakeholders across the UK government, academia and the private sector. They will gain experience in designing and delivering high-quality mixed-methods research for an external audience, relationship building with senior national security decision-makers and contribute directly to high-profile impactful public research reports. The successful candidate will be a highly motivated and collaborative researcher, who will work closely with researchers from CETaS and other organisations. Eligibility for Security Check (SC) clearance is a requirement for this role. Eligibility criteria and further information on the process can be found on the UK Government security vetting website. DUTIES AND AREAS OF RESPONSIBILITY Develop and present high-quality academic research on topics related to emerging technology and national security Articulate the findings and implications of this research to a non-expert policy audience, through various channels, both written and verbal Review and quality control written outputs produced by other researchers, both at the Turing and externally Co-organise CETaS events to inform and showcase research findings Support the work of policymakers, regulators and others by providing advice, attending workshops and giving presentations Please see our portal for a full breakdown of the Job Description. Terms and Conditions This post is offered on a fixed term basis, at an annual salary of £45,000 – 50,000 plus excellent benefits, including flexible working and family friendly policies, Employee-only benefits guide | The Alan Turing Institute The Alan Turing Institute is based at the British Library, in the heart of London’s Knowledge Quarter. We expect staff to come to our office at least 4 days per month. Some roles may require more days in the office; the hiring manager will be able to confirm this during the interview. Application procedure Please see our jobs portal (via the ' Apply ' button above) for full details on how to apply and the interview process. Equality Diversity and Inclusion We are committed to making sure our recruitment process is accessible and inclusive. This includes making reasonable adjustments for candidates who have a disability or long-term condition. Please contact us at adjustments@turing.ac.uk to find out how we can assist you. £45,000 to £50,000 per annum",
       "posted_date": "",
       "source": "jobs.ac.uk CS",
-      "deadline": "",
-      "requirements_zh": "根据您提供的职位描述信息，提取结果如下：\n\n1. **截止日期：** 未提供\n2. **主要技术要求：** 职位描述中**未包含**具体的技术要求信息。",
-      "relevance_score": 6.0,
-      "institution": ""
-    },
-    {
-      "title": "Postdoctoral Research Associate",
-      "url": "https://www.jobs.ac.uk/job/DRB880/postdoctoral-research-associate/",
-      "description": "Queen Mary University of London - Blizard Institute&lt;br /&gt;Salary: £38,419 to £46,618 per annum.",
-      "posted_date": "",
-      "source": "jobs.ac.uk CS",
-      "deadline": "",
-      "requirements_zh": "根据您提供的职位描述信息，提取结果如下：\n\n1. **截止日期：** 未提供\n2. **主要技术要求：** 职位描述中未包含具体的技术要求信息。",
+      "deadline": "2026-04-30T00:00:00+00:00",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 2024年4月30日 23:59 (伦敦，英国 BST)\n2. **主要技术要求：** 职位描述中未明确列出具体的技术要求（如编程语言、软件或特定技术栈），仅强调申请人需具备使用技能，致力于数据科学和人工智能研究，以推动世界向好的方向发展。",
       "relevance_score": 8.0,
-      "institution": ""
+      "institution": "The Alan Turing Institute",
+      "location": "",
+      "salary": "GBP45000.00-GBP50000.00 YEAR"
     },
     {
       "title": "Postdoctoral Research Associate in AI & Medical Imaging",
       "url": "https://www.jobs.ac.uk/job/DRE529/postdoctoral-research-associate-in-ai-and-medical-imaging/",
-      "description": "Queen Mary University of London - Barts Cancer Institute&lt;br /&gt;Salary: £38,419 to £44,288 per annum (pro rata)",
+      "description": "About the Role We are recruiting a Postdoctoral Research Associate to join a multidisciplinary project focused on early detection of hepatocellular carcinoma recurrence. The project will apply deep learning to improve detection using multiphase CT imaging and longitudinal biomarker data in routine practice. You will work with multidisciplinary clinical and AI teams on applied research, developing and evaluating computational methods, analysing imaging data, collaborating with clinicians for real-world impact, and contributing to publications. About You PhD (or near completion) in computer science, biomedical engineering, medical imaging, or related field Experience in deep learning with practical implementation Strong Python skills and relevant frameworks Experience with large clinical imaging datasets in secure environments Background in medical image analysis (CT/MRI preferred) Knowledge of detection, segmentation, and model development methods Interest in multimodal or longitudinal clinical data Ability to work independently and in multidisciplinary teams About the School/Department/Institute/Project The Barts Cancer Institute (BCI) is a Cancer Research UK Centre of Excellence whose work aims to transform the lives of those with and at risk of cancer through innovative research in the laboratory, in patients and in populations. It is one of six institutes within The Faculty of Medicine and Dentistry (FMD) BCI is internationally renowned in many areas of cancer research and it combines ground-breaking basic research with the expertise of clinicians and clinician scientists from the Centre for Experimental Cancer Medicine and the Barts NHS Trust to achieve improvements in cancer patient care. BCI is also a partner in the CRUK City of London Major Centre (together with UCL, Kings and the Francis Crick Institute) which is a Centre of Excellence in Biotherapeutics. BCI is committed in supporting and developing future cancer researchers through its extensive postgraduate training. About Queen Mary At Queen Mary University of London, we believe that a diversity of ideas helps us achieve the previously unthinkable. Throughout our history, we’ve fostered social justice and improved lives through academic excellence. And we continue to live and breathe this spirit today, not because it’s simply ‘the right thing to do’ but for what it helps us achieve and the intellectual brilliance it delivers. We continue to embrace diversity of thought and opinion in everything we do, in the belief that when views collide, disciplines interact, and perspectives intersect, truly original thought takes form. Benefits We offer competitive salaries, access to a generous pension scheme, 30 days’ leave per annum (pro-rata for part-time/fixed term), a season ticket loan scheme and access to a comprehensive range of personal and professional development opportunities. In addition, we offer a range of work life balance and family friendly, inclusive employment policies, flexible working arrangements, and campus facilities. Queen Mary’s commitment to our diverse and inclusive community is embedded in our appointments processes. Reasonable adjustments will be made at each stage of the recruitment process for any candidate with a disability. We are open to considering applications from candidates wishing to work flexibly. £38,419 to £44,288 per annum (pro rata)",
       "posted_date": "",
       "source": "jobs.ac.uk CS",
-      "deadline": "",
-      "requirements_zh": "根据您提供的职位描述：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 未提及（该描述仅包含职位名称、机构和薪资信息，未包含具体的工作职责或技术要求。）",
+      "deadline": "2026-05-04T00:00:00+00:00",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 专注于深度学习在多相CT影像和生物标志物数据上的应用，以早期检测肝细胞癌复发。要求具备深度学习的实践经验，精通Python及相关框架，并有处理大型临床影像数据的经验。",
       "relevance_score": 10.0,
-      "institution": ""
+      "institution": "Queen Mary University of London",
+      "location": "",
+      "salary": "GBP38419.00-GBP44288.00 YEAR"
     }
   ],
   "supervisor_updates": [],
@@ -599,137 +624,137 @@
       "url": "https://github.com/forrestchang/andrej-karpathy-skills",
       "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
       "stars_today": 5828,
-      "total_stars": 24405,
+      "total_stars": 24468,
       "language": "",
       "topics": [],
-      "summary_zh": "该仓库提供一个Markdown文件，基于Andrej Karpathy对LLM编程缺陷的观察，旨在提升Claude代码生成的准确性和质量。"
+      "summary_zh": "该仓库提供一个Markdown文件，基于Andrej Karpathy对LLM编程错误的观察，旨在提升Claude代码生成的准确性。"
     },
     {
       "full_name": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
       "description": "The agent that grows with you",
       "stars_today": 11297,
-      "total_stars": 76552,
+      "total_stars": 76586,
       "language": "Python",
       "topics": [],
-      "summary_zh": "Hermes Agent 是一个可成长的智能体，旨在通过持续学习和适应来增强用户能力。"
+      "summary_zh": "Hermes Agent 是一个可成长的智能体，旨在随着用户需求不断进化和增强其能力。"
     },
     {
       "full_name": "shiyu-coder/Kronos",
       "url": "https://github.com/shiyu-coder/Kronos",
       "description": "Kronos: A Foundation Model for the Language of Financial Markets",
       "stars_today": 1552,
-      "total_stars": 16932,
+      "total_stars": 16937,
       "language": "Python",
       "topics": [],
-      "summary_zh": "**Kronos是一个金融市场语言的基础模型，旨在理解和处理金融领域的专业文本。**"
+      "summary_zh": "**Kronos是一个专为金融市场语言设计的基石模型，旨在理解和处理金融领域的复杂文本数据。**"
     },
     {
       "full_name": "sponsors/thedotmack",
       "url": "https://github.com/sponsors/thedotmack",
       "description": "A Claude Code plugin that automatically captures everything Claude does during your coding sessions, compresses it with AI (using Claude's agent-sdk), and injects relevant context back into future sessions.",
       "stars_today": 3185,
-      "total_stars": 53005,
+      "total_stars": 53023,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "该GitHub仓库提供了一个Claude代码插件，能自动捕获编码过程，用AI压缩信息，并将相关上下文注入未来的Claude会话中，以增强代码辅助。"
+      "summary_zh": "这个GitHub仓库提供了一个Claude代码插件，能自动捕获编码过程，用AI压缩信息，并将相关上下文注入未来的Claude会话中。"
     },
     {
       "full_name": "microsoft/markitdown",
       "url": "https://github.com/microsoft/markitdown",
       "description": "Python tool for converting files and office documents to Markdown.",
       "stars_today": 2811,
-      "total_stars": 106791,
+      "total_stars": 106803,
       "language": "Python",
       "topics": [],
-      "summary_zh": "Markitdown是一个Python工具，能将各种文件和Office文档高效地转换为Markdown格式。"
+      "summary_zh": "Markitdown是一个Python工具，能将各类文件和Office文档高效地转换为Markdown格式。"
     },
     {
       "full_name": "multica-ai/multica",
       "url": "https://github.com/multica-ai/multica",
       "description": "The open-source managed agents platform. Turn coding agents into real teammates — assign tasks, track progress, compound skills.",
       "stars_today": 1724,
-      "total_stars": 10975,
+      "total_stars": 10986,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "**多智能体管理平台，将代码助手转化为可协作的团队成员，实现任务分配、进度追踪和技能复合。**"
+      "summary_zh": "这是一个开源的托管式智能体平台，能将编程智能体转化为团队成员，实现任务分配、进度跟踪和技能复合。"
     },
     {
       "full_name": "coleam00/Archon",
       "url": "https://github.com/coleam00/Archon",
       "description": "The first open-source harness builder for AI coding. Make AI coding deterministic and repeatable.",
       "stars_today": 679,
-      "total_stars": 17568,
+      "total_stars": 17576,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "**Archon是首个开源AI编程测试框架，旨在让AI代码生成过程实现确定性和可复现性。**"
+      "summary_zh": "Archon是首个开源AI编程测试套件构建器，旨在让AI编程结果可预测和可复现。"
     },
     {
       "full_name": "snarktank/ralph",
       "url": "https://github.com/snarktank/ralph",
       "description": "Ralph is an autonomous AI agent loop that runs repeatedly until all PRD items are complete.",
       "stars_today": 683,
-      "total_stars": 16479,
+      "total_stars": 16482,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "Ralph 是一个自主 AI 智能体循环，持续运行直至完成所有产品需求（PRD）事项。"
+      "summary_zh": "Ralph是一个自主AI智能体循环，持续运行直至完成所有产品需求（PRD）项目。"
     },
     {
       "full_name": "virattt/ai-hedge-fund",
       "url": "https://github.com/virattt/ai-hedge-fund",
       "description": "An AI Hedge Fund Team",
       "stars_today": 782,
-      "total_stars": 52871,
+      "total_stars": 52874,
       "language": "Python",
       "topics": [],
-      "summary_zh": "该仓库是一个人工智能对冲基金团队的项目集合，旨在利用AI技术进行量化投资策略的开发与实践。"
+      "summary_zh": "该仓库是一个**人工智能对冲基金团队**的项目集合，旨在利用AI技术进行量化投资和策略开发。"
     },
     {
       "full_name": "anthropics/claude-cookbooks",
       "url": "https://github.com/anthropics/claude-cookbooks",
       "description": "A collection of notebooks/recipes showcasing some fun and effective ways of using Claude.",
       "stars_today": 1127,
-      "total_stars": 39413,
+      "total_stars": 39424,
       "language": "Jupyter Notebook",
       "topics": [],
-      "summary_zh": "这个仓库是Anthropic提供的Claude模型使用指南集，通过一系列实用的Jupyter Notebooks展示了有趣且高效的Claude应用技巧。"
+      "summary_zh": "这个仓库提供了Claude模型的实用食谱和笔记本，展示了有趣且高效的使用方法。"
     },
     {
       "full_name": "shanraisshan/claude-code-best-practice",
       "url": "https://github.com/shanraisshan/claude-code-best-practice",
       "description": "practice made claude perfect",
       "stars_today": 2477,
-      "total_stars": 41473,
+      "total_stars": 41491,
       "language": "HTML",
       "topics": [],
-      "summary_zh": "该仓库旨在通过实践，总结并展示使用 Claude AI 进行代码开发的最佳实践。"
+      "summary_zh": "该仓库旨在通过实践代码，总结和优化使用 Claude 模型时的最佳实践。"
     },
     {
       "full_name": "jamiepine/voicebox",
       "url": "https://github.com/jamiepine/voicebox",
       "description": "The open-source voice synthesis studio",
       "stars_today": 652,
-      "total_stars": 16209,
+      "total_stars": 16217,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "一个开源的语音合成工作室，提供全面的声音制作和编辑功能。"
+      "summary_zh": "这是一个开源的语音合成工作室，提供全面的声音制作和编辑功能。"
     },
     {
       "full_name": "sponsors/ahujasid",
       "url": "https://github.com/sponsors/ahujasid",
       "description": "",
       "stars_today": 335,
-      "total_stars": 19458,
+      "total_stars": 19460,
       "language": "Python",
       "topics": [],
-      "summary_zh": "该仓库是一个GitHub Sponsors页面，用于展示和管理对用户ahujasid的支持者信息。"
+      "summary_zh": "该仓库展示了作者的GitHub赞助者信息和相关设置，用于管理和展示对项目的支持。"
     },
     {
       "full_name": "sponsors/hacksider",
       "url": "https://github.com/sponsors/hacksider",
       "description": "real time face swap and one-click video deepfake with only a single image",
       "stars_today": 235,
-      "total_stars": 90196,
+      "total_stars": 90195,
       "language": "Python",
       "topics": [],
       "summary_zh": "该仓库提供**实时换脸和一键视频深度伪造**功能，仅需**单张图像**即可实现。"
@@ -739,7 +764,7 @@
       "url": "https://github.com/gsd-build/get-shit-done",
       "description": "A light-weight and powerful meta-prompting, context engineering and spec-driven development system for Claude Code by TÂCHES.",
       "stars_today": 630,
-      "total_stars": 52026,
+      "total_stars": 52034,
       "language": "JavaScript",
       "topics": [],
       "summary_zh": "这是一个轻量级、强大的Claude代码元提示、上下文工程和规范驱动开发系统。"
@@ -750,13 +775,13 @@
     "papers_after_keyword_filter": 43,
     "papers_after_llm_filter": 24,
     "jobs_fetched": 0,
-    "jobs_after_filter": 7,
+    "jobs_after_filter": 5,
     "supervisor_pages_checked": 0,
     "supervisor_updates_found": 0,
     "llm_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "scoring_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "summarization_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "cost_usd": 0.0,
-    "duration_seconds": 74
+    "duration_seconds": 72
   }
 }
