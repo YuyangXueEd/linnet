@@ -72,7 +72,7 @@ date: {{ date }}
     <li>论文分类
       <ul>
         {% set nav_ns = namespace(seen=[]) %}
-        {% for p in papers | sort(attribute='score', reverse=True) %}
+        {% for p in papers %}
           {% set category_name = p.get('primary_category', (p.categories[0] if p.categories else 'Other')) %}
           {% set category_anchor = p.get('primary_category_anchor', category_name | lower | replace('.', '-') | replace(' ', '-') | replace('/', '-')) %}
           {% if category_anchor not in nav_ns.seen %}
@@ -102,7 +102,7 @@ date: {{ date }}
     <li>论文分类
       <ul>
         {% set nav_mobile_ns = namespace(seen=[]) %}
-        {% for p in papers | sort(attribute='score', reverse=True) %}
+        {% for p in papers %}
           {% set category_name = p.get('primary_category', (p.categories[0] if p.categories else 'Other')) %}
           {% set category_anchor = p.get('primary_category_anchor', category_name | lower | replace('.', '-') | replace(' ', '-') | replace('/', '-')) %}
           {% if category_anchor not in nav_mobile_ns.seen %}
@@ -130,7 +130,7 @@ date: {{ date }}
 
 {% if papers %}
 {% set content_ns = namespace(seen=[]) %}
-{% for p in papers | sort(attribute='score', reverse=True) %}
+{% for p in papers %}
 {% set category_name = p.get('primary_category', (p.categories[0] if p.categories else 'Other')) %}
 {% set category_anchor = p.get('primary_category_anchor', category_name | lower | replace('.', '-') | replace(' ', '-') | replace('/', '-')) %}
 {% if category_anchor not in content_ns.seen %}

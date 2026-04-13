@@ -12,6 +12,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from datetime import datetime, timedelta, timezone
@@ -38,6 +39,48 @@ from publishers.data_publisher import (
 from publishers.pages_publisher import (
     render_daily_page, render_weekly_page, render_monthly_page,
 )
+
+
+def _category_anchor(name: str) -> str:
+    return re.sub(r"[^a-z0-9-]+", "-", name.lower().replace(".", "-")).strip("-") or "other"
+
+
+def prepare_papers_for_rendering(papers: list[dict], preferred_categories: list[str]) -> list[dict]:
+    """Assign stable primary category and sort papers by category, then score."""
+    if not papers:
+        return papers
+
+    rank_map = {cat.lower(): idx for idx, cat in enumerate(preferred_categories)}
+    default_rank = len(preferred_categories) + 100
+
+    for paper in papers:
+        categories = [c for c in paper.get("categories", []) if c] or ["Other"]
+
+        # Keep configured categories first for readability in the details line.
+        categories = sorted(
+            categories,
+            key=lambda c: (rank_map.get(c.lower(), default_rank), c.lower()),
+        )
+        paper["categories"] = categories
+
+        # If there is only one category, that is always the primary category.
+        if len(categories) == 1:
+            primary = categories[0]
+        else:
+            primary = next((c for c in categories if c.lower() in rank_map), categories[0])
+
+        paper["primary_category"] = primary
+        paper["primary_category_anchor"] = _category_anchor(primary)
+        paper["primary_category_rank"] = rank_map.get(primary.lower(), default_rank)
+
+    return sorted(
+        papers,
+        key=lambda p: (
+            p.get("primary_category_rank", default_rank),
+            -float(p.get("score", 0.0)),
+            p.get("title", "").lower(),
+        ),
+    )
 
 
 def get_openrouter_client(sources_cfg: dict) -> OpenAI:
@@ -74,6 +117,7 @@ def run_daily(kw: dict, sources: dict, supervisors: list) -> None:
     if papers:
         print("Fetching arXiv figure previews...")
         papers = enrich_papers_with_figures(papers)
+        papers = prepare_papers_for_rendering(papers, kw["arxiv"]["categories"])
 
     # --- HN ---
     print("Fetching Hacker News...")
