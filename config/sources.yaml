@@ -16,8 +16,8 @@ github_trending:
   max_repos: 15
 
 llm:
-  scoring_model: "openai/gpt-5-nano"
-  summarization_model: "openai/gpt-5-nano"
+  scoring_model: "google/gemma-4-31b-it:free"
+  summarization_model: "google/gemma-4-31b-it:free"
   base_url: "https://openrouter.ai/api/v1"
 
 pages:
