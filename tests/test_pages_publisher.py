@@ -34,6 +34,10 @@ def test_render_daily_page_shows_paper(tmp_path, sample_paper):
     assert "FoundationSeg" in content
     assert "医学分割测试" in content
     assert "| 评分 | 论文 | 方向 |" not in content
+    assert "## 导航" in content
+    assert "[arXiv 精选](#arxiv)" in content
+    assert "[1. FoundationSeg: Universal Medical Image Segmentation](#paper-1)" in content
+    assert '<h3 id="paper-1">1. <a href="https://arxiv.org/abs/2604.12345">FoundationSeg: Universal Medical Image Segmentation</a></h3>' in content
 
 
 def test_render_daily_page_shows_paper_figure(tmp_path, sample_paper):

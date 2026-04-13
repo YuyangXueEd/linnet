@@ -19,11 +19,30 @@ date: {{ date }}
 
 ---
 
-## 📄 今日 arXiv 精选（{{ papers|length }} 篇）
+## 导航
+
+- [arXiv 精选](#arxiv)
+{% if papers %}
+{% for p in papers | sort(attribute='score', reverse=True) %}
+- [{{ loop.index }}. {{ p.title }}](#paper-{{ loop.index }})
+{% endfor %}
+{% endif %}
+- [Hacker News](#hacker-news)
+- [研究职位](#jobs)
+{% if github_trending %}
+- [GitHub 趋势](#github-trending)
+{% endif %}
+{% if supervisor_updates %}
+- [导师主页更新](#supervisors)
+{% endif %}
+
+---
+
+<h2 id="arxiv">📄 今日 arXiv 精选（{{ papers|length }} 篇）</h2>
 
 {% if papers %}
 {% for p in papers | sort(attribute='score', reverse=True) %}
-### {{ loop.index }}. [{{ p.title }}]({{ p.url }})
+<h3 id="paper-{{ loop.index }}">{{ loop.index }}. <a href="{{ p.url }}">{{ p.title }}</a></h3>
 
 **作者：** {{ p.authors | join(', ') }} | **分类：** {{ p.categories | join(', ') }} | **评分：** {{ "%.1f"|format(p.score) }}/10
 
@@ -46,7 +65,7 @@ date: {{ date }}
 {% endif %}
 {% endif %}
 
-## 🔥 Hacker News 科技热点（{{ hacker_news|length }} 条）
+<h2 id="hacker-news">🔥 Hacker News 科技热点（{{ hacker_news|length }} 条）</h2>
 
 {% if hacker_news %}
 {% for s in hacker_news %}
@@ -56,7 +75,7 @@ date: {{ date }}
 *今日无符合条件的热点。*
 {% endif %}
 
-## 💼 最新博士后 / 研究职位（{{ jobs|length }} 个）
+<h2 id="jobs">💼 最新博士后 / 研究职位（{{ jobs|length }} 个）</h2>
 
 {% if jobs %}
 {% for j in jobs %}
@@ -77,7 +96,7 @@ date: {{ date }}
 {% endif %}
 
 {% if github_trending %}
-## 🔥 GitHub 今日趋势（{{ github_trending|length }} 个）
+<h2 id="github-trending">🔥 GitHub 今日趋势（{{ github_trending|length }} 个）</h2>
 
 {% for r in github_trending %}
 - **[{{ r.full_name }}]({{ r.url }})** {% if r.language %}· {{ r.language }}{% endif %} {% if r.stars_today %}· ⭐ +{{ r.stars_today }} 今日{% elif r.total_stars %}· ⭐ {{ r.total_stars }}{% endif %}
@@ -89,7 +108,7 @@ date: {{ date }}
 {% endif %}
 
 {% if supervisor_updates %}
-## 👨‍🏫 导师主页更新
+<h2 id="supervisors">👨‍🏫 导师主页更新</h2>
 
 {% for u in supervisor_updates %}
 - **{{ u.name }}**（{{ u.institution }}）— {{ u.change_summary_zh }} [[主页]({{ u.url }})]
