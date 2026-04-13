@@ -9,10 +9,6 @@ def _call(client: Any, model: str, prompt: str, max_tokens: int = 300) -> str:
         messages=[{"role": "user", "content": prompt}],
         max_tokens=max_tokens,
         temperature=0.3,
-        extra_headers={
-            "HTTP-Referer": "https://github.com/YuyangXueEd/MyDailyUpdater",
-            "X-OpenRouter-Title": "MyDailyUpdater",
-        },
     )
     return resp.choices[0].message.content.strip()
 

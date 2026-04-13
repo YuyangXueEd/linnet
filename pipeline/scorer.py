@@ -49,10 +49,6 @@ def _call_llm(client: Any, model: str, prompt: str) -> str:
         messages=[{"role": "user", "content": prompt}],
         max_tokens=10,
         temperature=0,
-        extra_headers={
-            "HTTP-Referer": "https://github.com/YuyangXueEd/MyDailyUpdater",
-            "X-OpenRouter-Title": "MyDailyUpdater",
-        },
     )
     return resp.choices[0].message.content
 
