@@ -3,8 +3,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-# Free models typically have ~10 RPM; keep concurrency low to avoid 429s
-_MAX_WORKERS = 5
+# Keep concurrency very low to reduce rate-limit pressure in CI.
+_MAX_WORKERS = 2
 
 
 def _build_paper_prompt(paper: dict) -> str:
