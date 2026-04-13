@@ -1,6 +1,6 @@
 {
   "date": "2026-04-13",
-  "generated_at": "2026-04-13T22:26:48.270629+00:00",
+  "generated_at": "2026-04-13T22:35:48.844120+00:00",
   "papers": [
     {
       "id": "2604.09547v1",
@@ -19,7 +19,7 @@
       "url": "http://arxiv.org/abs/2604.09547v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09547v1",
       "score": 9.0,
-      "abstract_zh": "Tango 提出了一种新的高效视频大语言模型（Video LLM）框架，通过**多样性驱动策略**改进了基于注意力的 Token 选择，并引入 **ST-RoPE** 来保留时空几何结构。该方法解决了现有 Token 修剪方法在注意力分布处理和聚类结构保持上的局限性，从而更有效地利用视觉信号。",
+      "abstract_zh": "Tango 提出了一种新的视觉信号优化框架，用于高效视频大语言模型。它通过**多样性驱动策略**改进了基于注意力的令牌选择，并引入 **ST-RoPE** 以保留时空几何结构，解决了现有剪枝方法在注意力分布和聚类碎片化上的局限性。",
       "figure_url": "https://arxiv.org/html/2604.09547v1/x1.png",
       "figure_caption": "Limitations of two typical pre-LLM token pruning approaches. (Top Right) Top-k selection fails to fully capture the attention distribution, which is spatially multimodal and long-tailed in magnitude. (Bottom Right) Direct similarity-based clustering can result in noisy representations."
     },
@@ -42,7 +42,7 @@
       "url": "http://arxiv.org/abs/2604.09531v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09531v1",
       "score": 9.0,
-      "abstract_zh": "该论文提出了 **VisionFoundry** 框架，一个**任务驱动的合成数据生成管道**，仅需任务关键词即可利用 LLM 和 T2I 模型自动生成高质量的视觉问答（VQA）数据。\n\n其核心贡献是构建了 **VisionFoundry-10K** 数据集，用于**专门训练和提升视觉语言模型（VLMs）在空间理解等底层视觉感知任务上的能力**，无需人工标注。"
+      "abstract_zh": "VisionFoundry提出了一种**任务驱动的合成数据生成流水线**，仅依赖任务关键词（如“深度顺序”），利用LLM生成问答和T2I提示，并用T2I模型合成图像，无需人工标注。该方法构建了包含10个任务的10K合成VQA数据集，旨在**通过针对性的合成监督来增强视觉语言模型（VLMs）的空间理解和视角识别等底层视觉感知能力**。"
     },
     {
       "id": "2604.09529v1",
@@ -61,7 +61,7 @@
       "url": "http://arxiv.org/abs/2604.09529v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09529v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出 **VL-Calibration** 框架，通过强化学习将大型视觉语言模型（LVLMs）的置信度解耦为**视觉置信度和推理置信度**。 核心贡献在于解决了现有方法无法区分视觉感知错误和推理错误的问题，从而提高了高风险场景下LVLMs推理的准确性和可靠性。",
+      "abstract_zh": "该论文提出**VL-Calibration**，一个解耦视觉和推理置信度的强化学习框架，以解决大型视觉语言模型（LVLMs）高置信度错误的问题。它通过**内在视觉确定性估计**来监督视觉置信度，从而更准确地评估模型在不同错误源上的不确定性。",
       "figure_url": "https://arxiv.org/html/2604.09529v1/figure/first_image.png",
       "figure_caption": "The baseline method (upper) makes overconfident assumptions. Instead, our method (lower) decouples confidence into visual and reasoning confidence, with clear identification of uncertainty sources and improved calibration."
     },
@@ -84,7 +84,7 @@
       "url": "http://arxiv.org/abs/2604.09527v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09527v1",
       "score": 6.0,
-      "abstract_zh": "该论文提出了一种**基于稀疏点轨迹的步进式推理**方法，用于预测开放集未来场景动态。其核心是利用**自回归扩散模型**，通过短程、局部可预测的过渡来推进轨迹，并显式建模不确定性增长，从而能高效地从单张图像快速生成数千种多样化的未来场景。"
+      "abstract_zh": "该论文提出一种**基于稀疏点轨迹的步进式推理**方法，用于预测开放集未来场景动态。其核心是利用**自回归扩散模型**，通过短程、局部可预测的过渡来推进轨迹，并明确建模不确定性的增长。这使得模型能高效地从单张图像快速生成**数千种多样化的未来场景**。"
     },
     {
       "id": "2604.09480v1",
@@ -103,7 +103,7 @@
       "url": "http://arxiv.org/abs/2604.09480v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09480v1",
       "score": 8.0,
-      "abstract_zh": "Online3R通过引入**可学习的轻量级视觉提示**到冻结的几何基础模型中，实现了对新场景的在线适应性重建。它采用**局部-全局自监督学习策略**，利用中间结果和稀疏关键帧的约束来解决在线更新中的真值缺失和效率问题，从而提升了序列重建的一致性。",
+      "abstract_zh": "Online3R通过向冻结的几何基础模型引入**可学习的轻量级视觉提示**进行在线学习，以适应新场景并解决序列重建中的不一致性问题。它采用**局部-全局自监督学习策略**，利用中间结果和稀疏关键帧的约束，高效地更新提示且无需真实标签。",
       "figure_url": "https://arxiv.org/html/2604.09480v1/x1.png",
       "figure_caption": "Overview of our proposed Online3R. The core of our Online3R lies in constructing self-supervised methods and online prompt tuning, enabling the model to adapt to the current scene and ensuring consistent reconstruction results. We leverage a local consistency loss derived from temporally fused geometry to enhance the accuracy of subsequent predictions, and a global consistency loss that enforces geometric invariance across distant views to mitigate long-term drift, guaranteeing both consistency and efficiency."
     },
@@ -123,7 +123,7 @@
       "url": "http://arxiv.org/abs/2604.09478v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09478v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种**增量语义辅助的室内高保真网格重建方法**。它通过**视觉基础模型对新输入的RGB帧进行语义标注，并将这些标签增量地投影和融合到基于LiDAR-惯性里程计的地图上**，最终利用语义感知的TSDF融合生成高质量网格。此方法**利用语义信息解决了LiDAR稀疏性和漂移导致的几何重建模糊问题**。"
+      "abstract_zh": "该论文提出了一种**增量语义辅助的室内高保真网格重建方法**。它通过**视觉基础模型对新输入的RGB帧进行语义标注，并将这些标签增量地投影和融合到LiDAR里程计地图中**，最终利用**语义感知的TSDF融合和Marching Cubes生成高质量网格**。此方法**利用丰富的视觉语义来解决LiDAR稀疏性和漂移导致的几何重建模糊问题**。"
     },
     {
       "id": "2604.09437v1",
@@ -140,7 +140,7 @@
       "url": "http://arxiv.org/abs/2604.09437v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09437v1",
       "score": 6.0,
-      "abstract_zh": "AdaCubic提出了一种自适应的立方正则化优化器，通过求解带立方约束的辅助优化问题来动态调整立方项的权重。该方法利用Hutchinson方法近似Hessian矩阵以降低计算成本，并保持了立方正则化牛顿法的局部收敛保证。实验表明，AdaCubic性能优异且对超参数不敏感，具有很高的实用价值。"
+      "abstract_zh": "AdaCubic提出了一种**自适应立方正则化优化器**，通过求解一个带立方约束的辅助优化问题来动态调整正则化项的权重。该方法利用Hutchinson方法近似Hessian矩阵以降低计算成本，并**保证了立方正则化牛顿法的局部收敛性**。实验证明，AdaCubic性能优异且**无需超参数微调**。"
     },
     {
       "id": "2604.09436v1",
@@ -157,7 +157,7 @@
       "url": "http://arxiv.org/abs/2604.09436v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09436v1",
       "score": 8.0,
-      "abstract_zh": "SCoRe 是一种**训练无关的生成时谱重建方法**，用于从在噪声图像上训练的扩散模型中生成清晰图像。它利用扩散模型的谱偏置，通过**频率截止**抑制高频噪声，并基于**RAPSD理论**确定最佳的SDEdit初始化时间步长来重建干净的高频细节。该方法显著提升了在噪声数据集上训练的模型生成质量。",
+      "abstract_zh": "SCoRe 是一种**训练无关**的生成时谱域修复方法，用于从在噪声数据上训练的扩散模型中生成清晰图像。它利用扩散模型的谱偏置，通过**频率截止**抑制高频噪声，并利用**SDEdit**基于理论映射（RAPSD）精确地重新生成干净的高频细节。该方法显著提升了生成质量。",
       "figure_url": "https://arxiv.org/html/2604.09436v1/x1.png",
       "figure_caption": "Impact of a dataset containing noisy training images on the generated results. Images in red boxes are clean examples; all others are noisy."
     },
@@ -180,7 +180,7 @@
       "url": "http://arxiv.org/abs/2604.09429v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09429v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出“Rays as Pixels”模型，一个视频扩散模型（VDM），用于**联合学习视频帧与相机轨迹的分布**。它通过将相机表示为“光线像素”（raxels）并使用解耦自-交叉注意力机制进行联合去噪，**统一解决了相机参数估计、新视角生成和视频生成三大任务**。"
+      "abstract_zh": "该论文提出“Rays as Pixels”模型，一个视频扩散模型（VDM），用于**联合学习视频帧和相机轨迹的分布**。它通过将相机表示为“光线像素”（raxels）并使用解耦自-交叉注意力机制，**统一解决了相机轨迹预测、条件视频生成和新视角渲染**等任务。"
     },
     {
       "id": "2604.09426v1",
@@ -201,7 +201,7 @@
       "url": "http://arxiv.org/abs/2604.09426v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09426v1",
       "score": 6.0,
-      "abstract_zh": "该论文采用**基于经验的共同设计方法**，与盲人和低视力（BLV）用户合作，开发了一个**多模态的、无需视觉的3D数据可视化工具原型**。核心贡献在于通过迭代比较触觉探针和数字原型，确定了**参考声化、立体和体积音频**等经验验证的无障碍功能，显著提升了BLV用户的分析准确性和可学习性。"
+      "abstract_zh": "该论文采用**基于经验的共同设计方法**，与盲人和低视力（BLV）用户合作，开发了一个**多模态的、基于网络的3D数据可视化工具原型**。核心贡献在于通过迭代比较触觉探针和数字原型，确立了**参考声化、立体和体积音频**等经验验证的功能，以提高BLV用户对3D数据的分析准确性和可学习性。"
     },
     {
       "id": "2604.09425v1",
@@ -218,7 +218,7 @@
       "url": "http://arxiv.org/abs/2604.09425v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09425v1",
       "score": 9.0,
-      "abstract_zh": "该论文系统研究了视觉语言模型（VLMs）中图像Token的必要性。研究发现，视觉表示在浅层后迅速收敛到低复杂度状态，且层间差异不大，表明深层持续处理图像Token的计算开销可能是不必要的。",
+      "abstract_zh": "该论文系统研究了视觉语言模型（VLMs）中图像 Token 的作用，发现**视觉表征在浅层后迅速收敛到低复杂度状态**，且层间差异不大。 核心贡献在于**证明了深层持续处理图像 Token 的必要性较低**，挑战了当前 VLM 架构的效率假设。",
       "figure_url": "https://arxiv.org/html/2604.09425v1/pictures/teaser4.png",
       "figure_caption": "When is visual depth necessary in vision language models? We investigate a) stabilization of image tokens, b) layer-wise functional interchangeability, c) task-dependent utility, d) recoverability after truncation, e) reasoning-chain sensitivity. Our results reveal that image representations stabilize early, but their necessity depends on task and reasoning demands."
     },
@@ -242,7 +242,7 @@
       "url": "http://arxiv.org/abs/2604.09415v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09415v1",
       "score": 6.0,
-      "abstract_zh": "PhysInOne是一个包含200万个视频的大规模合成数据集，旨在解决物理学训练数据稀缺的问题。它覆盖了71种基本物理现象，并提供全面的3D、动态和物理属性标注。该数据集能有效提升AI模型在物理感知视频生成和未来预测等任务中的物理合理性。"
+      "abstract_zh": "PhysInOne是一个包含200万个视频的大规模合成数据集，旨在解决物理学AI训练数据稀缺的问题。它覆盖了71种基础物理现象，并提供了详尽的3D几何、运动和物理属性等标注。该数据集能有效提升模型在物理感知视频生成、未来帧预测等任务中的物理合理性。"
     },
     {
       "id": "2604.09405v1",
@@ -259,7 +259,7 @@
       "url": "http://arxiv.org/abs/2604.09405v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09405v1",
       "score": 7.0,
-      "abstract_zh": "EGLOCE 提出了一种**无需训练**的方法，通过在推理过程中**引导潜空间**来实现概念擦除。它利用**排斥能量**（远离目标概念）和**保留能量**（保持语义一致性）的双重优化目标，有效且不损害模型性能地移除特定概念。"
+      "abstract_zh": "EGLOCE 提出了一种**无需训练**的方法，通过在推理过程中**引导潜空间**来实现概念擦除。它使用**排斥能量**将生成过程推离目标概念，同时利用**保留能量**确保与原提示的语义一致性。该方法有效且不损害模型性能。"
     },
     {
       "id": "2604.09370v1",
@@ -278,7 +278,7 @@
       "url": "http://arxiv.org/abs/2604.09370v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09370v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种名为“Cluster-First Labelling”的自动化流程，用于对组织全玻片图像（WSI）中的组织成分进行分割和形态聚类。该方法通过**先聚类后标注**的范式，利用深度学习分割和降维聚类技术，将人工标注任务从标记单个对象转变为标记代表性簇，**极大地减少了人工标注的工作量**。",
+      "abstract_zh": "该论文提出了一种名为“Cluster-First Labelling”的自动化流程，用于对组织全玻片图像（WSI）中的组织成分进行分割和形态聚类。该方法通过**先聚类后标注**的范式，利用深度学习分割、特征提取和DBSCAN聚类，将海量对象的标注任务转化为对少数代表性聚类的标注，**极大地减少了人工标注的工作量**。",
       "figure_url": "https://arxiv.org/html/2604.09370v1/figures/pipeline_comp2.png",
       "figure_caption": "Pipeline architecture. WSI slides ( .ndpi ) are tiled into 512 × 512 512\\times 512 patches, quality-filtered, segmented with Cellpose-SAM, embedded with ResNet-50, reduced via UMAP, and clustered with DBSCAN. Optional downstream stages annotate images, extract representative tiles per cluster, and invoke a multimodal LLM for experimental classification."
     },
@@ -300,7 +300,7 @@
       "url": "http://arxiv.org/abs/2604.09368v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09368v1",
       "score": 7.0,
-      "abstract_zh": "该论文提出**FixATE**方法，通过将**视觉-语言模型（VLM）的内部视觉注意力与用户特定的眼动追踪数据对齐**，来提升推荐系统用户模拟的保真度。核心贡献在于证明了**基于个体凝视模式的微调**能有效捕捉用户视觉驱动的偏好，从而更准确地模拟真实用户行为。",
+      "abstract_zh": "该论文提出**FixATE**方法，通过将**视觉语言模型（VLM）的内部视觉注意力与用户特定的眼动追踪模式对齐**，来改进推荐系统用户模拟的保真度。核心贡献在于利用真实用户凝视数据，使模拟器能更真实地感知推荐界面的视觉布局，从而更准确地预测用户行为。",
       "figure_url": "https://arxiv.org/html/2604.09368v1/x1.png",
       "figure_caption": "Figure 1 . The difference of the perception of recommendations between real users and LLM-based user simulators."
     },
@@ -321,7 +321,7 @@
       "url": "http://arxiv.org/abs/2604.09366v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09366v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种鲁棒的4D视觉几何Transformer，通过**引入不确定性感知先验**来解决动态场景重建中的几何模糊问题。其核心方法包括**熵引导的子空间投影**分离动态和静态信息，**局部一致性驱动的几何纯化**消除结构噪声，以及**不确定性感知的跨视图一致性**进行精确的视图融合。这使得模型能更准确地重建动态场景的几何结构。",
+      "abstract_zh": "该论文提出了一种鲁棒的4D视觉几何Transformer，通过**熵引导的子空间投影**解耦动态和静态成分，并引入**局部一致性驱动的几何纯化**来消除结构异常。 核心贡献在于利用**不确定性感知的先验**，通过异方差最大似然估计来提高动态场景重建的准确性和鲁棒性。",
       "figure_url": "https://arxiv.org/html/2604.09366v1/x1.png",
       "figure_caption": "Overview of the proposed framwwork."
     },
@@ -343,7 +343,7 @@
       "url": "http://arxiv.org/abs/2604.09330v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09330v1",
       "score": 7.0,
-      "abstract_zh": "VAG提出了一种基于流匹配（flow-matching）的双流框架，用于联合生成视频和动作，同时受到视觉和语言的条件约束。该方法通过同步两个分支的去噪过程，实现了视频和动作之间更强的对齐，有效解决了现有模型中视频-动作不一致或生成效率低下的问题。",
+      "abstract_zh": "VAG提出了一种基于流匹配（flow-matching）的双流框架，用于联合生成视频和动作，并同时受到视觉和语言的条件约束。其核心贡献在于通过同步去噪机制，实现了视频生成与动作轨迹的强对齐，有效解决了现有世界模型和两阶段方法在具身数据合成中的效率和对齐问题。",
       "figure_url": "https://arxiv.org/html/2604.09330v1/x1.png",
       "figure_caption": "Illustration and capabilities of VAG. (a) We train our dual-stream video-action generation model using teleoperated robot trajectories. (b) Given an initial frame and a language instruction, the model can synchronously generate aligned video–action data pairs. (c) The generated data can be used to train robot policies for improved generalization. (d) The actions generated by the model can also be applied for real-world robot replay. The successful task execution demonstrates that the model holds the potential to function as a policy."
     },
@@ -363,7 +363,7 @@
       "url": "http://arxiv.org/abs/2604.09324v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09324v1",
       "score": 7.0,
-      "abstract_zh": "该论文提出**SFGS**方法，利用**空间三平面和时间六平面**捕捉动态特征，并通过**结构感知高斯模块**实现姿态依赖的细节重建。核心贡献在于**从单目视频中重建出表达丰富且拓扑一致的全身三维人像**，尤其提升了手部和面部表情的细节精度。",
+      "abstract_zh": "该论文提出了**结构感知细粒度高斯泼溅（SFGS）**方法，利用空间三平面和时间六平面捕捉动态特征。其核心贡献在于设计了结构感知高斯模块和基于细粒度手部重建的残差精炼模块，以**从单目视频中重建出具有高保真度和拓扑感知的、表情丰富的全身体姿态三维人像**。",
       "figure_url": "https://arxiv.org/html/2604.09324v1/x1.png",
       "figure_caption": "Limitation of conventional human gaussian splatting methods. The second row shows the error between the reconstructed 3D avatar from the corresponding input image in the first row and the 3D ground truth, with darker colors indicating larger reconstruction errors. The hand exhibits the largest reconstruction error across the entire body."
     },
@@ -381,7 +381,7 @@
       "url": "http://arxiv.org/abs/2604.09305v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09305v1",
       "score": 7.0,
-      "abstract_zh": "VAGNet 提出了一种基于深度神经网络的方法，利用**全局场景特征**而非耗时的逐对象特征，从行车记录仪视频中预测交通事故。其核心贡献在于实现了**高效的、实时的**基于视觉的事故预警能力。",
+      "abstract_zh": "VAGNet 提出了一种基于深度神经网络的方法，利用**全局场景特征**从行车记录仪视频中预测交通事故，而非依赖计算密集型的**逐对象特征提取**。其核心贡献在于实现了高效的、**基于视觉的事故预警**，适用于实时自动驾驶系统。",
       "figure_url": "https://arxiv.org/html/2604.09305v1/diagrams/vagnet_diagram.png",
       "figure_caption": "Architecture of the proposed VAGNet accident anticipation framework."
     },
@@ -403,7 +403,7 @@
       "url": "http://arxiv.org/abs/2604.09280v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09280v1",
       "score": 7.0,
-      "abstract_zh": "该论文提出了一种名为 **AMO-ENE** 的**基于注意力的多组学融合模型**，用于预测 HPV 相关口咽癌的治疗结果。核心方法是利用**分层 3D 半监督分割模型**自动识别和勾画淋巴结外侵犯（ENE），然后结合影像组学和深度特征进行预后预测。其贡献在于提供了一个**端到端的自动化流程**，解决了手动分割的局限性，以期更好地评估 ENE 状态。",
+      "abstract_zh": "该论文提出了 **AMO-ENE** 模型，一个基于注意力的多组学融合模型，用于预测 HPV 相关口咽癌的结局。它通过一个**端到端的流程**，结合 **CT 图像**（使用分层 3D 半监督分割技术提取影像组学和深度特征）和临床数据，**自动评估淋巴结外侵犯 (ENE) 状态**并预测治疗结果。",
       "figure_url": "https://arxiv.org/html/2604.09280v1/introduction_Figure_V3.png",
       "figure_caption": "Illustration for iENE status grading system. Nodes are presented with white borders, red healthy tissue background and black tumoral content. Grade 0 indicates metastatic pathological node with no signs of extension. Grade 1 indicates extension through the nodal capsule into surrounding fat. Grade 2 characterizes coalescent nodal masses with loss of internodal planes. Grade 3 is defined by overt invasion of surrounding structures and tissues. In case of multiple ENE, the maximum grade is reported."
     },
@@ -424,7 +424,7 @@
       "url": "http://arxiv.org/abs/2604.09258v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09258v1",
       "score": 6.0,
-      "abstract_zh": "该论文研究了预训练模型在不同数据源上的损失函数最小值是否一致，并提出**Nexus**方法。其核心贡献在于证明了任务特定最小值的几何“接近性”与下游泛化能力相关，并通过Nexus优化策略促使模型收敛到更接近所有数据源的**共同最小值**，从而提升泛化性能。"
+      "abstract_zh": "该论文研究了预训练损失函数的几何结构，发现标准优化器易收敛到任务特定最小值分散的点。作者提出 **Nexus** 方法，旨在使模型收敛到所有数据源的**共同最小值**（Common Minima），以提升下游任务的泛化能力。"
     },
     {
       "id": "2604.09227v1",
@@ -442,7 +442,7 @@
       "url": "http://arxiv.org/abs/2604.09227v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09227v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种**无需训练**的方法，利用**下采样矩阵**确保低分辨率（LR）预览图与高分辨率（HR）图像在**感知上保持一致性**。核心贡献是引入了**“零对合条件”（commutator-zero condition）**来指导流匹配模型，从而高效生成可用于筛选的、与最终结果高度相似的LR预览图，显著提升扩散模型的工作流程效率。",
+      "abstract_zh": "该论文提出了一种**无需训练**的方法，利用**下采样矩阵**确保低分辨率（LR）预览图与高分辨率（HR）图像在**感知上保持一致**。其核心贡献在于引入了**“零对合条件”**（commutator-zero condition），从而高效生成可用于筛选的LR预览图，显著**降低了扩散模型的工作流程计算成本**。",
       "figure_url": "https://arxiv.org/html/2604.09227v1/x1.png",
       "figure_caption": "Motivation of Preview Generation. Most users of generative AI usually produce diverse candidate images through repeated trials from multiple seeds (or prompts) to obtain a desired result. Our goal is to accelerate this workflow by generating low-resolution images that share the same content as their high-resolution counterparts but can be produced much faster in a training-free manner."
     },
@@ -461,7 +461,7 @@
       "url": "http://arxiv.org/abs/2604.09213v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09213v1",
       "score": 9.0,
-      "abstract_zh": "SHIFT 提出了一种轻量级框架，通过在推理时**有针对性地操纵 DiT 扩散模型中间层的激活**来实现概念移除。它学习动态的**引导向量**，能有效抑制不需要的概念，同时保持图像质量，并可用于风格迁移或偏置生成。",
+      "abstract_zh": "SHIFT 提出了一种轻量级框架，通过在推理时**有针对性地操纵 DiT 扩散模型中的中间激活层**来实现概念移除。它学习可动态应用的**引导向量**，以抑制不需要的概念，同时保持图像质量，并可用于风格迁移或引导生成特定内容。",
       "figure_url": "https://arxiv.org/html/2604.09213v1/x1.png",
       "figure_caption": "Double-stream block."
     },
@@ -482,7 +482,7 @@
       "url": "http://arxiv.org/abs/2604.09201v1",
       "pdf_url": "https://arxiv.org/pdf/2604.09201v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出 **CT-1** 模型，一个**视觉-语言-相机模型**，用于实现精确的相机可控视频生成。它通过**小波正则化损失**学习复杂的相机轨迹分布，并将这些轨迹整合到扩散模型中，从而将空间推理知识迁移到视频生成，实现与用户意图一致的相机控制。"
+      "abstract_zh": "该论文提出了CT-1模型，一个专用于视频生成的视觉-语言-相机模型，旨在通过准确估计相机轨迹来实现灵活且物理合理的相机控制。CT-1利用Wavelet正则化损失学习复杂的相机运动分布，并将其集成到扩散模型中，从而实现与用户意图对齐的空间感知相机控制。"
     }
   ],
   "hacker_news": [
@@ -493,7 +493,7 @@
       "score": 390,
       "created_at": "2026-04-13T02:53:10Z",
       "comments_url": "https://news.ycombinator.com/item?id=47747017",
-      "summary_zh": "苹果被视为AI领域的“失败者”，但其生态系统和用户基础可能成为其最终的竞争优势。"
+      "summary_zh": "苹果被视为AI落后者，但其生态系统和用户基础可能成为意外的护城河，使其最终受益。"
     },
     {
       "id": 47751032,
@@ -502,25 +502,25 @@
       "score": 174,
       "created_at": "2026-04-13T12:29:39Z",
       "comments_url": "https://news.ycombinator.com/item?id=47751032",
-      "summary_zh": "**人工智能或将终结数字浪潮，而非开启新的技术飞跃。**"
+      "summary_zh": "**人工智能或标志着数字浪潮的终结，而非下一波科技浪潮的开端。**"
     },
     {
       "id": 47753643,
       "title": "Claude.ai down",
       "url": "https://status.claude.com/incidents/6jd2m42f8mld",
-      "score": 126,
+      "score": 127,
       "created_at": "2026-04-13T15:41:08Z",
       "comments_url": "https://news.ycombinator.com/item?id=47753643",
-      "summary_zh": "Claude.ai 目前出现宕机，服务暂时中断。"
+      "summary_zh": "Claude.ai 目前服务中断，用户暂时无法访问。"
     },
     {
       "id": 47758028,
       "title": "Stanford report highlights growing disconnect between AI insiders and everyone",
       "url": "https://techcrunch.com/2026/04/13/stanford-report-highlights-growing-disconnect-between-ai-insiders-and-everyone-else/",
-      "score": 107,
+      "score": 122,
       "created_at": "2026-04-13T21:25:38Z",
       "comments_url": "https://news.ycombinator.com/item?id=47758028",
-      "summary_zh": "斯坦福报告揭示，人工智能圈内人士与公众的认知差距日益扩大。"
+      "summary_zh": "斯坦福报告揭示，人工智能圈内人士与公众的认知差距正在扩大。"
     },
     {
       "id": 47752402,
@@ -529,7 +529,7 @@
       "score": 62,
       "created_at": "2026-04-13T14:21:29Z",
       "comments_url": "https://news.ycombinator.com/item?id=47752402",
-      "summary_zh": "扎克伯格正秘密开发一个AI克隆人，或将代替他出席会议。"
+      "summary_zh": "扎克伯格正秘密开发一个AI“分身”，或将代他出席会议。"
     },
     {
       "id": 47748123,
@@ -538,7 +538,7 @@
       "score": 58,
       "created_at": "2026-04-13T05:56:49Z",
       "comments_url": "https://news.ycombinator.com/item?id=47748123",
-      "summary_zh": "AI裁员潮揭示了技术进步与就业市场之间日益加剧的矛盾和陷阱。"
+      "summary_zh": "AI裁员潮来袭，技术进步与就业市场间的矛盾日益凸显。"
     }
   ],
   "jobs": [
@@ -549,11 +549,15 @@
       "posted_date": "",
       "source": "jobs.ac.uk Research",
       "deadline": "2026-05-11T00:00:00+00:00",
-      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 建立计算机模型（in silico models）以模拟乳腺癌侵袭骨组织机制，涉及机械载荷、细胞成像、体内微CT和空间转录组学数据的整合与分析。",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 需具备构建**in silico模型**的能力，用于模拟乳腺癌侵袭骨组织、研究运动影响及机械敏感性骨细胞的作用，并整合**细胞成像、micro-CT和空间转录组学**数据。",
       "relevance_score": 8.0,
       "institution": "Queen Mary University of London",
-      "location": "",
-      "salary": "GBP38419.00-GBP51755.00 YEAR"
+      "location": "London, England, United Kingdom",
+      "salary": "GBP38419.00-GBP51755.00 YEAR",
+      "hours": "Full Time",
+      "contract_type": "Fixed-Term/Contract",
+      "placed_on": "13th April 2026",
+      "job_ref": "9640"
     },
     {
       "title": "Research Associate, Centre for Emerging Technology and Security",
@@ -562,11 +566,15 @@
       "posted_date": "",
       "source": "jobs.ac.uk Research",
       "deadline": "2026-04-30T00:00:00+00:00",
-      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 2024年4月30日 23:59 (伦敦，英国 BST)\n2. **主要技术要求：** 职位描述中未明确列出具体的技术要求（如编程语言、软件或特定技术栈）。",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 2024年4月30日 23:59 (伦敦，英国 BST)\n2. **主要技术要求：** 职位描述中未明确列出具体的技术要求（如编程语言、软件等），仅提及需要“数据科学和人工智能研究”的技能，并致力于“新兴技术”的研究。",
       "relevance_score": 8.0,
       "institution": "The Alan Turing Institute",
-      "location": "",
-      "salary": "GBP45000.00-GBP50000.00 YEAR"
+      "location": "London, England, United Kingdom",
+      "salary": "GBP45000.00-GBP50000.00 YEAR",
+      "hours": "Full Time",
+      "contract_type": "Fixed-Term/Contract",
+      "placed_on": "13th April 2026",
+      "job_ref": ""
     },
     {
       "title": "Postdoctoral Research Associate in Computational Bioengineering",
@@ -575,11 +583,15 @@
       "posted_date": "",
       "source": "jobs.ac.uk CS",
       "deadline": "2026-05-11T00:00:00+00:00",
-      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 建立计算机模型（in silico models）以模拟乳腺癌侵袭骨组织机制，涉及机械载荷、细胞成像、体内微CT和空间转录组学数据的整合与分析。",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 建立**in silico 模型**（模拟乳腺癌侵袭骨组织），涉及**机械载荷**、**细胞成像**、**体内微CT**和**空间转录组学**数据的整合与分析。",
       "relevance_score": 8.0,
       "institution": "Queen Mary University of London",
-      "location": "",
-      "salary": "GBP38419.00-GBP51755.00 YEAR"
+      "location": "London, England, United Kingdom",
+      "salary": "GBP38419.00-GBP51755.00 YEAR",
+      "hours": "Full Time",
+      "contract_type": "Fixed-Term/Contract",
+      "placed_on": "13th April 2026",
+      "job_ref": "9640"
     },
     {
       "title": "Research Associate, Centre for Emerging Technology and Security",
@@ -588,11 +600,15 @@
       "posted_date": "",
       "source": "jobs.ac.uk CS",
       "deadline": "2026-04-30T00:00:00+00:00",
-      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 2024年4月30日 23:59 (伦敦，英国 BST)\n2. **主要技术要求：** 职位描述中未明确列出具体的技术要求（如编程语言、软件或特定领域知识），仅提及需要“数据科学和人工智能研究”的技能，以及在“新兴技术”领域进行“开创性研究和见解”的能力。",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 2024年4月30日 23:59 (伦敦，英国 BST)\n2. **主要技术要求：** 描述中未明确列出具体的技术要求，但职位与**数据科学和人工智能研究**相关，旨在对**新兴技术**进行**开创性研究和洞察**，以加强英国安全。",
       "relevance_score": 8.0,
       "institution": "The Alan Turing Institute",
-      "location": "",
-      "salary": "GBP45000.00-GBP50000.00 YEAR"
+      "location": "London, England, United Kingdom",
+      "salary": "GBP45000.00-GBP50000.00 YEAR",
+      "hours": "Full Time",
+      "contract_type": "Fixed-Term/Contract",
+      "placed_on": "13th April 2026",
+      "job_ref": ""
     },
     {
       "title": "Postdoctoral Research Associate in AI & Medical Imaging",
@@ -601,11 +617,15 @@
       "posted_date": "",
       "source": "jobs.ac.uk CS",
       "deadline": "2026-05-04T00:00:00+00:00",
-      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 专注于深度学习在多相CT和生物标志物数据上的应用，以早期检测肝细胞癌复发。要求具备深度学习的实践经验、强大的Python技能及相关框架知识，并熟悉大型临床影像数据处理。",
+      "requirements_zh": "以下是从职位描述中提取的信息：\n\n1. **截止日期：** 未提及\n2. **主要技术要求：** 专注于深度学习在多相CT影像和生物标志物数据上的应用，以实现肝细胞癌复发的早期检测。要求具备深度学习的实践经验、强大的Python技能及相关框架的使用能力，并熟悉大型临床影像数据处理。",
       "relevance_score": 10.0,
       "institution": "Queen Mary University of London",
-      "location": "",
-      "salary": "GBP38419.00-GBP44288.00 YEAR"
+      "location": "London, England, United Kingdom",
+      "salary": "GBP38419.00-GBP44288.00 YEAR",
+      "hours": "Part Time",
+      "contract_type": "Fixed-Term/Contract",
+      "placed_on": "13th April 2026",
+      "job_ref": "9576"
     }
   ],
   "supervisor_updates": [],
@@ -615,70 +635,70 @@
       "url": "https://github.com/forrestchang/andrej-karpathy-skills",
       "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
       "stars_today": 5828,
-      "total_stars": 24544,
+      "total_stars": 24578,
       "language": "",
       "topics": [],
-      "summary_zh": "该仓库提供一个Claude.md文件，借鉴Andrej Karpathy对大型语言模型编程缺陷的观察，以提升Claude的代码生成能力。"
+      "summary_zh": "该仓库提供一个Claude.md文件，借鉴Andrej Karpathy对大型语言模型编程缺陷的观察，旨在提升Claude的代码生成能力。"
     },
     {
       "full_name": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
       "description": "The agent that grows with you",
       "stars_today": 11297,
-      "total_stars": 76608,
+      "total_stars": 76625,
       "language": "Python",
       "topics": [],
-      "summary_zh": "Hermes Agent 是一个可成长的智能体，旨在通过持续学习和发展来适应用户需求。"
+      "summary_zh": "Hermes Agent 是一个可成长的智能体，旨在通过持续学习和演进来适应用户需求。"
     },
     {
       "full_name": "shiyu-coder/Kronos",
       "url": "https://github.com/shiyu-coder/Kronos",
       "description": "Kronos: A Foundation Model for the Language of Financial Markets",
       "stars_today": 1552,
-      "total_stars": 16946,
+      "total_stars": 16953,
       "language": "Python",
       "topics": [],
-      "summary_zh": "**Kronos是一个金融市场语言的基础模型，专注于理解和处理金融领域的文本数据。**"
+      "summary_zh": "**Kronos是一个专为金融市场语言设计的基石模型，旨在理解和处理金融领域的专业文本。**"
     },
     {
       "full_name": "sponsors/thedotmack",
       "url": "https://github.com/sponsors/thedotmack",
       "description": "A Claude Code plugin that automatically captures everything Claude does during your coding sessions, compresses it with AI (using Claude's agent-sdk), and injects relevant context back into future sessions.",
       "stars_today": 3185,
-      "total_stars": 53047,
+      "total_stars": 53061,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "这个GitHub仓库提供了一个Claude代码插件，能自动捕获、AI压缩Claude的编码过程，并将相关上下文注入到未来的会话中，实现智能上下文增强。"
+      "summary_zh": "该插件能自动捕获 Claude 编程会话的全部内容，利用 AI 压缩并注入相关上下文，以增强未来的编程体验。"
     },
     {
       "full_name": "microsoft/markitdown",
       "url": "https://github.com/microsoft/markitdown",
       "description": "Python tool for converting files and office documents to Markdown.",
       "stars_today": 2811,
-      "total_stars": 106824,
+      "total_stars": 106830,
       "language": "Python",
       "topics": [],
-      "summary_zh": "Markitdown是微软开发的Python工具，能将各种文件和Office文档高效转换为Markdown格式。"
+      "summary_zh": "Markitdown是一个Python工具，能将各种文件和Office文档高效转换为Markdown格式。"
     },
     {
       "full_name": "multica-ai/multica",
       "url": "https://github.com/multica-ai/multica",
       "description": "The open-source managed agents platform. Turn coding agents into real teammates — assign tasks, track progress, compound skills.",
       "stars_today": 1724,
-      "total_stars": 11005,
+      "total_stars": 11012,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "**Multica是一个开源的托管式智能体平台，能将编码智能体转化为团队成员，实现任务分配、进度追踪和技能复合。**"
+      "summary_zh": "这是一个开源的托管式智能体平台，能将编程智能体转化为团队成员，用于分配任务、跟踪进度和技能复合。"
     },
     {
       "full_name": "coleam00/Archon",
       "url": "https://github.com/coleam00/Archon",
       "description": "The first open-source harness builder for AI coding. Make AI coding deterministic and repeatable.",
       "stars_today": 679,
-      "total_stars": 17576,
+      "total_stars": 17579,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "**Archon是首个开源AI编程测试框架，旨在让AI编程过程更具确定性和可重复性。**"
+      "summary_zh": "**Archon是首个开源AI编程测试框架，旨在让AI编程结果可预测且可复现。**"
     },
     {
       "full_name": "snarktank/ralph",
@@ -688,34 +708,34 @@
       "total_stars": 16487,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "Ralph是一个自主AI代理循环，持续运行直至完成所有产品需求（PRD）项目。"
+      "summary_zh": "Ralph是一个自主AI智能体循环，持续运行直至完成所有产品需求（PRD）项目。"
     },
     {
       "full_name": "virattt/ai-hedge-fund",
       "url": "https://github.com/virattt/ai-hedge-fund",
       "description": "An AI Hedge Fund Team",
       "stars_today": 782,
-      "total_stars": 52875,
+      "total_stars": 52876,
       "language": "Python",
       "topics": [],
-      "summary_zh": "该仓库是一个人工智能对冲基金团队的项目集合，旨在利用AI技术进行量化投资策略的开发与实践。"
+      "summary_zh": "该仓库是一个人工智能对冲基金团队的项目集合，旨在利用AI技术进行量化投资和策略开发。"
     },
     {
       "full_name": "anthropics/claude-cookbooks",
       "url": "https://github.com/anthropics/claude-cookbooks",
       "description": "A collection of notebooks/recipes showcasing some fun and effective ways of using Claude.",
       "stars_today": 1127,
-      "total_stars": 39431,
+      "total_stars": 39438,
       "language": "Jupyter Notebook",
       "topics": [],
-      "summary_zh": "这个仓库提供了Claude模型的实用食谱和笔记本，展示了有趣且高效的使用方法。"
+      "summary_zh": "该仓库提供Claude模型的实用食谱和示例笔记本，展示了有趣且高效的使用方法。"
     },
     {
       "full_name": "shanraisshan/claude-code-best-practice",
       "url": "https://github.com/shanraisshan/claude-code-best-practice",
       "description": "practice made claude perfect",
       "stars_today": 2477,
-      "total_stars": 41506,
+      "total_stars": 41518,
       "language": "HTML",
       "topics": [],
       "summary_zh": "该仓库旨在通过实践，总结和展示使用 Claude AI 进行代码开发的最佳实践和技巧。"
@@ -725,40 +745,40 @@
       "url": "https://github.com/jamiepine/voicebox",
       "description": "The open-source voice synthesis studio",
       "stars_today": 652,
-      "total_stars": 16227,
+      "total_stars": 16238,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "这是一个开源的语音合成工作室，提供全面的声音制作和编辑功能。"
+      "summary_zh": "**一个开源的语音合成工作室，提供全面的声音制作和编辑功能。**"
     },
     {
       "full_name": "sponsors/ahujasid",
       "url": "https://github.com/sponsors/ahujasid",
       "description": "",
       "stars_today": 335,
-      "total_stars": 19463,
+      "total_stars": 19465,
       "language": "Python",
       "topics": [],
-      "summary_zh": "这个GitHub仓库是 **ahujasid** 的个人 **GitHub Sponsors 页面**，用于展示和管理其接受捐赠和赞助的渠道与信息。"
+      "summary_zh": "这个GitHub仓库似乎是一个**个人赞助者页面或项目**，核心功能是**展示和管理对特定贡献者的支持或赞助信息**。"
     },
     {
       "full_name": "sponsors/hacksider",
       "url": "https://github.com/sponsors/hacksider",
       "description": "real time face swap and one-click video deepfake with only a single image",
       "stars_today": 235,
-      "total_stars": 90201,
+      "total_stars": 90204,
       "language": "Python",
       "topics": [],
-      "summary_zh": "该仓库提供**实时换脸和一键视频深度伪造**功能，仅需**单张图像**即可完成。"
+      "summary_zh": "该仓库提供**实时换脸和一键视频深度伪造**功能，仅需**单张图像**即可实现。"
     },
     {
       "full_name": "gsd-build/get-shit-done",
       "url": "https://github.com/gsd-build/get-shit-done",
       "description": "A light-weight and powerful meta-prompting, context engineering and spec-driven development system for Claude Code by TÂCHES.",
       "stars_today": 630,
-      "total_stars": 52040,
+      "total_stars": 52044,
       "language": "JavaScript",
       "topics": [],
-      "summary_zh": "这是一个轻量级、强大的Claude代码元提示、上下文工程和规范驱动开发系统，旨在高效完成任务。"
+      "summary_zh": "这是一个轻量级、强大的Claude代码元提示、上下文工程和规范驱动开发系统。"
     }
   ],
   "meta": {
@@ -773,6 +793,6 @@
     "scoring_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "summarization_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "cost_usd": 0.0,
-    "duration_seconds": 86
+    "duration_seconds": 81
   }
 }
