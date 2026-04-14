@@ -1,7 +1,31 @@
 {
   "date": "2026-04-14",
-  "generated_at": "2026-04-14T10:16:26.776483+00:00",
+  "generated_at": "2026-04-14T10:29:16.968491+00:00",
   "papers": [
+    {
+      "id": "2604.11197v1",
+      "title": "MedP-CLIP: Medical CLIP with Region-Aware Prompt Integration",
+      "authors": [
+        "Jiahui Peng",
+        "He Yao",
+        "Jingwen Li",
+        "Yanzhou Su",
+        "Sibo Ju"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Contrastive Language-Image Pre-training (CLIP) has demonstrated outstanding performance in global image understanding and zero-shot transfer through large-scale text-image alignment. However, the core of medical image analysis often lies in the fine-grained understanding of specific anatomical structures or lesion regions. Therefore, precisely comprehending region-of-interest (RoI) information provided by medical professionals or perception models becomes crucial. To address this need, we propose MedP-CLIP, a region-aware medical vision-language model (VLM). MedP-CLIP innovatively integrates medical prior knowledge and designs a feature-level region prompt integration mechanism, enabling it to flexibly respond to various prompt forms (e.g., points, bounding boxes, masks) while maintaining global contextual awareness when focusing on local regions. We pre-train the model on a meticulously constructed large-scale dataset (containing over 6.4 million medical images and 97.3 million region-level annotations), equipping it with cross-disease and cross-modality fine-grained spatial semantic understanding capabilities. Experiments demonstrate that MedP-CLIP significantly outperforms baseline methods in various medical tasks, including zero-shot recognition, interactive segmentation, and empowering multimodal large language models. This model provides a scalable, plug-and-play visual backbone for medical AI, combining holistic image understanding with precise regional analysis.",
+      "url": "http://arxiv.org/abs/2604.11197v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11197v1",
+      "score": 10.0,
+      "abstract_zh": "MedP-CLIP 提出了一种区域感知的医学视觉-语言模型，通过**特征级区域提示集成机制**，创新性地融合了医学先验知识。该方法能灵活响应点、框、掩码等多种区域提示，实现在关注局部区域的同时保持全局上下文理解。",
+      "figure_url": "https://arxiv.org/html/2604.11197v1/fig1.png",
+      "figure_caption": "MedP-CLIP can be flexibly deployed for various downstream tasks, significantly enhancing the region-aware analysis capability of medical imaging. This model supports direct application and plug-and-play integration, and accepts explicit prompts from users as well as outputs from perceptual models.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
     {
       "id": "2604.11679v1",
       "title": "Towards Brain MRI Foundation Models for the Clinic: Findings from the FOMO25 Challenge",
@@ -19,9 +43,76 @@
       "url": "http://arxiv.org/abs/2604.11679v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11679v1",
       "score": 10.0,
-      "abstract_zh": "该论文组织了FOMO25挑战赛，旨在推动脑部MRI基础模型的临床应用。核心方法是利用大规模未标注的临床数据（FOMO60K）进行自监督学习（SSL）预训练，并在少样本和跨领域设置下评估模型在卒中分类、脑膜瘤分割和脑龄回归等任务上的泛化能力。其贡献在于提供了一个更贴近真实临床环境的基准测试，以克服现有研究中预训练数据规模小和基准测试数据质量过高的问题。",
+      "abstract_zh": "该论文组织了FOMO25挑战赛，旨在推动脑部MRI基础模型的临床应用。**核心方法**是利用大规模未标记的临床数据（FOMO60K）进行自监督学习（SSL）预训练，并在少样本和跨领域设置下评估模型的泛化能力。**主要贡献**是首次在真实临床工作流数据上系统地评估了基础模型在卒中分类、脑膜瘤分割和脑龄回归等任务上的鲁棒性，以期克服临床数据异构性和标签稀缺的难题。",
       "figure_url": "https://arxiv.org/html/2604.11679v1/figures/supervised_baseline.png",
       "figure_caption": "Self-supervised pretraining boosts generalization. Across tasks, the top pretraining-based model from the method-track outperforms both from-scratch out-of-domain and in-domain supervised baselines, demonstrating that SSL can effectively leverage heterogeneous MRI data. Baselines are nnU-Net (segmentation) and Asparagus (classification/regression). The best performing method for classification was ashash, for segmentation Dolphin_creators, and for regression FOMO2JOMO. For Task 2, “Easy cases” were defined as the top 25% of cases ranked by average Dice score across all challenge participants.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11097v1",
+      "title": "CDPR: Cross-modal Diffusion with Polarization for Reliable Monocular Depth Estimation",
+      "authors": [
+        "Rongjia Yu",
+        "Tong Jia",
+        "Hao Wang",
+        "Xiaofang Li",
+        "Xiao Yang"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Monocular depth estimation is a fundamental yet challenging task in computer vision, especially under complex conditions such as textureless surfaces, transparency, and specular reflections. Recent diffusion-based approaches have significantly advanced performance by reformulating depth prediction as a denoising process in the latent space. However, existing methods rely solely on RGB inputs, which often lack sufficient cues in challenging regions. In this work, we present CDPR - Cross-modal Diffusion with Polarization for Reliable Monocular Depth Estimation - a novel diffusion-based framework that integrates physically grounded polarization priors to enhance estimation robustness. Specifically, we encode both RGB and polarization (AoLP/DoLP) images into a shared latent space via a pre-trained Variational Autoencoder (VAE), and dynamically fuse multi-modal information through a learnable confidence-aware gating mechanism. This fusion module adaptively suppresses noisy signals in polarization inputs while preserving informative cues, particularly around reflective or transparent surfaces, and provides the integrated latent representation for subsequent monocular depth estimation. Beyond depth estimation, we further verify that our framework can be easily generalized to surface normal prediction with minimal modification, showcasing its scalability to general polarization-guided dense prediction tasks. Experiments on both synthetic and real-world datasets validate that CDPR significantly outperforms RGB-only baselines in challenging regions while maintaining competitive performance in standard scenes.",
+      "url": "http://arxiv.org/abs/2604.11097v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11097v1",
+      "score": 9.0,
+      "abstract_zh": "该论文提出CDPR框架，通过**融合RGB和偏振信息**（AoLP/DoLP）来提高单目深度估计的鲁棒性。核心方法是利用预训练的VAE将多模态信息编码到共享潜空间，并通过**可学习的置信度感知门控机制**动态融合，以抑制噪声。",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11389v1",
+      "title": "ConvFormer3D-TAP: Phase/Uncertainty-Aware Front-End Fusion for Cine CMR View Classification Pipelines",
+      "authors": [
+        "Nafiseh Ghaffar Nia",
+        "Vinesh Appadurai",
+        "Suchithra V.",
+        "Chinmay Rane",
+        "Daniel Pittman"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Reliable recognition of standard cine cardiac MRI views is essential because each view determines which cardiac anatomy is visualized and which quantitative analyses can be performed. Incorrect view identification, whether by a human reader or an automated deep learning system, can propagate errors into segmentation, volumetric assessment, strain analysis, and valve evaluation. However, accurate view classification remains challenging under routine clinical variability in scanner vendor, acquisition protocol, motion artifacts, and plane prescription. We present ConvFormer3D-TAP, a cine-specific spatiotemporal architecture that integrates 3D convolutional tokenization with multiscale self-attention. The model is trained using masked spatiotemporal reconstruction and uncertainty-weighted multi-clip fusion to enhance robustness across cardiac phases and ambiguous temporal segments. The design captures complementary cues: local anatomical structure through convolutional priors and long-range cardiac-cycle dynamics through hierarchical attention. On a cohort of 150,974 clinically acquired cine sequences spanning six standard cine cardiac MRI views, ConvFormer3D-TAP achieved 96% validation accuracy with per-class F1-scores >= 0.94 and strong calibration (ECE = 0.025; Brier = 0.040). Error analysis shows that residual confusions are concentrated in anatomically adjacent long-axis and LVOT/AV view pairs, consistent with intrinsic prescription overlap. These results support ConvFormer3D-TAP as a scalable front-end for view routing, filtering and quality control in end-to-end cMRI workflows.",
+      "url": "http://arxiv.org/abs/2604.11389v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11389v1",
+      "score": 9.0,
+      "abstract_zh": "该论文提出了 **ConvFormer3D-TAP** 模型，用于电影心肌MRI视图分类。其核心方法是结合**3D卷积标记化**和**多尺度自注意力**，并通过**不确定性加权的多片段融合**来增强模型对不同心动周期的鲁棒性。主要贡献在于提供了一种更准确、更稳健的临床心肌MRI视图识别方案。",
+      "figure_url": "https://arxiv.org/html/2604.11389v1/Views.png",
+      "figure_caption": "Overview of the six standardized cine CMR views used in this study. Representative frames illustrate the anatomical orientation for: Cine2 (two-chamber), Cine3 (three-chamber), Cine4 (four-chamber), Cine-SAX (short-axis), Cine-LVOT (left ventricular outflow tract), and Cine-AV (aortic valve). These views constitute the target label set for the proposed cine view-classification framework.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11470v1",
+      "title": "Degradation-Aware and Structure-Preserving Diffusion for Real-World Image Super-Resolution",
+      "authors": [
+        "Yang Ji",
+        "Zonghao Chen",
+        "Zhihao Xue",
+        "Junqin Hu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Real-world image super-resolution is particularly challenging for diffusion models because real degradations are complex, heterogeneous, and rarely modeled explicitly. We propose a degradation-aware and structure-preserving diffusion framework for real-world SR. Specifically, we introduce Degradation-aware Token Injection, which encodes lightweight degradation statistics from low-resolution inputs and fuses them with semantic conditioning features, enabling explicit degradation-aware restoration. We further propose Spatially Asymmetric Noise Injection, which modulates diffusion noise with local edge strength to better preserve structural regions during training. Both modules are lightweight add-ons to the adopted diffusion SR framework, requiring only minor modifications to the conditioning pipeline. Experiments on DIV2K and RealSR show that our method delivers competitive no-reference perceptual quality and visually more realistic restoration results than recent baselines, while maintaining a favorable perception--distortion trade-off. Ablations confirm the effectiveness of each module and their complementary gains when combined. The code and model are publicly available at https://github.com/jiyang0315/DASP-SR.git.",
+      "url": "http://arxiv.org/abs/2604.11470v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11470v1",
+      "score": 9.0,
+      "abstract_zh": "该论文提出了一种**面向真实世界图像超分辨率的、考虑退化并保持结构的扩散模型框架**。核心方法包括**退化感知令牌注入**（编码轻量级退化信息）和**空间非对称噪声注入**（利用局部边缘强度调制噪声），以实现显式的退化感知恢复和结构保护。这使得模型在复杂真实退化下能生成更具感知质量和视觉真实感的超分辨率结果。",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -44,9 +135,34 @@
       "url": "http://arxiv.org/abs/2604.11775v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11775v1",
       "score": 9.0,
-      "abstract_zh": "该论文提出了一种高效的KernelSHAP框架，通过限制计算到感兴趣区域及其感受野，并利用补丁逻辑缓存加速推理，解决了3D医学图像分割中基于扰动的可解释性方法的计算瓶颈。其贡献在于实现了对体积CT分割的实用化解释，并通过比较不同特征抽象和聚合函数，生成了更具临床意义的归因。",
+      "abstract_zh": "该论文提出了一种高效的KernelSHAP框架，通过限制计算到感兴趣区域及其感受野，并利用补丁逻辑缓存加速推理，解决了3D医学图像分割中基于扰动的可解释性方法计算成本高的问题。其贡献在于实现了对体积CT分割的实用化解释，并通过比较不同特征抽象和聚合函数，生成了更具临床意义的归因分析。",
       "figure_url": "https://arxiv.org/html/2604.11775v1/figs/supervoxel-maps/fcc-Coronal.png",
       "figure_caption": "Coronal examples of (left) Regular FCC supervoxels and (right) Hybrid (organ-aware) FCC supervoxels within the RF-supported crop B RF B_{\\mathrm{RF}} . Regular FCC provides uniform geometry-driven units, whereas the Hybrid variant further splits FCC cells along organ boundaries to improve anatomical alignment.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11376v1",
+      "title": "From Redaction to Restoration: Deep Learning for Medical Image Anonymization and Reconstruction",
+      "authors": [
+        "Adrienne Kline",
+        "Abhijit Gaonkar",
+        "Daniel Pittman",
+        "Chris Kuehn",
+        "Nils Forkert"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "abstract": "Removing patient-specific information from medical images is crucial to enable sharing and open science without compromising patient identities. However, many methods currently used for deidentification have negative effects on downstream image analysis tasks because of removal of relevant but non-identifiable information. This work presents an end-to-end deep learning framework for transforming raw clinical image volumes into de-identified, analysis-ready datasets without compromising downstream utility. The methodology developed and tested in this work first detects and redacts regions likely to contain protected health information (PHI), such as burned-in text and metadata, and then uses a generative deep learning model to inpaint the redacted areas with anatomically and imaging plausible content. The proposed pipeline leverages a lightweight hybrid architecture, combining CRNN-based redaction with a latent-diffusion inpainting restoration module (Stable Diffusion 2). We evaluate the approach using both privacy-oriented metrics, which quantify residual PHI and success of redaction, and image-quality and task-based metrics, which assess the fidelity of restored volumes for representative deep learning applications. Our results suggest that the proposed method yields de-identified medical images that are visually coherent, maintaining fidelity for downstream models, while substantially reducing the risk of patient re-identification. By automating anonymization and image reconstruction within a single workflow, and dissemination of large-scale medical imaging collections, thereby lowering a key barrier to data sharing and multi-institutional collaboration in medical imaging AI.",
+      "url": "http://arxiv.org/abs/2604.11376v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11376v1",
+      "score": 9.0,
+      "abstract_zh": "该论文提出了一种端到端的深度学习框架，用于医疗影像的去标识化和重建。该方法首先使用基于CRNN的模型检测并涂抹包含PHI的区域，然后利用轻量级混合架构（结合Stable Diffusion 2的潜在扩散模型）生成解剖学和成像上合理的修复内容，以确保去标识化后的数据仍可用于下游分析。",
+      "figure_url": "https://arxiv.org/html/2604.11376v1/ultrasound.png",
+      "figure_caption": "Typical example of an echocardiogram with a synthetic PHI overlay",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -68,7 +184,7 @@
       "url": "http://arxiv.org/abs/2604.11653v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11653v1",
       "score": 9.0,
-      "abstract_zh": "GazeVaLM构建了一个包含放射科医生眼动数据的基准，用于评估AI生成X光片的临床真实性。该数据集记录了专家在诊断和真假分类任务中对真实和合成X光片的注视模式，并与多模态大语言模型（LLMs）的表现进行对比分析。其核心贡献是提供了首个结合眼动数据和AI评估的临床真实性基准，以深入理解人类感知和AI性能的差异。",
+      "abstract_zh": "GazeVaLM是一个多观察者眼动追踪基准数据集，用于评估AI生成X光片的临床真实性。它记录了放射科医生对真实和合成X光片的注视行为、诊断和真假判断，并扩展到与多模态大语言模型（LLMs）进行人机决策和不确定性水平的直接比较。",
       "figure_url": "https://arxiv.org/html/2604.11653v1/figures/Fig1.png",
       "figure_caption": "Figure 1. Overview of the proposed dataset pipeline, which introduces has two different assessors undertake two different tasks to produce an assortment of gaze data.",
       "primary_category": "cs.CV",
@@ -92,9 +208,33 @@
       "url": "http://arxiv.org/abs/2604.11789v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11789v1",
       "score": 9.0,
-      "abstract_zh": "该论文综述了大型多模态模型（LMMs）与面向对象视觉（Object-Centric Vision）的融合研究。核心方法是将LMMs的能力扩展到精确的实例识别、空间推理和可控的视觉操作。主要贡献在于系统性地梳理了该交叉领域在对象级理解、分割、编辑和生成方面的最新进展。",
+      "abstract_zh": "该论文综述了大型多模态模型（LMMs）与以物体为中心的视觉（Object-Centric Vision）的结合。核心方法是通过引入显式的物体级表征和操作，克服LMMs在精确物体定位、实例识别和可控视觉编辑方面的局限性。主要贡献在于系统性地梳理了该交叉领域在物体理解、分割、编辑和生成方面的最新进展。",
       "figure_url": "https://arxiv.org/html/2604.11789v1/x1.png",
       "figure_caption": "Overview of object-centric vision in the era of large multimodal models. The modalities considered in this paper include images, videos, and 3D data. Object-centric representations enable four fundamental capabilities: object understanding, object segmentation, object editing, and object generation.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11348v1",
+      "title": "LoGo-MR: Screening Breast MRI for Cancer Risk Prediction by Efficient Omni-Slice Modeling",
+      "authors": [
+        "Xin Wang",
+        "Yuan Gao",
+        "George Yiasemis",
+        "Antonio Portaluri",
+        "Zahra Aghdam"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Efficient and explainable breast cancer (BC) risk prediction is critical for large-scale population-based screening. Breast MRI provides functional information for personalized risk assessment. Yet effective modeling remains challenging as fully 3D CNNs capture volumetric context at high computational cost, whereas lightweight 2D CNNs fail to model inter-slice continuity. Importantly, breast MRI modeling for shor- and long-term BC risk stratification remains underexplored. In this study, we propose LoGo-MR, a 2.5D local-global structural modeling framework for five-year BC risk prediction. Aligned with clinical interpretation, our framework first employs neighbor-slice encoding to capture subtle local cues linked to short-term risk. It then integrates transformer-enhanced multiple-instance learning (MIL) to model distributed global patterns related to long-term risk and provide interpretable slice importance. We further apply this framework across axial, sagittal, and coronal planes as LoGo3-MR to capture complementary volumetric information. This multi-plane formulation enables voxel-level risk saliency mapping, which may assist radiologists in localizing risk-relevant regions during breast MRI interpretation. Evaluated on a large breast MRI screening cohort (~7.5K), our method outperforms 2D/3D baselines and existing SOTA MIL methods, achieving AUCs of 0.77-0.69 for 1- to 5-year prediction and improving C-index by ~6% over 3D CNNs. LoGo3-MR further improves overall performance with interpretable localization across three planes, and validation across seven backbones shows consistent gains. These results highlight the clinical potential of efficient MRI-based BC risk stratification for large-scale screening. Code will be released publicly.",
+      "url": "http://arxiv.org/abs/2604.11348v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11348v1",
+      "score": 9.0,
+      "abstract_zh": "LoGo-MR 提出一种2.5D局部-全局结构建模框架，用于五年期乳腺癌风险预测。该方法通过邻切片编码捕捉短期风险相关的局部线索，并结合增强型多实例学习（MIL）建模与可解释的全局模式，以解决计算效率和跨切片信息建模的挑战。",
+      "figure_url": "https://arxiv.org/html/2604.11348v1/x1.png",
+      "figure_caption": "Comparison of 3D, 2D, and the proposed LoGo-MR and LoGo 3 -MR frameworks for BC risk prediction. LoGo-MR combines local slice fusion with global MIL-based sequence modeling to capture both short-range anatomical continuity and long-range slice dependencies, while providing interpretable slice-level importance. LoGo 3 -MR extends this strategy across axial, sagittal, and coronal planes to capture complementary anatomical cues.",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -120,9 +260,33 @@
       "url": "http://arxiv.org/abs/2604.11762v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11762v1",
       "score": 9.0,
-      "abstract_zh": "**核心方法：** 论文发布了 **MosaicMRI**，一个大规模、多样化的**原始肌肉骨骼（MSK）MRI数据集**，包含2671个完整采样的MR数据卷。\n\n**核心贡献：** 该数据集是迄今为止最大的开源原始MSK MRI资源，旨在解决现有模型在不同解剖结构上可靠性研究不足的问题，并用其对加速重建基线模型（如VarNet）进行了全面评估。",
+      "abstract_zh": "**核心方法：** 论文提出了 **MosaicMRI**，一个大规模、多样化的**原始肌肉骨骼（MSK）MRI数据集**。\n\n**核心贡献：** 该数据集是目前最大的开源原始MSK MRI资源，旨在解决现有模型在不同解剖结构上可靠性研究不足的问题，并为加速重建等任务提供基准测试。",
       "figure_url": "https://arxiv.org/html/2604.11762v1/x1.png",
       "figure_caption": "MosaicMRI overview. (left) Anatomy distribution by volume count, showing a long-tailed composition prevalently by spine (49%, 1 , 316 1{,}316 volumes), followed by shoulder (14%, 373) and knee (14%, 362). (right) Representative slices spanning six anatomy groups and three orientations (axial, sagittal, coronal); overlays report in-plane matrix size, receive-coil count, and number of slices.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11176v1",
+      "title": "Precision Synthesis of Multi-Tracer PET via VLM-Modulated Rectified Flow for Stratifying Mild Cognitive Impairment",
+      "authors": [
+        "Tuo Liu",
+        "Shuijin Lin",
+        "Shaozhen Yan",
+        "Haifeng Wang",
+        "Jie Lu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "The biological definition of Alzheimer's disease (AD) relies on multi-modal neuroimaging, yet the clinical utility of positron emission tomography (PET) is limited by cost and radiation exposure, hindering early screening at preclinical or prodromal stages. While generative models offer a promising alternative by synthesizing PET from magnetic resonance imaging (MRI), achieving subject-specific precision remains a primary challenge. Here, we introduce DIReCT$++$, a Domain-Informed ReCTified flow model for synthesizing multi-tracer PET from MRI combined with fundamental clinical information. Our approach integrates a 3D rectified flow architecture to capture complex cross-modal and cross-tracer relationships with a domain-adapted vision-language model (BiomedCLIP) that provides text-guided, personalized generation using clinical scores and imaging knowledge. Extensive evaluations on multi-center datasets demonstrate that DIReCT$++$ not only produces synthetic PET images ($^{18}$F-AV-45 and $^{18}$F-FDG) of superior fidelity and generalizability but also accurately recapitulates disease-specific patterns. Crucially, combining these synthesized PET images with MRI enables precise personalized stratification of mild cognitive impairment (MCI), advancing a scalable, data-efficient tool for the early diagnosis and prognostic prediction of AD. The source code will be released on https://github.com/ladderlab-xjtu/DIReCT-PLUS.",
+      "url": "http://arxiv.org/abs/2604.11176v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11176v1",
+      "score": 9.0,
+      "abstract_zh": "该论文提出了一种名为 **DIReCT$++$** 的新方法，利用 **视觉-语言模型（VLM）调制的整流流（Rectified Flow）** 架构，实现了从MRI和临床信息中**高精度合成多示踪剂PET图像**。其核心贡献在于通过结合领域知识（BiomedCLIP）和整流流模型，解决了现有生成模型在**个体化精准合成**上的难题，有望用于阿尔茨海默病（MCI）的早期分层诊断。",
+      "figure_url": "https://arxiv.org/html/2604.11176v1/x1.png",
+      "figure_caption": "Overview of the DIReCT + ⁣ + ++ framework for multimodal PET synthesis and downstream analysis. (a) Schematic of the rectified flow (RF) process that synthesizes dual-tracer 18 F-AV-45 and 18 F-FDG PET images from MRI. (b) Fine-tuning of the pre-trained BiomedCLIP model via prompt learning to encode tracer-specific and subject-level text guidance. (c) Training pipeline of the conditional 3D RF model implemented as a multi-task U-Net that predicts velocity fields for both tracers. (d) One-step inference process that simultaneously generates synthetic AV45- and FDG-PET from MRI and textual input. (e) Downstream analytical tasks, including statistical analysis, early diagnosis, and stratification, demonstrating the clinical applicability of the synthesized PET images.",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -143,7 +307,31 @@
       "url": "http://arxiv.org/abs/2604.11559v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11559v1",
       "score": 9.0,
-      "abstract_zh": "该论文提出**渐进式纹理感知扩散模型（PTD）**，采用**粗到细**的框架恢复稀疏视角CT图像。它首先用**PTD$_{\\textit{rec}}$**恢复低频内容（粗糙结构），然后用**PTD$_{\\textit{diff}}$**通过**双域引导的条件扩散**生成高保真、一致的纹理细节。",
+      "abstract_zh": "该论文提出了一种**渐进式纹理感知扩散（PTD）模型**来解决稀疏视角CT（SVCT）中的纹理恢复难题。它采用**粗到细的框架**：首先通过PTD$_{\\textit{rec}}$恢复低频内容（粗略结构），然后利用PTD$_{\\textit{diff}}$中的**双域引导条件扩散**来生成高保真、一致的纹理细节。",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11164v1",
+      "title": "RADA: Region-Aware Dual-encoder Auxiliary learning for Barely-supervised Medical Image Segmentation",
+      "authors": [
+        "Shuang Zeng",
+        "Boxu Xie",
+        "Lei Zhu",
+        "Xinliang Zhang",
+        "Jiakui Hu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Deep learning has greatly advanced medical image segmentation, but its success relies heavily on fully supervised learning, which requires dense annotations that are costly and time-consuming for 3D volumetric scans. Barely-supervised learning reduces annotation burden by using only a few labeled slices per volume. Existing methods typically propagate sparse annotations to unlabeled slices through geometric continuity to generate pseudo-labels, but this strategy lacks semantic understanding, often resulting in low-quality pseudo-labels. Furthermore, medical image segmentation is inherently a pixel-level visual understanding task, where accuracy fundamentally depends on the quality of local, fine-grained visual features. Inspired by this, we propose RADA, a novel Region-Aware Dual-encoder Auxiliary learning pipeline which introduces a dual-encoder framework pre-trained on Alpha-CLIP to extract fine-grained, region-specific visual features from the original images and limited annotations. The framework combines image-level fine-grained visual features with text-level semantic guidance, providing region-aware semantic supervision that bridges image-level semantics and pixel-level segmentation. Integrated into a triple-view training framework, RADA achieves SOTA performance under extremely sparse annotation settings on LA2018, KiTS19 and LiTS, demonstrating robust generalization across diverse datasets.",
+      "url": "http://arxiv.org/abs/2604.11164v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11164v1",
+      "score": 9.0,
+      "abstract_zh": "RADA提出了一种**区域感知的双编码器辅助学习**框架，利用预训练的Alpha-CLIP提取细粒度的区域视觉特征。该方法旨在克服仅依赖几何连续性生成伪标签的语义不足问题，从而提高**极少监督下医学图像分割**的性能。",
+      "figure_url": "https://arxiv.org/html/2604.11164v1/introduction.png",
+      "figure_caption": "Conceptual comparison of different prompt-based learning paradigms for barely-supervised medical image segmentation. The diagram illustrates three distinct approaches applied to sparse annotation datasets. From left to right: (1) DeSCO (No Prompt) relies solely on geometric propagation without semantic guidance; (2) SGTC (Text Prompt) incorporates textual semantics through class-specific prompts; (3) Our proposed RADA (Multimodal Prompt) integrates complementary modalities – combining text prompts with original image data and sparse annotation masks to achieve region-aware visual understanding.",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -191,9 +379,79 @@
       "url": "http://arxiv.org/abs/2604.11730v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11730v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种基于行为科学的视频分析方法，用于识别个体在健康干预中的“矛盾/犹豫”（A/H）情绪。核心贡献在于通过分析语言、面部、声音和肢体语言等模态信息，自动化识别这种阻碍行为改变的关键情绪，以支持个性化的数字健康干预。",
+      "abstract_zh": "该论文提出了一种利用**多模态行为信号**（如面部、语音、肢体语言）来**自动识别视频中个体的“矛盾/犹豫”（Ambivalence/Hesitancy, A/H）情绪**的方法。其核心贡献在于，通过精确识别这些可能阻碍健康行为改变的微妙情绪，为**个性化数字健康干预**提供实时、可扩展的自动化支持。",
       "figure_url": "https://arxiv.org/html/2604.11730v1/x1.png",
       "figure_caption": "Conceptual illustration of the theoretical pathway by which ambivalence/hesitation (A/H) recognition can influence a digital behaviour change intervention: a user interacts with a smartphone app targeting physical activity, while the app detects A/H and adaptively adjusts cues and strategies to deliver more personalized support.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11331v1",
+      "title": "Any 3D Scene is Worth 1K Tokens: 3D-Grounded Representation for Scene Generation at Scale",
+      "authors": [
+        "Dongxu Wei",
+        "Qi Xu",
+        "Zhiqi Li",
+        "Hangning Zhou",
+        "Cong Qiu"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.CG"
+      ],
+      "abstract": "3D scene generation has long been dominated by 2D multi-view or video diffusion models. This is due not only to the lack of scene-level 3D latent representation, but also to the fact that most scene-level 3D visual data exists in the form of multi-view images or videos, which are naturally compatible with 2D diffusion architectures. Typically, these 2D-based approaches degrade 3D spatial extrapolation to 2D temporal extension, which introduces two fundamental issues: (i) representing 3D scenes via 2D views leads to significant representation redundancy, and (ii) latent space rooted in 2D inherently limits the spatial consistency of the generated 3D scenes. In this paper, we propose, for the first time, to perform 3D scene generation directly within an implicit 3D latent space to address these limitations. First, we repurpose frozen 2D representation encoders to construct our 3D Representation Autoencoder (3DRAE), which grounds view-coupled 2D semantic representations into a view-decoupled 3D latent representation. This enables representing 3D scenes observed from arbitrary numbers of views--at any resolution and aspect ratio--with fixed complexity and rich semantics. Then we introduce 3D Diffusion Transformer (3DDiT), which performs diffusion modeling in this 3D latent space, achieving remarkably efficient and spatially consistent 3D scene generation while supporting diverse conditioning configurations. Moreover, since our approach directly generates a 3D scene representation, it can be decoded to images and optional point maps along arbitrary camera trajectories without requiring per-trajectory diffusion sampling pass, which is common in 2D-based approaches.",
+      "url": "http://arxiv.org/abs/2604.11331v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11331v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出了一种**3D表示自编码器（3DRAE）**，用于直接在隐式3D潜在空间中进行场景生成，克服了基于2D扩散模型的冗余和空间一致性限制。**核心贡献**在于首次实现了将多视图2D语义表示解耦并嵌入到统一的3D潜在空间中，从而能高效、一致地生成大规模3D场景。",
+      "figure_url": "https://arxiv.org/html/2604.11331v1/x1.png",
+      "figure_caption": "3D-Grounded Scene Generation. (a) Our 3DRAE repurposes frozen 2D representation encoders to ground any number of views into fixed-length 3D latent tokens, which can be queried to decode images and point maps of arbitrary views. (b) Previous 2D diffusion-based methods perform diffusion modeling in the view-coupled 2D latent space, resulting in computational redundancy and limited spatial consistency. (c) Our 3DDiT performs diffusion modeling in the view-decoupled 3D latent space, enabling 3D-grounded generation with superior efficiency and spatial consistency.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11162v1",
+      "title": "Boxes2Pixels: Learning Defect Segmentation from Noisy SAM Masks",
+      "authors": [
+        "Camile Lendering",
+        "Erkut Akdag",
+        "Egor Bondarev"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Accurate defect segmentation is critical for industrial inspection, yet dense pixel-level annotations are rarely available. A common workaround is to convert inexpensive bounding boxes into pseudo-masks using foundation segmentation models such as the Segment Anything Model (SAM). However, these pseudo-labels are systematically noisy on industrial surfaces, often hallucinating background structure while missing sparse defects.\n  To address this limitation, a noise-robust box-to-pixel distillation framework, Boxes2Pixels, is proposed that treats SAM as a noisy teacher rather than a source of ground-truth supervision. Bounding boxes are converted into pseudo-masks offline by SAM, and a compact student is trained with (i) a hierarchical decoder over frozen DINOv2 features for semantic stability, (ii) an auxiliary binary localization head to decouple sparse foreground discovery from class prediction, and (iii) a one-sided online self-correction mechanism that relaxes background supervision when the student is confident, targeting teacher false negatives.\n  On a manually annotated wind turbine inspection benchmark, the proposed Boxes2Pixels improves anomaly mIoU by +6.97 and binary IoU by +9.71 over the strongest baseline trained under identical weak supervision. Moreover, online self-correction increases the binary recall by +18.56, while the model employs 80\\% fewer trainable parameters. Code is available at https://github.com/CLendering/Boxes2Pixels.",
+      "url": "http://arxiv.org/abs/2604.11162v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11162v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出 **Boxes2Pixels** 框架，用于从嘈杂的 SAM 生成的边界框伪标签中学习缺陷分割。其核心方法是利用 SAM 作为**有噪声的教师**，通过**分层解码器**、**辅助定位头**和**单边在线自校正机制**来减轻伪标签中的噪声，从而实现鲁棒的缺陷分割。",
+      "figure_url": "https://arxiv.org/html/2604.11162v1/x1.png",
+      "figure_caption": "Overview of the proposed framework, Boxes2Pixels, for sparse defect segmentation. From left to right, top to bottom: (i) an input wind turbine image, (ii) legacy YOLO bounding boxes used as coarse supervision, (iii) SAM-generated pseudo-masks exhibiting both spurious regions and missed defects, and (iv) prediction from Boxes2Pixels. Colors indicate correct detections (green), defects recovered by the student but missed by the teacher (blue), and omitted or erroneous regions (red).",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11136v1",
+      "title": "BoxTuning: Directly Injecting the Object Box for Multimodal Model Fine-Tuning",
+      "authors": [
+        "Zekun Qian",
+        "Ruize Han",
+        "Wei Feng"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "abstract": "Object-level spatial-temporal understanding is essential for video question answering, yet existing multimodal large language models (MLLMs) encode frames holistically and lack explicit mechanisms for fine-grained object grounding. Recent work addresses this by serializing bounding box coordinates as text tokens, but this text-coordinate paradigm suffers from a fundamental modality mismatch: object information is inherently visual, yet encoding it as text incurs a high token cost that forces aggressive temporal downsampling. We propose BoxTuning, which resolves this mismatch by injecting object spatial-temporal information directly into the visual modality. Colored bounding boxes and trajectory trails are rendered onto video frames as visual prompts, with only a concise color-to-object legend retained as text. This reduces the token cost significantly, achieving 87-93% text token reduction in practice. It also preserves full temporal resolution, where the trajectory trails further encode inter-frame motion direction and speed within each keyframe, recovering fine-grained dynamics that text-coordinate methods are forced to discard. Experimental results on five video QA benchmarks (CLEVRER, Perception Test, STAR, NExT-QA, IntentQA) show that BoxTuning surpasses text-coordinate baselines on spatially oriented tasks and nearly eliminates the accuracy degradation observed on reasoning-centric tasks, establishing visual prompting as a more natural and efficient paradigm for conveying object information to video MLLMs.",
+      "url": "http://arxiv.org/abs/2604.11136v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11136v1",
+      "score": 8.0,
+      "abstract_zh": "BoxTuning 提出一种新颖方法，通过将彩色边界框和轨迹渲染到视频帧上，直接将物体时空信息注入视觉模态，以解决现有方法将坐标编码为文本带来的模态不匹配和高昂成本问题。该方法显著减少了文本Token消耗（87-93%），同时保持了完整的时间分辨率，从而提升了多模态模型对精细物体理解的能力。",
+      "figure_url": "https://arxiv.org/html/2604.11136v1/x1.png",
+      "figure_caption": "Comparison of object-centric representation strategies for video MLLMs. Left : ObjectMLLM [ tang2025objectmllm ] serializes per-frame bounding box coordinates as text tokens ( e.g . , “ (Object 0) adult: frame 0 [73 30 92 100] … ”), producing 1,218 tokens for a single video. The original keyframes lack intermediate dynamics, leading to action misinterpretation. Right : BoxTuning renders colored bounding boxes and trajectory trails directly on the video frames, with only a concise color-mapped text legend ( e.g . , “ (1) Red box: Adult; (2) Blue box: Elephant; … ”, 182 tokens). The trajectory-augmented keyframes capture continuous dynamics, enabling accurate temporal reasoning. Overall, BoxTuning achieves 85% token savings (in this case) while bridging temporal gaps that text-coordinate methods miss.",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -216,7 +474,49 @@
       "url": "http://arxiv.org/abs/2604.11798v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11798v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种**基于预算感知的、利用nnU-Net的放疗分割质量保证（QA）框架**。该框架结合**不确定性量化（如预测熵）和事后校准**，生成**逐体素的不确定性图**，以指导人工复核。研究对比了多种不确定性方法（如TS、DE、CE、TTA）在TMLI任务中的表现，旨在提高模型部署的可靠性。",
+      "abstract_zh": "该论文提出了一种**基于预算感知的、利用nnU-Net的放疗分割质量保证（QA）框架**。该框架结合了**不确定性量化（如预测熵）和事后校准**，生成体素级不确定性图，以指导对模型可能出错区域的**靶向人工复核**。",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11007v1",
+      "title": "Data-Efficient Semantic Segmentation of 3D Point Clouds via Open-Vocabulary Image Segmentation-based Pseudo-Labeling",
+      "authors": [
+        "Takahiko Furuya"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Semantic segmentation of 3D point cloud scenes is a crucial task for various applications. In real-world scenarios, training segmentation models often faces three concurrent forms of data insufficiency: scarcity of training scenes, scarcity of point-level annotations, and absence of 2D image sequences from which point clouds were reconstructed. Existing data-efficient algorithms typically address only one or two of these challenges, leaving the joint treatment of all three unexplored. This paper proposes a data-efficient training framework specifically designed to address the three forms of data insufficiency. Our proposed algorithm, called Point pseudo-Labeling via Open-Vocabulary Image Segmentation (PLOVIS), leverages an Open-Vocabulary Image Segmentation (OVIS) model as a pseudo label generator to compensate for the lack of training data. PLOVIS creates 2D images for pseudo-labeling directly from training 3D point clouds, eliminating the need for 2D image sequences. To mitigate the inherent noise and class imbalance in pseudo labels, we introduce a two-stage filtering of pseudo labels combined with a class-balanced memory bank for effective training. The two-stage filtering mechanism first removes low-confidence pseudo labels, then discards likely incorrect pseudo labels, thereby enhancing the quality of pseudo labels. Experiments on four benchmark datasets, i.e., ScanNet, S3DIS, Toronto3D, and Semantic3D, under realistic data-scarce conditions (a few tens of training 3D scenes, each annotated with only <100 3D points) demonstrate that PLOVIS consistently outperforms existing methods including standard fine-tuning strategies and state-of-the-art weakly supervised learning algorithms. Code will be made publicly available.",
+      "url": "http://arxiv.org/abs/2604.11007v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11007v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出了一种名为 PLOVIS 的数据高效训练框架，用于解决 3D 点云语义分割中训练场景、点级标注和 2D 图像序列三方面的联合数据不足问题。核心方法是利用**开放词汇图像分割 (OVIS) 模型作为伪标签生成器**，直接从 3D 点云生成 2D 图像进行伪标注。其主要贡献是**首次实现了在三类数据稀疏情况下进行有效的 3D 点云语义分割**。",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11170v1",
+      "title": "Do Instance Priors Help Weakly Supervised Semantic Segmentation?",
+      "authors": [
+        "Anurag Das",
+        "Anna Kukleva",
+        "Xinting Hu",
+        "Yuki M. Asano",
+        "Bernt Schiele"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Semantic segmentation requires dense pixel-level annotations, which are costly and time-consuming to acquire. To address this, we present SeSAM, a framework that uses a foundational segmentation model, i.e. Segment Anything Model (SAM), with weak labels, including coarse masks, scribbles, and points. SAM, originally designed for instance-based segmentation, cannot be directly used for semantic segmentation tasks. In this work, we identify specific challenges faced by SAM and determine appropriate components to adapt it for class-based segmentation using weak labels. Specifically, SeSAM decomposes class masks into connected components, samples point prompts along object skeletons, selects SAM masks using weak-label coverage, and iteratively refines labels using pseudo-labels, enabling SAM-generated masks to be effectively used for semantic segmentation. Integrated with a semi-supervised learning framework, SeSAM balances ground-truth labels, SAM-based pseudo-labels, and high-confidence pseudo-labels, significantly improving segmentation quality. Extensive experiments across multiple benchmarks and weak annotation types show that SeSAM consistently outperforms weakly supervised baselines while substantially reducing annotation cost relative to fine supervision.",
+      "url": "http://arxiv.org/abs/2604.11170v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11170v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出了 **SeSAM 框架**，用于利用 **SAM 模型** 和 **弱监督信号**（如粗糙掩码、笔画、点）进行语义分割。其核心方法包括：**分解类别掩码、采样骨架点提示、基于弱标签覆盖选择 SAM 掩码，并通过伪标签迭代细化**，有效将实例分割模型应用于类别分割任务。",
+      "figure_url": "https://arxiv.org/html/2604.11170v1/x1.png",
+      "figure_caption": "Our SeSAM framework , utilizing additional instance priors, integrates with various weak labels (points, scribbles, and coarse annotations) and enhances semantic segmentation quality (see road and car on the left) while remaining cost-effective (right plot). For instance, using scribbles achieves 94% of fine-supervised performance while requiring only 2% of the annotation budget.",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -236,7 +536,53 @@
       "url": "http://arxiv.org/abs/2604.11585v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11585v1",
       "score": 8.0,
-      "abstract_zh": "GeomPrompt提出了一种轻量级跨模态模块，仅利用RGB图像生成任务驱动的几何提示，作为冻结的RGB-D分割模型的第四通道输入，以应对深度信息缺失。此外，GeomPrompt-Recovery模块通过预测第四通道的校正来补偿退化的深度信息。两者仅依赖分割监督进行训练，有效恢复了对分割有用的几何先验知识。",
+      "abstract_zh": "GeomPrompt提出了一种轻量级跨模态模块，仅利用RGB图像生成任务驱动的几何提示，作为冻结的RGB-D分割模型的第四通道输入，以应对深度信息缺失。此外，GeomPrompt-Recovery通过预测第四通道的校正来补偿退化的深度。两者仅用分割监督训练，旨在恢复对分割有用的几何先验，而非精确的深度估计。",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11401v1",
+      "title": "GS4City: Hierarchical Semantic Gaussian Splatting via City-Model Priors",
+      "authors": [
+        "Qilin Zhang",
+        "Jinyu Zhu",
+        "Olaf Wysocki",
+        "Benjamin Busam",
+        "Boris Jutzi"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Recent semantic 3D Gaussian Splatting (3DGS) methods primarily rely on 2D foundation models, often yielding ambiguous boundaries and limited support for structured urban semantics. While city models such as CityGML encode hierarchically organized semantics together with building geometry, these labels cannot be directly mapped to Gaussian primitives. We present GS4City, a hierarchical semantic Gaussian Splatting method that incorporates city-model priors for urban scene understanding. GS4City derives reliable image-aligned masks from Level of Detail (LoD) 3 CityGML models via two-pass raycasting, explicitly using parent-child relations to validate and recover fine-grained facade elements. It then fuses these geometry-grounded masks with foundation-model predictions to establish scene-consistent instance correspondences, and learns a compact identity encoding for each Gaussian under joint 2D identity supervision and 3D spatial regularization. Experiments on the TUM2TWIN and Gold Coast datasets show that GS4City effectively incorporates structured building semantics into Gaussian scene representations, outperforming existing 2D-driven semantic 3DGS baselines, including LangSplat and Gaga, by up to 15.8 IoU points in coarse building segmentation and 14.2 mIoU points in fine-grained semantic segmentation. By bridging structured city models and photorealistic Gaussian scene representations, GS4City enables semantically queryable and structure-aware urban reconstruction. Code is available at https://github.com/Jinyzzz/GS4City.",
+      "url": "http://arxiv.org/abs/2604.11401v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11401v1",
+      "score": 8.0,
+      "abstract_zh": "GS4City提出了一种结合城市模型先验的层次化语义3D高斯泼溅方法。它通过两步光线投射从CityGML中提取可靠的、与图像对齐的掩码，并利用父子关系验证细节。该方法融合几何先验和基础模型预测，学习一致的实例对应关系，以实现更精确的城市场景语义理解。",
+      "figure_url": "https://arxiv.org/html/2604.11401v1/x1.png",
+      "figure_caption": "GS4City augments a photorealistic Gaussian scene with structured CityGML priors to produce hierarchical urban understanding. It enables appearance-robust segmentation, geometry-aligned boundaries, open-vocabulary querying, and city-model metadata integration within a unified 3DGS scene.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11218v1",
+      "title": "H-SPAM: Hierarchical Superpixel Anything Model",
+      "authors": [
+        "Julien Walther",
+        "Rémi Giraud",
+        "Michaël Clément"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Superpixels offer a compact image representation by grouping pixels into coherent regions. Recent methods have reached a plateau in terms of segmentation accuracy by generating noisy superpixel shapes. Moreover, most existing approaches produce a single fixed-scale partition that limits their use in vision pipelines that would benefit multi-scale representations. In this work, we introduce H-SPAM (Hierarchical Superpixel Anything Model), a unified framework for generating accurate, regular, and perfectly nested hierarchical superpixels. Starting from a fine partition, guided by deep features and external object priors, H-SPAM constructs the hierarchy through a two-phase region merging process that first preserves object consistency and then allows controlled inter-object grouping. The hierarchy can also be modulated using visual attention maps or user input to preserve important regions longer in the hierarchy. Experiments on standard benchmarks show that H-SPAM strongly outperforms existing hierarchical methods in both accuracy and regularity, while performing on par with most recent state-of-the-art non-hierarchical methods. Code and pretrained models are available: https://github.com/waldo-j/hspam.",
+      "url": "http://arxiv.org/abs/2604.11218v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11218v1",
+      "score": 8.0,
+      "abstract_zh": "H-SPAM 提出了一种生成**准确、规则且完美嵌套的层次化超像素**的统一框架。它通过**深度特征引导的区域合并**过程，先保证对象一致性，再进行跨对象分组，从而解决了现有方法精度和多尺度表示的局限性。",
+      "figure_url": "https://arxiv.org/html/2604.11218v1/imgs/168084.jpg",
+      "figure_caption": "Hierarchical superpixel segmentation example. The proposed H-SPAM method generates very regular and easily interpretable superpixels that are aligned with the image objects through the hierarchy, compared to HHTS [ 8 ] .",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -256,9 +602,33 @@
       "url": "http://arxiv.org/abs/2604.11636v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11636v1",
       "score": 8.0,
-      "abstract_zh": "**核心方法：** MorphoFlow 提出了一种基于稀疏表面标注的生成式形状建模框架，它结合了神经隐式表示、自解码器和自回归归一化流。\n\n**主要贡献：** 该方法实现了紧凑且概率性的形状表示学习，能够在仅有稀疏监督的情况下，进行分辨率无关的 3D 形态建模和可解释的潜在变异性分析。",
+      "abstract_zh": "**核心方法：** MorphoFlow 提出了一种稀疏监督的生成形状建模框架，结合神经隐式表示、自解码器和自回归归一化流，直接从稀疏表面注释中学习紧凑的概率形状表示。\n\n**贡献：** 该方法实现了分辨率无关的 3D 解剖建模，并通过自解码器支持在稀疏监督下优化实例级潜在编码，从而提高了可扩展性和灵活性。",
       "figure_url": "https://arxiv.org/html/2604.11636v1/x1.png",
       "figure_caption": "MorphoFlow Architecture . For only generative shape modelling α − 1 = 1 \\alpha^{-1}=1 , making the distribution a standard normal. For compact shape latent α − 1 \\alpha^{-1} values are learned during training with ARD regularization loss.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11411v1",
+      "title": "Online Reasoning Video Object Segmentation",
+      "authors": [
+        "Jinyuan Liu",
+        "Yang Wang",
+        "Zeyu Zhao",
+        "Weixin Li",
+        "Song Wang"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Reasoning video object segmentation predicts pixel-level masks in videos from natural-language queries that may involve implicit and temporally grounded references. However, existing methods are developed and evaluated in an offline regime, where the entire video is available at inference time and future frames can be exploited for retrospective disambiguation, deviating from real-world deployments that require strictly causal, frame-by-frame decisions. We study Online Reasoning Video Object Segmentation (ORVOS), where models must incrementally interpret queries using only past and current frames without revisiting previous predictions, while handling referent shifts as events unfold. To support evaluation, we introduce ORVOSB, a benchmark with frame-level causal annotations and referent-shift labels, comprising 210 videos, 12,907 annotated frames, and 512 queries across five reasoning categories. We further propose a baseline with continually-updated segmentation prompts and a structured temporal token reservoir for long-horizon reasoning under bounded computation. Experiments show that existing methods struggle under strict causality and referent shifts, while our baseline establishes a strong foundation for future research.",
+      "url": "http://arxiv.org/abs/2604.11411v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11411v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出了**在线推理视频目标分割（ORVOS）**范式，要求模型在仅使用过去和当前帧的情况下，**逐帧**对自然语言查询进行因果推理和分割，以应对动态变化的指代对象。为此，他们创建了**ORVOSB基准**，包含因果标注和指代漂移标签，并提出了一个使用持续更新的分割提示作为基线模型。",
+      "figure_url": "https://arxiv.org/html/2604.11411v1/x1.png",
+      "figure_caption": "Overview of ORVOSB data construction and annotation pipeline.",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -280,9 +650,34 @@
       "url": "http://arxiv.org/abs/2604.11627v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11627v1",
       "score": 8.0,
-      "abstract_zh": "**核心方法：** POINTS-Long 提出了一种受人眼启发的动态双模态（焦点/待机）视觉标记缩放机制，并设计了可动态分离的KV缓存。\n\n**核心贡献：** 该模型在处理长序列视觉任务时，实现了效率和准确性的动态权衡，在保持高精度的同时大幅减少了视觉标记和计算量，并原生支持高效的流式视觉理解。",
+      "abstract_zh": "**核心方法：** POINTS-Long 引入了受人眼启发的动态双模式（焦点/待机）视觉标记缩放机制，并设计了可动态分离的 KV 缓存。\n\n**核心贡献：** 该模型在处理长序列视觉输入时，实现了效率和准确性的动态权衡，显著降低了计算成本（使用极少标记），同时原生支持高效的流式视觉理解。",
       "figure_url": "https://arxiv.org/html/2604.11627v1/x1.png",
       "figure_caption": "POINTS-Long: Bridging the Gap between Human Visual Perception and MLLM Scalability. Inspired by human’s adaptive visual processing, POINTS-Long introduces a dual-mode system which switches between high-fidelity Focus Mode and efficient Standby Mode, enabling both detailed analysis and long-term streaming understanding with significantly reduced cost.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11399v1",
+      "title": "Reasoning Resides in Layers: Restoring Temporal Reasoning in Video-Language Models with Layer-Selective Merging",
+      "authors": [
+        "Zihang Fu",
+        "Haonan Wang",
+        "Jian Kang",
+        "Kenji Kawaguchi",
+        "Jiaying Wu"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "abstract": "Multimodal adaptation equips large language models (LLMs) with perceptual capabilities, but often weakens the reasoning ability inherited from language-only pretraining. This trade-off is especially pronounced in video-language models (VLMs), where visual alignment can impair temporal reasoning (TR) over sequential events. We propose MERIT, a training-free, task-driven model merging framework for restoring TR in VLMs. MERIT searches over layer-wise self-attention merging recipes between a VLM and its paired text-only backbone using an objective that improves TR while penalizing degradation in temporal perception (TP). Across three representative VLMs and multiple challenging video benchmarks, MERIT consistently improves TR, preserves or improves TP, and generalizes beyond the search set to four distinct benchmarks. It also outperforms uniform full-model merging and random layer selection, showing that effective recovery depends on selecting the right layers. Interventional masking and frame-level attribution further show that the selected layers are disproportionately important for reasoning and shift model decisions toward temporally and causally relevant evidence. These results show that targeted, perception-aware model merging can effectively restore TR in VLMs without retraining.",
+      "url": "http://arxiv.org/abs/2604.11399v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11399v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出 **MERIT** 框架，通过**训练前、任务驱动的模型层选择性合并**（merging），将视频语言模型（VLM）与纯文本模型进行融合。核心目标是**恢复VLM中因视觉对齐而削弱的时间推理能力**，同时保持或提升时间感知能力。",
+      "figure_url": "https://arxiv.org/html/2604.11399v1/x1.png",
+      "figure_caption": "Multimodal adaptation can impair intrinsic temporal reasoning (TR) in VLMs. Top: A base LLM correctly answers a text-only TR question, whereas the corresponding VLM fails on the identical text input after multimodal adaptation. Bottom: On a video task, while the VLM correctly perceives salient visual entities, it fails to infer the causal-temporal structure of the event sequence, exposing a gap between visual perception and TR.",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -302,9 +697,125 @@
       "url": "http://arxiv.org/abs/2604.11707v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11707v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出了一种名为 Re2Pix 的分层视频预测框架，它将预测分解为**语义表示预测**和**表示引导的视觉合成**两阶段。核心方法是先预测未来场景结构（在冻结模型特征空间中），再用这些预测表示指导扩散模型生成逼真视频。这使得模型能解耦处理动态一致性和视觉保真度。",
+      "abstract_zh": "Re2Pix 提出一种分层视频预测框架，首先预测未来场景的语义特征表示，然后利用这些表示指导潜在扩散模型生成逼真视频帧。该方法通过解耦动态结构预测和外观生成，解决了训练与测试时表示不匹配的问题，从而提高了复杂场景下的预测准确性和视觉保真度。",
       "figure_url": "https://arxiv.org/html/2604.11707v1/x1.png",
       "figure_caption": "Overview of the proposed Re2Pix hierarchical framework during inference. In Stage 1, semantic features h 1 : M h_{1:M} of the context frames are extracted from a vision foundation model (VFM) encoder E h E_{h} and fed into a masked feature transformer to autoregressively predict (in frame-wise way) future semantic VFM features h ^ M + 1 : K \\hat{h}_{M+1:K} . In Stage 2, both the past h ^ 1 : M \\hat{h}_{1:M} and predicted features h ^ M + 1 : K \\hat{h}_{M+1:K} condition the diffusion transformer G z G_{z} to generate future VAE latents z ^ M + 1 : K \\hat{z}_{M+1:K} , which are then decoded into RGB future frames.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11156v1",
+      "title": "rPPG-VQA: A Video Quality Assessment Framework for Unsupervised rPPG Training",
+      "authors": [
+        "Tianyang Dai",
+        "Ming Chang",
+        "Yan Chen",
+        "Yang Hu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Unsupervised remote photoplethysmography (rPPG) promises to leverage unlabeled video data, but its potential is hindered by a critical challenge: training on low-quality \"in-the-wild\" videos severely degrades model performance. An essential step missing here is to assess the suitability of the videos for rPPG model learning before using them for the task. Existing video quality assessment (VQA) methods are mainly designed for human perception and not directly applicable to the above purpose. In this work, we propose rPPG-VQA, a novel framework for assessing video suitability for rPPG. We integrate signal-level and scene-level analyses and design a dual-branch assessment architecture. The signal-level branch evaluates the physiological signal quality of the videos via robust signal-to-noise ratio (SNR) estimation with a multi-method consensus mechanism, and the scene-level branch uses a multimodal large language model (MLLM) to identify interferences like motion and unstable lighting. Furthermore, we propose a two-stage adaptive sampling (TAS) strategy that utilizes the quality score to curate optimal training datasets. Experiments show that by training on large-scale, \"in-the-wild\" videos filtered by our framework, we can develop unsupervised rPPG models that achieve a substantial improvement in accuracy on standard benchmarks. Our code is available at https://github.com/Tianyang-Dai/rPPG-VQA.",
+      "url": "http://arxiv.org/abs/2604.11156v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11156v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出了 **rPPG-VQA** 框架，用于评估视频数据对无监督 rPPG 训练的适用性。它通过**信号级（SNR估计）**和**场景级（MLLM分析干扰）**的双分支架构，量化视频质量，从而解决现有VQA方法不适用于rPPG训练评估的问题。",
+      "figure_url": "https://arxiv.org/html/2604.11156v1/figs/illustration.png",
+      "figure_caption": "Dataset categorization and performance comparison for unsupervised rPPG. (a) Classification of datasets into labeled rPPG benchmarks and unlabeled “in-the-wild” corpora. (b) HR estimation errors on the PURE test set using different sampling criteria. “All” and “Random” denote the full and randomly sampled combined dataset (CAS(ME) 2 and Celeb-DF (v2)), respectively.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11122v1",
+      "title": "Semantic-Geometric Dual Compression: Training-Free Visual Token Reduction for Ultra-High-Resolution Remote Sensing Understanding",
+      "authors": [
+        "Yueying Li",
+        "Fengxiang Wang",
+        "Yan Li",
+        "Mingshuo Chen",
+        "Mengying Zhao"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "abstract": "Multimodal Large Language Models (MLLMs) have demonstrated immense potential in Earth observation. However, the massive visual tokens generated when processing Ultra-High-Resolution (UHR) imagery introduce prohibitive computational overhead, severely bottlenecking their inference efficiency. Existing visual token compression methods predominantly adopt static and uniform compression strategies, neglecting the inherent \"Semantic-Geometric Duality\" in remote sensing interpretation tasks. Specifically, object semantic tasks focus on the abstract semantics of objects and benefit from aggressive background pruning, whereas scene geometric tasks critically rely on the integrity of spatial topology. To address this challenge, we propose DualComp, a task-adaptive dual-stream token compression framework. Dynamically guided by a lightweight pre-trained router, DualComp decouples feature processing into two dedicated pathways. In the object semantic stream, the Spatially-Contiguous Semantic Aggregator (SCSA) utilizes size-adaptive clustering to aggregates redundant background while protecting small object. In the scene geometric stream, the Instruction-Guided Structure Recoverer (IGSR) introduces a greedy path-tracing topology completion mechanism to reconstruct spatial skeletons. Experiments on the UHR remote sensing benchmark XLRS-Bench demonstrate that DualComp accomplishes high-fidelity remote sensing interpretation at an exceptionally low computational cost, achieving simultaneous improvements in both efficiency and accuracy.",
+      "url": "http://arxiv.org/abs/2604.11122v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11122v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出**DualComp**框架，通过**语义-几何双流**机制解决超高分辨率遥感图像处理中视觉令牌过多导致的计算瓶颈。它利用轻量级路由器动态引导，分别对**语义任务**进行背景剪枝，对**几何任务**保持空间拓扑完整性，实现了**无需训练的视觉令牌高效压缩**。",
+      "figure_url": "https://arxiv.org/html/2604.11122v1/figure/intro_1.png",
+      "figure_caption": "Pilot study reveals semantic–geometric duality under token compression. We evaluate a UHR remote-sensing MLLM across multiple compression ratios and report performance changes for three representative groups of subtasks: (a) semantic-dominant improves as compression increases; (b) balanced peaks at a moderate ratio; (c) geometric-dominant drops under strong compression. This highlights that background tokens can be either redundant noise or indispensable geometric evidence, depending on task intent.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11089v1",
+      "title": "Structured State-Space Regularization for Compact and Generation-Friendly Image Tokenization",
+      "authors": [
+        "Jinsung Lee",
+        "Jaemin Oh",
+        "Namhun Kim",
+        "Dongwon Kim",
+        "Byung-Jun Yoon"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Image tokenizers are central to modern vision models as they often operate in latent spaces. An ideal latent space must be simultaneously compact and generation-friendly: it should capture image's essential content compactly while remaining easy to model with generative approaches. In this work, we introduce a novel regularizer to align latent spaces with these two objectives. The key idea is to guide tokenizers to mimic the hidden state dynamics of state-space models (SSMs), thereby transferring their critical property, frequency awareness, to latent features. Grounded in a theoretical analysis of SSMs, our regularizer enforces encoding of fine spatial structures and frequency-domain cues into compact latent features; leading to more effective use of representation capacity and improved generative modelability. Experiments demonstrate that our method improves generation quality in diffusion models while incurring only minimal loss in reconstruction fidelity.",
+      "url": "http://arxiv.org/abs/2604.11089v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11089v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出一种**结构化状态空间正则化**方法，通过引导图像分词器模仿状态空间模型（SSM）的隐藏状态动态，将SSM的频率感知能力迁移到潜在特征中。这使得潜在表示既**紧凑**又能**利于生成**，实验证明能提升扩散模型的生成质量。",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11025v1",
+      "title": "Test-time Scaling over Perception: Resolving the Grounding Paradox in Thinking with Images",
+      "authors": [
+        "Zheng Jiang",
+        "Yiming Chen",
+        "Nan He",
+        "Jiahui Chen",
+        "Chaoyang Li"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Recent multimodal large language models (MLLMs) have begun to support Thinking with Images by invoking visual tools such as zooming and cropping during inference. Yet these systems remain brittle in fine-grained visual reasoning because they must decide where to look before they have access to the evidence needed to make that decision correctly. We identify this circular dependency as the Grounding Paradox. To address it, we propose Test-Time Scaling over Perception (TTSP), a framework that treats perception itself as a scalable inference process. TTSP generates multiple exploratory perception traces, filters unreliable traces using entropy-based confidence estimation, distills validated observations into structured knowledge, and iteratively refines subsequent exploration toward unresolved uncertainty. Extensive experiments on high-resolution and general multimodal reasoning benchmarks show that TTSP consistently outperforms strong baselines across backbone sizes, while also exhibiting favorable scalability and token efficiency. Our results suggest that scaling perception at test time is a promising direction for robust multimodal reasoning under perceptual uncertainty.",
+      "url": "http://arxiv.org/abs/2604.11025v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11025v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出了**测试时感知缩放（TTSP）**框架，通过将感知视为可扩展推理过程来解决多模态大模型中“先看哪里”的**基础悖论**。TTSP通过生成多重探索性感知轨迹、基于熵过滤不可靠信息，并将有效观察提炼为结构化知识，从而**迭代优化视觉推理的准确性**。",
+      "figure_url": "https://arxiv.org/html/2604.11025v1/x1.png",
+      "figure_caption": "Figure 1. Illustration of the Grounding Paradox.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.10999v1",
+      "title": "TraversalBench: Challenging Paths to Follow for Vision Language Models",
+      "authors": [
+        "Clara Petrova",
+        "Zhuo Chen",
+        "Marin Soljačić"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Vision-language models (VLMs) perform strongly on many multimodal benchmarks. However, the ability to follow complex visual paths -- a task that human observers typically find straightforward -- remains under-tested. We introduce TraversalBench, a controlled benchmark for exact visual path traversal. Each instance contains a single continuous polyline, a unique start marker, and markers placed at path vertices; the task is to recover the exact ordered sequence encountered when traversing the path from start to finish. The benchmark explicitly balances key path-structural factors including self-intersection count, tortuosity, vertex count, and nearby confounding lines, while minimizing reliance on OCR, world knowledge, and open-ended planning. We find that self-intersections are the dominant source of difficulty. A first-crossing analysis shows that errors are sharply localized: performance is relatively stable immediately before the first crossing, then drops steeply when the model must resolve the correct continuation. By contrast, nearby confounding lines produce a weaker persistent degradation that compounds with repeated exposure. These analyses make TraversalBench a useful diagnostic for identifying whether models suffer from human-like failures or other breakdowns in sustained visual processing. An auxiliary reading-order benchmark further reveals a consistent preference for layouts compatible with left-to-right serialization, while not explaining away the main effects of path complexity. Together, these results position TraversalBench as a controlled diagnostic of path-faithful visual reasoning and as a useful testbed for studying multimodal spatial reasoning under ambiguity, clutter, and distractor structure. More broadly, we position TraversalBench as a contribution to the still-limited area of sustained visual grounding benchmarks for VLMs.",
+      "url": "http://arxiv.org/abs/2604.10999v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.10999v1",
+      "score": 8.0,
+      "abstract_zh": "TraversalBench是一个新颖的、受控的视觉路径遍历基准，用于精确评估视觉语言模型（VLMs）遵循复杂路径的能力。该基准通过平衡路径结构因素（如自相交、曲折度），并最小化对OCR和世界知识的依赖，揭示了**自相交**是模型性能下降的主要瓶颈。",
+      "figure_url": "https://arxiv.org/html/2604.10999v1/frontpage_teaser_qa_style_mp9_qwen72b_3.png",
+      "figure_caption": "Examples from TraversalBench . Left: A non-tortuous, non-self-intersecting path that the model traces correctly. Right: A highly tortuous, heavily self-intersecting path for which the model produces an incorrect sequence. Glyphs are rendered slightly larger than in examples in the dataset.",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -328,9 +839,101 @@
       "url": "http://arxiv.org/abs/2604.11490v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11490v1",
       "score": 7.0,
-      "abstract_zh": "该论文提出了**人类区域适应（Anthropogenic Regional Adaptation）**的新范式，旨在优化多模态模型对特定区域的关联性，同时保持全局泛化能力。为此，研究人员设计了**GG-EZ**方法，通过区域数据过滤和模型合并来实现高效适应，并在多种视觉-语言模型上验证了其有效性。",
+      "abstract_zh": "该论文提出了**人类区域适应（Anthropogenic Regional Adaptation）**的新范式，旨在优化多模态模型对特定区域的关联性，同时保持全局泛化能力。作者还提出了**GG-EZ**方法，通过区域数据过滤和模型合并来实现这种适应。",
       "figure_url": "https://arxiv.org/html/2604.11490v1/x1.png",
       "figure_caption": "Through anthropogenic regional adaptation, we identify two primary model archetypes: (left) Global model with strong overall global performance, but struggle to represent certain regions appropriately, and (right) Regional-specific model that has a strong representation towards certain regions, but fall short on the global context.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11038v1",
+      "title": "EgoFun3D: Modeling Interactive Objects from Egocentric Videos using Function Templates",
+      "authors": [
+        "Weikun Peng",
+        "Denys Iliash",
+        "Manolis Savva"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "We present EgoFun3D, a coordinated task formulation, dataset, and benchmark for modeling interactive 3D objects from egocentric videos. Interactive objects are of high interest for embodied AI but scarce, making modeling from readily available real-world videos valuable. Our task focuses on obtaining simulation-ready interactive 3D objects from egocentric video input. While prior work largely focuses on articulations, we capture general cross-part functional mappings (e.g., rotation of stove knob controls stove burner temperature) through function templates, a structured computational representation. Function templates enable precise evaluation and direct compilation into executable code across simulation platforms. To enable comprehensive benchmarking, we introduce a dataset of 271 egocentric videos featuring challenging real-world interactions with paired 3D geometry, segmentation over 2D and 3D, articulation and function template annotations. To tackle the task, we propose a 4-stage pipeline consisting of: 2D part segmentation, reconstruction, articulation estimation, and function template inference. Comprehensive benchmarking shows that the task is challenging for off-the-shelf methods, highlighting avenues for future work.",
+      "url": "http://arxiv.org/abs/2604.11038v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11038v1",
+      "score": 7.0,
+      "abstract_zh": "EgoFun3D 提出了一种新颖的框架，用于从第一人称视频中建模可交互的 3D 物体，重点在于捕获跨部件的功能映射。其核心方法是引入**函数模板**（Function Templates）作为结构化表示，以精确描述和编译物体的交互功能。该工作贡献了一个新的**数据集和基准**，推动了具身AI对真实世界交互物体的理解和模拟。",
+      "figure_url": "https://arxiv.org/html/2604.11038v1/x1.png",
+      "figure_caption": "We present EgoFun3D : a coordinated task, dataset and benchmark for modeling interactive 3D objects from egocentric videos. Given an egocentric video as an input, the output is a simulation-ready interactive object (e.g., faucet handle starts water flow from faucet spout). We break down the task into 4 steps to propose a baseline approach using off-the-shelf components. Our function template representation, produced by the proposed system, can be compiled into executable code for a simulator of choice.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11144v1",
+      "title": "Hierarchical Textual Knowledge for Enhanced Image Clustering",
+      "authors": [
+        "Yijie Zhong",
+        "Yunfan Gao",
+        "Weipeng Jiang",
+        "Haofen Wang"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.CL",
+        "cs.MM"
+      ],
+      "abstract": "Image clustering aims to group images in an unsupervised fashion. Traditional methods focus on knowledge from visual space, making it difficult to distinguish between visually similar but semantically different classes. Recent advances in vision-language models enable the use of textual knowledge to enhance image clustering. However, most existing methods rely on coarse class labels or simple nouns, overlooking the rich conceptual and attribute-level semantics embedded in textual space. In this paper, we propose a knowledge-enhanced clustering (KEC) method that constructs a hierarchical concept-attribute structured knowledge with the help of large language models (LLMs) to guide clustering. Specifically, we first condense redundant textual labels into abstract concepts and then automatically extract discriminative attributes for each single concept and similar concept pairs, via structured prompts to LLMs. This knowledge is instantiated for each input image to achieve the knowledge-enhanced features. The knowledge-enhanced features with original visual features are adapted to various downstream clustering algorithms. We evaluate KEC on 20 diverse datasets, showing consistent improvements across existing methods using additional textual knowledge. KEC without training outperforms zero-shot CLIP on 14 out of 20 datasets. Furthermore, the naive use of textual knowledge may harm clustering performance, while KEC provides both accuracy and robustness.",
+      "url": "http://arxiv.org/abs/2604.11144v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11144v1",
+      "score": 7.0,
+      "abstract_zh": "该论文提出了一种知识增强聚类（KEC）方法，利用大型语言模型（LLM）构建了**层次化的概念-属性结构知识**来指导图像聚类。核心方法是**提炼抽象概念并自动提取概念间的判别性属性**，以克服仅依赖视觉信息或粗粒度文本标签的局限性。这使得模型能更好地利用丰富的文本语义来区分语义不同但视觉相似的图像。",
+      "figure_url": "https://arxiv.org/html/2604.11144v1/x1.png",
+      "figure_caption": "Motivation and intuition behind KEC. We first contrast the type of knowledge used by existing methods versus our method. It also illustrates that class labels alone often fail to identify objects of similar categories. Building on prior work showing that CLIP attends to targeted semantical regions [ 40 ] , we visualize the attention maps derived from nouns and discriminative attributes using the method from [ 4 ] . The results motivate us to mine discriminative attributes to construct structured textual knowledge for guiding image clustering.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11444v1",
+      "title": "HuiYanEarth-SAR: A Foundation Model for High-Fidelity and Low-Cost Global Remote Sensing Imagery Generation",
+      "authors": [
+        "Yongxiang Liu",
+        "Jie Zhou",
+        "Yafei Song",
+        "Tianpeng Liu",
+        "Li Liu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Synthetic Aperture Radar (SAR) imagery generation is essential for deepening the study of scattering mechanisms, establishing trustworthy electromagnetic scene models, and fundamentally alleviating the data scarcity bottleneck that constrains development in this field. However, existing methods find it difficult to simultaneously ensure high fidelity in both global geospatial semantics and microscopic scattering mechanisms, resulting in severe challenges for global generation. To address this, we propose \\textbf{HuiYanEarth-SAR}, the first foundational SAR imagery generation model based on AlphaEarth and integrated scattering mechanisms. By injecting geospatial priors to control macroscopic structures and utilizing implicit scattering characteristic modeling to ensure the authenticity of microscopic textures, we achieve the capability of generating high-fidelity SAR images for global locations solely based on geographic coordinates. This study not only constructs an efficient SAR scene simulator but also establishes a bridge connecting geography, scatter mechanism, and artificial intelligence from a methodological standpoint. It advances SAR research by expanding the paradigm from perception and understanding to simulation and creation, providing key technical support for constructing a high-confidence digital twin of the Earth.",
+      "url": "http://arxiv.org/abs/2604.11444v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11444v1",
+      "score": 7.0,
+      "abstract_zh": "**核心方法：** HuiYanEarth-SAR是一个基于AlphaEarth的SAR图像生成基础模型，通过注入地理空间先验控制宏观结构，并利用隐式散射特性建模确保微观纹理真实性。\n\n**核心贡献：** 首次实现了仅基于地理坐标，就能生成高保真、低成本的全球SAR图像，有效缓解了数据稀缺问题。",
+      "figure_url": "https://arxiv.org/html/2604.11444v1/x1.png",
+      "figure_caption": "(a) We propose HuiYanEarth-SAR, the first generative foundation model conditioned on both geophysical priors and SAR scattering mechanism. The model only takes the geographic coordinates as input with low cost, ultimately generating high-fidelity SAR images that are strictly aligned with the input conditions and physically consistent. (b) HuiYanEarth-SAR shows powerful capabilities in generating global, high-fidelity SAR images. Code is available at https://github.com/JoyeZLearning/HuiYanEarth-SAR .",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11042v1",
+      "title": "Improving Layout Representation Learning Across Inconsistently Annotated Datasets via Agentic Harmonization",
+      "authors": [
+        "Renyu Li",
+        "Vladimir Kirilenko",
+        "Yao You",
+        "Crag Wolfe"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Fine-tuning object detection (OD) models on combined datasets assumes annotation compatibility, yet datasets often encode conflicting spatial definitions for semantically equivalent categories. We propose an agentic label harmonization workflow that uses a vision-language model to reconcile both category semantics and bounding box granularity across heterogeneous sources before training. We evaluate on document layout detection as a challenging case study, where annotation standards vary widely across corpora. Without harmonization, naïve mixed-dataset fine-tuning degrades a pretrained RT-DETRv2 detector: on SCORE-Bench, which measures how accurately the full document conversion pipeline reproduces ground-truth structure, table TEDS drops from 0.800 to 0.750. Applied to two corpora whose 16 and 10 category taxonomies share only 8 direct correspondences, harmonization yields consistent gains across content fidelity, table structure, and spatial consistency: detection F-score improves from 0.860 to 0.883, table TEDS improves to 0.814, and mean bounding box overlap drops from 0.043 to 0.016. Representation analysis further shows that harmonized training produces more compact and separable post-decoder embeddings, confirming that annotation inconsistency distorts the learned feature space and that resolving it before training restores representation structure.",
+      "url": "http://arxiv.org/abs/2604.11042v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11042v1",
+      "score": 7.0,
+      "abstract_zh": "该论文提出了一种**代理式标签协调工作流**，利用视觉-语言模型来调和不同数据集中类别语义和边界框粒度的不一致性。其核心贡献在于，通过在模型训练前进行数据异构性对齐，**显著提高了跨不一致标注数据集的布局检测性能**，解决了简单混合训练导致的性能下降问题。",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -353,9 +956,81 @@
       "url": "http://arxiv.org/abs/2604.11689v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11689v1",
       "score": 7.0,
-      "abstract_zh": "该论文提出了 **LARY 基准**，用于统一评估**潜在动作表示**在**高层语义动作**和**底层机器人控制**任务中的泛化能力。\n\n其核心方法是构建一个包含海量视频、图像对和运动轨迹的大型数据集，以解决现有VLA模型中显式动作数据短缺的问题。",
+      "abstract_zh": "该论文提出了**LARY基准**，用于统一评估**潜在动作表示**在**高层语义动作**和**底层机器人控制**任务中的泛化能力。\n\n核心方法是利用海量无标签的人类动作视频，将视觉信号转化为**本体论无关的潜在动作表示**，并首次对其在VLA任务中的鲁棒性进行了严格检验。",
       "figure_url": "https://arxiv.org/html/2604.11689v1/x1.png",
       "figure_caption": "LARYBench evaluates vision-to-action transformation on both action generalization and robotic control.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11004v1",
+      "title": "Panoptic Pairwise Distortion Graph",
+      "authors": [
+        "Muhammad Kamran Janjua",
+        "Abdul Wahab",
+        "Bahador Rashidi"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "In this work, we introduce a new perspective on comparative image assessment by representing an image pair as a structured composition of its regions. In contrast, existing methods focus on whole image analysis, while implicitly relying on region-level understanding. We extend the intra-image notion of a scene graph to inter-image, and propose a novel task of Distortion Graph (DG). DG treats paired images as a structured topology grounded in regions, and represents dense degradation information such as distortion type, severity, comparison and quality score in a compact interpretable graph structure. To realize the task of learning a distortion graph, we contribute (i) a region-level dataset, PandaSet, (ii) a benchmark suite, PandaBench, with varying region-level difficulty, and (iii) an efficient architecture, Panda, to generate distortion graphs. We demonstrate that PandaBench poses a significant challenge for state-of-the-art multimodal large language models (MLLMs) as they fail to understand region-level degradations even when fed with explicit region cues. We show that training on PandaSet or prompting with DG elicits region-wise distortion understanding, opening a new direction for fine-grained, structured pairwise image assessment.",
+      "url": "http://arxiv.org/abs/2604.11004v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11004v1",
+      "score": 7.0,
+      "abstract_zh": "该论文提出**失真图（Distortion Graph, DG）**，将图像对表示为基于区域的结构化拓扑，以捕捉密集的失真信息。为实现此任务，研究贡献了**PandaSet数据集**、**PandaBench基准**和**Panda模型**，旨在超越传统全图评估。",
+      "figure_url": "https://arxiv.org/html/2604.11004v1/x1.png",
+      "figure_caption": "DG Task Overview. Top: Given two images, Panda learns the proposed Distortion Graph ( DG ). Bottom: Grounded Subgraphs illustrate how DG grounds regions in terms of distortion information.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11231v1",
+      "title": "Seg2Change: Adapting Open-Vocabulary Semantic Segmentation Model for Remote Sensing Change Detection",
+      "authors": [
+        "You Su",
+        "Yonghong Song",
+        "Jingqi Chen",
+        "Zehan Wen"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "abstract": "Change detection is a fundamental task in remote sensing, aiming to quantify the impacts of human activities and ecological dynamics on land-cover changes. Existing change detection methods are limited to predefined classes in training datasets, which constrains their scalability in real-world scenarios. In recent years, numerous advanced open-vocabulary semantic segmentation models have emerged for remote sensing imagery. However, there is still a lack of an effective framework for directly applying these models to open-vocabulary change detection (OVCD), a novel task that integrates vision and language to detect changes across arbitrary categories. To address these challenges, we first construct a category-agnostic change detection dataset, termed CA-CDD. Further, we design a category-agnostic change head to detect the transitions of arbitrary categories and index them to specific classes. Based on them, we propose Seg2Change, an adapter designed to adapt open-vocabulary semantic segmentation models to change detection task. Without bells and whistles, this simple yet effective framework achieves state-of-the-art OVCD performance (+9.52 IoU on WHU-CD and +5.50 mIoU on SECOND). Our code is released at https://github.com/yogurts-sy/Seg2Change.",
+      "url": "http://arxiv.org/abs/2604.11231v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11231v1",
+      "score": 7.0,
+      "abstract_zh": "该论文提出 **Seg2Change** 框架，旨在将开放词汇语义分割模型应用于遥感影像的开放词汇变化检测（OVCD）。核心方法是设计了一个**类别无关的变化检测头**，用于检测任意类别的变化并进行索引，同时构建了**类别无关的变化检测数据集（CA-CDD）**。主要贡献在于首次有效适配了开放词汇模型到OVCD任务，提高了变化检测的泛化能力。",
+      "figure_url": "https://arxiv.org/html/2604.11231v1/images/Paradigm5-3.png",
+      "figure_caption": "Figure 1. Previous paradigms vs. our paradigm. Previous paradigms rely on change proposals and are constrained by the segmentation performance of the proposal generator. Meanwhile, both paradigms (a–b) distinguish changed instances using a predefined threshold, which makes it difficult to accurately delineate change boundaries. In contrast, our paradigm, based on category-agnostic change maps, can effectively leverage more powerful open-vocabulary segmentation models.",
+      "primary_category": "cs.CV",
+      "primary_category_anchor": "cs-cv",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11225v1",
+      "title": "Sign Language Recognition in the Age of LLMs",
+      "authors": [
+        "Vaclav Javorek",
+        "Jakub Honzik",
+        "Ivan Gruber",
+        "Tomas Zelezny",
+        "Marek Hruz"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "abstract": "Recent Vision Language Models (VLMs) have demonstrated strong performance across a wide range of multimodal reasoning tasks. This raises the question of whether such general-purpose models can also address specialized visual recognition problems such as isolated sign language recognition (ISLR) without task-specific training. In this work, we investigate the capability of modern VLMs to perform ISLR in a zero-shot setting. We evaluate several open-source and proprietary VLMs on the WLASL300 benchmark. Our experiments show that, under prompt-only zero-shot inference, current open-source VLMs remain far behind classic supervised ISLR classifiers by a wide margin. However, follow-up experiments reveal that these models capture partial visual-semantic alignment between signs and text descriptions. Larger proprietary models achieve substantially higher accuracy, highlighting the importance of model scale and training data diversity. All our code is publicly available on GitHub.",
+      "url": "http://arxiv.org/abs/2604.11225v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11225v1",
+      "score": 7.0,
+      "abstract_zh": "该论文研究了**大型视觉语言模型（VLMs）在零样本设置下进行孤立手语识别（ISLR）的能力**。 结果显示，**开源模型性能远逊于传统方法，但大型专有模型表现出潜力，表明模型规模和数据多样性的重要性**。",
+      "figure_url": "https://arxiv.org/html/2604.11225v1/x1.png",
+      "figure_caption": "Evaluation paradigms for zero-shot ISLR with VLMs. Top: Standard closed-set classification with defined target labels. Middle: Zero-shot prediction instructing the model to behave as an ASL expert capable of categorizing the input videos into an open set. Bottom: Zero-shot binary classification instructing the model to think about the input video to conclude whether the performed sign is the one the user thinks of, with optional knowledge about the data.",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
@@ -377,7 +1052,7 @@
       "url": "http://arxiv.org/abs/2604.11637v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11637v1",
       "score": 7.0,
-      "abstract_zh": "STS-Mixer 提出了一种新颖的**时空-谱混合（Spatio-Temporal-Spectral Mixer）**框架，通过将4D点云视频转换为**图谱信号**并分解为不同频率，以捕捉其内在的几何结构。该方法的核心贡献在于**融合了时空信息与频率域的几何细节**，有效提升了4D点云视频的理解能力。",
+      "abstract_zh": "STS-Mixer提出了一种新颖的**时空-谱混合（Spatio-Temporal-Spectral Mixer）**框架，通过将4D点云视频转换为**图谱信号**并进行**多频带分解**，以捕捉其独特的几何特征。该方法**融合了空间、时间与不同频率的谱信息**，有效克服了纯时空方法难以捕捉几何细节的局限，提升了4D点云视频的理解能力。",
       "figure_url": "https://arxiv.org/html/2604.11637v1/x1.png",
       "figure_caption": "Graph spectral analysis of point clouds with Graph Fourier Transform (GFT) and inverse GFT (IGFT). The high-frequency bands of point clouds encode fine-grained geometric details which can be observed by the difference between the original point cloud and the one w/o high frequency. The low-frequency bands capture most energy as well as the coarse shapes which can be observed by the similarity between the original point cloud and the one w/o mid-high frequency.",
       "primary_category": "cs.CV",
@@ -400,10 +1075,129 @@
       "url": "http://arxiv.org/abs/2604.11809v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11809v1",
       "score": 7.0,
-      "abstract_zh": "该论文研究了在特征匹配中引入旋转不变性的最佳阶段。研究发现，在描述符阶段引入旋转不变性与在匹配器阶段引入效果相似，但能使匹配器更快，且不损害垂直（upright）性能。",
+      "abstract_zh": "该论文研究了在特征匹配中引入旋转不变性的最佳阶段。**核心方法**是通过在描述符或匹配器中学习旋转不变性，并在大规模数据集上进行实验比较。**主要贡献**在于发现将不变性融入描述符即可获得与在匹配器中学习相似的性能，且能加速匹配过程，同时不损害直立图像的性能。",
       "primary_category": "cs.CV",
       "primary_category_anchor": "cs-cv",
       "primary_category_rank": 0
+    },
+    {
+      "id": "2604.11005v1",
+      "title": "Diffusion-CAM: Faithful Visual Explanations for dMLLMs",
+      "authors": [
+        "Haomin Zuo",
+        "Yidi Li",
+        "Luoxiao Yang",
+        "Xiaofeng Zhang"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "While diffusion Multimodal Large Language Models (dMLLMs) have recently achieved remarkable strides in multimodal generation, the development of interpretability mechanisms has lagged behind their architectural evolution. Unlike traditional autoregressive models that produce sequential activations, diffusion-based architectures generate tokens via parallel denoising, resulting in smooth, distributed activation patterns across the entire sequence. Consequently, existing Class Activation Mapping (CAM) methods, which are tailored for local, sequential dependencies, are ill-suited for interpreting these non-autoregressive behaviors. To bridge this gap, we propose Diffusion-CAM, the first interpretability method specifically tailored for dMLLMs. We derive raw activation maps by differentiably probing intermediate representations in the transformer backbone, accordingly capturing both latent features and their class-specific gradients. To address the inherent stochasticity of these raw signals, we incorporate four key modules to resolve spatial ambiguity and mitigate intra-image confounders and redundant token correlations. Extensive experiments demonstrate that Diffusion-CAM significantly outperforms SoTA methods in both localization accuracy and visual fidelity, establishing a new standard for understanding the parallel generation process of diffusion multimodal systems.",
+      "url": "http://arxiv.org/abs/2604.11005v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11005v1",
+      "score": 9.0,
+      "abstract_zh": "Diffusion-CAM 提出了一种专门针对扩散多模态大语言模型（dMLLMs）的解释方法。它通过可微分地探查 Transformer 中间层来获取原始激活图，从而捕捉潜在特征及其类别特定梯度，以克服现有 CAM 方法不适用于 dMLLMs 并行去噪特性的局限。",
+      "figure_url": "https://arxiv.org/html/2604.11005v1/x1.png",
+      "figure_caption": "Visual comparison of (A) [LLaVA-CAM] and (B) [Diffusion-CAM] (ours). Our method generates more focused and clearer activation maps.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.11095v1",
+      "title": "Bottleneck Tokens for Unified Multimodal Retrieval",
+      "authors": [
+        "Siyu Sun",
+        "Jing Ren",
+        "Zhaohe Liao",
+        "Dongxiao Mao",
+        "Xiangyuan Ren"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "Adapting decoder-only multimodal large language models (MLLMs) for unified multimodal retrieval faces two structural gaps. First, existing methods rely on implicit pooling, which overloads the hidden state of a standard vocabulary token (e.g., <EOS>) as the sequence-level representation, a mechanism never designed for information aggregation. Second, contrastive fine-tuning specifies what the embedding should match but provides no token-level guidance on how information should be compressed into it. We address both gaps with two complementary components. Architecturally, we introduce Bottleneck Tokens (BToks), a small set of learnable tokens that serve as a fixed-capacity explicit pooling mechanism. For training, we propose Generative Information Condensation: a next-token prediction objective coupled with a Condensation Mask that severs the direct attention path from target tokens to query tokens. All predictive signals are thereby forced through the BToks, converting the generative loss into dense, token-level supervision for semantic compression. At inference time, only the input and BToks are processed in a single forward pass with negligible overhead over conventional last-token pooling. On MMEB-V2 (78 datasets, 3 modalities, 9 meta-tasks), our approach achieves state-of-the-art among 2B-scale methods under comparable data conditions, attaining an Overall score of 59.0 (+3.6 over VLM2Vec-V2) with substantial gains on semantically demanding tasks (e.g., +12.6 on Video-QA).",
+      "url": "http://arxiv.org/abs/2604.11095v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11095v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出**瓶颈令牌（BToks）**作为固定容量的显式池化机制，解决了解码器模型进行多模态检索时的隐式池化问题。同时，通过**生成式信息凝聚**（结合下一词预测和信息掩码），强制信息流经BToks，从而实现高效的跨模态信息压缩和统一检索。",
+      "figure_url": "https://arxiv.org/html/2604.11095v1/x1.png",
+      "figure_caption": "Bottleneck tokens for unified multimodal retrieval. The model uses a set of learnable bottleneck tokens (red) inserted between the query tokens and the target tokens in the LLM decoder. The query is embedded through these bottleneck tokens, while the model autoregressively predicts the target tokens. This structure enforces focused interaction between query and target, improving retrieval performance without altering the inference-time complexity.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.11137v1",
+      "title": "From Answers to Arguments: Toward Trustworthy Clinical Diagnostic Reasoning with Toulmin-Guided Curriculum Goal-Conditioned Learning",
+      "authors": [
+        "Chen Zhan",
+        "Xiaoyu Tan",
+        "Gengchen Ma",
+        "Yu-Jie Xiong",
+        "Xiaoyan Jiang"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "The integration of Large Language Models (LLMs) into clinical decision support is critically obstructed by their opaque and often unreliable reasoning. In the high-stakes domain of healthcare, correct answers alone are insufficient; clinical practice demands full transparency to ensure patient safety and enable professional accountability. A pervasive and dangerous weakness of current LLMs is their tendency to produce \"correct answers through flawed reasoning.\" This issue is far more than a minor academic flaw; such process errors signal a fundamental lack of robust understanding, making the model prone to broader hallucinations and unpredictable failures when faced with real-world clinical complexity. In this paper, we establish a framework for trustworthy clinical argumentation by adapting the Toulmin model to the diagnostic process. We propose a novel training pipeline: Curriculum Goal-Conditioned Learning (CGCL), designed to progressively train LLM to generate diagnostic arguments that explicitly follow this Toulmin structure. CGCL's progressive three-stage curriculum systematically builds a solid clinical argument: (1) extracting facts and generating differential diagnoses; (2) justifying a core hypothesis while rebutting alternatives; and (3) synthesizing the analysis into a final, qualified conclusion. We validate CGCL using T-Eval, a quantitative framework measuring the integrity of the diagnosis reasoning. Experiments show that our method achieves diagnostic accuracy and reasoning quality comparable to resource-intensive Reinforcement Learning (RL) methods, while offering a more stable and efficient training pipeline.",
+      "url": "http://arxiv.org/abs/2604.11137v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11137v1",
+      "score": 8.0,
+      "abstract_zh": "该论文提出了一种名为**课程目标条件学习 (CGCL)** 的新颖训练框架，用于提升临床诊断推理的可信度。它借鉴**图尔敏模型 (Toulmin model)** 结构化临床论证过程，旨在解决当前大型语言模型“正确答案但推理有缺陷”的问题，从而提高决策透明度和可靠性。",
+      "figure_url": "https://arxiv.org/html/2604.11137v1/latex/Figure/arr_p1.png",
+      "figure_caption": "Clinical Diagnostic Reasoning Paradigms.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.11307v1",
+      "title": "PaperScope: A Multi-Modal Multi-Document Benchmark for Agentic Deep Research Across Massive Scientific Papers",
+      "authors": [
+        "Lei Xiong",
+        "Huaying Yuan",
+        "Zheng Liu",
+        "Zhao Cao",
+        "Zhicheng Dou"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "Leveraging Multi-modal Large Language Models (MLLMs) to accelerate frontier scientific research is promising, yet how to rigorously evaluate such systems remains unclear. Existing benchmarks mainly focus on single-document understanding, whereas real scientific workflows require integrating evidence from multiple papers, including their text, tables, and figures. As a result, multi-modal, multi-document scientific reasoning remains underexplored and lacks systematic evaluation. To address this gap, we introduce PaperScope, a multi-modal multi-document benchmark designed for agentic deep research. PaperScope presents three advantages: (1) Structured scientific grounding. It is built on a knowledge graph of over 2,000 AI papers spanning three years, providing a structured foundation for research-oriented queries. (2) Semantically dense evidence construction. It integrates semantically related key information nodes and employs optimized random-walk article selector to sample thematically coherent paper sets, thereby ensuring adequate semantic density and task complexity. (3) Multi-task evaluation of scientific reasoning. It contains over 2,000 QA pairs across reasoning, retrieval, summarization, and problem solving, enabling evaluation of multi-step scientific reasoning. Experimental results show that even advanced systems such as OpenAI Deep Research and Tongyi Deep Research achieve limited scores on PaperScope, highlighting the difficulty of long-context retrieval and deep multi-source reasoning. PaperScope thus provides a rigorous benchmark alongside a scalable pipeline for constructing large-scale multi-modal, multi-source deep research datasets.",
+      "url": "http://arxiv.org/abs/2604.11307v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11307v1",
+      "score": 8.0,
+      "abstract_zh": "**核心方法：** PaperScope构建了一个基于知识图谱的、包含文本、表格和图表的多模态、多文档基准，用于评估AI系统在海量科学论文中的深度研究能力。\n\n**核心贡献：** 解决了现有基准侧重单文档的局限性，提供了系统化的评估框架，以推动多模态大模型在复杂、跨文档科学推理任务中的发展。",
+      "figure_url": "https://arxiv.org/html/2604.11307v1/x1.png",
+      "figure_caption": "Visualized Examples of PaperScope Bench: Sub-task illustrations from four meta-tasks. The icons in the center represent the various capabilities required by the agent. In each case, the icons placed next to specific stages indicate the particular capabilities needed at that stage. Thinking refers to the reasoning and decomposition of the underlying intent of a given query. Understanding denotes multi-modal comprehension of the document content.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.11334v1",
+      "title": "Dynamic Summary Generation for Interpretable Multimodal Depression Detection",
+      "authors": [
+        "Shiyu Teng",
+        "Jiaqing Liu",
+        "Hao Sun",
+        "Yu Li",
+        "Shurong Chai"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "Depression remains widely underdiagnosed and undertreated because stigma and subjective symptom ratings hinder reliable screening. To address this challenge, we propose a coarse-to-fine, multi-stage framework that leverages large language models (LLMs) for accurate and interpretable detection. The pipeline performs binary screening, five-class severity classification, and continuous regression. At each stage, an LLM produces progressively richer clinical summaries that guide a multimodal fusion module integrating text, audio, and video features, yielding predictions with transparent rationale. The system then consolidates all summaries into a concise, human-readable assessment report. Experiments on the E-DAIC and CMDC datasets show significant improvements over state-of-the-art baselines in both accuracy and interpretability.",
+      "url": "http://arxiv.org/abs/2604.11334v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.11334v1",
+      "score": 7.0,
+      "abstract_zh": "该论文提出一个**粗粒到细粒的多阶段框架**，利用大型语言模型（LLMs）生成**递进的临床摘要**来指导**多模态特征融合**，从而实现抑郁症的**高精度和可解释性检测**。其核心贡献在于通过LLM驱动的摘要生成，实现了**透明的预测推理**和**简洁的评估报告**。",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 1
     },
     {
       "id": "2604.11563v1",
@@ -421,7 +1215,7 @@
       "url": "http://arxiv.org/abs/2604.11563v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11563v1",
       "score": 7.0,
-      "abstract_zh": "Synthius-Mem提出了一种受大脑启发的结构化人格记忆系统，通过将对话分解为六个认知领域来提取“已知信息”，而非简单检索原始对话。该方法有效抵抗幻觉，并在LoCoMo基准测试中实现了高记忆准确率（94.4%）和强大的对抗鲁棒性（99.6%）。",
+      "abstract_zh": "Synthius-Mem提出了一种受大脑启发的结构化人格记忆系统，通过将对话分解为六个认知领域来提取关于用户的知识，而非简单检索。该方法有效抵抗了幻觉，并在LoCoMo基准测试中实现了高记忆准确率和强大的对抗鲁棒性。",
       "primary_category": "cs.AI",
       "primary_category_anchor": "cs-ai",
       "primary_category_rank": 1
@@ -444,7 +1238,7 @@
       "url": "http://arxiv.org/abs/2604.11547v1",
       "pdf_url": "https://arxiv.org/pdf/2604.11547v1",
       "score": 8.0,
-      "abstract_zh": "该论文提出MedSSR框架，通过利用罕见病知识**合成可控的推理问题**，并利用模型自身生成伪标签。然后采用**自监督强化学习**在合成数据上训练，以高效增强LLM在数据稀疏领域的医疗推理能力。",
+      "abstract_zh": "该论文提出MedSSR框架，通过利用罕见病知识**合成可控的推理问题**，并利用模型自身生成伪标签。然后采用**自监督强化学习**在合成数据上进行训练，以高效增强LLM在数据稀疏领域的医疗推理能力。",
       "figure_url": "https://arxiv.org/html/2604.11547v1/x1.png",
       "figure_caption": "Distribution of question types in existing medical datasets. Only 22% are reasoning-intensive, and just 3% among them concern rare diseases.",
       "primary_category": "cs.LG",
@@ -460,7 +1254,7 @@
       "score": 241,
       "created_at": "2026-04-13T21:25:38Z",
       "comments_url": "https://news.ycombinator.com/item?id=47758028",
-      "summary_zh": "斯坦福报告揭示：人工智能圈内人与大众的认知差距日益扩大。"
+      "summary_zh": "斯坦福报告揭示，人工智能圈内人士与公众的认知差距日益扩大。"
     },
     {
       "id": 47751032,
@@ -469,16 +1263,25 @@
       "score": 179,
       "created_at": "2026-04-13T12:29:39Z",
       "comments_url": "https://news.ycombinator.com/item?id=47751032",
-      "summary_zh": "**人工智能或将终结数字浪潮，而非开启下一波技术革新。**"
+      "summary_zh": "**人工智能或将终结数字浪潮，而非开启新的技术飞跃。**"
     },
     {
       "id": 47756772,
       "title": "GAIA – Open-source framework for building AI agents that run on local hardware",
       "url": "https://amd-gaia.ai/docs",
-      "score": 131,
+      "score": 132,
       "created_at": "2026-04-13T19:28:41Z",
       "comments_url": "https://news.ycombinator.com/item?id=47756772",
-      "summary_zh": "GAIA是一个开源框架，用于在本地硬件上构建和运行人工智能代理。"
+      "summary_zh": "GAIA是一个开源框架，让用户能在本地硬件上构建和运行AI智能体。"
+    },
+    {
+      "id": 47762901,
+      "title": "An AI Vibe Coding Horror Story",
+      "url": "https://www.tobru.ch/an-ai-vibe-coding-horror-story/",
+      "score": 131,
+      "created_at": "2026-04-14T08:35:45Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47762901",
+      "summary_zh": "AI 辅助编程可能导致代码质量下降和难以追踪的“恐怖”后果。"
     },
     {
       "id": 47753643,
@@ -488,15 +1291,6 @@
       "created_at": "2026-04-13T15:41:08Z",
       "comments_url": "https://news.ycombinator.com/item?id=47753643",
       "summary_zh": "Claude.ai 目前服务中断，用户无法访问。"
-    },
-    {
-      "id": 47762901,
-      "title": "An AI Vibe Coding Horror Story",
-      "url": "https://www.tobru.ch/an-ai-vibe-coding-horror-story/",
-      "score": 121,
-      "created_at": "2026-04-14T08:35:45Z",
-      "comments_url": "https://news.ycombinator.com/item?id=47762901",
-      "summary_zh": "AI 辅助编程可能导致难以追踪的、令人不安的“代码怪谈”。"
     },
     {
       "id": 47757775,
@@ -523,16 +1317,16 @@
       "score": 77,
       "created_at": "2026-04-13T14:21:29Z",
       "comments_url": "https://news.ycombinator.com/item?id=47752402",
-      "summary_zh": "扎克伯格正秘密开发一个AI“分身”，可能用于代替他出席会议。"
+      "summary_zh": "扎克伯格正开发一个AI克隆人，或将代替他出席会议。"
     },
     {
       "id": 47758347,
       "title": "N-Day-Bench – Can LLMs find real vulnerabilities in real codebases?",
       "url": "https://ndaybench.winfunc.com",
-      "score": 72,
+      "score": 73,
       "created_at": "2026-04-13T21:54:03Z",
       "comments_url": "https://news.ycombinator.com/item?id=47758347",
-      "summary_zh": "N-Day-Bench测试探究大型语言模型能否在真实代码库中发现实际安全漏洞。"
+      "summary_zh": "N-Day-Bench 旨在测试大型语言模型（LLM）在真实代码库中发现实际安全漏洞的能力。"
     },
     {
       "id": 47758863,
@@ -541,7 +1335,7 @@
       "score": 67,
       "created_at": "2026-04-13T22:40:26Z",
       "comments_url": "https://news.ycombinator.com/item?id=47758863",
-      "summary_zh": "AI 驱动的“十倍工程师”目标正以牺牲资深工程师的身体健康为代价。"
+      "summary_zh": "AI驱动的“十倍速”工作要求正以身体健康为代价，压垮资深工程师。"
     }
   ],
   "jobs": [
@@ -552,7 +1346,7 @@
       "posted_date": "",
       "source": "jobs.ac.uk CS",
       "deadline": "2026-05-11T00:00:00+00:00",
-      "requirements_zh": "研究方向：利用in silico模型研究乳腺癌侵袭和骨组织定植的机制，重点关注运动对骨损伤发展的影响及机械敏感性骨细胞的作用，整合机械载荷、细胞成像、体内微CT和空间转录组学数据。\n关键要求：具有生物信息学和计算生物力学背景的欧洲研究理事会（ERC）资助的博士后研究员；具备计算机科学、生物医学科学或生物工程背景，有跨学科研究经验和生物信息学分析经验；或具备炎症和病理学相关生物力学技能的工程师，并有处理大型数据集的经验。\n申请信息：截止/开始时间、申请材料、联系渠道（如有）：截止时间：2026-05-11；申请材料和联系渠道未注明。\n职位条件：地点、合同类型、工作量、薪资：地点：伦敦，英格兰，英国；合同类型：固定期限/合同；工作量：全职；薪资：每年GBP38419.00-GBP51755.00。\n一句建议：给CV/医疗影像/LLM方向申请者的匹配建议：建议侧重强调在生物力学建模、空间组学数据分析或处理大型生物医学数据集方面的计算技能，以匹配该职位对in silico模型构建和多模态数据整合的要求。",
+      "requirements_zh": "研究方向：利用in silico模型研究乳腺癌侵袭和骨组织定植的机制，重点关注运动对骨损伤发展的影响及机械敏感性骨细胞的作用，整合机械载荷、细胞成像、体内微CT和空间转录组学数据。\n关键要求：具有生物信息学和计算生物力学背景的欧洲研究理事会（ERC）资助的博士后研究员；具备计算机科学、生物医学科学或生物工程背景，有跨学科研究经验和生物信息学分析经验；或具备炎症和病理学相关生物力学技能的工程师，并有处理大型数据集的经验。\n申请信息：截止/开始时间、申请材料、联系渠道（如有）：截止日期：2026-05-11；申请材料和联系渠道未注明。\n职位条件：地点、合同类型、工作量、薪资：地点：伦敦，英格兰，英国；合同类型：固定期限/合同；工作量：全职；薪资：每年GBP 38,419.00 - GBP 51,755.00。\n一句建议：给CV/医疗影像/LLM方向申请者的匹配建议：对于有计算生物力学或生物信息学背景的申请者，该职位非常匹配；若有CV经验，可强调在模型构建和数据分析中的应用；医疗影像和LLM背景的申请",
       "relevance_score": 8.0,
       "institution": "Queen Mary University of London",
       "location": "London, England, United Kingdom",
@@ -569,7 +1363,7 @@
       "posted_date": "",
       "source": "jobs.ac.uk CS",
       "deadline": "2026-04-30T00:00:00+00:00",
-      "requirements_zh": "研究方向：新兴技术（如AI）在国家安全领域的应用、地缘政治竞争、AI赋能的虚假信息、公共态度与政策框架制定\n关键要求：高度积极主动、协作能力强、能够设计和交付高质量的混合方法研究、具备获得安全审查（SC）许可的资格\n申请信息：截止/开始时间：2026年4月30日 23:59 (BST)；申请材料：未注明；联系渠道：未注明\n职位条件：地点：伦敦，英格兰，英国；合同类型：固定期限/合同；工作量：全职 (36小时)；薪资：每年GBP45000.00-GBP50000.00\n一句建议：建议申请者强调在跨学科研究（数据科学/AI与安全/政策）中的项目经验和与政府/行业利益相关者的沟通能力。",
+      "requirements_zh": "研究方向：新兴技术与国家安全（Emerging Technology and Security），涉及AI能力负责任使用、全球威胁评估（如AI赋能的虚假信息）、政策制定与立法建议等。\n关键要求：高度积极主动、协作能力强，能够设计和交付高质量的混合方法研究，具备与高级国家安全决策者建立关系的能力，需满足安全审查（SC）许可资格。\n申请信息：截止/开始时间：2026-04-30 (23:59 BST) / 未注明；申请材料：未注明；联系渠道：未注明\n职位条件：地点：London, England, United Kingdom；合同类型：固定期限/合同 (Fixed-Term/Contract)；工作量：全职 (Full Time, 36小时/周)；薪资：GBP45000.00-GBP50000.00/年\n一句建议：建议申请者强调在安全、政策或跨学科研究中的混合方法应用经验，并突出其对国家安全领域新兴技术（如AI）的理解和应用能力。",
       "relevance_score": 8.0,
       "institution": "The Alan Turing Institute",
       "location": "London, England, United Kingdom",
@@ -586,7 +1380,7 @@
       "posted_date": "",
       "source": "jobs.ac.uk CS",
       "deadline": "2026-05-04T00:00:00+00:00",
-      "requirements_zh": "研究方向：深度学习在肝细胞癌复发早期检测中的应用，结合多相CT影像和纵向生物标志物数据。\n关键要求：计算机科学、生物医学工程、医学影像等相关领域博士（或即将完成）；具备深度学习实践经验，精通Python及其框架；有处理大型临床影像数据集的经验；具备医学影像分析（优选CT/MRI）背景。\n申请信息：截止/开始时间：2026-05-04（截止）；申请材料：未注明；联系渠道：未注明\n职位条件：地点：伦敦，英格兰，英国；合同类型：固定期限/合同；工作量：兼职；薪资：GBP38419.00-GBP44288.00/年\n一句建议：该职位高度专注于医疗影像和深度学习的交叉应用，建议重点突出在CT/MRI分析、多模态数据处理及临床转化方面的具体项目经验。",
+      "requirements_zh": "研究方向：利用深度学习对多相CT影像和纵向生物标志物数据进行分析，以实现肝细胞癌复发的早期检测。\n关键要求：计算机科学、生物医学工程、医学影像等相关领域博士学位（或即将完成）；具备深度学习的实践经验，精通Python及其相关框架；有处理大型临床影像数据集的经验；具备医学影像分析（优选CT/MRI）背景。\n申请信息：截止/开始时间：2026-05-04（截止）；申请材料：未注明；联系渠道（如有）：未注明\n职位条件：地点：伦敦，英格兰，英国；合同类型：固定期限/合同；工作量：兼职；薪资：GBP38419.00-GBP44288.00/年\n一句建议：建议CV/医疗影像方向申请者重点突出在深度学习模型开发、CT影像分析以及处理多模态/纵向临床数据方面的具体经验。",
       "relevance_score": 10.0,
       "institution": "Queen Mary University of London",
       "location": "London, England, United Kingdom",
@@ -597,31 +1391,14 @@
       "job_ref": "9576"
     },
     {
-      "title": "Associate Professor in Artificial Intelligence",
-      "url": "https://www.jobs.ac.uk/job/DRD985/associate-professor-in-artificial-intelligence/",
-      "description": "Our Mission Coventry University Group is a global education group with a mission of Creating Better Futures. We are driven by our passionate belief in the transformational power of education and research to enable and empower our students, colleagues and partners and to improve the world around them. Our people are key to our success and each role contributes to the Group’s ongoing progress in communities around the world. The Role The Research Centre of Computational Science & Mathematical Modelling develops and applies computational methods to real‑world challenges, with focus on AI issues such as explainability, privacy, robustness, and governance. We seek candidates with strong technical and programming skills, a problem‑led research mindset, commitment to open, collaborative, and trans‑disciplinary research. This role will strengthen the university’s capabilities in AI, machine learning, and data science, with applications aligned to one of our priority research areas: Health and Life Sciences; Defence and Security; Engineering for Sustainability; Agriculture and Water Resilience; or the Creative Economies. The role is split approximately as 60% to perform applied AI research and 40% to perform AI education activities. Key responsibilities lead impactful applied AI research, including developing bids, securing funding, and delivering projects. Funding will be sought from traditional research bodies (e.g. UKRI, EU) and through commercial routes via our AI Adoption Lab, including Knowledge Transfer Partnerships (KTPs), consultancy, contract research, and industry‑funded PhDs. Teaching will be delivered through the new AI Skills Academy. You will contribute to the design, delivery, and assessment of a range of provision, including CPD and Executive Education for external clients, apprenticeship programmes, and AI upskilling for CU Group staff and students. Qualifications Required A PhD or equivalent in relevant discipline such as Computer Science or a related field. Our Successful Candidate You will develop innovative research projects aligned with University’s strategic strengths and lead external funding bids. The role involves generating impact and income through knowledge exchange, industry-sponsored PhDs, consultancy, and contract research, drawing on prior experience in these areas. You will have research expertise in generative AI (e.g. fine-tuning, prompt engineering, retrieval‑augmented generation) and/or machine learning (e.g. data preparation, model selection, optimisation, and evaluation). You will demonstrate a strong record of high‑quality publications and a clear strategy for future outputs aligned with UK REF priorities of originality, significance, and rigour. The Benefits Along with a competitive salary we offer a Rewards and Benefits package which includes: Excellent Employers Pension Contribution 30 days Annual leave plus Bank Holidays New Holiday Purchase Scheme up to 5 additional days BUPA Cash Plan 50% off Tuition Fee’s for staff dependants CU Reward Scheme Cycle To Work scheme Our Culture As a global Education Group, equality, diversity, and inclusion are embedded within the fabric of our organisation and are a key focus of our core values. We harness the power and potential of the diverse cultures, backgrounds, abilities, and experiences of our students, colleagues, and partners to create opportunities for all. Closing date: 17 May 2026",
-      "posted_date": "",
-      "source": "jobs.ac.uk AI",
-      "deadline": "2026-05-17T00:00:00+00:00",
-      "requirements_zh": "研究方向：人工智能（AI）、机器学习、数据科学，重点关注AI的可解释性、隐私性、鲁棒性和治理，应用领域包括健康与生命科学、国防与安全、可持续工程、农业与水资源韧性、创意经济。\n关键要求：强大的技术和编程技能，以问题为导向的研究思维，致力于开放、协作和跨学科研究。\n申请信息：截止/开始时间：2026-05-17；申请材料：未注明；联系渠道（如有）：未注明\n职位条件：地点：Coventry, England, United Kingdom；合同类型：Permanent；工作量：Full Time；薪资：GBP59138.00-GBP62728.00 YEAR\n一句建议：对于CV/医疗影像方向申请者，应强调在健康与生命科学领域应用AI研究的经验和潜在资金申请能力；对于LLM方向申请者，可侧重于AI的可解释性、鲁棒性或治理方面的研究成果。",
-      "relevance_score": 8.0,
-      "institution": "Coventry University Group",
-      "location": "Coventry, England, United Kingdom",
-      "salary": "GBP59138.00-GBP62728.00 YEAR",
-      "hours": "Full Time",
-      "contract_type": "Permanent",
-      "placed_on": "10th April 2026",
-      "job_ref": "3397"
-    },
-    {
-      "title": "MSCA Postdoctoral Fellowships at Slovak University of Technology in Bratislava - Research topic: Aggregation of uncertain data",
-      "url": "https://euraxess.ec.europa.eu/jobs/hosting/msca-postdoctoral-fellowships-slovak-university-technology-bratislava-research-topic",
-      "description": "Description Slovak University of Technology in Bratislava (STU) invites motivated researchers with a strong track record to prepare joint applications for 2026 Marie Skłodowska-Curie Actions Postdoctoral Fellowships (MSCA PF) call with a deadline on September 9, 2026. MSCA PFs are among Europe’s... * Funding Programme: [Horizon Europe - MSCA](https://euraxess.ec.europa.eu/jobs/search?f%5B0%5D=job_is_eu_founded%3A4348) Deadline: 18 May 2026 Website: [https://www.stuba.sk/](https://www.stuba.sk/) * [Share](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#share) * [X (formerly Twitter)](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#xTwitter) * [LinkedIn](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#linkedin) * [Facebook](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#facebook) * [Whatsapp](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#whatsapp) * [E-mail](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#email) * [Gmail](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#gmail) * [YahooMail](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#yahoomail) * [Pocket](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#pocket) * [Viadeo](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#viadeo) * [Weibo](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#weibo) * [Blogger](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#blogger) * [Qzone](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#qzone) * * JOB * Portugal * [Associação do Instituto Superior Técnico para a Investigação e Desenvolvimento _IST-ID](https://euraxess.ec.europa.eu/partnering/organisations/profile/associacao-do-instituto-superior-tecnico-para-investigacao-e) *",
+      "title": "Hosting offer for MSCA PF 2026: Universidad de Sevilla (Spain). Department of Ingeniería de Sistemas y Automática - MACS research group",
+      "url": "https://euraxess.ec.europa.eu/jobs/hosting/hosting-offer-msca-pf-2026-universidad-de-sevilla-spain-department-ingenieria-de",
+      "description": "Professor Jose Angel Acosta , from Department of Ingeniería de Sistemas y Automática - MACS research group at the University of Seville, welcomes postdoctoral candidates interested in applying for a Marie Skłodowska-Curie Postdoctoral Fellowships (MSCA-PF) in 2026 at this University. Please note... * Funding Programme: [Horizon Europe - MSCA](https://euraxess.ec.europa.eu/jobs/search?f%5B0%5D=job_is_eu_founded%3A4348) Deadline: 1 June 2026 Website: [http://www.us.es](http://www.us.es/) * [Share](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#share) * [X (formerly Twitter)](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#xTwitter) * [LinkedIn](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#linkedin) * [Facebook](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#facebook) * [Whatsapp](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#whatsapp) * [E-mail](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#email) * [Gmail](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#gmail) * [YahooMail](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#yahoomail) * [Pocket](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#pocket) * [Viadeo](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#viadeo) * [Weibo](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#weibo) * [Blogger](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#blogger) * [Qzone](https://euraxess.ec.europa.eu/jobs/search?f[0]=job_country:771&f[1]=offer_type:job_offer&f[2]=positions:postdoc_positions#qzone) * * JOB * Portugal * [COFAC](https://euraxess.ec.europa.eu/partnering/organisations/profile/cofac) *",
       "institution": "",
       "posted_date": "14 April 2026",
-      "deadline": "18 May 2026   Website:  [https://www",
+      "deadline": "1 June 2026   Website:  [http://www",
       "source": "EURAXESS UK Postdoc",
-      "requirements_zh": "研究方向：不确定数据聚合 (Aggregation of uncertain data)\n关键要求：具有良好研究记录的积极研究人员，需准备联合申请2026年MSCA博士后奖学金\n申请信息：截止/开始时间：18 May 2026 (MSCA PF 最终截止日期为 September 9, 2026), 申请材料：联合申请材料（具体材料未注明）, 联系渠道（如有）：未注明\n职位条件：地点：布拉迪斯拉发斯洛伐克技术大学 (Slovak University of Technology in Bratislava), 合同类型：MSCA Postdoctoral Fellowships (博士后奖学金), 工作量：未注明, 薪资：未注明\n一句建议：该职位专注于不确定数据处理，建议CV/医疗影像/LLM方向的申请者强调其在数据不确定性建模、鲁棒性分析或信息融合方面的经验。",
+      "requirements_zh": "研究方向：系统工程与自动化（Ingeniería de Sistemas y Automática），MACS研究组\n关键要求：申请者需有意向申请2026年度的玛丽·斯克沃多夫斯卡-居里夫人博士后奖学金（MSCA-PF）\n申请信息：截止时间：1 June 2026；申请材料：需按MSCA-PF项目要求准备；联系渠道：Professor Jose Angel Acosta\n职位条件：地点：西班牙塞维利亚大学（Universidad de Sevilla）；合同类型：MSCA-PF资助下的博士后职位；工作量：未注明；薪资：未注明\n一句建议：建议重点突出您在系统工程或自动化领域的具体研究成果，以匹配MACS研究组的背景。",
       "relevance_score": 7.0,
       "location": "",
       "salary": "",
@@ -638,87 +1415,87 @@
       "url": "https://github.com/forrestchang/andrej-karpathy-skills",
       "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
       "stars_today": 5733,
-      "total_stars": 28804,
+      "total_stars": 28878,
       "language": "",
       "topics": [],
-      "summary_zh": "该仓库提供一个Markdown文件，基于Andrej Karpathy对大语言模型编程缺陷的观察，旨在提升Claude代码生成的准确性。"
+      "summary_zh": "该仓库提供一个Claude.md文件，借鉴Andrej Karpathy对大模型编程缺陷的观察，旨在提升Claude的代码生成能力。"
     },
     {
       "full_name": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
       "description": "The agent that grows with you",
       "stars_today": 11289,
-      "total_stars": 81735,
+      "total_stars": 81806,
       "language": "Python",
       "topics": [],
-      "summary_zh": "Hermes Agent 是一个可成长的智能体，旨在通过持续学习和发展来适应用户需求。"
+      "summary_zh": "Hermes Agent 是一个可成长的智能体，旨在通过持续学习和演化来适应用户需求。"
     },
     {
       "full_name": "shiyu-coder/Kronos",
       "url": "https://github.com/shiyu-coder/Kronos",
       "description": "Kronos: A Foundation Model for the Language of Financial Markets",
       "stars_today": 1554,
-      "total_stars": 17463,
+      "total_stars": 17469,
       "language": "Python",
       "topics": [],
-      "summary_zh": "Kronos是一个**金融市场语言基础模型**，专注于理解和处理金融领域的专业文本。"
+      "summary_zh": "**Kronos是一个金融市场语言的基石模型，旨在理解和处理金融领域的专业文本。**"
     },
     {
       "full_name": "sponsors/thedotmack",
       "url": "https://github.com/sponsors/thedotmack",
       "description": "A Claude Code plugin that automatically captures everything Claude does during your coding sessions, compresses it with AI (using Claude's agent-sdk), and injects relevant context back into future sessions.",
       "stars_today": 3175,
-      "total_stars": 54384,
+      "total_stars": 54409,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "该Claude代码插件能自动捕获编码过程，用AI压缩信息，并将相关上下文注入未来的Claude会话中，实现智能上下文增强。"
+      "summary_zh": "这个GitHub仓库提供了一个Claude代码插件，能自动捕获、AI压缩Claude的编码过程，并将相关上下文注入到未来的会话中。"
     },
     {
       "full_name": "microsoft/markitdown",
       "url": "https://github.com/microsoft/markitdown",
       "description": "Python tool for converting files and office documents to Markdown.",
       "stars_today": 2808,
-      "total_stars": 107730,
+      "total_stars": 107744,
       "language": "Python",
       "topics": [],
-      "summary_zh": "Markitdown是一个Python工具，能将各种文件和Office文档高效地转换为Markdown格式。"
+      "summary_zh": "Markitdown是一个Python工具，能将各种文件和Office文档高效转换为Markdown格式。"
     },
     {
       "full_name": "multica-ai/multica",
       "url": "https://github.com/multica-ai/multica",
       "description": "The open-source managed agents platform. Turn coding agents into real teammates — assign tasks, track progress, compound skills.",
       "stars_today": 1715,
-      "total_stars": 11876,
+      "total_stars": 11894,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "这是一个开源的托管式智能体平台，能将代码智能体转化为团队成员，实现任务分配、进度跟踪和技能复合。"
+      "summary_zh": "**多智能体协作平台，将代码智能体转化为可协作的团队成员，实现任务分配、进度追踪和技能复合。**"
     },
     {
       "full_name": "coleam00/Archon",
       "url": "https://github.com/coleam00/Archon",
       "description": "The first open-source harness builder for AI coding. Make AI coding deterministic and repeatable.",
       "stars_today": 677,
-      "total_stars": 17828,
+      "total_stars": 17829,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "**Archon是首个开源AI编程测试框架，旨在实现AI代码生成的确定性和可复现性。**"
+      "summary_zh": "**Archon是首个开源AI编程测试套件构建器，旨在使AI代码生成过程确定且可复现。**"
     },
     {
       "full_name": "snarktank/ralph",
       "url": "https://github.com/snarktank/ralph",
       "description": "Ralph is an autonomous AI agent loop that runs repeatedly until all PRD items are complete.",
       "stars_today": 691,
-      "total_stars": 16729,
+      "total_stars": 16732,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "Ralph 是一个自主运行的 AI 代理循环，它会持续执行直到完成所有产品需求（PRD）项目。"
+      "summary_zh": "Ralph是一个自主AI智能体循环，持续运行直至完成所有产品需求（PRD）项目。"
     },
     {
       "full_name": "virattt/ai-hedge-fund",
       "url": "https://github.com/virattt/ai-hedge-fund",
       "description": "An AI Hedge Fund Team",
       "stars_today": 783,
-      "total_stars": 53532,
+      "total_stars": 53538,
       "language": "Python",
       "topics": [],
       "summary_zh": "该仓库是一个人工智能对冲基金团队的项目集合，旨在利用AI技术进行量化投资策略的开发与实践。"
@@ -728,74 +1505,74 @@
       "url": "https://github.com/anthropics/claude-cookbooks",
       "description": "A collection of notebooks/recipes showcasing some fun and effective ways of using Claude.",
       "stars_today": 1012,
-      "total_stars": 39850,
+      "total_stars": 39855,
       "language": "Jupyter Notebook",
       "topics": [],
-      "summary_zh": "这个仓库是Anthropic提供的Claude模型使用指南集，通过一系列笔记本和食谱展示了有趣且高效的Claude应用方法。"
+      "summary_zh": "这个仓库提供了Claude模型的实用食谱和笔记本，展示了有趣且高效的使用方法。"
     },
     {
       "full_name": "shanraisshan/claude-code-best-practice",
       "url": "https://github.com/shanraisshan/claude-code-best-practice",
       "description": "from vibe coding to agentic engineering - practice makes claude perfect",
       "stars_today": 2461,
-      "total_stars": 42773,
+      "total_stars": 42789,
       "language": "HTML",
       "topics": [],
-      "summary_zh": "该仓库旨在通过实践，将Claude的使用从简单的代码编写提升到更高级的智能体工程实践。"
+      "summary_zh": "该仓库旨在通过实践，将Claude模型的使用从简单的代码编写提升到更具工程化和智能体的应用层面。"
     },
     {
       "full_name": "jamiepine/voicebox",
       "url": "https://github.com/jamiepine/voicebox",
       "description": "The open-source voice synthesis studio",
       "stars_today": 512,
-      "total_stars": 16690,
+      "total_stars": 16695,
       "language": "TypeScript",
       "topics": [],
-      "summary_zh": "这是一个开源的语音合成工作室，提供全面的工具和环境来进行高质量的语音生成。"
+      "summary_zh": "一个开源的语音合成工作室，提供全面的语音合成功能。"
     },
     {
       "full_name": "sponsors/ahujasid",
       "url": "https://github.com/sponsors/ahujasid",
       "description": "",
       "stars_today": 339,
-      "total_stars": 19643,
+      "total_stars": 19648,
       "language": "Python",
       "topics": [],
-      "summary_zh": "该仓库展示了作者的GitHub赞助者信息，可能包含赞助者列表或相关设置。"
+      "summary_zh": "这个GitHub仓库是 **ahujasid** 的个人赞助页面，用于展示和管理对其项目的支持者。"
     },
     {
       "full_name": "sponsors/hacksider",
       "url": "https://github.com/sponsors/hacksider",
       "description": "real time face swap and one-click video deepfake with only a single image",
       "stars_today": 217,
-      "total_stars": 90482,
+      "total_stars": 90483,
       "language": "Python",
       "topics": [],
-      "summary_zh": "该仓库提供**实时换脸和一键视频深度伪造**功能，仅需**单张图像**即可实现。"
+      "summary_zh": "该仓库提供**实时换脸和一键视频深度伪造**功能，仅需**单张图像**即可完成。"
     },
     {
       "full_name": "gsd-build/get-shit-done",
       "url": "https://github.com/gsd-build/get-shit-done",
       "description": "A light-weight and powerful meta-prompting, context engineering and spec-driven development system for Claude Code by TÂCHES.",
       "stars_today": 655,
-      "total_stars": 52526,
+      "total_stars": 52533,
       "language": "JavaScript",
       "topics": [],
       "summary_zh": "这是一个轻量级、强大的Claude代码元提示、上下文工程和规范驱动开发系统。"
     }
   ],
   "meta": {
-    "papers_fetched": 120,
-    "papers_after_keyword_filter": 64,
-    "papers_after_llm_filter": 19,
+    "papers_fetched": 300,
+    "papers_after_keyword_filter": 151,
+    "papers_after_llm_filter": 53,
     "jobs_fetched": 0,
-    "jobs_after_filter": 5,
+    "jobs_after_filter": 4,
     "supervisor_pages_checked": 0,
     "supervisor_updates_found": 0,
     "llm_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "scoring_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "summarization_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "cost_usd": 0.0,
-    "duration_seconds": 115
+    "duration_seconds": 141
   }
 }
