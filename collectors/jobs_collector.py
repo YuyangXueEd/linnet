@@ -360,7 +360,7 @@ def _parse_academicpositions_markdown(md: str, source_name: str) -> list[dict[st
         url = match.group(2).strip()
         # Split title from inline description: find first sentence boundary
         # that isn't inside an abbreviation (e.g. "Ph.D.", "Prof.")
-        sent_m = re.search(r'(?<![A-Z][a-z]|Ph\.D|Prof|Dr|Mr|Mrs|Ms)\.\s+(?=[A-Z])', title_desc)
+        sent_m = re.search(r'(?<!Prof)(?<!Mrs)(?<![A-Z][a-z])\.\s+(?=[A-Z])', title_desc)
         if sent_m:
             title = title_desc[:sent_m.start() + 1].strip()
             description = title_desc[sent_m.end():].strip()
