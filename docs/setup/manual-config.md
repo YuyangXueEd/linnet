@@ -132,6 +132,29 @@ Available placeholders per prompt:
 
 ---
 
+## Get your digest in ServerChan
+
+If you want a lighter notification path, especially for Chinese-language workflows, ServerChan is a good fit:
+
+1. Open [sct.ftqq.com/sendkey](https://sct.ftqq.com/sendkey)
+2. Copy your SendKey
+3. Add it as a secret: **Settings → Secrets → New secret**, name it `SERVERCHAN_SENDKEY`
+4. Enable it in [config/sources.yaml](../../config/sources.yaml):
+
+```yaml
+sinks:
+  serverchan:
+    enabled: true
+    max_papers: 5
+    max_hn: 3
+    max_github: 3
+    max_jobs: 3
+```
+
+This keeps the key out of YAML and out of version control.
+
+---
+
 ## Get your digest in Slack
 
 In addition to the website, you can receive a daily Slack message:

@@ -15,11 +15,11 @@ jobs:
     permissions:
       contents: write       # needed to git push
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -46,10 +46,11 @@ jobs:
           # Set these secrets in your repo to enable the corresponding sink.
           # Leave unset (or empty) to skip that sink gracefully.
           SLACK_WEBHOOK_URL:    ${{ secrets.SLACK_WEBHOOK_URL }}
+          SERVERCHAN_SENDKEY:   ${{ secrets.SERVERCHAN_SENDKEY }}
 
       - name: Upload daily pipeline log
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: daily-pipeline-log-${{ github.run_id }}
           path: daily-pipeline.log

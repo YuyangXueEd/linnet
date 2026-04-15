@@ -1,7 +1,7 @@
 # MyDailyUpdater — LLM context file
 
 Self-hosted daily research digest pipeline. Runs via GitHub Actions, outputs a
-Jekyll static site (GitHub Pages) and optional Slack messages.
+Jekyll static site (GitHub Pages) and optional delivery sinks such as Slack and ServerChan.
 
 Source: https://github.com/YuyangXueEd/MyDailyUpdater
 License: MIT
@@ -15,7 +15,7 @@ main.py  ──►  extensions/  ──►  pipeline/  ──►  publishers/  �
               (fetch+process    (score,          (JSON + Markdown
                +render)         summarise)        templates)
                                                        │
-                                                  sinks/  ──►  Slack
+                                                  sinks/  ──►  Slack / ServerChan
 ```
 
 Entry point: `main.py`
@@ -70,13 +70,17 @@ sinks/               Delivery layer (all disabled by default)
   __init__.py        SINK_REGISTRY list
   README.md          Full sink guide
   slack/             SlackSink — Block Kit via Incoming Webhook
+  serverchan/        ServerChanSink — Markdown digest via SendKey
   _template/         Starter template for new sinks
   Each package contains __init__.py (sink class) + README.md (docs)
 
 config/
   sources.yaml       Enable/disable extensions, language, LLM models, sink config
-  keywords.yaml      arXiv categories/keywords, HN keywords, score thresholds
-  supervisors.yaml   Lab/advisor pages to monitor
+  extensions/
+    arxiv.yaml             arXiv categories/keywords/threshold
+    hacker_news.yaml       HN keywords and score thresholds
+    postdoc_jobs.yaml      Job search routes and filters
+    supervisor_updates.yaml URLs to monitor
 
 docs/                Generated site (served by GitHub Pages)
   daily/             Rendered Markdown pages
@@ -84,7 +88,7 @@ docs/                Generated site (served by GitHub Pages)
   data/weekly/       Weekly JSON payloads
   data/monthly/      Monthly JSON payloads
 
-tests/               Pytest suite (53 tests, no live network or LLM calls)
+tests/               Pytest suite (61 tests, no live network or LLM calls)
 ```
 
 ---
@@ -211,7 +215,8 @@ Sink exceptions are caught by orchestrator — they do not abort the pipeline.
 | `llm.scoring_model` | str | OpenRouter model ID |
 | `llm.summarization_model` | str | OpenRouter model ID |
 | `llm.base_url` | str | Default: https://openrouter.ai/api/v1 |
-| `sinks.slack.enabled` | bool | Requires SLACK_WEBHOOK_URL env var |
+| `sinks.slack.enabled` | bool | Requires `SLACK_WEBHOOK_URL` env var |
+| `sinks.serverchan.enabled` | bool | Requires `SERVERCHAN_SENDKEY` env var |
 
 ### keywords.yaml top-level keys
 | Key | Notes |
