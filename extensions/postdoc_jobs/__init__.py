@@ -1,9 +1,9 @@
 """postdoc_jobs extension — fetches, scores, and summarises postdoc and academic job postings."""
 
+from extensions.base import BaseExtension, FeedSection
 from extensions.postdoc_jobs.collector import fetch_jobs
 from extensions.postdoc_jobs.scorer import score_jobs
 from extensions.postdoc_jobs.summarizer import summarize_jobs
-from extensions.base import BaseExtension, FeedSection
 
 
 class PostdocJobsExtension(BaseExtension):

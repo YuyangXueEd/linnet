@@ -11,14 +11,15 @@ Quick reference:
 """
 
 import os
+
 from extensions.base import BaseExtension, FeedSection
 
 
 class TemplateExtension(BaseExtension):
     # ── Required class attributes ──────────────────────────────────────────────
-    key   = "my_source"   # must match your config/sources.yaml key exactly
-    title = "My Source"   # shown as the section heading in the rendered output
-    icon  = "🧩"          # shown in the quick-nav and section heading
+    key = "my_source"  # must match your config/sources.yaml key exactly
+    title = "My Source"  # shown as the section heading in the rendered output
+    icon = "🧩"  # shown in the quick-nav and section heading
 
     # ── Step 1: fetch ──────────────────────────────────────────────────────────
     def fetch(self) -> list[dict]:
@@ -66,12 +67,11 @@ class TemplateExtension(BaseExtension):
             return items
 
         model = self.config["llm_summarization_model"]
-        lang  = self.config.get("language", "en")
+        lang = self.config.get("language", "en")
 
         for item in items:
             prompt = (
-                f"Summarise the following in one sentence in {lang}:\n"
-                f"{item.get('description', '')}"
+                f"Summarise the following in one sentence in {lang}:\n{item.get('description', '')}"
             )
             resp = self.llm.chat.completions.create(
                 model=model,

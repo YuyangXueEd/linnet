@@ -2,232 +2,200 @@
 
 [English](README.md)
 
-自托管、可扩展的每日摘要流水线。每天自动从多个来源抓取论文、新闻、职位和热门仓库，通过 LLM 评分和摘要，最终发布为可搜索的静态网站（GitHub Pages）。
+**每天早上自动送来一份个性化的科研摘要——不用你动手。**
 
-**[在线演示 →](https://yuyangxueed.github.io/MyDailyUpdater)**
+Fork 这个仓库，填入一个 API 密钥，然后每天早上就能收到一份按你的兴趣筛选、由 AI 摘要的 arXiv 论文、Hacker News 热文和 GitHub 趋势仓库，并发布为你专属的网站。
+
+**[在线示例 →](https://yuyangxueed.github.io/MyDailyUpdater)**
+
+> **费用：** 使用 `gemini-2.5-flash-lite` 通过 OpenRouter，每天约 $0.01–$0.05（有免费额度）。
 
 ---
 
-## 功能概览
+## 每天早上你会收到什么
 
-| 数据源 | 内容 |
+| 来源 | 内容 |
 |---|---|
-| **arXiv** | 按类别和关键词筛选论文，LLM 相关性评分，摘要 + 图片预览 |
-| **Hacker News** | 超过分数阈值的 AI/ML 热门文章 |
-| **学术职位** | 来自 jobs.ac.uk、FindAPostDoc、EURAXESS 等的博士后和研究员职位 |
-| **GitHub Trending** | 每日 AI/ML 热门仓库 |
-| **导师页面监控** | 检测你关注的导师/实验室主页内容变化 |
+| **arXiv** | 符合你关键词的新论文，每篇附 AI 摘要 |
+| **Hacker News** | 超过你设定分数线的 AI/ML 热门文章 |
+| **GitHub Trending** | 今天在你感兴趣领域最受关注的仓库 |
+| **天气** | 你所在城市的今日天气 |
+| **博士后职位** | 来自 jobs.ac.uk、FindAPostDoc、EURAXESS 的学术职位 |
+| **导师主页监控** | 你关注的教授或实验室主页有更新时提醒你 |
 
-通过 GitHub Actions 每天 UTC 午夜自动运行，输出提交回仓库并以 Jekyll 网站（Just the Docs 主题）形式发布。
+所有内容通过 GitHub Actions 在 UTC 午夜自动运行，结果保存回仓库并发布为可搜索的静态网站。
 
 ---
 
-## 快速开始
+## 5 步完成配置
 
-### 1. Fork 本仓库
+### 第 1 步 — 把这个仓库复制到你的账号下
 
-在 GitHub 页面点击 **Fork**，所有 Actions 工作流和 Pages 配置已包含在内。
+点击页面顶部的 **Fork**，GitHub 会在你的账号下创建一份副本，自动化流程已全部包含在内。
 
-### 2. 添加 API 密钥
+### 第 2 步 — 添加 API 密钥
 
-在你的 Fork 中：**Settings → Secrets and variables → Actions → New repository secret**
+在你 Fork 后的仓库中，进入：**Settings → Secrets and variables → Actions → New repository secret**
 
-| Secret 名称 | 值 |
+| 名称 | 值 |
 |---|---|
-| `OPENROUTER_API_KEY` | 你的 [OpenRouter](https://openrouter.ai) API Key |
+| `OPENROUTER_API_KEY` | 你在 [openrouter.ai/keys](https://openrouter.ai/keys) 获取的密钥，以 `sk-or-...` 开头，有免费额度 |
 
-获取方式：前往 [openrouter.ai/keys](https://openrouter.ai/keys) → **Create Key** → 复制以 `sk-or-...` 开头的密钥。
+这是你唯一需要填的凭据。[OpenRouter](https://openrouter.ai) 让你用一个密钥调用多种 AI 模型（Gemini、GPT、Claude），随时可以切换。
 
-流水线使用 OpenRouter，可以在 `config/sources.yaml` 中自由切换模型。
+### 第 3 步 — 开启你的网站
 
-### 3. 开启 GitHub Pages
+进入：**Settings → Pages → Source: Deploy from a branch → 分支选 `main`，文件夹选 `/docs`**
 
-**Settings → Pages → Source: Deploy from a branch → 分支选 `main` / `docs/`**
+点击 **Save**，你的网站地址会出现在那里，格式类似 `https://你的用户名.github.io/MyDailyUpdater`。
 
-### 4. 配置你的兴趣方向
+### 第 4 步 — 选择你的研究方向
 
-编辑 `config/keywords.yaml` 设置 arXiv 类别、关键词和评分阈值。  
-编辑 `config/sources.yaml` 启用/禁用数据源、选择输出语言和 LLM 模型。
-
-### 5. 触发首次运行
-
-**Actions → Daily Digest → Run workflow** — 约 5 分钟后网站上线。
-
----
-
-## 配置说明
-
-### `config/sources.yaml`
+打开 [config/extensions/arxiv.yaml](config/extensions/arxiv.yaml)，里面有四个现成的配置方案，找到最接近你研究方向的那个，去掉行首的 `#` 来启用它，然后按需修改关键词：
 
 ```yaml
-# 摘要输出语言。
-# "en"（默认，英文）| "zh"（中文）| "fr" | "de" | "ja" | "ko" | "es" | "pt"
-# 支持任意 BCP-47 语言代码 —— LLM 将直接以该语言输出，无需单独翻译步骤。
-language: "en"
+# 方案 A：AI / ML / LLM（通用）
+# categories: [cs.AI, cs.LG, cs.CL, cs.CV, stat.ML]
+# must_include:
+#   - large language model
+#   - foundation model
+#   ...
 
+# 方案 B：机器人 / 具身智能
+# 方案 C：医学 AI / 临床 NLP
+# 方案 D：NLP / 文本 / 推理
+```
+
+想用中文摘要？打开 [config/sources.yaml](config/sources.yaml)，把 `language: "en"` 改成 `"zh"` 即可。也支持 `"fr"`、`"de"`、`"ja"`、`"ko"`、`"es"` 等任意语言代码。
+
+### 第 5 步 — 触发第一次运行
+
+进入：**Actions → Daily Digest → Run workflow → Run workflow**
+
+约 5 分钟后网站即可访问。
+
+---
+
+## 开启或关闭各个来源
+
+打开 [config/sources.yaml](config/sources.yaml)，对每个来源设置 `enabled: true` 或 `enabled: false`：
+
+```yaml
 arxiv:
-  enabled: true
-  max_papers_per_run: 300
+  enabled: true          # arXiv 论文——主要来源
 
 hacker_news:
-  enabled: true
-
-jobs:
-  enabled: true
-
-supervisor_monitoring:
-  enabled: true
+  enabled: true          # Hacker News 热文
 
 github_trending:
-  enabled: true
+  enabled: true          # 今日 GitHub 趋势仓库
   max_repos: 15
 
-llm:
-  scoring_model: "google/gemini-2.5-flash-lite-preview-09-2025"
-  summarization_model: "google/gemini-2.5-flash-lite-preview-09-2025"
-  base_url: "https://openrouter.ai/api/v1"
-```
-
-### `config/keywords.yaml`
-
-控制 arXiv 过滤条件、HN 关键词匹配、职位过滤和 LLM 评分阈值，详见文件内注释。
-
-### `config/supervisors.yaml`
-
-配置需要监控的导师/实验室主页：
-
-```yaml
-supervisors:
-  - name: "张三"
-    institution: "示例大学"
-    url: "https://example.ac.uk/~zhangsan"
-```
-
----
-
-## 扩展系统
-
-每个数据源都是一个独立的 **Extension**（`extensions/` 目录）。Extension 拥有完整的流水线：fetch（抓取）→ process（评分/总结）→ render（输出 `FeedSection`）。
-
-### 添加新数据源
-
-1. 创建 `extensions/my_source.py`：
-
-```python
-from extensions.base import BaseExtension, FeedSection
-
-class MySourceExtension(BaseExtension):
-    key = "my_source"       # 必须与 config/sources.yaml 中的键名一致
-    title = "我的数据源"
-
-    def fetch(self) -> list[dict]:
-        # 从数据源拉取原始数据
-        ...
-
-    def process(self, items: list[dict]) -> list[dict]:
-        # 可选：评分、过滤、摘要
-        # self.llm    —— OpenAI 兼容的 LLM 客户端
-        # self.config —— 该 Extension 的配置（含 language、模型名称等）
-        return items
-
-    def render(self, items: list[dict]) -> FeedSection:
-        return FeedSection(key=self.key, title=self.title, items=items)
-```
-
-2. 在 `extensions/__init__.py` 中注册：
-
-```python
-from extensions.my_source import MySourceExtension
-
-REGISTRY = [
-    ...,
-    MySourceExtension,
-]
-```
-
-3. 在 `config/sources.yaml` 中添加配置块：
-
-```yaml
-my_source:
+weather:
   enabled: true
-  # 你的 Extension 专属配置
+  city: "Edinburgh"      # 改成你的城市
+
+postdoc_jobs:
+  enabled: false         # 学术职位列表——需要的话改为 true
+
+supervisor_updates:
+  enabled: false         # 导师主页监控——需要的话改为 true
 ```
 
-编排器会在下次流水线运行时自动调用 `ext.run()`。
+你也可以在这里切换 AI 模型，或限制每天抓取的论文数量。
 
 ---
 
-## 投递 Sink
+## 把摘要发到 Slack
 
-每日 payload 构建完成后，流水线可以将内容推送到外部服务。所有 sink **默认关闭**——在 `config/sources.yaml` 中启用，并将所需凭据添加为 GitHub Secret。
+除了网站，你还可以每天收到一条 Slack 消息。配置大约需要 2 分钟：
 
-### Slack
-
-通过 Incoming Webhook 向 Slack 频道发送 Block Kit 消息，包含顶级论文、HN 热文、热门仓库和职位摘要。
-
-**配置步骤：**
-1. 前往 [api.slack.com/apps](https://api.slack.com/apps) → **Create New App** → From scratch
-2. 左侧菜单进入 **Features → Incoming Webhooks**
-3. 将 **Activate Incoming Webhooks** 开关拨到 **On**
-4. 滚动到页面底部，点击 **Add New Webhook to Workspace**
-5. 选择要发送消息的频道，点击 **Allow**
-6. 回到 Incoming Webhooks 页面，从底部表格中复制 Webhook URL，格式如下：
-   `https://hooks.slack.com/services/T.../B.../...`
-7. 添加为 GitHub Secret：**Settings → Secrets and variables → Actions → New repository secret**
-   - Name: `SLACK_WEBHOOK_URL` · Secret: 粘贴刚才复制的 URL
-8. 在 `config/sources.yaml` 中启用：
+1. 打开 [api.slack.com/apps](https://api.slack.com/apps) → **Create New App** → **From scratch**
+2. 左侧菜单 → **Features → Incoming Webhooks** → 开关拨到 **On**
+3. 页面下方 → **Add New Webhook to Workspace** → 选择频道 → **Allow**
+4. 复制 Webhook URL（格式类似 `https://hooks.slack.com/services/T.../B.../...`）
+5. 在仓库里添加 Secret：**Settings → Secrets → New secret**，名称填 `SLACK_WEBHOOK_URL`
+6. 在 [config/sources.yaml](config/sources.yaml) 中启用：
 
 ```yaml
 sinks:
   slack:
     enabled: true
-    max_papers: 5
-    max_hn: 3
-    max_github: 3
+    max_papers: 5    # 推送几篇论文
+    max_hn: 3        # 推送几条 HN 热文
+    max_github: 3    # 推送几个 GitHub 趋势仓库
 ```
 
-> **提示：** `SLACK_WEBHOOK_URL` 为可选项。如果未设置该 Secret，Slack sink 会静默跳过，不会导致流水线失败。
-
-### 添加新的 Sink
-
-```python
-# sinks/my_sink.py
-from sinks.base import BaseSink
-
-class MySink(BaseSink):
-    key = "my_sink"   # 对应 sources.yaml 中的 sinks.my_sink
-
-    def deliver(self, payload: dict) -> None:
-        # payload 包含：date, papers, hacker_news, jobs, github_trending, meta
-        api_key = os.environ.get("MY_SINK_API_KEY", "")
-        ...
-```
-
-在 `sinks/__init__.py` 中注册，并在 `sources.yaml` 的 `sinks:` 下添加配置块。
+不配置 Slack 也完全没问题，网站照常更新。
 
 ---
 
-## 本地运行
+## 自动运行计划
+
+| 时间 | 内容 |
+|---|---|
+| 每天 UTC 00:00 | 完整摘要——论文、HN、GitHub 趋势、天气，以及你启用的其他来源 |
+| 每周一 UTC 01:00 | 上周趋势汇总 |
+| 每月 1 日 UTC 02:00 | 月度全景概述 |
+
+也可以随时手动触发：**Actions → [工作流名称] → Run workflow**。
+
+---
+
+## 添加你自己的数据来源
+
+每个来源都是 `extensions/` 目录下一个独立的文件夹。添加新来源的步骤：
+
+**1. 复制模板：**
+```bash
+cp -r extensions/_template extensions/my_source
+```
+
+**2. 填入三个函数**，在 `extensions/my_source/__init__.py` 中：
+- `fetch()` — 从任何地方抓取原始数据（网站、API、文件）
+- `process()` — 可选：用内置 AI 客户端过滤或摘要
+- `render()` — 把结果格式化为摘要中的一个板块
+
+**3. 注册**，在 `extensions/__init__.py` 中：
+```python
+from extensions.my_source import MySourceExtension
+
+REGISTRY = [..., MySourceExtension]
+```
+
+**4. 添加开关**，在 `config/sources.yaml` 中：
+```yaml
+my_source:
+  enabled: true
+```
+
+完整指南和示例：[extensions/README.md](extensions/README.md)
+
+---
+
+## 在本地运行
 
 ```bash
 # 安装依赖
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-# 设置 API Key
+# 设置 API 密钥
 export OPENROUTER_API_KEY=sk-or-...
 
-# 运行每日流水线
+# 运行完整摘要
 python main.py --mode daily
 
-# 周报 / 月报汇总
+# 只抓取数据，不调用 AI（免费，用来测试配置是否正常）
+python main.py --dry-run
+
+# 周报或月报
 python main.py --mode weekly
 python main.py --mode monthly
+```
 
-# 快速状态检查（供 Claude Code SessionStart hook 使用）
-python main.py --check-today
-
-# 运行测试
+运行测试：
+```bash
 PYTHONPATH=. pytest tests/ -q
 ```
 
@@ -237,42 +205,42 @@ PYTHONPATH=. pytest tests/ -q
 
 ```
 MyDailyUpdater/
-├── extensions/          # 可插拔数据源 Extension
-│   ├── base.py          # BaseExtension + FeedSection 基类
-│   ├── arxiv.py
-│   ├── hacker_news.py
-│   ├── jobs.py
-│   ├── supervisor.py
-│   └── github_trending.py
-├── collectors/          # 底层抓取函数（供 Extension 调用）
-├── pipeline/            # 评分、摘要、聚合、配置加载
-├── publishers/          # JSON 写入 + Jinja2 → Markdown 渲染
-├── templates/           # 日报/周报/月报 Jinja2 模板
+├── extensions/             # 每个数据来源一个文件夹
+│   ├── _template/          # 复制这个来新建数据来源
+│   ├── arxiv/              # arXiv 论文
+│   ├── github_trending/    # GitHub 趋势仓库
+│   ├── hacker_news/        # Hacker News 热文
+│   ├── postdoc_jobs/       # 学术职位列表
+│   ├── supervisor_updates/ # 导师主页监控
+│   ├── weather/            # 天气预报
+│   └── base.py             # 所有来源共用的基类
+├── sinks/                  # 推送渠道（如 Slack）
+│   └── slack/
+├── pipeline/               # 评分、摘要、组装摘要
+├── publishers/             # 把结果写入 docs/ 网站文件
+├── templates/              # 日报/周报/月报页面模板
 ├── config/
-│   ├── sources.yaml     # 数据源开关、语言、LLM 模型
-│   ├── keywords.yaml    # 过滤条件、阈值、类别
-│   └── supervisors.yaml # 监控的导师页面
-├── docs/                # 生成的网站（由 GitHub Pages 服务）
+│   ├── sources.yaml        # 来源开关、输出语言、AI 模型
+│   └── extensions/
+│       ├── arxiv.yaml      # 你的研究关键词和 arXiv 分类
+│       ├── hacker_news.yaml
+│       ├── postdoc_jobs.yaml
+│       └── supervisor_updates.yaml
+├── docs/                   # 生成的网站（由 GitHub Pages 发布）
 ├── tests/
-└── main.py              # CLI 入口 + 流水线编排器
+└── main.py                 # 入口
 ```
 
 ---
 
-## 定时工作流
+## 分享你的配置
 
-| 工作流 | 触发时间 | 内容 |
-|---|---|---|
-| `daily.yml` | 每天 UTC 00:00 | 完整流水线，输出提交到 `docs/` |
-| `weekly.yml` | 每周一 UTC 01:00 | 周度趋势汇总 |
-| `monthly.yml` | 每月 1 日 UTC 02:00 | 月度全景概述 |
+做了什么有趣的配置，或者用这个工具追踪了一个冷门领域？欢迎在 [Discussions](https://github.com/YuyangXueEd/MyDailyUpdater/discussions) 里分享——有类似研究兴趣的人会很感激你。
 
-所有工作流均可通过 **Actions → Run workflow** 手动触发。
+发现 bug 或想添加新的来源？[提一个 issue](https://github.com/YuyangXueEd/MyDailyUpdater/issues)。
 
 ---
 
 ## 许可证
 
-MIT License — 详见 [LICENSE](LICENSE)。
-
-欢迎贡献。如果你开发了新的 Extension，欢迎提 PR 或在 Issues 中分享。
+MIT — 详见 [LICENSE](LICENSE)。欢迎贡献。

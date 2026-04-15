@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+
 import yaml
 
 CONFIG_DIR = Path(__file__).parent.parent / "config"
@@ -43,7 +44,9 @@ def validate_sources(sources: dict) -> None:
     arxiv = sources.get("arxiv", {})
     max_papers = arxiv.get("max_papers_per_run", 300)
     if not isinstance(max_papers, int) or max_papers < 1:
-        errors.append(f"  • arxiv.max_papers_per_run must be a positive integer, got: {max_papers!r}")
+        errors.append(
+            f"  • arxiv.max_papers_per_run must be a positive integer, got: {max_papers!r}"
+        )
 
     lang = sources.get("language", "en")
     if not isinstance(lang, str) or not lang:
@@ -70,6 +73,8 @@ def validate_arxiv_config(arxiv_cfg: dict) -> None:
         errors.append(f"  • llm_score_threshold must be between 0 and 10, got: {threshold!r}")
 
     if errors:
-        print("WARNING: Possible misconfiguration in config/extensions/arxiv.yaml:", file=sys.stderr)
+        print(
+            "WARNING: Possible misconfiguration in config/extensions/arxiv.yaml:", file=sys.stderr
+        )
         for e in errors:
             print(e, file=sys.stderr)

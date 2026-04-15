@@ -19,10 +19,41 @@ def _clean_html_text(fragment: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+_GREEK_DUPLICATE_LATEX_RE = re.compile(
+    r"(["
+    r"\u0370-\u03FF"
+    r"\u1F00-\u1FFF"
+    r"](?:\s+[A-Za-z0-9]+)?)\s+(\\[A-Za-z]+(?:\s*(?:\{[^{}]*\}|_[{][^{}]*[}]|\^[{][^{}]*[}]|_[A-Za-z0-9]+|\^[A-Za-z0-9]+))*)"
+)
+
+_LATEX_EXPR_RE = re.compile(
+    r"(?<!\\\()(?<!\\\[)"
+    r"(\\[A-Za-z]+(?:\s*(?:\{[^{}]*\}|_[{][^{}]*[}]|\^[{][^{}]*[}]|_[A-Za-z0-9]+|\^[A-Za-z0-9]+))*)"
+)
+
+
+def _normalise_caption_math(text: str) -> str:
+    """
+    Convert arXiv's flattened math text into KaTeX-friendly inline math.
+
+    After tags are stripped, captions often contain duplicated text such as
+    ``ρ t \\rho_{t}`` or ``μ \\mu``. We drop the duplicated unicode prefix and
+    wrap the remaining LaTeX command in ``\\( ... \\)`` so KaTeX can render it.
+    """
+    if "\\" not in text:
+        return text
+
+    text = _GREEK_DUPLICATE_LATEX_RE.sub(r"\2", text)
+    text = _LATEX_EXPR_RE.sub(r"\\( \1 \\)", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def _parse_first_figure(html: str, base_url: str) -> dict[str, str] | None:
     figures = re.findall(r"<figure\b[^>]*>(.*?)</figure>", html, re.DOTALL | re.IGNORECASE)
     for figure_html in figures:
-        caption_match = re.search(r"<figcaption\b[^>]*>(.*?)</figcaption>", figure_html, re.DOTALL | re.IGNORECASE)
+        caption_match = re.search(
+            r"<figcaption\b[^>]*>(.*?)</figcaption>", figure_html, re.DOTALL | re.IGNORECASE
+        )
         if not caption_match:
             continue
 
@@ -35,6 +66,7 @@ def _parse_first_figure(html: str, base_url: str) -> dict[str, str] | None:
             continue
 
         caption = re.sub(r"^Figure\s*1\s*:\s*", "", raw_caption, flags=re.IGNORECASE).strip()
+        caption = _normalise_caption_math(caption)
         return {
             "figure_url": urljoin(base_url, image_match.group(1)),
             "figure_caption": caption or raw_caption,
@@ -121,14 +153,16 @@ def fetch_papers(
         combined = f"{result.title} {result.summary}"
         if not keyword_match(combined, must_include):
             continue
-        papers.append({
-            "id": result.entry_id.split("/abs/")[-1],
-            "title": result.title,
-            "authors": [a.name for a in result.authors[:5]],
-            "categories": list(result.categories),
-            "abstract": result.summary,
-            "url": result.entry_id,
-            "pdf_url": result.pdf_url,
-        })
+        papers.append(
+            {
+                "id": result.entry_id.split("/abs/")[-1],
+                "title": result.title,
+                "authors": [a.name for a in result.authors[:5]],
+                "categories": list(result.categories),
+                "abstract": result.summary,
+                "url": result.entry_id,
+                "pdf_url": result.pdf_url,
+            }
+        )
 
     return papers

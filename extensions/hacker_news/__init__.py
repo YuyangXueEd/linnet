@@ -1,8 +1,8 @@
 """Hacker News extension — fetches and summarises top AI/ML stories."""
 
+from extensions.base import BaseExtension, FeedSection
 from extensions.hacker_news.collector import fetch_stories
 from extensions.hacker_news.summarizer import summarize_hn_stories
-from extensions.base import BaseExtension, FeedSection
 
 
 class HackerNewsExtension(BaseExtension):

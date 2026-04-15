@@ -1,5 +1,6 @@
 from pathlib import Path
-from publishers.pages_publisher import render_daily_page, render_weekly_page
+
+from publishers.pages_publisher import render_daily_page
 
 
 def make_daily_payload(**overrides):
@@ -30,14 +31,16 @@ def test_render_daily_page_contains_date(tmp_path):
 def test_render_daily_page_shows_paper(tmp_path, sample_paper):
     sample_paper.update({"score": 8.5, "abstract": "医学分割测试。", "keywords_matched": []})
     payload = make_daily_payload(
-        sections_ordered=[{
-            "key": "arxiv",
-            "payload_key": "papers",
-            "title": "arXiv Papers",
-            "icon": "📄",
-            "items": [sample_paper],
-            "meta": {},
-        }],
+        sections_ordered=[
+            {
+                "key": "arxiv",
+                "payload_key": "papers",
+                "title": "arXiv Papers",
+                "icon": "📄",
+                "items": [sample_paper],
+                "meta": {},
+            }
+        ],
         papers=[sample_paper],
         arxiv=[sample_paper],
     )
@@ -49,44 +52,58 @@ def test_render_daily_page_shows_paper(tmp_path, sample_paper):
     assert '<a href="#arxiv">📄 arXiv Papers</a>' in content
     assert '<a href="#cat-cs-cv">cs.CV</a>' in content
     assert '<h3 id="cat-cs-cv">cs.CV</h3>' in content
-    assert '<h4>1. <a href="https://arxiv.org/abs/2604.12345">FoundationSeg: Universal Medical Image Segmentation</a></h4>' in content
+    assert (
+        '<h4>1. <a href="https://arxiv.org/abs/2604.12345">FoundationSeg: Universal Medical Image Segmentation</a></h4>'
+        in content
+    )
 
 
 def test_render_daily_page_shows_paper_figure(tmp_path, sample_paper):
-    sample_paper.update({
-        "score": 8.5,
-        "abstract": "医学分割测试。",
-        "figure_url": "https://arxiv.org/html/2604.12345v1/Figures/figure1.png",
-        "figure_caption": "Figure one caption.",
-    })
+    sample_paper.update(
+        {
+            "score": 8.5,
+            "abstract": "医学分割测试。",
+            "figure_url": "https://arxiv.org/html/2604.12345v1/Figures/figure1.png",
+            "figure_caption": "Figure one caption with \\( \\rho_{t} \\).",
+        }
+    )
     payload = make_daily_payload(
-        sections_ordered=[{
-            "key": "arxiv",
-            "payload_key": "papers",
-            "title": "arXiv Papers",
-            "icon": "📄",
-            "items": [sample_paper],
-            "meta": {},
-        }],
+        sections_ordered=[
+            {
+                "key": "arxiv",
+                "payload_key": "papers",
+                "title": "arXiv Papers",
+                "icon": "📄",
+                "items": [sample_paper],
+                "meta": {},
+            }
+        ],
         papers=[sample_paper],
         arxiv=[sample_paper],
     )
     out_path = render_daily_page(payload, docs_dir=str(tmp_path))
     content = Path(out_path).read_text(encoding="utf-8")
-    assert "![Figure one caption.](https://arxiv.org/html/2604.12345v1/Figures/figure1.png)" in content
-    assert "*Figure 1.* Figure one caption." in content
+    assert (
+        "![Figure one caption with \\( \\rho_{t} \\).](https://arxiv.org/html/2604.12345v1/Figures/figure1.png)"
+        in content
+    )
+    assert "*Figure 1.* Figure one caption with \\( \\rho_{t} \\)." in content
+    assert "katex.min.css" in content
+    assert "renderMathInElement" in content
 
 
 def test_render_daily_page_shows_distinct_models_and_arxiv_warning(tmp_path):
     payload = make_daily_payload(
-        sections_ordered=[{
-            "key": "arxiv",
-            "payload_key": "papers",
-            "title": "arXiv Papers",
-            "icon": "📄",
-            "items": [],
-            "meta": {},
-        }],
+        sections_ordered=[
+            {
+                "key": "arxiv",
+                "payload_key": "papers",
+                "title": "arXiv Papers",
+                "icon": "📄",
+                "items": [],
+                "meta": {},
+            }
+        ],
         papers=[],
         arxiv=[],
         meta={
@@ -105,7 +122,8 @@ def test_render_daily_page_shows_distinct_models_and_arxiv_warning(tmp_path):
 
 
 def test_render_daily_page_shows_github_trending_bullets(tmp_path):
-    repos = [{
+    repos = [
+        {
             "full_name": "example/repo",
             "url": "https://github.com/example/repo",
             "language": "Python",
@@ -113,16 +131,19 @@ def test_render_daily_page_shows_github_trending_bullets(tmp_path):
             "total_stars": 1234,
             "description": "Example repo for testing markdown rendering.",
             "summary": "测试摘要。",
-        }]
+        }
+    ]
     payload = make_daily_payload(
-        sections_ordered=[{
-            "key": "github_trending",
-            "payload_key": "github_trending",
-            "title": "GitHub Trending",
-            "icon": "⭐",
-            "items": repos,
-            "meta": {},
-        }],
+        sections_ordered=[
+            {
+                "key": "github_trending",
+                "payload_key": "github_trending",
+                "title": "GitHub Trending",
+                "icon": "⭐",
+                "items": repos,
+                "meta": {},
+            }
+        ],
         github_trending=repos,
     )
     out_path = render_daily_page(payload, docs_dir=str(tmp_path))
@@ -133,22 +154,26 @@ def test_render_daily_page_shows_github_trending_bullets(tmp_path):
 
 
 def test_render_daily_page_shows_job_location_and_salary(tmp_path, sample_job):
-    sample_job.update({
-        "requirements": "Deep learning experience required.",
-        "relevance_score": 8.0,
-        "institution": "Example University",
-        "location": "London, UK",
-        "salary": "GBP40000-GBP50000 YEAR",
-    })
+    sample_job.update(
+        {
+            "requirements": "Deep learning experience required.",
+            "relevance_score": 8.0,
+            "institution": "Example University",
+            "location": "London, UK",
+            "salary": "GBP40000-GBP50000 YEAR",
+        }
+    )
     payload = make_daily_payload(
-        sections_ordered=[{
-            "key": "postdoc_jobs",
-            "payload_key": "jobs",
-            "title": "Postdoc Jobs",
-            "icon": "💼",
-            "items": [sample_job],
-            "meta": {},
-        }],
+        sections_ordered=[
+            {
+                "key": "postdoc_jobs",
+                "payload_key": "jobs",
+                "title": "Postdoc Jobs",
+                "icon": "💼",
+                "items": [sample_job],
+                "meta": {},
+            }
+        ],
         jobs=[sample_job],
         postdoc_jobs=[sample_job],
     )
@@ -172,14 +197,16 @@ def test_render_daily_page_shows_weather_section(tmp_path):
         "source": "Open-Meteo",
     }
     payload = make_daily_payload(
-        sections_ordered=[{
-            "key": "weather",
-            "payload_key": "weather",
-            "title": "Weather",
-            "icon": "🌦️",
-            "items": [weather_item],
-            "meta": {},
-        }],
+        sections_ordered=[
+            {
+                "key": "weather",
+                "payload_key": "weather",
+                "title": "Weather",
+                "icon": "🌦️",
+                "items": [weather_item],
+                "meta": {},
+            }
+        ],
         weather=[weather_item],
     )
     out_path = render_daily_page(payload, docs_dir=str(tmp_path))

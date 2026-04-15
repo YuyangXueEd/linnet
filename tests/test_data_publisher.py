@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+
 from extensions.base import FeedSection
 from publishers.data_publisher import build_daily_payload, write_daily_json
 

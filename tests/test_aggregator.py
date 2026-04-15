@@ -1,6 +1,6 @@
 import json
-from pathlib import Path
-from pipeline.aggregator import load_daily_jsons, compute_keyword_frequency, build_weekly_payload
+
+from pipeline.aggregator import build_weekly_payload, compute_keyword_frequency, load_daily_jsons
 
 
 def make_daily_json(tmp_path, date_str, papers, jobs):
@@ -22,7 +22,9 @@ def make_daily_json(tmp_path, date_str, papers, jobs):
 def test_load_daily_jsons(tmp_path):
     make_daily_json(tmp_path, "2026-04-07", [], [])
     make_daily_json(tmp_path, "2026-04-08", [], [])
-    results = load_daily_jsons(["2026-04-07", "2026-04-08"], data_dir=str(tmp_path / "data" / "daily"))
+    results = load_daily_jsons(
+        ["2026-04-07", "2026-04-08"], data_dir=str(tmp_path / "data" / "daily")
+    )
     assert len(results) == 2
 
 
@@ -39,12 +41,27 @@ def test_compute_keyword_frequency():
 
 
 def test_build_weekly_payload(tmp_path):
-    p = {"id": "1", "title": "Test", "score": 9.0, "abstract": "test",
-         "authors": [], "categories": ["cs.CV"], "url": "", "pdf_url": "",
-         "keywords_matched": ["medical imaging"]}
-    j = {"title": "Postdoc AI", "institution": "Oxford", "deadline": "",
-         "url": "", "requirements": "", "source": "", "relevance_score": 8.0,
-         "posted_date": ""}
+    p = {
+        "id": "1",
+        "title": "Test",
+        "score": 9.0,
+        "abstract": "test",
+        "authors": [],
+        "categories": ["cs.CV"],
+        "url": "",
+        "pdf_url": "",
+        "keywords_matched": ["medical imaging"],
+    }
+    j = {
+        "title": "Postdoc AI",
+        "institution": "Oxford",
+        "deadline": "",
+        "url": "",
+        "requirements": "",
+        "source": "",
+        "relevance_score": 8.0,
+        "posted_date": "",
+    }
     make_daily_json(tmp_path, "2026-04-07", [p], [j])
     dates = ["2026-04-07"]
     payload = build_weekly_payload(

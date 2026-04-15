@@ -15,7 +15,9 @@ Config block in sources.yaml:
 """
 
 import os
+
 import httpx
+
 from sinks.base import BaseSink
 
 
@@ -25,7 +27,7 @@ class SlackSink(BaseSink):
     def deliver(self, payload: dict) -> None:
         webhook_url = os.environ.get("SLACK_WEBHOOK_URL", "")
         if not webhook_url:
-            raise EnvironmentError("SLACK_WEBHOOK_URL is not set")
+            raise OSError("SLACK_WEBHOOK_URL is not set")
 
         blocks = self._build_blocks(payload)
         resp = httpx.post(webhook_url, json={"blocks": blocks}, timeout=15)
@@ -50,10 +52,12 @@ class SlackSink(BaseSink):
         blocks: list[dict] = []
 
         # ── Header ──────────────────────────────────────────────────────
-        blocks.append({
-            "type": "header",
-            "text": {"type": "plain_text", "text": f"📰 Daily Digest — {date}"},
-        })
+        blocks.append(
+            {
+                "type": "header",
+                "text": {"type": "plain_text", "text": f"📰 Daily Digest — {date}"},
+            }
+        )
 
         # ── Stats bar ───────────────────────────────────────────────────
         stats = (
@@ -91,10 +95,12 @@ class SlackSink(BaseSink):
                 score = s.get("score", "")
                 link = f"<{url}|{_escape(title)}>" if url else _escape(title)
                 lines.append(f"• {link}  `{score} pts`\n  {_escape(summary)}")
-            blocks.append({
-                "type": "section",
-                "text": {"type": "mrkdwn", "text": "\n".join(lines)},
-            })
+            blocks.append(
+                {
+                    "type": "section",
+                    "text": {"type": "mrkdwn", "text": "\n".join(lines)},
+                }
+            )
             blocks.append({"type": "divider"})
 
         # ── GitHub Trending ─────────────────────────────────────────────
@@ -107,16 +113,23 @@ class SlackSink(BaseSink):
                 summary = _truncate(r.get("summary", ""), 200)
                 stars_today = r.get("stars_today", 0)
                 lang = r.get("language", "")
-                meta_str = "  ".join(filter(None, [
-                    f"`{lang}`" if lang else "",
-                    f"+{stars_today}★ today" if stars_today else "",
-                ]))
+                meta_str = "  ".join(
+                    filter(
+                        None,
+                        [
+                            f"`{lang}`" if lang else "",
+                            f"+{stars_today}★ today" if stars_today else "",
+                        ],
+                    )
+                )
                 link = f"<{url}|{_escape(name)}>" if url else _escape(name)
                 lines.append(f"• {link}  {meta_str}\n  {_escape(summary)}")
-            blocks.append({
-                "type": "section",
-                "text": {"type": "mrkdwn", "text": "\n".join(lines)},
-            })
+            blocks.append(
+                {
+                    "type": "section",
+                    "text": {"type": "mrkdwn", "text": "\n".join(lines)},
+                }
+            )
             blocks.append({"type": "divider"})
 
         # ── Jobs summary ─────────────────────────────────────────────────
@@ -131,10 +144,12 @@ class SlackSink(BaseSink):
                 lines.append(f"• {link}  —  {_escape(inst)}")
             if len(jobs) > 3:
                 lines.append(f"_…and {len(jobs) - 3} more_")
-            blocks.append({
-                "type": "section",
-                "text": {"type": "mrkdwn", "text": "\n".join(lines)[:3000]},
-            })
+            blocks.append(
+                {
+                    "type": "section",
+                    "text": {"type": "mrkdwn", "text": "\n".join(lines)[:3000]},
+                }
+            )
 
         # ── Footer ───────────────────────────────────────────────────────
         duration = meta.get("duration_seconds", 0)
@@ -146,6 +161,7 @@ class SlackSink(BaseSink):
 
 
 # ── Helpers ─────────────────────────────────────────────────────────────────
+
 
 def _header_section(text: str) -> dict:
     return {"type": "section", "text": {"type": "mrkdwn", "text": f"*{text}*"}}
@@ -159,4 +175,4 @@ def _escape(text: str) -> str:
 def _truncate(text: str, max_len: int) -> str:
     """Truncate text to max_len characters, appending ellipsis if cut."""
     text = str(text)
-    return text if len(text) <= max_len else text[:max_len - 1] + "…"
+    return text if len(text) <= max_len else text[: max_len - 1] + "…"

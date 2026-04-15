@@ -3,7 +3,7 @@
 import re
 from typing import Any
 
-from extensions.arxiv.collector import fetch_papers, enrich_papers_with_figures
+from extensions.arxiv.collector import enrich_papers_with_figures, fetch_papers
 from extensions.arxiv.scorer import score_papers
 from extensions.arxiv.summarizer import summarize_papers
 from extensions.base import BaseExtension, FeedSection

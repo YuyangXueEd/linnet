@@ -15,23 +15,33 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
 from openai import OpenAI
 
 from extensions import REGISTRY, FeedSection
-from sinks import SINK_REGISTRY
-from pipeline.config_loader import load_extension_config, load_sources, validate_sources, validate_arxiv_config
+from pipeline.aggregator import build_monthly_payload, build_weekly_payload, load_daily_jsons
+from pipeline.config_loader import (
+    load_extension_config,
+    load_sources,
+    validate_arxiv_config,
+    validate_sources,
+)
 from pipeline.utils import lang_instruction
-from pipeline.aggregator import build_weekly_payload, build_monthly_payload, load_daily_jsons
 from publishers.data_publisher import (
-    write_daily_json, write_weekly_json, write_monthly_json, build_daily_payload,
+    build_daily_payload,
+    write_daily_json,
+    write_monthly_json,
+    write_weekly_json,
 )
 from publishers.pages_publisher import (
-    render_daily_page, render_weekly_page, render_monthly_page,
+    render_daily_page,
+    render_monthly_page,
+    render_weekly_page,
 )
+from sinks import SINK_REGISTRY
 
 
 def get_openrouter_client(sources_cfg: dict) -> OpenAI:
@@ -73,9 +83,7 @@ def _build_extension_configs(sources: dict) -> dict[str, dict]:
     }
 
 
-def _instantiate_extensions(
-    configs: dict[str, dict], llm_client: Any
-) -> list[Any]:
+def _instantiate_extensions(configs: dict[str, dict], llm_client: Any) -> list[Any]:
     """Instantiate all registered extensions with their merged configs."""
     extensions = []
     for ext_class in REGISTRY:
@@ -99,7 +107,7 @@ def run_daily(sources: dict, dry_run: bool = False) -> None:
     for ext in extensions:
         sections[ext.key] = ext.run()
 
-    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    date_str = datetime.now(UTC).strftime("%Y-%m-%d")
     arxiv_meta = sections.get("arxiv", FeedSection(key="arxiv", title="arXiv Papers")).meta
     summary_model = sources["llm"]["summarization_model"]
     scoring_model = sources["llm"]["scoring_model"]
@@ -140,7 +148,7 @@ def run_daily(sources: dict, dry_run: bool = False) -> None:
 
 
 def run_weekly() -> None:
-    today = datetime.now(timezone.utc)
+    today = datetime.now(UTC)
     dates = [(today - timedelta(days=i)).strftime("%Y-%m-%d") for i in range(7, 0, -1)]
     period = today.strftime("%Y-W%V")
 
@@ -156,7 +164,7 @@ def run_weekly() -> None:
         f"Summarize the overall weekly trends of the following {len(all_papers)} papers "
         f"{lang_instruction(lang)}, in ≤300 words. Cover popular directions, "
         f"notable advances, and any significant shifts:\n\n"
-        + "\n".join(f"- {p['title']}: {p.get('abstract','')}" for p in all_papers[:30])
+        + "\n".join(f"- {p['title']}: {p.get('abstract', '')}" for p in all_papers[:30])
     )
     resp = client.chat.completions.create(
         model=sources["llm"]["summarization_model"],
@@ -173,7 +181,7 @@ def run_weekly() -> None:
 
 
 def run_monthly() -> None:
-    today = datetime.now(timezone.utc)
+    today = datetime.now(UTC)
     dates = [(today - timedelta(days=i)).strftime("%Y-%m-%d") for i in range(30, 0, -1)]
     period = today.strftime("%Y-%m")
 
@@ -189,7 +197,7 @@ def run_monthly() -> None:
         f"Summarize the monthly trends of the following {len(all_papers)} papers from the past 30 days "
         f"{lang_instruction(lang)}, in ≤500 words. Cover shifts in research direction popularity, "
         f"notable groups or labs, and trends to watch next month:\n\n"
-        + "\n".join(f"- {p['title']}: {p.get('abstract','')}" for p in all_papers[:50])
+        + "\n".join(f"- {p['title']}: {p.get('abstract', '')}" for p in all_papers[:50])
     )
     resp = client.chat.completions.create(
         model=sources["llm"]["summarization_model"],
@@ -207,8 +215,8 @@ def run_monthly() -> None:
 
 def check_today() -> None:
     """Print compact summary for Claude Code SessionStart hook."""
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    yesterday = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d")
+    today = datetime.now(UTC).strftime("%Y-%m-%d")
+    yesterday = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d")
 
     data_dir = Path(__file__).parent / "docs" / "data" / "daily"
     for date_str in [today, yesterday]:
@@ -240,8 +248,9 @@ if __name__ == "__main__":
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--mode", choices=["daily", "weekly", "monthly"])
     group.add_argument("--check-today", action="store_true")
-    group.add_argument("--dry-run", action="store_true",
-                       help="Fetch data only — skip all LLM calls (no API cost)")
+    group.add_argument(
+        "--dry-run", action="store_true", help="Fetch data only — skip all LLM calls (no API cost)"
+    )
     args = parser.parse_args()
 
     if args.check_today:

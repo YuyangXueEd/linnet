@@ -28,7 +28,7 @@ def summarize_job(job: dict, client: Any, model: str, lang: str = "en") -> dict:
         "Application Info: deadline/start date, required materials, contact (if any)\n"
         "Position Details: location, contract type, workload, salary\n"
         "One-line Advice: match assessment for CV/medical imaging/LLM applicants\n\n"
-        f"Title: {job['title']}\nInstitution: {job.get('institution','')}\n"
+        f"Title: {job['title']}\nInstitution: {job.get('institution', '')}\n"
         f"Location: {location}\nSalary: {salary}\nDeadline: {deadline}\n"
         f"Contract: {contract_type}\nHours: {hours}\nPosted: {placed_on}\nRef: {job_ref}\n"
         f"Description: {description}"
@@ -48,9 +48,7 @@ def summarize_job(job: dict, client: Any, model: str, lang: str = "en") -> dict:
     return job
 
 
-def summarize_jobs(
-    jobs: list[dict], client: Any, model: str, lang: str = "en"
-) -> list[dict]:
+def summarize_jobs(jobs: list[dict], client: Any, model: str, lang: str = "en") -> list[dict]:
     """Summarize jobs sequentially to avoid rate limiting."""
     if not jobs:
         return []
@@ -58,7 +56,7 @@ def summarize_jobs(
     for j in jobs:
         try:
             results.append(summarize_job(j, client, model, lang))
-        except Exception as e:
+        except Exception:
             j["requirements"] = _fallback_text("Job", lang)
             results.append(j)
     return results

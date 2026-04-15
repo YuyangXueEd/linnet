@@ -5,9 +5,7 @@ from typing import Any
 from pipeline.utils import _fallback_text, call_llm_summarize, lang_instruction
 
 
-def _summarize_one_github_repo(
-    repo: dict, client: Any, model: str, lang: str = "en"
-) -> dict:
+def _summarize_one_github_repo(repo: dict, client: Any, model: str, lang: str = "en") -> dict:
     prompt = (
         f"Summarize the core function and key features of the following GitHub repository "
         f"{lang_instruction(lang)}, in one sentence (≤60 words):\n\n"
@@ -27,7 +25,7 @@ def summarize_github_repos(
     for r in repos:
         try:
             results.append(_summarize_one_github_repo(r, client, model, lang))
-        except Exception as e:
+        except Exception:
             r["summary"] = _fallback_text("Repo", lang)
             results.append(r)
     return results

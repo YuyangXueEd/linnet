@@ -1,8 +1,8 @@
 import json
 import re
 from html import unescape
-from urllib.parse import urlsplit, urlunsplit
 from typing import Any
+from urllib.parse import urlsplit, urlunsplit
 
 import feedparser
 import httpx
@@ -99,7 +99,11 @@ def _extract_jobs_ac_uk_table_details(html: str) -> dict[str, str]:
         "job_ref": "",
     }
 
-    employer_match = re.search(r'<h3\b[^>]*class="[^"]*j-advert__employer[^"]*"[^>]*>(.*?)</h3>', html, re.IGNORECASE | re.DOTALL)
+    employer_match = re.search(
+        r'<h3\b[^>]*class="[^"]*j-advert__employer[^"]*"[^>]*>(.*?)</h3>',
+        html,
+        re.IGNORECASE | re.DOTALL,
+    )
     if employer_match:
         details["institution"] = _clean_html_text(employer_match.group(1))
 
@@ -163,7 +167,11 @@ def _coerce_salary(base_salary: Any) -> str:
         max_value = value.get("maxValue")
         unit = value.get("unitText", "")
         if min_value and max_value:
-            salary = f"{currency}{min_value}-{currency}{max_value}" if currency else f"{min_value}-{max_value}"
+            salary = (
+                f"{currency}{min_value}-{currency}{max_value}"
+                if currency
+                else f"{min_value}-{max_value}"
+            )
         elif min_value:
             salary = f"{currency}{min_value}" if currency else str(min_value)
         elif value.get("value"):
@@ -182,7 +190,9 @@ def enrich_job_details(job: dict[str, Any]) -> dict[str, Any]:
         return job
 
     try:
-        response = httpx.get(url, timeout=20, follow_redirects=True, headers={"User-Agent": "MyDailyUpdater/1.0"})
+        response = httpx.get(
+            url, timeout=20, follow_redirects=True, headers={"User-Agent": "MyDailyUpdater/1.0"}
+        )
         response.raise_for_status()
     except Exception:
         return job
@@ -191,10 +201,14 @@ def enrich_job_details(job: dict[str, Any]) -> dict[str, Any]:
     posting = _extract_job_posting_schema(response.text)
     if posting:
         organization = posting.get("hiringOrganization") or {}
-        enriched["description"] = _clean_html_text(posting.get("description", "")) or enriched.get("description", "")
+        enriched["description"] = _clean_html_text(posting.get("description", "")) or enriched.get(
+            "description", ""
+        )
         if isinstance(organization, dict):
             enriched["institution"] = organization.get("name", enriched.get("institution", ""))
-        enriched["deadline"] = posting.get("validThrough", enriched.get("deadline", "")) or enriched.get("deadline", "")
+        enriched["deadline"] = posting.get(
+            "validThrough", enriched.get("deadline", "")
+        ) or enriched.get("deadline", "")
         enriched["salary"] = _coerce_salary(posting.get("baseSalary")) or enriched.get("salary", "")
         posting_location = _extract_location_from_posting(posting)
         if posting_location:
@@ -202,7 +216,15 @@ def enrich_job_details(job: dict[str, Any]) -> dict[str, Any]:
 
     # Fallback for jobs.ac.uk pages where JSON-LD is absent/incomplete.
     details = _extract_jobs_ac_uk_table_details(response.text)
-    for field in ["institution", "location", "salary", "hours", "contract_type", "placed_on", "job_ref"]:
+    for field in [
+        "institution",
+        "location",
+        "salary",
+        "hours",
+        "contract_type",
+        "placed_on",
+        "job_ref",
+    ]:
         if not enriched.get(field) and details.get(field):
             enriched[field] = details[field]
     if not enriched.get("deadline") and details.get("deadline"):
@@ -218,8 +240,8 @@ def parse_feed_entry(entry: Any, source_name: str) -> dict[str, Any]:
         "description": getattr(entry, "summary", ""),
         "posted_date": getattr(entry, "published", ""),
         "source": source_name,
-        "deadline": "",          # extracted later by summarizer
-        "requirements": "",   # filled by summarizer
+        "deadline": "",  # extracted later by summarizer
+        "requirements": "",  # filled by summarizer
         "relevance_score": 0.0,
         "institution": "",
         "location": "",
@@ -235,18 +257,18 @@ def _parse_findapostdoc_markdown(md: str, source_name: str) -> list[dict[str, An
     """Parse findapostdoc.com markdown returned by r.jina.ai."""
     jobs = []
     # Each job block is preceded by the shortlist button pattern
-    blocks = re.split(r'\[\]\(javascript:void\(0\)[^)]*\)', md)
+    blocks = re.split(r"\[\]\(javascript:void\(0\)[^)]*\)", md)
     for block in blocks:
         title_match = re.search(
-            r'\[([^\]]+)\]\((https://www\.findapostdoc\.com/search/Job-Details\.aspx\?jobcode=\d+)[^)]*\)',
+            r"\[([^\]]+)\]\((https://www\.findapostdoc\.com/search/Job-Details\.aspx\?jobcode=\d+)[^)]*\)",
             block,
         )
         if not title_match:
             continue
         title = title_match.group(1).strip()
         url = title_match.group(2).strip()
-        after = block[title_match.end():]
-        lines = [l.strip() for l in after.split("\n") if l.strip() and not l.startswith("[")]
+        after = block[title_match.end() :]
+        lines = [ln.strip() for ln in after.split("\n") if ln.strip() and not ln.startswith("[")]
         institution = lines[0] if lines else ""
         posted_date = ""
         deadline = ""
@@ -259,27 +281,29 @@ def _parse_findapostdoc_markdown(md: str, source_name: str) -> list[dict[str, An
         description = ""
         read_more = re.search(r"\[Read more\]", after)
         if read_more:
-            raw = after[:read_more.start()]
+            raw = after[: read_more.start()]
             # Strip the institution line from the front
-            raw = re.sub(r'^\s*' + re.escape(institution) + r'\s*', '', raw)
+            raw = re.sub(r"^\s*" + re.escape(institution) + r"\s*", "", raw)
             description = re.sub(r"\s+", " ", raw).strip()
-        jobs.append({
-            "title": title,
-            "url": url,
-            "description": description,
-            "institution": institution,
-            "posted_date": posted_date,
-            "deadline": deadline,
-            "source": source_name,
-            "requirements": "",
-            "relevance_score": 0.0,
-            "location": "",
-            "salary": "",
-            "hours": "",
-            "contract_type": "",
-            "placed_on": "",
-            "job_ref": "",
-        })
+        jobs.append(
+            {
+                "title": title,
+                "url": url,
+                "description": description,
+                "institution": institution,
+                "posted_date": posted_date,
+                "deadline": deadline,
+                "source": source_name,
+                "requirements": "",
+                "relevance_score": 0.0,
+                "location": "",
+                "salary": "",
+                "hours": "",
+                "contract_type": "",
+                "placed_on": "",
+                "job_ref": "",
+            }
+        )
     return jobs
 
 
@@ -290,10 +314,10 @@ def _parse_euraxess_markdown(md: str, source_name: str) -> list[dict[str, Any]]:
     """
     jobs = []
     # Split on ### job entry headings; each block ends at the next ### or ####
-    blocks = re.split(r'\n(?=### \[)', md)
+    blocks = re.split(r"\n(?=### \[)", md)
     for block in blocks:
         title_m = re.match(
-            r'### \[([^\]]+)\]\((https://euraxess\.ec\.europa\.eu/jobs/[^)]+)\)',
+            r"### \[([^\]]+)\]\((https://euraxess\.ec\.europa\.eu/jobs/[^)]+)\)",
             block,
         )
         if not title_m:
@@ -304,82 +328,83 @@ def _parse_euraxess_markdown(md: str, source_name: str) -> list[dict[str, Any]]:
 
         title = title_m.group(1).strip()
         url = title_m.group(2).strip()
-        body = block[title_m.end():]
+        body = block[title_m.end() :]
 
         # Description: all prose text, stopping before metadata bullets or "Posted on"
-        desc_end = re.search(r'\n\s*[\*\-]\s+\*\*|Posted on:', body)
-        raw_desc = body[:desc_end.start()] if desc_end else body
-        description = re.sub(r'\s+', ' ', raw_desc).strip()
+        desc_end = re.search(r"\n\s*[\*\-]\s+\*\*|Posted on:", body)
+        raw_desc = body[: desc_end.start()] if desc_end else body
+        description = re.sub(r"\s+", " ", raw_desc).strip()
 
         # Posted date
         posted_date = ""
-        posted_m = re.search(r'Posted on:\s*(.+)', body)
+        posted_m = re.search(r"Posted on:\s*(.+)", body)
         if posted_m:
             posted_date = posted_m.group(1).strip()
 
         # Research field from bullet metadata
         field = ""
-        field_m = re.search(r'Research Field:\s*\[([^\]]+)\]', body)
+        field_m = re.search(r"Research Field:\s*\[([^\]]+)\]", body)
         if field_m:
             field = field_m.group(1).strip()
 
         # Deadline from body text
         deadline = ""
-        dl_m = re.search(r'(?:deadline|closing date|apply by):\s*([^\n.]+)', body, re.IGNORECASE)
+        dl_m = re.search(r"(?:deadline|closing date|apply by):\s*([^\n.]+)", body, re.IGNORECASE)
         if dl_m:
             deadline = dl_m.group(1).strip()
 
-        jobs.append({
-            "title": title,
-            "url": url,
-            "description": f"{description} [Field: {field}]" if field else description,
-            "institution": "",
-            "posted_date": posted_date,
-            "deadline": deadline,
-            "source": source_name,
-            "requirements": "",
-            "relevance_score": 0.0,
-            "location": "",
-            "salary": "",
-            "hours": "",
-            "contract_type": "",
-            "placed_on": "",
-            "job_ref": "",
-        })
+        jobs.append(
+            {
+                "title": title,
+                "url": url,
+                "description": f"{description} [Field: {field}]" if field else description,
+                "institution": "",
+                "posted_date": posted_date,
+                "deadline": deadline,
+                "source": source_name,
+                "requirements": "",
+                "relevance_score": 0.0,
+                "location": "",
+                "salary": "",
+                "hours": "",
+                "contract_type": "",
+                "placed_on": "",
+                "job_ref": "",
+            }
+        )
     return jobs
 
 
 def _parse_academicpositions_markdown(md: str, source_name: str) -> list[dict[str, Any]]:
     """Parse academicpositions.com markdown returned by r.jina.ai."""
     jobs = []
-    job_pattern = re.compile(
-        r'\[####\s+([^\]]+)\]\((https://academicpositions\.com/ad/[^)]+)\)'
-    )
+    job_pattern = re.compile(r"\[####\s+([^\]]+)\]\((https://academicpositions\.com/ad/[^)]+)\)")
     for match in job_pattern.finditer(md):
         title_desc = match.group(1).strip()
         url = match.group(2).strip()
         # Split title from inline description: find first sentence boundary
         # that isn't inside an abbreviation (e.g. "Ph.D.", "Prof.")
-        sent_m = re.search(r'(?<!Prof)(?<!Mrs)(?<![A-Z][a-z])\.\s+(?=[A-Z])', title_desc)
+        sent_m = re.search(r"(?<!Prof)(?<!Mrs)(?<![A-Z][a-z])\.\s+(?=[A-Z])", title_desc)
         if sent_m:
-            title = title_desc[:sent_m.start() + 1].strip()
-            description = title_desc[sent_m.end():].strip()
+            title = title_desc[: sent_m.start() + 1].strip()
+            description = title_desc[sent_m.end() :].strip()
         else:
             title = title_desc
             description = ""
         # Look back for employer link and location
         before = md[max(0, match.start() - 400) : match.start()]
         inst_m = re.search(
-            r'\[([^\]]+)\]\(https://academicpositions\.com/employer/[^)]+\)',
+            r"\[([^\]]+)\]\(https://academicpositions\.com/employer/[^)]+\)",
             before,
         )
         institution = inst_m.group(1).strip() if inst_m else ""
         location = ""
         if inst_m:
-            after_inst = before[inst_m.end():]
+            after_inst = before[inst_m.end() :]
             loc_lines = [
-                l.strip() for l in after_inst.split("\n")
-                if l.strip() and not l.strip().startswith("[") and not l.strip().startswith("#")
+                ln.strip()
+                for ln in after_inst.split("\n")
+                if ln.strip() and not ln.strip().startswith("[") and not ln.strip().startswith("#")
             ]
             if loc_lines:
                 location = loc_lines[0]
@@ -387,23 +412,25 @@ def _parse_academicpositions_markdown(md: str, source_name: str) -> list[dict[st
         after = md[match.end() : match.end() + 300]
         pub_m = re.search(r"Published\s+(.+?)(?:\n|$)", after)
         posted_date = pub_m.group(1).strip() if pub_m else ""
-        jobs.append({
-            "title": title,
-            "url": url,
-            "description": description,
-            "institution": institution,
-            "posted_date": posted_date,
-            "deadline": "",
-            "source": source_name,
-            "requirements": "",
-            "relevance_score": 0.0,
-            "location": location,
-            "salary": "",
-            "hours": "",
-            "contract_type": "",
-            "placed_on": "",
-            "job_ref": "",
-        })
+        jobs.append(
+            {
+                "title": title,
+                "url": url,
+                "description": description,
+                "institution": institution,
+                "posted_date": posted_date,
+                "deadline": "",
+                "source": source_name,
+                "requirements": "",
+                "relevance_score": 0.0,
+                "location": location,
+                "salary": "",
+                "hours": "",
+                "contract_type": "",
+                "placed_on": "",
+                "job_ref": "",
+            }
+        )
     return jobs
 
 
@@ -448,7 +475,7 @@ def fetch_jobs(
             job = parse_feed_entry(entry, source_name=source["name"])
             if filter_job(job, filter_keywords, exclude_keywords):
                 jobs.append(enrich_job_details(job))
-    for source in (jina_sources or []):
+    for source in jina_sources or []:
         for job in fetch_jina_source(source):
             if filter_job(job, filter_keywords, exclude_keywords):
                 jobs.append(job)

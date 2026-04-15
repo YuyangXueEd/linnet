@@ -19,6 +19,10 @@ date: {{ date }}
 
 ---
 
+{% for sec in sections_ordered %}
+{% include "extensions/" + sec.key + "/head.html.j2" ignore missing %}
+{% endfor %}
+
 <style>
 /* ── Quick nav panel (desktop, fixed) ───────────────────────────── */
 .daily-nav-panel {

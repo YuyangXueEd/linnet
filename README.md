@@ -5,295 +5,247 @@
 
 [中文文档](README_zh.md)
 
-**Your personal research feed, delivered daily.** Fork this repo, add one API key, and get a searchable static site + Slack digest every morning — automatically.
+**Get a personalised research digest every morning — without lifting a finger.**
 
-**[Live demo →](https://yuyangxueed.github.io/MyDailyUpdater)**
+Fork this repo, add one API key, and wake up to a fresh digest of arXiv papers, Hacker News stories, and trending GitHub repos — automatically filtered for your interests, summarised by AI, and published as your own website.
 
-> **Cost:** ~$0.01–$0.05 per day using `gemini-2.5-flash-lite` via OpenRouter (free tier available).
+**[See a live example →](https://yuyangxueed.github.io/MyDailyUpdater)**
+
+> **Cost:** about $0.01–$0.05 per day using `gemini-2.5-flash-lite` via OpenRouter (free tier available).
 
 ---
 
-## What it does
+## What you get every morning
 
-| Source | What you get |
+| Source | What it fetches |
 |---|---|
-| **arXiv** | Papers filtered by category and keyword, LLM-scored for relevance, summarised with figure previews |
-| **Hacker News** | Top AI/ML stories above a configurable score threshold |
-| **GitHub Trending** | Daily trending AI/ML repositories |
+| **arXiv** | New papers matching your keywords — each with an AI-written summary |
+| **Hacker News** | Top AI/ML stories above a score you set |
+| **GitHub Trending** | Today's most-starred repos in your area |
+| **Weather** | Today's forecast for your city |
+| **Postdoc jobs** | Research job listings from jobs.ac.uk, FindAPostDoc, and EURAXESS |
+| **Supervisor monitor** | Alerts when a professor's or lab's webpage changes |
 
-
-Runs automatically at midnight UTC via GitHub Actions. Output is committed back to the repo and served as a Jekyll site (Just the Docs theme).
+Everything runs automatically at midnight UTC via GitHub Actions. Results are saved back to your repo and published as a searchable website.
 
 ---
 
-## Quick start
+## Set it up in 5 steps
 
-### 1. Fork this repo
+### Step 1 — Copy this repo to your account
 
-Click **Fork** on GitHub. All GitHub Actions workflows and Pages config are included.
+Click **Fork** at the top of this page. GitHub will create your own copy. All the automation comes with it.
 
-### 2. Add your API key
+### Step 2 — Add your API key
 
-In your fork: **Settings → Secrets and variables → Actions → New repository secret**
+In your forked repo, go to: **Settings → Secrets and variables → Actions → New repository secret**
 
-| Secret | Value |
+| Name | Value |
 |---|---|
-| `OPENROUTER_API_KEY` | Your [OpenRouter](https://openrouter.ai) API key |
+| `OPENROUTER_API_KEY` | Your key from [openrouter.ai/keys](https://openrouter.ai/keys) — free tier works, starts with `sk-or-...` |
 
-To get your key: go to [openrouter.ai/keys](https://openrouter.ai/keys) → **Create Key** → copy the value starting with `sk-or-...`.
+This is the only credential you need. [OpenRouter](https://openrouter.ai) lets you call many AI models (Gemini, GPT, Claude) with one key and switch between them any time.
 
-The pipeline uses OpenRouter so you can swap models freely in `config/sources.yaml`.
+### Step 3 — Turn on your website
 
-### 3. Enable GitHub Pages
+Go to: **Settings → Pages → Source: Deploy from a branch → Branch: `main`, folder: `/docs`**
 
-**Settings → Pages → Source: Deploy from a branch → Branch: `main` / `docs/`**
+Click **Save**. Your site URL will appear there — it looks like `https://YOUR-USERNAME.github.io/MyDailyUpdater`.
 
-### 4. Customise your interests
+### Step 4 — Pick your research topics
 
-Edit `config/keywords.yaml` to set your arXiv categories, keywords, and score thresholds.  
-Edit `config/sources.yaml` to enable/disable sources, choose a language, and pick LLM models.
-
-### 5. Trigger the first run
-
-**Actions → Daily Digest → Run workflow** — the site will be live within ~5 minutes.
-
----
-
-## Configuration
-
-### `config/sources.yaml`
+Open [config/extensions/arxiv.yaml](config/extensions/arxiv.yaml). It has four ready-made profiles — uncomment the one closest to your work and edit the keywords freely:
 
 ```yaml
-# Output language for all summaries.
-# "en" (default) | "zh" | "fr" | "de" | "ja" | "ko" | "es" | "pt"
-# Any BCP-47 language code works — the LLM responds in that language directly.
-language: "en"
+# PROFILE A: AI / ML / LLM (general)
+# categories: [cs.AI, cs.LG, cs.CL, cs.CV, stat.ML]
+# must_include:
+#   - large language model
+#   - foundation model
+#   ...
 
+# PROFILE B: Robotics / Embodied AI
+# PROFILE C: Medical AI / Clinical NLP
+# PROFILE D: NLP / Text / Reasoning
+```
+
+Uncomment one profile by removing the `#` from each line, then edit as needed.
+
+Want summaries in a different language? Open [config/sources.yaml](config/sources.yaml) and change `language: "en"` to `"zh"`, `"fr"`, `"de"`, `"ja"`, `"ko"`, `"es"`, or any other language code.
+
+### Step 5 — Run it for the first time
+
+Go to: **Actions → Daily Digest → Run workflow → Run workflow**
+
+Your site will be live in about 5 minutes.
+
+---
+
+## Turn sources on and off
+
+Open [config/sources.yaml](config/sources.yaml) and set `enabled: true` or `enabled: false` for each source:
+
+```yaml
 arxiv:
-  enabled: true
-  max_papers_per_run: 300
+  enabled: true          # arXiv papers — the main event
 
 hacker_news:
-  enabled: true
-
-jobs:
-  enabled: true
-
-supervisor_monitoring:
-  enabled: true
+  enabled: true          # top Hacker News stories
 
 github_trending:
-  enabled: true
+  enabled: true          # today's trending GitHub repos
   max_repos: 15
 
-llm:
-  scoring_model: "google/gemini-2.5-flash-lite-preview-09-2025"
-  summarization_model: "google/gemini-2.5-flash-lite-preview-09-2025"
-  base_url: "https://openrouter.ai/api/v1"
-```
-
-### `config/keywords.yaml`
-
-Controls arXiv filters, HN keyword matching, job filters, and LLM score thresholds. See the file for the full schema with inline comments.
-
-### `config/supervisors.yaml`
-
-List of supervisor / lab pages to watch for changes:
-
-```yaml
-supervisors:
-  - name: "Ada Lovelace"
-    institution: "University of Example"
-    url: "https://example.ac.uk/~lovelace"
-```
-
----
-
-## Extension gallery
-
-| Extension | Source | Status |
-|---|---|---|
-| `arxiv` | arXiv daily feed | ✅ built-in |
-| `hacker_news` | Hacker News | ✅ built-in |
-| `github_trending` | GitHub Trending | ✅ built-in |
-
-Built a new extension? Open a PR or share it in [Issues](https://github.com/YuyangXueEd/MyDailyUpdater/issues) — it can be listed here.
-
----
-
-## Extension system
-
-Every data source is a self-contained **extension** (`extensions/`). An extension owns its full pipeline: fetch → process (score + summarise) → render a `FeedSection`.
-
-> Full guide, template file, and testing instructions: **[extensions/README.md](extensions/README.md)**
-
-### Adding a new source
-
-1. Create `extensions/my_source.py`:
-
-```python
-from extensions.base import BaseExtension, FeedSection
-
-class MySourceExtension(BaseExtension):
-    key = "my_source"       # must match your config/sources.yaml key
-    title = "My Source"
-
-    def fetch(self) -> list[dict]:
-        # pull raw items from your data source
-        ...
-
-    def process(self, items: list[dict]) -> list[dict]:
-        # optional: score, filter, summarise
-        # self.llm   — OpenAI-compatible LLM client
-        # self.config — your config slice (includes language, model names)
-        return items
-
-    def render(self, items: list[dict]) -> FeedSection:
-        return FeedSection(key=self.key, title=self.title, items=items)
-```
-
-2. Register it in `extensions/__init__.py`:
-
-```python
-from extensions.my_source import MySourceExtension
-
-REGISTRY = [
-    ...,
-    MySourceExtension,
-]
-```
-
-3. Add a config block in `config/sources.yaml`:
-
-```yaml
-my_source:
+weather:
   enabled: true
-  # your extension-specific options here
+  city: "Edinburgh"      # change to your city
+
+postdoc_jobs:
+  enabled: false         # academic job listings — turn on if you want these
+
+supervisor_updates:
+  enabled: false         # professor/lab page monitor — turn on if you want these
 ```
 
-The orchestrator will call `ext.run()` automatically on the next pipeline run.
+You can also switch AI models here, or cap how many papers get fetched per day.
 
 ---
 
-## Delivery sinks
+## Get your digest in Slack
 
-After the daily payload is built, the pipeline can push it to external services. All sinks are **disabled by default** — enable each one in `config/sources.yaml` and add the required credentials as GitHub secrets.
+In addition to the website, you can receive a daily Slack message. Setup takes about 2 minutes:
 
-### Slack
-
-Posts a Block Kit message to a Slack channel with top papers, HN stories, trending repos, and a job summary.
-
-**Setup:**
-1. Go to [api.slack.com/apps](https://api.slack.com/apps) → **Create New App** → From scratch
-2. In the left sidebar, go to **Features → Incoming Webhooks**
-3. Toggle **Activate Incoming Webhooks** to **On**
-4. Scroll to the bottom and click **Add New Webhook to Workspace**
-5. Select the channel you want to post to, then click **Allow**
-6. Back on the Incoming Webhooks page, copy the URL from the table — it looks like:
-   `https://hooks.slack.com/services/T.../B.../...`
-7. Add it as a GitHub secret: **Settings → Secrets and variables → Actions → New repository secret**
-   - Name: `SLACK_WEBHOOK_URL` · Secret: the URL you just copied
-8. Enable in `config/sources.yaml`:
+1. Go to [api.slack.com/apps](https://api.slack.com/apps) → **Create New App** → **From scratch**
+2. Left sidebar → **Features → Incoming Webhooks** → toggle **On**
+3. Scroll down → **Add New Webhook to Workspace** → choose your channel → **Allow**
+4. Copy the webhook URL (looks like `https://hooks.slack.com/services/T.../B.../...`)
+5. Add it as a secret in your repo: **Settings → Secrets → New secret**, name it `SLACK_WEBHOOK_URL`
+6. Enable it in [config/sources.yaml](config/sources.yaml):
 
 ```yaml
 sinks:
   slack:
     enabled: true
-    max_papers: 5
-    max_hn: 3
-    max_github: 3
+    max_papers: 5    # how many papers to include
+    max_hn: 3        # how many HN stories to include
+    max_github: 3    # how many trending repos to include
 ```
 
-> **Note:** `SLACK_WEBHOOK_URL` is optional. If the secret is not set, the Slack sink is silently skipped — it will not cause the pipeline to fail.
-
-### Adding a new sink
-
-```python
-# sinks/my_sink.py
-from sinks.base import BaseSink
-
-class MySink(BaseSink):
-    key = "my_sink"   # matches sinks.my_sink in sources.yaml
-
-    def deliver(self, payload: dict) -> None:
-        # payload has: date, papers, hacker_news, jobs, github_trending, meta
-        api_key = os.environ.get("MY_SINK_API_KEY", "")
-        ...
-```
-
-Register in `sinks/__init__.py` and add a config block under `sinks:` in `sources.yaml`.
+If you skip this step, nothing breaks — the website still updates as normal.
 
 ---
 
-## Running locally
+## What runs on its own
+
+| When | What happens |
+|---|---|
+| Every day at midnight UTC | Full digest — papers, HN, GitHub trending, weather, any extras you enabled |
+| Every Monday at 1 AM UTC | Weekly summary of the past week |
+| 1st of every month at 2 AM UTC | Monthly overview |
+
+You can also trigger any of these by hand: **Actions → [workflow name] → Run workflow**.
+
+---
+
+## Add your own data source
+
+Every source is a self-contained folder inside `extensions/`. To add a new one:
+
+**1. Copy the template:**
+```bash
+cp -r extensions/_template extensions/my_source
+```
+
+**2. Fill in three functions** in `extensions/my_source/__init__.py`:
+- `fetch()` — grab raw data from anywhere (a website, an API, a file)
+- `process()` — optional: filter or summarise using the built-in AI client
+- `render()` — format the results for the digest
+
+**3. Register it** in `extensions/__init__.py`:
+```python
+from extensions.my_source import MySourceExtension
+
+REGISTRY = [..., MySourceExtension]
+```
+
+**4. Add an on/off switch** in `config/sources.yaml`:
+```yaml
+my_source:
+  enabled: true
+```
+
+Full guide with a worked example: [extensions/README.md](extensions/README.md)
+
+---
+
+## Running on your own computer
 
 ```bash
-# Install dependencies
+# Install
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 # Set your API key
 export OPENROUTER_API_KEY=sk-or-...
 
-# Run the daily pipeline
+# Run a full digest
 python main.py --mode daily
 
-# Dry run — fetch only, no LLM calls (zero cost, good for testing)
+# Test without any AI calls (free — good for checking your config works)
 python main.py --dry-run
 
-# Weekly / monthly rollup
+# Weekly or monthly summary
 python main.py --mode weekly
 python main.py --mode monthly
+```
 
-# Quick status check (used by the Claude Code SessionStart hook)
-python main.py --check-today
-
-# Run tests
+Run the test suite:
+```bash
 PYTHONPATH=. pytest tests/ -q
 ```
 
 ---
 
-## Project structure
+## Project layout
 
 ```
 MyDailyUpdater/
-├── extensions/          # pluggable data source extensions
-│   ├── base.py          # BaseExtension + FeedSection
-│   ├── arxiv.py
-│   ├── hacker_news.py
-│   ├── jobs.py
-│   ├── supervisor.py
-│   └── github_trending.py
-├── collectors/          # low-level fetch functions (used by extensions)
-├── pipeline/            # scorer, summariser, aggregator, config loader
-├── publishers/          # JSON writer + Jinja2 → Markdown renderer
-├── templates/           # daily / weekly / monthly Jinja2 templates
+├── extensions/             # one folder per data source
+│   ├── _template/          # copy this to build your own source
+│   ├── arxiv/              # arXiv papers
+│   ├── github_trending/    # GitHub trending repos
+│   ├── hacker_news/        # Hacker News stories
+│   ├── postdoc_jobs/       # academic job listings
+│   ├── supervisor_updates/ # professor/lab page monitor
+│   ├── weather/            # weather forecast
+│   └── base.py             # shared base class all extensions inherit from
+├── sinks/                  # delivery channels (e.g. Slack)
+│   └── slack/
+├── pipeline/               # scoring, summarising, assembling the digest
+├── publishers/             # writes the website files to docs/
+├── templates/              # daily / weekly / monthly page layouts
 ├── config/
-│   ├── sources.yaml     # enable/disable sources, language, LLM models
-│   ├── keywords.yaml    # filters, thresholds, categories
-│   └── supervisors.yaml # supervisor pages to watch
-├── docs/                # generated site (served by GitHub Pages)
+│   ├── sources.yaml        # turn sources on/off, set language & AI models
+│   └── extensions/
+│       ├── arxiv.yaml      # your research keywords & categories
+│       ├── hacker_news.yaml
+│       ├── postdoc_jobs.yaml
+│       └── supervisor_updates.yaml
+├── docs/                   # your generated website (served by GitHub Pages)
 ├── tests/
-└── main.py              # CLI entry point + pipeline orchestrator
+└── main.py                 # entry point
 ```
 
 ---
 
-## Scheduled workflows
+## Share your setup
 
-| Workflow | Schedule | What it does |
-|---|---|---|
-| `daily.yml` | UTC 00:00 daily | Full pipeline, commits output to `docs/` |
-| `weekly.yml` | UTC 01:00 Monday | Weekly rollup summary |
-| `monthly.yml` | UTC 02:00 1st of month | Monthly trend overview |
+Using this for an unusual research area? Set up a particularly useful config? Post it in [Discussions](https://github.com/YuyangXueEd/MyDailyUpdater/discussions) — others with similar interests will find it.
 
-All workflows can also be triggered manually via **Actions → Run workflow**.
+Have a bug or want a new source added? [Open an issue](https://github.com/YuyangXueEd/MyDailyUpdater/issues).
 
 ---
 
 ## License
 
-MIT License — see [LICENSE](LICENSE).
-
-Contributions welcome. If you build a new extension, feel free to open a PR or share it in Issues.
+MIT — see [LICENSE](LICENSE). Contributions welcome.

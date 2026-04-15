@@ -4,14 +4,22 @@ title: Home
 nav_order: 1
 ---
 
-# Research Daily Digest
+# MyDailyUpdater — Live Demo
 
-Daily AI / Computer Vision / Medical Imaging research updates, auto-generated every day at UK midnight via GitHub Actions + OpenRouter LLM.
+This is a live example of what your own digest site looks like after forking [MyDailyUpdater](https://github.com/YuyangXueEd/MyDailyUpdater).
+
+Every day at midnight UTC, GitHub Actions fetches new arXiv papers, Hacker News stories, and trending GitHub repos — filters them by topic, summarises them with AI, and commits the results here automatically.
+
+**The topics shown here are just one person's config.** Fork the repo and swap in your own keywords to get a digest built around your research.
 
 ---
 
-**Browse by section:**
+**Browse:**
 
-- [日报 (Daily)]({{ "/daily/" | relative_url }}) — arXiv papers, HN highlights, postdoc jobs, GitHub trending
-- [周报 (Weekly)]({{ "/weekly/" | relative_url }}) — weekly trend rollup
-- [月报 (Monthly)]({{ "/monthly/" | relative_url }}) — monthly landscape overview
+- [Daily]({{ "/daily/" | relative_url }}) — today's papers, HN highlights, GitHub trending
+- [Weekly]({{ "/weekly/" | relative_url }}) — weekly rollup
+- [Monthly]({{ "/monthly/" | relative_url }}) — monthly overview
+
+---
+
+**Want your own?** → [github.com/YuyangXueEd/MyDailyUpdater](https://github.com/YuyangXueEd/MyDailyUpdater) — fork, add one API key, done.

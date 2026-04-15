@@ -12,6 +12,7 @@ Config block in sources.yaml:
 """
 
 import os
+
 # import httpx  # or whatever HTTP client you need
 from sinks.base import BaseSink
 
@@ -41,7 +42,7 @@ class MySink(BaseSink):
         # 1. Read credentials from environment (never from self.config)
         api_key = os.environ.get("MY_SINK_API_KEY", "")
         if not api_key:
-            raise EnvironmentError("MY_SINK_API_KEY is not set")
+            raise OSError("MY_SINK_API_KEY is not set")
 
         # 2. Read display limits from config (with sensible defaults)
         max_papers = self.config.get("max_papers", 5)

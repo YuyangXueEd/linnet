@@ -1,7 +1,7 @@
-import httpx
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
+import httpx
 
 _ALGOLIA_URL = "https://hn.algolia.com/api/v1/search"
 _HN_ITEM_URL = "https://news.ycombinator.com/item?id={}"
@@ -43,19 +43,22 @@ def fetch_stories(
     hours_back: int = 24,
 ) -> list[dict[str, Any]]:
     """Fetch top HN stories from Algolia API, filter by score and keywords."""
-    cutoff = int((datetime.now(timezone.utc) - timedelta(hours=hours_back)).timestamp())
+    cutoff = int((datetime.now(UTC) - timedelta(hours=hours_back)).timestamp())
     seen_ids: set[str] = set()
     all_stories: list[dict] = []
 
     search_terms = ["AI", "LLM", "machine learning", "computer vision", "deep learning"]
     with httpx.Client(timeout=30) as client:
         for term in search_terms:
-            resp = client.get(_ALGOLIA_URL, params={
-                "query": term,
-                "tags": "story",
-                "numericFilters": f"created_at_i>{cutoff},points>{min_score}",
-                "hitsPerPage": 50,
-            })
+            resp = client.get(
+                _ALGOLIA_URL,
+                params={
+                    "query": term,
+                    "tags": "story",
+                    "numericFilters": f"created_at_i>{cutoff},points>{min_score}",
+                    "hitsPerPage": 50,
+                },
+            )
             resp.raise_for_status()
             for hit in resp.json().get("hits", []):
                 oid = hit.get("objectID")

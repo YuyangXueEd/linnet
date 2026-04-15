@@ -5,8 +5,9 @@ from typing import Any
 
 import trafilatura
 
-
-_DEFAULT_HASHES_PATH = str(Path(__file__).parent.parent.parent / "docs" / "data" / "supervisor_hashes.json")
+_DEFAULT_HASHES_PATH = str(
+    Path(__file__).parent.parent.parent / "docs" / "data" / "supervisor_hashes.json"
+)
 
 
 def compute_hash(text: str) -> str:
@@ -54,11 +55,13 @@ def fetch_supervisor_updates(
             continue
         if detect_changes(url, text, hashes_path):
             update_hashes(url, text, hashes_path)
-            updates.append({
-                "name": sup.get("name", ""),
-                "institution": sup.get("institution", ""),
-                "url": url,
-                "page_text": text[:3000],  # cap for LLM context
-                "change_summary": "",    # filled by summarizer
-            })
+            updates.append(
+                {
+                    "name": sup.get("name", ""),
+                    "institution": sup.get("institution", ""),
+                    "url": url,
+                    "page_text": text[:3000],  # cap for LLM context
+                    "change_summary": "",  # filled by summarizer
+                }
+            )
     return updates

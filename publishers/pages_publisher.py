@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+
 from jinja2 import Environment, FileSystemLoader
 
 _PROJECT_ROOT = str(Path(__file__).parent.parent)
@@ -51,8 +52,9 @@ def _regenerate_index(docs_dir: str, latest_date: str) -> None:
     with open(index_path, encoding="utf-8") as f:
         content = f.read()
     import re
+
     updated = re.sub(
-        r'\*\*Latest:\*\*.*',
+        r"\*\*Latest:\*\*.*",
         f'**Latest:** [{latest_date} 日报]({{{{ "/daily/{latest_date}/" | relative_url }}}})',
         content,
     )

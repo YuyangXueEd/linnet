@@ -29,7 +29,7 @@ def summarize_hn_stories(
     for s in stories:
         try:
             results.append(_summarize_one_hn(s, client, model, lang))
-        except Exception as e:
+        except Exception:
             s["summary"] = _fallback_text("Story", lang)
             results.append(s)
     return results

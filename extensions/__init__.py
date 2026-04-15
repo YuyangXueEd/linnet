@@ -16,10 +16,10 @@ To add a new extension:
   4. If the extension needs filter/keyword config, create config/extensions/my_source.yaml
 """
 
-from extensions.base import BaseExtension, FeedSection
 from extensions.arxiv import ArxivExtension
-from extensions.hacker_news import HackerNewsExtension
+from extensions.base import BaseExtension, FeedSection
 from extensions.github_trending import GitHubTrendingExtension
+from extensions.hacker_news import HackerNewsExtension
 from extensions.postdoc_jobs import PostdocJobsExtension
 from extensions.supervisor_updates import SupervisorExtension
 from extensions.weather import WeatherExtension

@@ -144,6 +144,11 @@ python main.py --dry-run
 
 Each extension is a package (`extensions/<name>/`) containing `__init__.py` (the extension class), `template.md.j2` (its section template), and usually `README.md` (docs specific to that extension).
 
+An extension may also provide optional page assets:
+
+- `head.html.j2` — CSS/JS tags injected into the rendered page when that section is present
+- `nav.md.j2` — extra navigation links for that section
+
 | Package | Key | What it does |
 |---|---|---|
 | `arxiv/` | `arxiv` | Fetches arXiv papers, LLM-scores and summarises them — [docs](arxiv/README.md) |

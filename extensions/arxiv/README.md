@@ -2,6 +2,8 @@
 
 Fetches papers from the arXiv daily feed, scores them for relevance with an LLM, summarises each one, and enriches them with the first figure from the paper's HTML page.
 
+This extension also ships a page-level `head.html.j2` include that loads KaTeX, so inline LaTeX found in figure captions can be rendered on the generated site.
+
 ## Pipeline
 
 ```

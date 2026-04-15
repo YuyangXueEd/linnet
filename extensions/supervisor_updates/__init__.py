@@ -1,8 +1,8 @@
 """Supervisor extension — watches advisor/lab pages for content changes."""
 
+from extensions.base import BaseExtension, FeedSection
 from extensions.supervisor_updates.collector import fetch_supervisor_updates
 from extensions.supervisor_updates.summarizer import summarize_supervisor_update
-from extensions.base import BaseExtension, FeedSection
 
 
 class SupervisorExtension(BaseExtension):

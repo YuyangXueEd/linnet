@@ -1,8 +1,8 @@
 """GitHub Trending extension — fetches and summarises trending AI/ML repos."""
 
+from extensions.base import BaseExtension, FeedSection
 from extensions.github_trending.collector import fetch_github_trending
 from extensions.github_trending.summarizer import summarize_github_repos
-from extensions.base import BaseExtension, FeedSection
 
 
 class GitHubTrendingExtension(BaseExtension):

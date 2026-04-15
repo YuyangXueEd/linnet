@@ -19,9 +19,7 @@ def summarize_paper(paper: dict, client: Any, model: str, lang: str = "en") -> d
     return _summarize_one_paper(paper, client, model, lang)
 
 
-def summarize_papers(
-    papers: list[dict], client: Any, model: str, lang: str = "en"
-) -> list[dict]:
+def summarize_papers(papers: list[dict], client: Any, model: str, lang: str = "en") -> list[dict]:
     """Summarize all papers sequentially to avoid rate limiting."""
     if not papers:
         return []

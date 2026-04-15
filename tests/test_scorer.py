@@ -1,6 +1,10 @@
 from unittest.mock import MagicMock
+
 from extensions.arxiv.scorer import (
-    build_batch_paper_prompt, parse_score, parse_batch_scores, score_papers,
+    build_batch_paper_prompt,
+    parse_batch_scores,
+    parse_score,
+    score_papers,
 )
 
 

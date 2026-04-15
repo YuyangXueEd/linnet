@@ -1,4 +1,5 @@
 import json
+
 from extensions.supervisor_updates.collector import compute_hash, detect_changes, update_hashes
 
 

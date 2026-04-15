@@ -11,10 +11,11 @@ We use a GITHUB_TOKEN env var if available (5000 req/hr with auth).
 
 import os
 import re
+from datetime import UTC
 from html import unescape
-import httpx
 from typing import Any
 
+import httpx
 
 _SEARCH_URL = "https://api.github.com/search/repositories"
 _TRENDING_URL = "https://github.com/trending"
@@ -31,9 +32,19 @@ _AI_TOPICS = [
 ]
 
 _AI_KEYWORDS = [
-    "llm", "large language model", "diffusion", "computer vision",
-    "medical imaging", "deep learning", "neural network", "transformer",
-    "gpt", "bert", "stable diffusion", "multimodal", "vision",
+    "llm",
+    "large language model",
+    "diffusion",
+    "computer vision",
+    "medical imaging",
+    "deep learning",
+    "neural network",
+    "transformer",
+    "gpt",
+    "bert",
+    "stable diffusion",
+    "multimodal",
+    "vision",
 ]
 
 
@@ -102,8 +113,9 @@ def fetch_trending_via_search(max_repos: int = 20, days_back: int = 1) -> list[d
     Use GitHub Search API to find recently-created repos with high star velocity.
     Queries multiple AI topics and deduplicates.
     """
-    from datetime import datetime, timedelta, timezone
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days_back)).strftime("%Y-%m-%d")
+    from datetime import datetime, timedelta
+
+    cutoff = (datetime.now(UTC) - timedelta(days=days_back)).strftime("%Y-%m-%d")
 
     seen: set[int] = set()
     repos: list[dict] = []
@@ -111,12 +123,15 @@ def fetch_trending_via_search(max_repos: int = 20, days_back: int = 1) -> list[d
     with httpx.Client(timeout=30, headers=_get_headers()) as client:
         for topic in _AI_TOPICS[:5]:  # limit to avoid rate limit
             try:
-                resp = client.get(_SEARCH_URL, params={
-                    "q": f"topic:{topic} created:>{cutoff}",
-                    "sort": "stars",
-                    "order": "desc",
-                    "per_page": 10,
-                })
+                resp = client.get(
+                    _SEARCH_URL,
+                    params={
+                        "q": f"topic:{topic} created:>{cutoff}",
+                        "sort": "stars",
+                        "order": "desc",
+                        "per_page": 10,
+                    },
+                )
                 if resp.status_code == 403:
                     break  # rate limited
                 resp.raise_for_status()
@@ -154,8 +169,9 @@ def fetch_trending_via_scrape(language: str = "", since: str = "daily") -> list[
     repos = []
     # Parse repo entries from the trending page HTML
     # Each repo is in an <article class="Box-row"> block
-    articles = re.findall(r'<article[^>]*class="[^"]*Box-row[^"]*"[^>]*>(.*?)</article>',
-                          html, re.DOTALL)
+    articles = re.findall(
+        r'<article[^>]*class="[^"]*Box-row[^"]*"[^>]*>(.*?)</article>', html, re.DOTALL
+    )
     for article in articles:
         repo = _parse_trending_article(article)
         if not repo:
