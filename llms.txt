@@ -11,11 +11,11 @@ License: MIT
 ## Architecture overview
 
 ```
-main.py  ──►  extensions/  ──►  pipeline/  ──►  publishers/  ──►  docs/
-              (fetch+process    (score,          (JSON + Markdown
-               +render)         summarise)        templates)
-                                                       │
-                                                  sinks/  ──►  Slack
+main.py  ──►  extensions/  ──►  publishers/  ──►  docs/
+              (fetch → process     (JSON + Markdown
+               → render → FeedSection)  templates)
+                                              │
+                                         sinks/  ──►  Slack
 ```
 
 Entry point: `main.py`
@@ -23,7 +23,6 @@ Entry point: `main.py`
 - `--mode weekly`  — weekly rollup summary
 - `--mode monthly` — monthly rollup summary
 - `--dry-run`      — fetch only, zero LLM calls (for testing)
-- `--check-today`  — print compact status (used by Claude Code session hook)
 
 ---
 
@@ -33,37 +32,48 @@ Entry point: `main.py`
 extensions/          Pluggable data source extensions (one package = one source)
   base.py            BaseExtension ABC + FeedSection dataclass
   __init__.py        REGISTRY list
-  README.md          Full extension guide
-  arxiv/             arXiv papers: fetch → score → summarise → enrich figures
+  README.md          Full extension guide + PR checklist
+  llms.txt           LLM context for extensions/ subtree
+  arxiv/             arXiv papers: fetch → LLM score → summarise → enrich figures
+    __init__.py      ArxivExtension class
+    collector.py     fetch_papers(), enrich_papers_with_figures()
+    scorer.py        score_papers() — LLM batch scoring
+    summarizer.py    summarize_papers()
+    README.md        Config options, output schema, test commands
+    template.md.j2   Jinja2 section template
+    head.html.j2     KaTeX CSS/JS injection for LaTeX rendering
+    nav.md.j2        Per-category navigation links
   hacker_news/       HN stories above score threshold
-  github_trending/   GitHub trending repos
-  _template/         Starter template for new extensions
-  Each package contains __init__.py (extension class) + README.md (docs)
+    collector.py     fetch_stories()
+  github_trending/   GitHub trending repos (no LLM scoring)
+    collector.py     fetch_github_trending()
+  weather/           Today's weather via Open-Meteo (no LLM)
+    collector.py     fetch_today_weather()
+  postdoc_jobs/      Research job listings (offline by default)
+    collector.py     fetch_jobs()
+  supervisor_updates/ Lab/advisor page change detection (offline by default)
+  _template/         Starter template — copy this to build a new extension
+    __init__.py      Fully documented extension skeleton
+    collector.py     Fetch logic skeleton (separate from extension class)
+    template.md.j2   Jinja2 section template skeleton
+    README.md        6-section doc template + PR checklist
 
-collectors/          Low-level fetch/parse functions (used by extensions)
-  arxiv_collector.py      fetch_papers(), enrich_papers_with_figures()
-  hn_collector.py         fetch_stories()
-  github_trending_collector.py  fetch_github_trending()
-  jobs_collector.py       fetch_jobs() — used by offline jobs extension
-  supervisor_watcher.py   detect_changes() — used by offline supervisor extension
-
-pipeline/            Shared processing utilities
-  config_loader.py   load_sources(), load_keywords(), load_supervisors(),
-                     validate_sources(), validate_keywords()
-  scorer.py          score_papers() — LLM batch scoring, returns filtered list
-  summarizer.py      summarize_papers/hn_stories/github_repos/jobs/supervisor_update()
-                     lang_instruction(lang) — builds language directive for prompts
+pipeline/            Shared utilities (not scorer/summariser — those live in extensions)
+  config_loader.py   load_sources(), load_extension_config(name),
+                     validate_sources(), validate_arxiv_config()
   aggregator.py      build_weekly_payload(), build_monthly_payload(),
                      load_daily_jsons(), compute_keyword_frequency()
+  utils.py           lang_instruction(lang), parse_score(text),
+                     call_llm_scoring(), call_llm_summarize()
 
 publishers/
   data_publisher.py  build_daily_payload(), write_daily/weekly/monthly_json()
   pages_publisher.py render_daily/weekly/monthly_page() via Jinja2 templates
 
-templates/           Jinja2 templates → Markdown
-  daily.md.j2        Daily digest page
-  weekly.md.j2       Weekly rollup page
-  monthly.md.j2      Monthly overview page
+templates/           Top-level Jinja2 templates → Markdown pages
+  daily.md.j2        Daily digest — iterates over all extension sections
+  weekly.md.j2       Weekly rollup (hardcoded to top_papers, new_jobs — see debt)
+  monthly.md.j2      Monthly overview (same)
 
 sinks/               Delivery layer (all disabled by default)
   base.py            BaseSink ABC — enabled defaults False (opt-in)
@@ -71,20 +81,24 @@ sinks/               Delivery layer (all disabled by default)
   README.md          Full sink guide
   slack/             SlackSink — Block Kit via Incoming Webhook
   _template/         Starter template for new sinks
-  Each package contains __init__.py (sink class) + README.md (docs)
 
 config/
   sources.yaml       Enable/disable extensions, language, LLM models, sink config
-  keywords.yaml      arXiv categories/keywords, HN keywords, score thresholds
-  supervisors.yaml   Lab/advisor pages to monitor
+  extensions/        Per-extension filter/keyword config
+    arxiv.yaml       arXiv categories, must_include keywords, boost_keywords
+    hacker_news.yaml HN score threshold and keyword filters
+    weather.yaml     City and timezone overrides
+    postdoc_jobs.yaml  Job search terms
+    supervisor_updates.yaml  Pages to monitor
 
 docs/                Generated site (served by GitHub Pages)
   daily/             Rendered Markdown pages
   data/daily/        Raw JSON payloads (YYYY-MM-DD.json)
   data/weekly/       Weekly JSON payloads
   data/monthly/      Monthly JSON payloads
+  setup/             Static config wizard (index.html)
 
-tests/               Pytest suite (53 tests, no live network or LLM calls)
+tests/               Pytest suite (60 tests, no live network or LLM calls)
 ```
 
 ---
@@ -98,9 +112,8 @@ tests/               Pytest suite (53 tests, no live network or LLM calls)
   "generated_at": "2026-04-15T00:03:00+00:00",
   "papers": [...],           # list of paper dicts (see below)
   "hacker_news": [...],      # list of story dicts
-  "jobs": [...],             # list of job dicts
-  "supervisor_updates": [...],
   "github_trending": [...],  # list of repo dicts
+  "weather": [...],          # list of weather item dicts
   "meta": {
     "papers_fetched": int,
     "papers_after_keyword_filter": int,
@@ -108,8 +121,6 @@ tests/               Pytest suite (53 tests, no live network or LLM calls)
     "llm_model": str,
     "scoring_model": str,
     "summarization_model": str,
-    "cost_usd": float,
-    "duration_seconds": int,
   }
 }
 ```
@@ -166,9 +177,10 @@ Every extension subclasses `BaseExtension` and implements:
 class MyExtension(BaseExtension):
     key   = "my_source"   # matches config/sources.yaml key
     title = "My Source"
+    icon  = "🧩"          # shown in nav + section heading
 
-    def fetch(self) -> list[dict]: ...          # no LLM
-    def process(self, items) -> list[dict]: ... # LLM ok; check self.config.get("dry_run")
+    def fetch(self) -> list[dict]: ...          # no LLM; return raw items
+    def process(self, items) -> list[dict]: ... # LLM ok; check dry_run
     def render(self, items) -> FeedSection: ... # no network
 ```
 
@@ -180,6 +192,9 @@ class MyExtension(BaseExtension):
 - `dry_run` — bool; when True skip all LLM calls
 
 `self.llm` — OpenAI-compatible client (OpenRouter); use for chat completions.
+
+Heavy fetch/parse logic goes in a separate `collector.py` inside the package so it
+can be unit-tested without instantiating the extension class.
 
 ---
 
@@ -202,47 +217,57 @@ Sink exceptions are caught by orchestrator — they do not abort the pipeline.
 ### sources.yaml top-level keys
 | Key | Type | Notes |
 |---|---|---|
+| `display_order` | list[str] | Order of sections in the rendered digest |
 | `language` | str | BCP-47; LLM outputs in this language |
 | `arxiv.enabled` | bool | |
 | `arxiv.max_papers_per_run` | int | Papers fetched before keyword filter |
 | `hacker_news.enabled` | bool | |
 | `github_trending.enabled` | bool | |
 | `github_trending.max_repos` | int | |
+| `weather.enabled` | bool | |
+| `weather.city` | str | City name for geocoding |
+| `weather.timezone` | str | IANA timezone or "auto" |
 | `llm.scoring_model` | str | OpenRouter model ID |
 | `llm.summarization_model` | str | OpenRouter model ID |
 | `llm.base_url` | str | Default: https://openrouter.ai/api/v1 |
 | `sinks.slack.enabled` | bool | Requires SLACK_WEBHOOK_URL env var |
 
-### keywords.yaml top-level keys
+### config/extensions/arxiv.yaml keys
 | Key | Notes |
 |---|---|
-| `arxiv.categories` | arXiv category codes, e.g. cs.CV |
-| `arxiv.must_include` | At least one keyword must match title/abstract |
-| `arxiv.boost_keywords` | Raise score if matched |
-| `arxiv.llm_score_threshold` | Papers below this score (0–10) are dropped |
-| `hacker_news.min_score` | Minimum HN points |
-| `hacker_news.keywords` | At least one must appear in title |
+| `categories` | arXiv category codes, e.g. cs.CV |
+| `must_include` | At least one keyword must match title/abstract |
+| `boost_keywords` | Raise LLM score if matched |
+| `llm_score_threshold` | Papers below this score (0–10) are dropped |
 
 ---
 
 ## LLM usage patterns
 
 All LLM calls use `self.llm.chat.completions.create(model=..., messages=[...])`.
-Language is injected via `lang_instruction(lang)` from `pipeline/summarizer.py`:
+Language is injected via `lang_instruction(lang)` from `pipeline/utils.py`:
 - Returns `"in English"` for `lang="en"`
-- Returns `"in Chinese (Simplified)"` for `lang="zh"`, etc.
+- Returns `"in Chinese (Simplified) (non-English)"` for `lang="zh"`, etc.
 
 Scoring uses batch prompts (multiple papers per request) for efficiency.
-Summarisation is per-item.
+Summarisation is per-item, done in each extension's `summarizer.py`.
+
+---
+
+## Known tech debt
+
+- `templates/weekly.md.j2` and `templates/monthly.md.j2` hardcode `top_papers`,
+  `new_jobs`, `trending_keywords`. They are not extension-aware — adding a new
+  extension requires manual template edits for weekly/monthly views.
 
 ---
 
 ## Testing
 
 ```bash
-PYTHONPATH=. pytest tests/ -q          # 53 tests, ~1s, no network/LLM
+PYTHONPATH=. pytest tests/ -q          # 60 tests, ~3s, no network/LLM
 python main.py --dry-run               # live fetch, zero LLM cost
 ```
 
-Tests use fixtures from `tests/conftest.py`. No mocking of external APIs —
-tests cover parsing/filtering logic with inline fixture data only.
+Tests cover parsing/filtering logic with inline fixture data. No live API calls.
+See `tests/conftest.py` for shared fixtures.

@@ -1,15 +1,13 @@
 # extensions/ — LLM context file
 
 This directory contains all data source extensions for MyDailyUpdater.
-Each extension is a self-contained unit: fetch → process → render → FeedSection.
+Each extension is a self-contained package: fetch → process → render → FeedSection.
 
-See also: extensions/README.md (human guide), extensions/_template.py (starter)
+See also: extensions/README.md (human guide), extensions/_template/ (starter package)
 
 ---
 
 ## File map
-
-Each extension is a package directory containing `__init__.py` (the class) and `README.md` (extension-specific docs).
 
 ```
 base.py              BaseExtension ABC + FeedSection dataclass  ← read this first
@@ -19,30 +17,47 @@ llms.txt             This file
 
 arxiv/
   __init__.py        ArxivExtension — fetch + LLM score + summarise + figures
+  collector.py       fetch_papers(), enrich_papers_with_figures()
+  scorer.py          score_papers() — LLM batch scoring, returns filtered list
+  summarizer.py      summarize_papers()
+  template.md.j2     Jinja2 section template
+  head.html.j2       KaTeX CSS/JS injection (renders LaTeX in figure captions)
+  nav.md.j2          Per-category quick-nav links
   README.md          Config options, output schema, test commands
 
 hacker_news/
   __init__.py        HackerNewsExtension — fetch + LLM summarise
+  collector.py       fetch_stories()
   README.md          Config options, output schema, test commands
 
 github_trending/
   __init__.py        GitHubTrendingExtension — fetch + LLM summarise
+  collector.py       fetch_github_trending()
   README.md          Config options, output schema, test commands
 
-jobs/
-  __init__.py        JobsExtension — RSS + scraping, LLM score + summarise
-  README.md          Config options, output schema, enabling steps
+weather/
+  __init__.py        WeatherExtension — fetch today's forecast, no LLM
+  collector.py       fetch_today_weather() — Open-Meteo geocoding + forecast API
+  README.md          Config options, output item schema, test commands
+
+postdoc_jobs/
+  __init__.py        PostdocJobsExtension — offline by default
+  collector.py       fetch_jobs()
+  README.md          Config options, enabling steps
 
 supervisor_updates/
-  __init__.py        SupervisorExtension — page change detection + LLM diff summary
-  README.md          Config options, output schema, enabling steps
+  __init__.py        SupervisorExtension — page change detection, offline by default
+  README.md          Config options, enabling steps
 
-_template/
-  __init__.py        Fully commented starter for new extensions
-  README.md          How to use the template
+_template/           Starter package — copy this to build a new extension
+  __init__.py        Fully documented extension skeleton with contracts
+  collector.py       Fetch logic skeleton (separate module for testability)
+  template.md.j2     Jinja2 section template skeleton with usage comments
+  README.md          6-section doc template + 10-item PR checklist
 ```
 
-Note: `jobs` and `supervisor_updates` are present as packages but **not in REGISTRY** — they are disabled by default. Enable by adding to REGISTRY and setting `enabled: true` in sources.yaml.
+Note: `postdoc_jobs` and `supervisor_updates` are in `REGISTRY` but **disabled
+by default** (`enabled: false` in sources.yaml). Enable by setting `enabled: true`.
 
 ---
 
@@ -52,6 +67,7 @@ Note: `jobs` and `supervisor_updates` are present as packages but **not in REGIS
 class BaseExtension(ABC):
     key:   str = ""    # unique snake_case — must match config/sources.yaml key
     title: str = ""    # display name used in rendered output
+    icon:  str = "📌"  # shown in nav + section heading
 
     def __init__(self, config: dict, llm_client: Any = None): ...
 
@@ -70,9 +86,8 @@ class BaseExtension(ABC):
 
     def run(self) -> FeedSection:
         # called by orchestrator
-        # returns empty FeedSection if not self.enabled
         if not self.enabled:
-            return FeedSection(key=self.key, title=self.title)
+            return self.build_section()
         items = self.fetch()
         items = self.process(items)
         return self.render(items)
@@ -85,18 +100,20 @@ class BaseExtension(ABC):
 ```python
 @dataclass
 class FeedSection:
-    key:   str             # snake_case identifier
-    title: str             # section heading
-    items: list[dict]      # processed items; schema is extension-specific
-    meta:  dict            # stats (counts, durations, etc.)
+    key:         str             # snake_case identifier
+    title:       str             # section heading
+    icon:        str = "📌"
+    payload_key: str | None = None
+    items:       list[dict]      # processed items; schema is extension-specific
+    meta:        dict            # stats (counts, durations, etc.)
 ```
 
 ---
 
 ## self.config — injected keys
 
-The orchestrator builds the config dict by merging sources.yaml + keywords.yaml
-and injecting these keys into every extension's config:
+The orchestrator merges `sources.yaml` + `config/extensions/{key}.yaml`
+and injects these keys into every extension's config:
 
 | Key | Type | Source |
 |---|---|---|
@@ -106,13 +123,15 @@ and injecting these keys into every extension's config:
 | `llm_summarization_model` | str | sources.yaml llm.summarization_model |
 | `dry_run` | bool | set when `--dry-run` CLI flag is used |
 
-Extension-specific keys (example for arxiv):
+Extension-specific keys come from `config/extensions/{key}.yaml`.
+Example for arxiv:
+
 | Key | Source |
 |---|---|
-| `categories` | keywords.yaml arxiv.categories |
-| `must_include` | keywords.yaml arxiv.must_include |
-| `boost_keywords` | keywords.yaml arxiv.boost_keywords |
-| `llm_score_threshold` | keywords.yaml arxiv.llm_score_threshold |
+| `categories` | config/extensions/arxiv.yaml |
+| `must_include` | config/extensions/arxiv.yaml |
+| `boost_keywords` | config/extensions/arxiv.yaml |
+| `llm_score_threshold` | config/extensions/arxiv.yaml |
 | `max_papers_per_run` | sources.yaml arxiv.max_papers_per_run |
 
 ---
@@ -143,32 +162,39 @@ def process(self, items):
 
 ## Item field conventions
 
-Use these field names so templates render correctly without changes:
-
-### Papers (produced by arxiv.py)
+### Papers (produced by arxiv extension)
 ```
 id, title, authors, affiliations, categories, primary_category,
 primary_category_anchor, url, score, abstract, keywords_matched,
 figure_url, figure_caption
 ```
 
-### HN stories (produced by hacker_news.py)
+### HN stories (produced by hacker_news extension)
 ```
 id, title, url, score, comments_url, summary
 ```
 
-### GitHub repos (produced by github_trending.py)
+### GitHub repos (produced by github_trending extension)
 ```
 full_name, url, description, language, stars_today, total_stars, summary
 ```
 
-### Jobs (produced by offline jobs extension)
+### Weather (produced by weather extension)
+```
+query, label, resolved_name, region, country, latitude, longitude,
+timezone, forecast_date, condition, weather_code, temperature_c,
+apparent_temperature_c, temp_max_c, temp_min_c, humidity_pct,
+wind_speed_kmh, precipitation_probability_pct, is_day, sunrise, sunset,
+source, source_url
+```
+
+### Jobs (produced by postdoc_jobs extension)
 ```
 title, url, institution, location, deadline, salary, source,
 relevance_score, requirements
 ```
 
-### Supervisor updates (produced by offline supervisor extension)
+### Supervisor updates (produced by supervisor_updates extension)
 ```
 name, institution, url, change_summary
 ```
@@ -177,34 +203,44 @@ name, institution, url, change_summary
 
 ## How to add an extension (quick reference)
 
-1. `cp extensions/_template.py extensions/my_source.py`
-2. Set `key` and `title`; implement `fetch()`, optionally `process()`, `render()`
-3. Add to `REGISTRY` in `extensions/__init__.py`
-4. Add config block in `config/sources.yaml`
-5. Add `"my_source": {**sources.get("my_source", {}), **llm}` in `main.py _build_extension_configs()`
-6. Write tests in `tests/test_my_source.py`
-7. `PYTHONPATH=. pytest tests/ -q` — all must pass
+```bash
+# 1. Copy the template package
+cp -r extensions/_template extensions/my_source
+```
 
-Full guide: extensions/README.md
-
----
-
-## Registering in __init__.py
+Then in `extensions/my_source/__init__.py`:
+- Set `key = "my_source"`, `title`, `icon`
+- Implement `fetch()`, optionally `process()`, `render()`
+- Put HTTP logic in `collector.py` (keeps it unit-testable)
 
 ```python
-from extensions.base import BaseExtension, FeedSection
-from extensions.arxiv import ArxivExtension
-from extensions.hacker_news import HackerNewsExtension
-from extensions.github_trending import GitHubTrendingExtension
-# from extensions.my_source import MySourceExtension  ← add here
-
-REGISTRY: list[type[BaseExtension]] = [
-    ArxivExtension,
-    HackerNewsExtension,
-    GitHubTrendingExtension,
-    # MySourceExtension,   ← add here
-]
+# 2. Register in extensions/__init__.py
+from extensions.my_source import MySourceExtension
+REGISTRY = [..., MySourceExtension]
 ```
+
+```yaml
+# 3. Add to config/sources.yaml
+display_order:
+  - my_source
+
+my_source:
+  enabled: true
+  max_items: 20  # any source-level limit
+```
+
+```yaml
+# 4. Optionally add config/extensions/my_source.yaml for filter/keyword config
+keywords:
+  - AI
+llm_score_threshold: 7
+```
+
+5. Write `tests/test_my_source.py` — test `collector.py` logic with fixture data.
+6. `PYTHONPATH=. pytest tests/ -q` — all must pass.
+7. Update `extensions/my_source/README.md` with all 6 sections + checklist.
+
+Full guide: extensions/README.md
 
 ---
 
@@ -214,13 +250,12 @@ REGISTRY: list[type[BaseExtension]] = [
 # Run all tests (no network, no LLM)
 PYTHONPATH=. pytest tests/ -q
 
-# Run tests for one extension's collector
-PYTHONPATH=. pytest tests/test_hn_collector.py -v
+# Run tests for one extension
+PYTHONPATH=. pytest tests/test_arxiv_collector.py -v
 
 # Smoke test with live data, zero LLM cost
 python main.py --dry-run
 ```
 
-Write tests in `tests/` targeting the collector functions (`collectors/*.py`),
-not the extension class directly. Use inline fixture data — no live API calls.
-See `tests/conftest.py` for shared fixtures (sample_paper, sample_job, etc.).
+Tests target the `collector.py` functions — not the extension class directly.
+Use inline fixture data; no live API calls in the test suite.

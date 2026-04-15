@@ -1,0 +1,26 @@
+# config/extensions/weather.yaml — Weather extension config
+#
+# City and timezone are also configurable in config/sources.yaml (under the
+# `weather:` block). Values here take precedence if both are set.
+#
+# City name
+# ---------
+# Use the common English name of your city. The extension resolves it via the
+# Open-Meteo Geocoding API, so approximate names ("London", "New York") work.
+# Avoid abbreviations that are ambiguous across countries.
+#
+# city: "Edinburgh"
+
+# Timezone
+# --------
+# "auto" uses the city's local timezone (recommended).
+# Or set an explicit IANA timezone string, e.g.:
+#   "Europe/London"
+#   "America/New_York"
+#   "Asia/Shanghai"
+#   "Asia/Tokyo"
+#   "Australia/Sydney"
+#
+# Full list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#
+# timezone: "auto"

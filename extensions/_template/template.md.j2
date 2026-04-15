@@ -1,7 +1,39 @@
+{#
+  template.md.j2 — Jinja2 section template for the my_source extension.
+
+  This file is rendered once per pipeline run and receives a single variable:
+    sec  — the FeedSection object produced by render()
+
+  Available on `sec`:
+    sec.key          str        — e.g. "my_source"
+    sec.title        str        — e.g. "My Source"
+    sec.icon         str        — e.g. "🧩"
+    sec["items"]     list[dict] — processed item dicts (matches your schema)
+    sec["meta"]      dict       — counters/stats set in render()
+
+  Guard the whole block with `{% if sec["items"] %}` so the section is
+  completely absent from the page when there is nothing to show.
+
+  Field access tips:
+    {{ item.title }}              — direct field access
+    {{ item.url | default("#") }} — fallback for fields that may be empty
+    {% if item.summary %}...{% endif %} — guard optional fields
+
+  Markdown heading levels:
+    Use <h2> for the section heading (matches other extensions).
+    Use ### for sub-headings within the section (e.g. per-category).
+#}
 {% if sec["items"] %}
 <h2 id="{{ sec.key }}">{{ sec.icon }} {{ sec.title }} ({{ sec["items"]|length }})</h2>
 
 {% for item in sec["items"] %}
-- {{ item }}
+### {{ loop.index }}. [{{ item.title }}]({{ item.url }})
+
+{% if item.summary %}
+{{ item.summary }}
+{% elif item.description %}
+{{ item.description }}
+{% endif %}
+
 {% endfor %}
 {% endif %}

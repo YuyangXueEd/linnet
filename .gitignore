@@ -27,3 +27,5 @@ daily-pipeline.log
 # Claude Code
 .claude/
 .codex
+
+superpowers/

@@ -156,7 +156,7 @@ An extension may also provide optional page assets:
 | `github_trending/` | `github_trending` | Fetches daily trending GitHub repos — [docs](github_trending/README.md) |
 | `postdoc_jobs/` | `postdoc_jobs` | Fetches and ranks research job postings — [docs](postdoc_jobs/README.md) |
 | `supervisor_updates/` | `supervisor_updates` | Monitors supervisor / lab pages for changes — [docs](supervisor_updates/README.md) |
-| `weather/` | `weather` | Fetches today's weather for a configured city |
+| `weather/` | `weather` | Fetches today's weather for a configured city — [docs](weather/README.md) |
 
 ---
 
