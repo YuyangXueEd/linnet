@@ -7,16 +7,6 @@ arxiv:
     - cs.MA
 
   must_include:
-    - medical imaging
-    - medical image
-    - MRI
-    - CT scan
-    - radiology
-    - pathology
-    - ultrasound
-    - fundus
-    - histology
-    - segmentation
     - computer vision
     - large language model
     - vision language model
@@ -25,6 +15,12 @@ arxiv:
     - agent
     - orchestration
     - agentic
+    - multimodal
+    - hallucination
+    - medical imaging
+    - chest X-ray
+    - report generation
+    - world model
 
   boost_keywords:
     - VLM
@@ -33,7 +29,11 @@ arxiv:
     - CLIP
     - zero-shot
     - few-shot
-    - multimodal
+    - medical image
+    - MRI
+    - CT scan
+    - radiology
+    - histology
 
   llm_score_threshold: 7
 
