@@ -1,9 +1,13 @@
-# MyDailyUpdater
+![MyDailyUpdater](assets/logo-wide.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Daily Digest](https://github.com/YuyangXueEd/MyDailyUpdater/actions/workflows/daily.yml/badge.svg)](https://github.com/YuyangXueEd/MyDailyUpdater/actions/workflows/daily.yml)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/YuyangXueEd/MyDailyUpdater/pulls)
 
 [中文文档](README_zh.md)
+
+![MyDailyUpdater hero](assets/hero.png)
 
 **Get a personalised research digest every morning — without lifting a finger.**
 
@@ -27,6 +31,8 @@ Fork this repo, add one API key, and wake up to a fresh digest of arXiv papers, 
 | **Supervisor monitor** | Alerts when a professor's or lab's webpage changes |
 
 Everything runs automatically at midnight UTC via GitHub Actions. Results are saved back to your repo and published as a searchable website.
+
+![Pipeline workflow](assets/workflow.png)
 
 ---
 
@@ -235,6 +241,25 @@ MyDailyUpdater/
 ├── tests/
 └── main.py                 # entry point
 ```
+
+---
+
+## Contributing with AI coding agents
+
+This project is designed to be extended — and AI coding assistants are first-class contributors here.
+
+Two `llms.txt` files are maintained specifically so AI agents can orient quickly:
+
+- **[llms.txt](llms.txt)** — full project overview: architecture, pipeline, config reference, directory map
+- **[extensions/llms.txt](extensions/llms.txt)** — extension development guide: `BaseExtension` contract, `FeedSection` schema, copy-paste checklist for new extensions
+
+If you're using **Claude Code**, **Cursor**, **GitHub Copilot**, or any other AI assistant, start your session with:
+
+```
+Please read llms.txt and extensions/llms.txt before making changes to this repo.
+```
+
+The [`extensions/_template/`](extensions/_template/) package is also written as a full developer guide — every method includes its contract, every config key is documented, and [`extensions/_template/README.md`](extensions/_template/README.md) ends with a 10-item PR checklist. When adding a new extension, point your AI agent at that file first.
 
 ---
 
