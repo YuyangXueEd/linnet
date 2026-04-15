@@ -23,3 +23,5 @@ Every day at midnight UTC, GitHub Actions fetches new arXiv papers, Hacker News 
 ---
 
 **Want your own?** → [github.com/YuyangXueEd/MyDailyUpdater](https://github.com/YuyangXueEd/MyDailyUpdater) — fork, add one API key, done.
+
+Not sure how to configure it? Use the **[Setup Wizard]({{ "/setup/" | relative_url }})** to pick your topics and get your config files ready to copy in.

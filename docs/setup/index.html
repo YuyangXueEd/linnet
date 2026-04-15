@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyDailyUpdater — Setup Wizard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f6f8fa;
+      color: #24292f;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #57606a;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #d0d7de;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .step-badge {
+      background: #0969da;
+      color: #fff;
+      border-radius: 50%;
+      width: 1.6rem;
+      height: 1.6rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+      color: #24292f;
+    }
+
+    label .hint {
+      font-weight: 400;
+      color: #57606a;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .option-card {
+      border: 2px solid #d0d7de;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+
+    .option-card:hover {
+      border-color: #0969da;
+      background: #f0f6ff;
+    }
+
+    .option-card.selected {
+      border-color: #0969da;
+      background: #dbeafe;
+    }
+
+    .option-card .option-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .option-card .option-desc {
+      font-size: 0.8rem;
+      color: #57606a;
+      margin-top: 0.2rem;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .toggle-row:last-child { border-bottom: none; }
+
+    .toggle-label { font-size: 0.9rem; }
+    .toggle-label small { display: block; color: #57606a; font-size: 0.8rem; }
+
+    .toggle {
+      position: relative;
+      width: 42px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .toggle input { opacity: 0; width: 0; height: 0; }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #d0d7de;
+      border-radius: 24px;
+      transition: background 0.2s;
+    }
+
+    .toggle-slider::before {
+      content: "";
+      position: absolute;
+      width: 18px; height: 18px;
+      left: 3px; top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .toggle input:checked + .toggle-slider { background: #2da44e; }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      background: #fff;
+      color: #24292f;
+      margin-bottom: 0.75rem;
+    }
+
+    input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: #0969da;
+      box-shadow: 0 0 0 3px rgba(9,105,218,0.2);
+    }
+
+    .generate-btn {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background: #2da44e;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-bottom: 1.5rem;
+    }
+
+    .generate-btn:hover { background: #218a3e; }
+
+    .output-section { display: none; }
+    .output-section.visible { display: block; }
+
+    .output-block { margin-bottom: 1.5rem; }
+
+    .output-block h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .copy-btn {
+      background: #f6f8fa;
+      border: 1px solid #d0d7de;
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: #24292f;
+      transition: background 0.15s;
+    }
+
+    .copy-btn:hover { background: #e6edf3; }
+    .copy-btn.copied { background: #dafbe1; border-color: #2da44e; color: #116329; }
+
+    pre {
+      background: #f6f8fa;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      padding: 1rem;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .next-steps {
+      background: #dafbe1;
+      border: 1px solid #2da44e40;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .next-steps h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #116329;
+    }
+
+    .next-steps ol {
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: #24292f;
+    }
+
+    .next-steps code {
+      background: #fff;
+      border: 1px solid #d0d7de;
+      border-radius: 3px;
+      padding: 0.1em 0.3em;
+      font-size: 0.85em;
+    }
+
+    a { color: #0969da; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h1>MyDailyUpdater Setup Wizard</h1>
+  <p class="subtitle">Answer a few questions and get your config files, ready to copy in.</p>
+
+  <!-- Step 1: Research profile -->
+  <div class="card">
+    <h2><span class="step-badge">1</span> What's your research area?</h2>
+    <div class="option-grid" id="profile-grid">
+      <div class="option-card selected" data-profile="ai">
+        <div class="option-title">AI / ML / LLM</div>
+        <div class="option-desc">Foundation models, diffusion, agents, multimodal</div>
+      </div>
+      <div class="option-card" data-profile="robotics">
+        <div class="option-title">Robotics / Embodied AI</div>
+        <div class="option-desc">Robot learning, sim-to-real, manipulation</div>
+      </div>
+      <div class="option-card" data-profile="medical">
+        <div class="option-title">Medical AI</div>
+        <div class="option-desc">Imaging, radiology, clinical NLP</div>
+      </div>
+      <div class="option-card" data-profile="nlp">
+        <div class="option-title">NLP / Text / Reasoning</div>
+        <div class="option-desc">Language models, QA, summarisation</div>
+      </div>
+      <div class="option-card" data-profile="cv">
+        <div class="option-title">Computer Vision</div>
+        <div class="option-desc">Detection, segmentation, representation learning</div>
+      </div>
+      <div class="option-card" data-profile="custom">
+        <div class="option-title">Custom keywords</div>
+        <div class="option-desc">I'll type my own topics</div>
+      </div>
+    </div>
+
+    <div id="custom-keywords-section" style="display:none;">
+      <label>Your keywords <span class="hint">(one per line)</span></label>
+      <textarea id="custom-keywords" rows="5"
+        style="width:100%;padding:0.5rem 0.75rem;border:1px solid #d0d7de;border-radius:6px;font-size:0.9rem;font-family:monospace;resize:vertical;margin-bottom:0.5rem;"
+        placeholder="neural network&#10;retrieval augmented generation&#10;federated learning"></textarea>
+      <label>arXiv categories <span class="hint">(e.g. cs.AI, cs.LG, cs.CV)</span></label>
+      <input type="text" id="custom-categories" placeholder="cs.AI, cs.LG" />
+    </div>
+  </div>
+
+  <!-- Step 2: Extras -->
+  <div class="card">
+    <h2><span class="step-badge">2</span> Which extras do you want?</h2>
+    <div class="toggle-row">
+      <div class="toggle-label">
+        Hacker News
+        <small>Top AI/ML stories each day</small>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-hn" checked />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="toggle-row">
+      <div class="toggle-label">
+        GitHub Trending
+        <small>Today's most-starred repos</small>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-gh" checked />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="toggle-row">
+      <div class="toggle-label">
+        Weather
+        <small>Today's forecast for your city</small>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-weather" checked />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="toggle-row">
+      <div class="toggle-label">
+        Postdoc &amp; research jobs
+        <small>From jobs.ac.uk, FindAPostDoc, EURAXESS</small>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-jobs" />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="toggle-row">
+      <div class="toggle-label">
+        Supervisor / lab page monitor
+        <small>Alert when a professor's page changes</small>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-supervisor" />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Step 3: Language & city -->
+  <div class="card">
+    <h2><span class="step-badge">3</span> Language &amp; city</h2>
+    <label>Summary language</label>
+    <select id="language">
+      <option value="en">English</option>
+      <option value="zh">Chinese (中文)</option>
+      <option value="fr">French (Français)</option>
+      <option value="de">German (Deutsch)</option>
+      <option value="ja">Japanese (日本語)</option>
+      <option value="ko">Korean (한국어)</option>
+      <option value="es">Spanish (Español)</option>
+      <option value="pt">Portuguese (Português)</option>
+    </select>
+
+    <label id="city-label" for="city">Your city <span class="hint">(for weather — leave blank to skip)</span></label>
+    <input type="text" id="city" placeholder="Edinburgh" />
+  </div>
+
+  <button class="generate-btn" onclick="generate()">Generate my config files</button>
+
+  <!-- Output -->
+  <div class="output-section" id="output-section">
+
+    <div class="output-block">
+      <h3>
+        <span>📄 config/sources.yaml</span>
+        <button class="copy-btn" onclick="copyBlock('sources-output', this)">Copy</button>
+      </h3>
+      <pre id="sources-output"></pre>
+    </div>
+
+    <div class="output-block">
+      <h3>
+        <span>📄 config/extensions/arxiv.yaml</span>
+        <button class="copy-btn" onclick="copyBlock('arxiv-output', this)">Copy</button>
+      </h3>
+      <pre id="arxiv-output"></pre>
+    </div>
+
+    <div class="next-steps">
+      <h3>What to do next</h3>
+      <ol>
+        <li>In your forked repo, open <code>config/sources.yaml</code> and replace its contents with the first block above.</li>
+        <li>Open <code>config/extensions/arxiv.yaml</code> and replace its contents with the second block.</li>
+        <li>Commit the changes (just edit and save — GitHub's web editor works fine).</li>
+        <li>Go to <strong>Actions → Daily Digest → Run workflow</strong> to trigger the first run.</li>
+        <li>Your site will be live in about 5 minutes.</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── Profile data ─────────────────────────────────────────────────────────────
+const PROFILES = {
+  ai: {
+    categories: ["cs.AI", "cs.LG", "cs.CL", "cs.CV", "stat.ML"],
+    must_include: [
+      "large language model", "foundation model", "diffusion model",
+      "agent", "multimodal", "RLHF", "alignment",
+    ],
+    boost_keywords: ["GPT", "LLaMA", "Gemini", "Claude", "LoRA", "RAG", "chain-of-thought"],
+  },
+  robotics: {
+    categories: ["cs.RO", "cs.AI", "cs.LG", "cs.CV"],
+    must_include: [
+      "robot learning", "reinforcement learning", "sim-to-real",
+      "manipulation", "navigation", "embodied",
+    ],
+    boost_keywords: ["MuJoCo", "IsaacGym", "imitation learning", "world model"],
+  },
+  medical: {
+    categories: ["cs.CV", "cs.AI", "cs.LG", "eess.IV", "q-bio.QM"],
+    must_include: [
+      "medical imaging", "clinical", "radiology", "pathology",
+      "electronic health record",
+    ],
+    boost_keywords: ["CT", "MRI", "X-ray", "histology", "MIMIC", "segmentation"],
+  },
+  nlp: {
+    categories: ["cs.CL", "cs.AI", "cs.LG"],
+    must_include: [
+      "language model", "reasoning", "question answering",
+      "summarisation", "machine translation",
+    ],
+    boost_keywords: ["BERT", "T5", "instruction tuning", "benchmark", "hallucination"],
+  },
+  cv: {
+    categories: ["cs.CV", "cs.AI", "cs.LG"],
+    must_include: [
+      "object detection", "image segmentation", "visual representation",
+      "self-supervised", "contrastive learning",
+    ],
+    boost_keywords: ["ViT", "CLIP", "SAM", "DINO", "zero-shot", "few-shot"],
+  },
+};
+
+// ── Profile selection ─────────────────────────────────────────────────────────
+let selectedProfile = "ai";
+
+document.querySelectorAll(".option-card").forEach((card) => {
+  card.addEventListener("click", () => {
+    document.querySelectorAll(".option-card").forEach((c) => c.classList.remove("selected"));
+    card.classList.add("selected");
+    selectedProfile = card.dataset.profile;
+    const customSection = document.getElementById("custom-keywords-section");
+    customSection.style.display = selectedProfile === "custom" ? "block" : "none";
+  });
+});
+
+// ── Weather toggle hides city field ──────────────────────────────────────────
+document.getElementById("toggle-weather").addEventListener("change", function () {
+  document.getElementById("city-label").style.opacity = this.checked ? "1" : "0.4";
+  document.getElementById("city").disabled = !this.checked;
+});
+
+// ── Generate ─────────────────────────────────────────────────────────────────
+function generate() {
+  const lang = document.getElementById("language").value;
+  const city = document.getElementById("city").value.trim() || "Edinburgh";
+  const useHN = document.getElementById("toggle-hn").checked;
+  const useGH = document.getElementById("toggle-gh").checked;
+  const useWeather = document.getElementById("toggle-weather").checked;
+  const useJobs = document.getElementById("toggle-jobs").checked;
+  const useSupervisor = document.getElementById("toggle-supervisor").checked;
+
+  // Build display_order (only enabled sources)
+  const order = [];
+  if (useWeather) order.push("weather");
+  order.push("arxiv");
+  if (useGH) order.push("github_trending");
+  if (useHN) order.push("hacker_news");
+  if (useJobs) order.push("postdoc_jobs");
+  if (useSupervisor) order.push("supervisor_updates");
+
+  // sources.yaml
+  const sourcesLines = [
+    "display_order:",
+    ...order.map((k) => `  - ${k}`),
+    "",
+    "arxiv:",
+    "  enabled: true",
+    "  max_papers_per_run: 300",
+    "",
+    `hacker_news:`,
+    `  enabled: ${useHN}`,
+    "",
+    `postdoc_jobs:`,
+    `  enabled: ${useJobs}`,
+    "",
+    `supervisor_updates:`,
+    `  enabled: ${useSupervisor}`,
+    "",
+    `github_trending:`,
+    `  enabled: ${useGH}`,
+    "  max_repos: 15",
+    "",
+    `weather:`,
+    `  enabled: ${useWeather}`,
+    `  city: "${city}"`,
+    "  timezone: auto",
+    "",
+    `language: "${lang}"`,
+    "",
+    "llm:",
+    '  scoring_model: "google/gemini-2.5-flash-lite-preview-09-2025"',
+    '  summarization_model: "google/gemini-2.5-flash-lite-preview-09-2025"',
+    '  base_url: "https://openrouter.ai/api/v1"',
+    "",
+    "pages:",
+    '  base_url: ""',
+    "",
+    "sinks:",
+    "  slack:",
+    "    enabled: false",
+    "    max_papers: 5",
+    "    max_hn: 3",
+    "    max_github: 3",
+  ];
+
+  document.getElementById("sources-output").textContent = sourcesLines.join("\n");
+
+  // arxiv.yaml
+  let profile;
+  if (selectedProfile === "custom") {
+    const rawKeywords = document.getElementById("custom-keywords").value
+      .split("\n")
+      .map((k) => k.trim())
+      .filter(Boolean);
+    const rawCats = document.getElementById("custom-categories").value
+      .split(",")
+      .map((c) => c.trim())
+      .filter(Boolean);
+    profile = {
+      categories: rawCats.length ? rawCats : ["cs.AI", "cs.LG"],
+      must_include: rawKeywords.length ? rawKeywords : ["machine learning"],
+      boost_keywords: [],
+    };
+  } else {
+    profile = PROFILES[selectedProfile];
+  }
+
+  const arxivLines = [
+    "categories:",
+    ...profile.categories.map((c) => `  - ${c}`),
+    "",
+    "must_include:",
+    ...profile.must_include.map((k) => `  - ${k}`),
+    "",
+    "boost_keywords:",
+    ...profile.boost_keywords.map((k) => `  - ${k}`),
+    "",
+    "llm_score_threshold: 7",
+  ];
+
+  document.getElementById("arxiv-output").textContent = arxivLines.join("\n");
+
+  // Show output
+  const out = document.getElementById("output-section");
+  out.classList.add("visible");
+  out.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ── Copy button ───────────────────────────────────────────────────────────────
+function copyBlock(id, btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.textContent = "Copy";
+      btn.classList.remove("copied");
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

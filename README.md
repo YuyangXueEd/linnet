@@ -9,7 +9,7 @@
 
 Fork this repo, add one API key, and wake up to a fresh digest of arXiv papers, Hacker News stories, and trending GitHub repos — automatically filtered for your interests, summarised by AI, and published as your own website.
 
-**[See a live example →](https://yuyangxueed.github.io/MyDailyUpdater)**
+**[See a live example →](https://yuyangxueed.github.io/MyDailyUpdater)** · **[Setup Wizard →](https://yuyangxueed.github.io/MyDailyUpdater/setup/)**
 
 > **Cost:** about $0.01–$0.05 per day using `gemini-2.5-flash-lite` via OpenRouter (free tier available).
 

@@ -6,7 +6,7 @@
 
 Fork 这个仓库，填入一个 API 密钥，然后每天早上就能收到一份按你的兴趣筛选、由 AI 摘要的 arXiv 论文、Hacker News 热文和 GitHub 趋势仓库，并发布为你专属的网站。
 
-**[在线示例 →](https://yuyangxueed.github.io/MyDailyUpdater)**
+**[在线示例 →](https://yuyangxueed.github.io/MyDailyUpdater)** · **[配置向导 →](https://yuyangxueed.github.io/MyDailyUpdater/setup/)**
 
 > **费用：** 使用 `gemini-2.5-flash-lite` 通过 OpenRouter，每天约 $0.01–$0.05（有免费额度）。
 
