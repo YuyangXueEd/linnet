@@ -1,0 +1,25 @@
+{#
+Optional quick-nav include for an extension.
+
+What this file is for:
+- Add extra links below the section entry in the daily quick-nav
+- Link to subsections, tags, categories, anchors, or custom views
+
+How it is used:
+- templates/daily.md.j2 includes this file inside the nav list for the current
+  section:
+    {% include "extensions/" + sec.key + "/nav.md.j2" ignore missing %}
+- The current section is available as `sec`.
+
+Safe default:
+- If your extension has no subsection anchors or extra navigation, delete this
+  file.
+
+Minimal example:
+  {% if sec["items"] %}
+  <ul>
+    <li><a href="#{{ sec.key }}-top">Top items</a></li>
+    <li><a href="#{{ sec.key }}-latest">Latest items</a></li>
+  </ul>
+  {% endif %}
+#}

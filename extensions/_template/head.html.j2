@@ -1,0 +1,33 @@
+{#
+Optional page-level head include for an extension.
+
+What this file is for:
+- Add CSS or JS that should only load when this extension section is present
+- Add third-party assets such as KaTeX, charts, syntax highlighting, etc.
+- Keep extension-specific page tweaks out of the shared site template
+
+How it is used:
+- templates/daily.md.j2 includes this file once for each rendered section:
+    {% include "extensions/" + sec.key + "/head.html.j2" ignore missing %}
+- Because it is included from the daily page template, it receives the same
+  render context as the page, including common values such as:
+    sec
+    date
+    generated_at
+    meta
+    sections_ordered
+
+Safe default:
+- If your extension does not need any extra head assets, delete this file.
+
+Minimal example:
+  <style>
+    .my-source-card { border-left: 4px solid #1565c0; }
+  </style>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("my_source assets loaded");
+  });
+  </script>
+#}

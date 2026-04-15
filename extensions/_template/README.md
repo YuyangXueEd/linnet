@@ -24,6 +24,24 @@ cp -r extensions/_template extensions/my_source
 | `process()` | LLM scoring / summarising. Always check `self.config.get("dry_run")` first. |
 | `render()` | Wrap items in `FeedSection`. No network or LLM calls. |
 
+## Optional page assets
+
+This template also includes two optional files you can keep, edit, or delete:
+
+| File | When to use it |
+|---|---|
+| `head.html.j2` | Add per-extension CSS / JS / `<link>` / `<script>` tags when the section is present |
+| `nav.md.j2` | Add extra links under the section in the daily quick-nav |
+
+They are both safe to remove if your extension does not need them.
+
+Useful template context in these files usually includes:
+- `sec` — the current `FeedSection`
+- `date` — current daily digest date
+- `meta` — top-level pipeline metadata
+- `generated_at` — render timestamp
+- payload keys such as `papers`, `jobs`, `hacker_news`, depending on enabled sections
+
 ## Template README structure
 
 Once your extension is working, update this README with:
