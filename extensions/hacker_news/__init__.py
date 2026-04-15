@@ -28,7 +28,10 @@ class HackerNewsExtension(BaseExtension):
         lang = self.config.get("language", "en")
         prompts = self.config.get("prompts", {})
         return summarize_hn_stories(
-            items, self.llm, summary_model, lang,
+            items,
+            self.llm,
+            summary_model,
+            lang,
             prompt_template=prompts.get("hacker_news_summary"),
         )
 

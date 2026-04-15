@@ -83,14 +83,20 @@ class ArxivExtension(BaseExtension):
         prompts = self.config.get("prompts", {})
 
         scored = score_papers(
-            items, self.llm, scoring_model, threshold,
+            items,
+            self.llm,
+            scoring_model,
+            threshold,
             prompt_template=prompts.get("arxiv_score"),
         )
         self._scored_count = len(scored)
         print(f"  After LLM filter: {self._scored_count}")
 
         summarised = summarize_papers(
-            scored, self.llm, summary_model, lang,
+            scored,
+            self.llm,
+            summary_model,
+            lang,
             prompt_template=prompts.get("arxiv_summary"),
         )
 

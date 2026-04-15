@@ -25,7 +25,10 @@ class GitHubTrendingExtension(BaseExtension):
         lang = self.config.get("language", "en")
         prompts = self.config.get("prompts", {})
         return summarize_github_repos(
-            items, self.llm, summary_model, lang,
+            items,
+            self.llm,
+            summary_model,
+            lang,
             prompt_template=prompts.get("github_summary"),
         )
 
