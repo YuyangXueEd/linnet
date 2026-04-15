@@ -12,26 +12,16 @@ Usage:
 import argparse
 import json
 import os
-import re
 import sys
 import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Any
 
 from openai import OpenAI
 
-from collectors.arxiv_collector import fetch_papers, enrich_papers_with_figures
-from collectors.github_trending_collector import fetch_github_trending
-from collectors.hn_collector import fetch_stories
-from collectors.jobs_collector import fetch_jobs
-from collectors.supervisor_watcher import fetch_supervisor_updates
+from extensions import REGISTRY, FeedSection
 from pipeline.config_loader import load_keywords, load_sources, load_supervisors
-from pipeline.scorer import score_papers, score_jobs
-from pipeline.summarizer import (
-    summarize_papers, summarize_hn_stories,
-    summarize_jobs, summarize_supervisor_update,
-    summarize_github_repos,
-)
 from pipeline.aggregator import build_weekly_payload, build_monthly_payload, load_daily_jsons
 from publishers.data_publisher import (
     write_daily_json, write_weekly_json, write_monthly_json, build_daily_payload,
@@ -39,48 +29,6 @@ from publishers.data_publisher import (
 from publishers.pages_publisher import (
     render_daily_page, render_weekly_page, render_monthly_page,
 )
-
-
-def _category_anchor(name: str) -> str:
-    return re.sub(r"[^a-z0-9-]+", "-", name.lower().replace(".", "-")).strip("-") or "other"
-
-
-def prepare_papers_for_rendering(papers: list[dict], preferred_categories: list[str]) -> list[dict]:
-    """Assign stable primary category and sort papers by category, then score."""
-    if not papers:
-        return papers
-
-    rank_map = {cat.lower(): idx for idx, cat in enumerate(preferred_categories)}
-    default_rank = len(preferred_categories) + 100
-
-    for paper in papers:
-        categories = [c for c in paper.get("categories", []) if c] or ["Other"]
-
-        # Keep configured categories first for readability in the details line.
-        categories = sorted(
-            categories,
-            key=lambda c: (rank_map.get(c.lower(), default_rank), c.lower()),
-        )
-        paper["categories"] = categories
-
-        # If there is only one category, that is always the primary category.
-        if len(categories) == 1:
-            primary = categories[0]
-        else:
-            primary = next((c for c in categories if c.lower() in rank_map), categories[0])
-
-        paper["primary_category"] = primary
-        paper["primary_category_anchor"] = _category_anchor(primary)
-        paper["primary_category_rank"] = rank_map.get(primary.lower(), default_rank)
-
-    return sorted(
-        papers,
-        key=lambda p: (
-            p.get("primary_category_rank", default_rank),
-            -float(p.get("score", 0.0)),
-            p.get("title", "").lower(),
-        ),
-    )
 
 
 def get_openrouter_client(sources_cfg: dict) -> OpenAI:
@@ -97,88 +45,92 @@ def get_openrouter_client(sources_cfg: dict) -> OpenAI:
     )
 
 
+def _build_extension_configs(
+    sources: dict, keywords: dict, supervisors: list
+) -> dict[str, dict]:
+    """
+    Merge per-extension config slices from sources.yaml and keywords.yaml.
+
+    Each extension receives a single flat dict containing:
+      - source settings (enabled flag, limits, URLs)
+      - keyword / filter settings
+      - injected LLM model names
+    """
+    llm = {
+        "llm_scoring_model": sources["llm"]["scoring_model"],
+        "llm_summarization_model": sources["llm"]["summarization_model"],
+    }
+    return {
+        "arxiv": {**sources.get("arxiv", {}), **keywords.get("arxiv", {}), **llm},
+        "hacker_news": {
+            **sources.get("hacker_news", {}),
+            **keywords.get("hacker_news", {}),
+            **llm,
+        },
+        "jobs": {**sources.get("jobs", {}), **keywords.get("jobs", {}), **llm},
+        "supervisor_updates": {
+            **sources.get("supervisor_monitoring", {}),
+            "supervisors": supervisors,
+            **llm,
+        },
+        "github_trending": {**sources.get("github_trending", {}), **llm},
+    }
+
+
+def _instantiate_extensions(
+    configs: dict[str, dict], llm_client: Any
+) -> list[Any]:
+    """Instantiate all registered extensions with their merged configs."""
+    extensions = []
+    for ext_class in REGISTRY:
+        cfg = configs.get(ext_class.key, {})
+        extensions.append(ext_class(cfg, llm_client))
+    return extensions
+
+
 def run_daily(kw: dict, sources: dict, supervisors: list) -> None:
     start = time.time()
     client = get_openrouter_client(sources)
-    scoring_model = sources["llm"]["scoring_model"]
-    summary_model = sources["llm"]["summarization_model"]
+    configs = _build_extension_configs(sources, kw, supervisors)
+    extensions = _instantiate_extensions(configs, client)
 
-    # --- arxiv ---
-    print("Fetching arxiv papers...")
-    raw_papers = fetch_papers(
-        categories=kw["arxiv"]["categories"],
-        must_include=kw["arxiv"]["must_include"],
-        max_results=sources["arxiv"].get("max_papers_per_run", 500),
-    )
-    print(f"  After keyword filter: {len(raw_papers)}")
-    scored_papers = score_papers(raw_papers, client, scoring_model, kw["arxiv"]["llm_score_threshold"])
-    print(f"  After LLM filter: {len(scored_papers)}")
-    papers = summarize_papers(scored_papers, client, summary_model)
-    if papers:
-        print("Fetching arXiv figure previews...")
-        papers = enrich_papers_with_figures(papers)
-        papers = prepare_papers_for_rendering(papers, kw["arxiv"]["categories"])
-
-    # --- HN ---
-    print("Fetching Hacker News...")
-    hn_stories = []
-    if sources["hacker_news"]["enabled"]:
-        raw_hn = fetch_stories(
-            keywords=kw["hacker_news"]["keywords"],
-            min_score=kw["hacker_news"]["min_score"],
-            max_items=kw["hacker_news"]["max_items"],
-        )
-        hn_stories = summarize_hn_stories(raw_hn, client, summary_model)
-    print(f"  HN stories: {len(hn_stories)}")
-
-    # --- Jobs ---
-    print("Fetching jobs...")
-    jobs = []
-    if sources["jobs"]["enabled"]:
-        raw_jobs = fetch_jobs(
-            rss_sources=kw["jobs"]["rss_sources"],
-            filter_keywords=kw["jobs"]["filter_keywords"],
-            exclude_keywords=kw["jobs"]["exclude_keywords"],
-            jina_sources=kw["jobs"].get("jina_sources", []),
-        )
-        scored_jobs = score_jobs(raw_jobs, client, scoring_model, kw["jobs"]["llm_score_threshold"])
-        jobs = summarize_jobs(scored_jobs, client, summary_model)
-    print(f"  Jobs: {len(jobs)}")
-
-    # --- Supervisors ---
-    supervisor_updates = []
-    if sources["supervisor_monitoring"]["enabled"] and supervisors:
-        print(f"Checking {len(supervisors)} supervisor pages...")
-        raw_updates = fetch_supervisor_updates(supervisors)
-        supervisor_updates = [summarize_supervisor_update(u, client, summary_model) for u in raw_updates]
-
-    # --- GitHub Trending ---
-    github_trending = []
-    if sources.get("github_trending", {}).get("enabled", False):
-        print("Fetching GitHub trending...")
-        max_repos = sources["github_trending"].get("max_repos", 15)
-        raw_trending = fetch_github_trending(max_repos=max_repos)
-        github_trending = summarize_github_repos(raw_trending, client, summary_model)
-        print(f"  GitHub trending: {len(github_trending)} repos")
+    sections: dict[str, FeedSection] = {}
+    for ext in extensions:
+        sections[ext.key] = ext.run()
 
     date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    arxiv_meta = sections["arxiv"].meta
+    summary_model = sources["llm"]["summarization_model"]
+    scoring_model = sources["llm"]["scoring_model"]
+
     meta = {
-        "papers_fetched": sources["arxiv"].get("max_papers_per_run", 500),
-        "papers_after_keyword_filter": len(raw_papers),
-        "papers_after_llm_filter": len(scored_papers),
+        "papers_fetched": arxiv_meta.get("papers_fetched", 0),
+        "papers_after_keyword_filter": arxiv_meta.get("papers_after_keyword_filter", 0),
+        "papers_after_llm_filter": arxiv_meta.get("papers_after_llm_filter", 0),
         "jobs_fetched": 0,
-        "jobs_after_filter": len(jobs),
+        "jobs_after_filter": sections["jobs"].meta.get("count", 0),
         "supervisor_pages_checked": len(supervisors),
-        "supervisor_updates_found": len(supervisor_updates),
-        "llm_model": summary_model if scoring_model == summary_model else f"score={scoring_model}; summary={summary_model}",
+        "supervisor_updates_found": sections["supervisor_updates"].meta.get("count", 0),
+        "llm_model": (
+            summary_model
+            if scoring_model == summary_model
+            else f"score={scoring_model}; summary={summary_model}"
+        ),
         "scoring_model": scoring_model,
         "summarization_model": summary_model,
         "cost_usd": 0.0,
         "duration_seconds": round(time.time() - start),
     }
 
-    payload = build_daily_payload(date_str, papers, hn_stories, jobs, supervisor_updates, meta,
-                                   github_trending=github_trending)
+    payload = build_daily_payload(
+        date_str,
+        papers=sections["arxiv"].items,
+        hn_stories=sections["hacker_news"].items,
+        jobs=sections["jobs"].items,
+        supervisor_updates=sections["supervisor_updates"].items,
+        meta=meta,
+        github_trending=sections["github_trending"].items,
+    )
     json_path = write_daily_json(payload)
     md_path = render_daily_page(payload)
     print(f"Written: {json_path}")

@@ -1,4 +1,4 @@
-from main import prepare_papers_for_rendering
+from extensions.arxiv import _prepare_papers as prepare_papers_for_rendering
 
 
 def test_prepare_papers_for_rendering_sorts_by_preferred_category_then_score():

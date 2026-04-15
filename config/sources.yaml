@@ -1,3 +1,11 @@
+# sources.yaml — enable/disable extensions and set source-level options.
+#
+# Each top-level key corresponds to an extension registered in extensions/__init__.py.
+# To add a new extension:
+#   1. Create extensions/my_source.py subclassing BaseExtension (key = "my_source")
+#   2. Add it to REGISTRY in extensions/__init__.py
+#   3. Add a config block here (and keyword filters in keywords.yaml if needed)
+
 arxiv:
   enabled: true
   max_papers_per_run: 300
