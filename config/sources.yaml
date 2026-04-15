@@ -14,10 +14,10 @@ hacker_news:
   enabled: true
 
 jobs:
-  enabled: true
+  enabled: false   # extension offline — see extensions/jobs.py.bak
 
 supervisor_monitoring:
-  enabled: true
+  enabled: false   # extension offline — see extensions/supervisor.py.bak
 
 github_trending:
   enabled: true

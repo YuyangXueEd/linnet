@@ -110,10 +110,6 @@ def run_daily(kw: dict, sources: dict, supervisors: list) -> None:
         "papers_fetched": arxiv_meta.get("papers_fetched", 0),
         "papers_after_keyword_filter": arxiv_meta.get("papers_after_keyword_filter", 0),
         "papers_after_llm_filter": arxiv_meta.get("papers_after_llm_filter", 0),
-        "jobs_fetched": 0,
-        "jobs_after_filter": sections["jobs"].meta.get("count", 0),
-        "supervisor_pages_checked": len(supervisors),
-        "supervisor_updates_found": sections["supervisor_updates"].meta.get("count", 0),
         "llm_model": (
             summary_model
             if scoring_model == summary_model
@@ -129,8 +125,8 @@ def run_daily(kw: dict, sources: dict, supervisors: list) -> None:
         date_str,
         papers=sections["arxiv"].items,
         hn_stories=sections["hacker_news"].items,
-        jobs=sections["jobs"].items,
-        supervisor_updates=sections["supervisor_updates"].items,
+        jobs=[],
+        supervisor_updates=[],
         meta=meta,
         github_trending=sections["github_trending"].items,
     )

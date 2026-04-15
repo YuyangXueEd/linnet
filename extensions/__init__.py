@@ -18,8 +18,6 @@ To add a new extension:
 from extensions.base import BaseExtension, FeedSection
 from extensions.arxiv import ArxivExtension
 from extensions.hacker_news import HackerNewsExtension
-from extensions.jobs import JobsExtension
-from extensions.supervisor import SupervisorExtension
 from extensions.github_trending import GitHubTrendingExtension
 
 # Ordered list of all known extensions.
@@ -27,8 +25,6 @@ from extensions.github_trending import GitHubTrendingExtension
 REGISTRY: list[type[BaseExtension]] = [
     ArxivExtension,
     HackerNewsExtension,
-    JobsExtension,
-    SupervisorExtension,
     GitHubTrendingExtension,
 ]
 
