@@ -30,118 +30,36 @@ Fork this repo, add one API key, and wake up to a fresh digest of arXiv papers, 
 | **Postdoc jobs** | Research job listings from jobs.ac.uk, FindAPostDoc, and EURAXESS |
 | **Supervisor monitor** | Alerts when a professor's or lab's webpage changes |
 
+Find out more in `extensions` ...
+
 Everything runs automatically at midnight UTC via GitHub Actions. Results are saved back to your repo and published as a searchable website.
 
 ![Pipeline workflow](assets/workflow.png)
 
 ---
 
-## Set it up in 5 steps
+## Get started
 
-### Step 1 — Copy this repo to your account
+**Option A — Setup Wizard (recommended):** [Open the wizard →](https://yuyangxueed.github.io/MyDailyUpdater/setup/)
+Fork the repo, open the wizard, answer 5 questions, paste the generated config. Done in under 5 minutes.
 
-Click **Fork** at the top of this page. GitHub will create your own copy. All the automation comes with it.
-
-### Step 2 — Add your API key
-
-In your forked repo, go to: **Settings → Secrets and variables → Actions → New repository secret**
-
-| Name | Value |
-|---|---|
-| `OPENROUTER_API_KEY` | Your key from [openrouter.ai/keys](https://openrouter.ai/keys) — free tier works, starts with `sk-or-...` |
-
-This is the only credential you need. [OpenRouter](https://openrouter.ai) lets you call many AI models (Gemini, GPT, Claude) with one key and switch between them any time.
-
-### Step 3 — Turn on your website
-
-Go to: **Settings → Pages → Source: Deploy from a branch → Branch: `main`, folder: `/docs`**
-
-Click **Save**. Your site URL will appear there — it looks like `https://YOUR-USERNAME.github.io/MyDailyUpdater`.
-
-### Step 4 — Pick your research topics
-
-Open [config/extensions/arxiv.yaml](config/extensions/arxiv.yaml). It has four ready-made profiles — uncomment the one closest to your work and edit the keywords freely:
-
-```yaml
-# PROFILE A: AI / ML / LLM (general)
-# categories: [cs.AI, cs.LG, cs.CL, cs.CV, stat.ML]
-# must_include:
-#   - large language model
-#   - foundation model
-#   ...
-
-# PROFILE B: Robotics / Embodied AI
-# PROFILE C: Medical AI / Clinical NLP
-# PROFILE D: NLP / Text / Reasoning
-```
-
-Uncomment one profile by removing the `#` from each line, then edit as needed.
-
-Want summaries in a different language? Open [config/sources.yaml](config/sources.yaml) and change `language: "en"` to `"zh"`, `"fr"`, `"de"`, `"ja"`, `"ko"`, `"es"`, or any other language code.
-
-### Step 5 — Run it for the first time
-
-Go to: **Actions → Daily Digest → Run workflow → Run workflow**
-
-Your site will be live in about 5 minutes.
+**Option B — Manual configuration:** [Step-by-step guide →](docs/setup/manual-config.md)
+Edit the YAML files directly. Full reference for every option including LLM prompt customisation and Slack setup.
 
 ---
 
-## Turn sources on and off
+## Documentation layout
 
-Open [config/sources.yaml](config/sources.yaml) and set `enabled: true` or `enabled: false` for each source:
+This repo uses two documentation spaces on purpose:
 
-```yaml
-arxiv:
-  enabled: true          # arXiv papers — the main event
+- `docs/` contains public site content deployed to GitHub Pages, including the setup wizard, manual setup guide, and generated digest pages
+- `dev_docs/` is reserved for official developer and maintainer documentation
 
-hacker_news:
-  enabled: true          # top Hacker News stories
-
-github_trending:
-  enabled: true          # today's trending GitHub repos
-  max_repos: 15
-
-weather:
-  enabled: true
-  city: "Edinburgh"      # change to your city
-
-postdoc_jobs:
-  enabled: false         # academic job listings — turn on if you want these
-
-supervisor_updates:
-  enabled: false         # professor/lab page monitor — turn on if you want these
-```
-
-You can also switch AI models here, or cap how many papers get fetched per day.
+Code-local docs still live next to the code they explain, such as `extensions/README.md` and `sinks/README.md`.
 
 ---
 
-## Get your digest in Slack
-
-In addition to the website, you can receive a daily Slack message. Setup takes about 2 minutes:
-
-1. Go to [api.slack.com/apps](https://api.slack.com/apps) → **Create New App** → **From scratch**
-2. Left sidebar → **Features → Incoming Webhooks** → toggle **On**
-3. Scroll down → **Add New Webhook to Workspace** → choose your channel → **Allow**
-4. Copy the webhook URL (looks like `https://hooks.slack.com/services/T.../B.../...`)
-5. Add it as a secret in your repo: **Settings → Secrets → New secret**, name it `SLACK_WEBHOOK_URL`
-6. Enable it in [config/sources.yaml](config/sources.yaml):
-
-```yaml
-sinks:
-  slack:
-    enabled: true
-    max_papers: 5    # how many papers to include
-    max_hn: 3        # how many HN stories to include
-    max_github: 3    # how many trending repos to include
-```
-
-If you skip this step, nothing breaks — the website still updates as normal.
-
----
-
-## What runs on its own
+## What runs automatically
 
 | When | What happens |
 |---|---|
@@ -149,7 +67,7 @@ If you skip this step, nothing breaks — the website still updates as normal.
 | Every Monday at 1 AM UTC | Weekly summary of the past week |
 | 1st of every month at 2 AM UTC | Monthly overview |
 
-You can also trigger any of these by hand: **Actions → [workflow name] → Run workflow**.
+Trigger any of these by hand: **Actions → [workflow name] → Run workflow**.
 
 ---
 
@@ -230,6 +148,7 @@ MyDailyUpdater/
 ├── pipeline/               # scoring, summarising, assembling the digest
 ├── publishers/             # writes the website files to docs/
 ├── templates/              # daily / weekly / monthly page layouts
+├── dev_docs/               # official developer / maintainer documentation
 ├── config/
 │   ├── sources.yaml        # turn sources on/off, set language & AI models
 │   └── extensions/
@@ -237,7 +156,7 @@ MyDailyUpdater/
 │       ├── hacker_news.yaml
 │       ├── postdoc_jobs.yaml
 │       └── supervisor_updates.yaml
-├── docs/                   # your generated website (served by GitHub Pages)
+├── docs/                   # public site content deployed by GitHub Pages
 ├── tests/
 └── main.py                 # entry point
 ```

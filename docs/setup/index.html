@@ -3,604 +3,2383 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyDailyUpdater — Setup Wizard</title>
+  <title>MyDailyUpdater - Setup Wizard</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f6f8fa;
-      color: #24292f;
-      min-height: 100vh;
-      padding: 2rem 1rem;
+    :root {
+      color-scheme: light;
+      --bg: #f7f4ee;
+      --bg-accent: #ebe4d6;
+      --panel: rgba(255, 255, 255, 0.9);
+      --panel-strong: #fffdf7;
+      --text: #1f2a37;
+      --muted: #5d6b7a;
+      --border: rgba(46, 74, 88, 0.14);
+      --shadow: 0 24px 60px rgba(33, 49, 64, 0.12);
+      --brand: #1565c0;
+      --brand-soft: rgba(21, 101, 192, 0.12);
+      --accent: #00897b;
+      --accent-soft: rgba(0, 137, 123, 0.12);
+      --warn: #b26b00;
+      --warn-soft: rgba(255, 179, 0, 0.16);
+      --success: #1f7a4d;
+      --danger: #a93d3d;
+      --surface-alt: rgba(235, 244, 255, 0.65);
+      --chip: #eef6ff;
+      --chip-border: rgba(21, 101, 192, 0.18);
+      --chip-text: #12457f;
+      --button-text: #ffffff;
     }
 
-    .container {
-      max-width: 720px;
+    body[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #121a22;
+      --bg-accent: #1d2a36;
+      --panel: rgba(20, 29, 39, 0.9);
+      --panel-strong: #18222c;
+      --text: #edf2f7;
+      --muted: #a4b3c2;
+      --border: rgba(186, 211, 232, 0.14);
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
+      --brand: #78aaf3;
+      --brand-soft: rgba(120, 170, 243, 0.16);
+      --accent: #4fd1c5;
+      --accent-soft: rgba(79, 209, 197, 0.16);
+      --warn: #f2be55;
+      --warn-soft: rgba(242, 190, 85, 0.14);
+      --success: #6ee7a8;
+      --danger: #ff8d8d;
+      --surface-alt: rgba(25, 38, 50, 0.85);
+      --chip: #1d3142;
+      --chip-border: rgba(120, 170, 243, 0.18);
+      --chip-text: #d7e8ff;
+      --button-text: #0f1720;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #121a22;
+        --bg-accent: #1d2a36;
+        --panel: rgba(20, 29, 39, 0.9);
+        --panel-strong: #18222c;
+        --text: #edf2f7;
+        --muted: #a4b3c2;
+        --border: rgba(186, 211, 232, 0.14);
+        --shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
+        --brand: #78aaf3;
+        --brand-soft: rgba(120, 170, 243, 0.16);
+        --accent: #4fd1c5;
+        --accent-soft: rgba(79, 209, 197, 0.16);
+        --warn: #f2be55;
+        --warn-soft: rgba(242, 190, 85, 0.14);
+        --success: #6ee7a8;
+        --danger: #ff8d8d;
+        --surface-alt: rgba(25, 38, 50, 0.85);
+        --chip: #1d3142;
+        --chip-border: rgba(120, 170, 243, 0.18);
+        --chip-text: #d7e8ff;
+        --button-text: #0f1720;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(21, 101, 192, 0.12), transparent 32%),
+        radial-gradient(circle at top right, rgba(0, 137, 123, 0.14), transparent 34%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-accent) 100%);
+      padding: 32px 16px 48px;
+    }
+
+    a {
+      color: var(--brand);
+    }
+
+    .shell {
+      max-width: 1180px;
       margin: 0 auto;
     }
 
-    h1 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 24px;
+      margin-bottom: 24px;
     }
 
-    .subtitle {
-      color: #57606a;
-      margin-bottom: 2rem;
-      font-size: 1rem;
+    .hero-main,
+    .hero-side,
+    .wizard,
+    .preview {
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
     }
 
-    .card {
-      background: #fff;
-      border: 1px solid #d0d7de;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
+    .hero-main {
+      padding: 28px;
     }
 
-    .card h2 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
+    .hero-side {
+      padding: 22px;
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .step-badge {
-      background: #0969da;
-      color: #fff;
-      border-radius: 50%;
-      width: 1.6rem;
-      height: 1.6rem;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.04rem;
+      max-width: 62ch;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button,
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    label {
-      display: block;
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-bottom: 0.35rem;
-      color: #24292f;
-    }
-
-    label .hint {
-      font-weight: 400;
-      color: #57606a;
-    }
-
-    .option-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 0.6rem;
-      margin-bottom: 1rem;
-    }
-
-    .option-card {
-      border: 2px solid #d0d7de;
-      border-radius: 6px;
-      padding: 0.75rem 1rem;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      text-decoration: none;
       cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--brand), #0d8ac8);
+      color: #fff;
+      box-shadow: 0 16px 32px rgba(21, 101, 192, 0.22);
+    }
+
+    .button-secondary {
+      background: var(--surface-alt);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .theme-toggle {
+      align-self: flex-start;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stat-card {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--panel-strong);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .stat-card span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+
+    .hero-side .note {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .wizard-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.8fr);
+      gap: 24px;
+    }
+
+    .wizard {
+      padding: 24px;
+    }
+
+    .preview {
+      padding: 22px;
+      position: sticky;
+      top: 24px;
+      align-self: start;
+    }
+
+    .progress {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .progress-step {
+      padding: 12px 10px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--panel-strong);
+      min-height: 92px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      justify-content: space-between;
+    }
+
+    .progress-step.is-active {
+      border-color: rgba(21, 101, 192, 0.32);
+      background: linear-gradient(180deg, var(--brand-soft), var(--panel-strong));
+      transform: translateY(-1px);
+    }
+
+    .progress-step.is-complete {
+      border-color: rgba(0, 137, 123, 0.28);
+      background: linear-gradient(180deg, var(--accent-soft), var(--panel-strong));
+    }
+
+    .progress-step .step-number {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .progress-step strong {
+      font-size: 0.96rem;
+      line-height: 1.35;
+    }
+
+    .progress-step span {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .step-header h2 {
+      margin: 0 0 8px;
+      font-size: 1.65rem;
+      letter-spacing: -0.02em;
+    }
+
+    .step-header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .step-pill {
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      font-size: 0.92rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .source-card,
+    .config-card,
+    .info-card,
+    .output-card,
+    .mini-panel {
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--panel-strong);
+    }
+
+    .source-card {
+      padding: 18px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      min-height: 178px;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .source-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(21, 101, 192, 0.24);
+      box-shadow: 0 18px 36px rgba(21, 101, 192, 0.08);
+    }
+
+    .source-card.is-selected {
+      border-color: rgba(21, 101, 192, 0.34);
+      background: linear-gradient(180deg, var(--brand-soft), var(--panel-strong));
+    }
+
+    .source-card .checkmark {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: var(--brand);
+      background: var(--panel);
+      font-weight: 700;
+    }
+
+    .source-card .source-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.02rem;
+      margin-bottom: 10px;
+    }
+
+    .source-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.94rem;
+    }
+
+    .source-card .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--chip-border);
+      color: var(--chip-text);
+      font-size: 0.85rem;
+    }
+
+    .selected-list {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .selected-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--panel-strong);
+    }
+
+    .selected-item.is-dragging {
+      opacity: 0.55;
+    }
+
+    .drag-handle {
+      color: var(--muted);
+      font-size: 1rem;
+      cursor: grab;
       user-select: none;
     }
 
-    .option-card:hover {
-      border-color: #0969da;
-      background: #f0f6ff;
+    .selected-meta strong,
+    .config-card h3,
+    .output-card h3,
+    .info-card h3,
+    .mini-panel h3 {
+      margin: 0;
+      font-size: 1rem;
     }
 
-    .option-card.selected {
-      border-color: #0969da;
-      background: #dbeafe;
+    .selected-meta p,
+    .config-card p,
+    .output-card p,
+    .info-card p,
+    .mini-panel p,
+    .helper-text,
+    .preview p,
+    .status-note {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.93rem;
     }
 
-    .option-card .option-title {
+    .stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .config-card,
+    .info-card,
+    .output-card,
+    .mini-panel {
+      padding: 18px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .field,
+    .field-full {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field-full {
+      margin-top: 14px;
+    }
+
+    label {
+      font-size: 0.92rem;
       font-weight: 600;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      padding: 12px 14px;
+      min-height: 48px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+      outline: 3px solid rgba(21, 101, 192, 0.18);
+      outline-offset: 2px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--brand);
+    }
+
+    .range-row {
+      display: grid;
+      grid-template-columns: 1fr 100px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .checkbox-row,
+    .toggle-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: var(--surface-alt);
+    }
+
+    .toggle-card.is-disabled {
+      opacity: 0.62;
+    }
+
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .preset {
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 14px;
+      background: var(--panel);
+      display: grid;
+      gap: 10px;
+    }
+
+    .preset input {
+      margin: 0;
+    }
+
+    .preset label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.92rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .tag-editor {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--chip-border);
+      background: var(--chip);
+      color: var(--chip-text);
       font-size: 0.9rem;
     }
 
-    .option-card .option-desc {
-      font-size: 0.8rem;
-      color: #57606a;
-      margin-top: 0.2rem;
-    }
-
-    .toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.6rem 0;
-      border-bottom: 1px solid #f3f4f6;
-    }
-
-    .toggle-row:last-child { border-bottom: none; }
-
-    .toggle-label { font-size: 0.9rem; }
-    .toggle-label small { display: block; color: #57606a; font-size: 0.8rem; }
-
-    .toggle {
-      position: relative;
-      width: 42px;
-      height: 24px;
-      flex-shrink: 0;
-    }
-
-    .toggle input { opacity: 0; width: 0; height: 0; }
-
-    .toggle-slider {
-      position: absolute;
-      cursor: pointer;
-      inset: 0;
-      background: #d0d7de;
-      border-radius: 24px;
-      transition: background 0.2s;
-    }
-
-    .toggle-slider::before {
-      content: "";
-      position: absolute;
-      width: 18px; height: 18px;
-      left: 3px; top: 3px;
-      background: #fff;
-      border-radius: 50%;
-      transition: transform 0.2s;
-    }
-
-    .toggle input:checked + .toggle-slider { background: #2da44e; }
-    .toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
-
-    input[type="text"], select {
-      width: 100%;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid #d0d7de;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      background: #fff;
-      color: #24292f;
-      margin-bottom: 0.75rem;
-    }
-
-    input[type="text"]:focus, select:focus {
-      outline: none;
-      border-color: #0969da;
-      box-shadow: 0 0 0 3px rgba(9,105,218,0.2);
-    }
-
-    .generate-btn {
-      display: block;
-      width: 100%;
-      padding: 0.75rem;
-      background: #2da44e;
-      color: #fff;
+    .tag button {
       border: none;
-      border-radius: 6px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
       font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.15s;
-      margin-bottom: 1.5rem;
     }
 
-    .generate-btn:hover { background: #218a3e; }
-
-    .output-section { display: none; }
-    .output-section.visible { display: block; }
-
-    .output-block { margin-bottom: 1.5rem; }
-
-    .output-block h3 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
+    .inline-action {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .copy-btn {
-      background: #f6f8fa;
-      border: 1px solid #d0d7de;
-      border-radius: 4px;
-      padding: 0.2rem 0.6rem;
-      font-size: 0.8rem;
+    .inline-action input {
+      flex: 1 1 220px;
+    }
+
+    .small-button,
+    .copy-button,
+    .move-button,
+    .step-button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
       cursor: pointer;
-      color: #24292f;
-      transition: background 0.15s;
     }
 
-    .copy-btn:hover { background: #e6edf3; }
-    .copy-btn.copied { background: #dafbe1; border-color: #2da44e; color: #116329; }
+    .small-button,
+    .copy-button,
+    .move-button {
+      padding: 10px 12px;
+    }
 
-    pre {
-      background: #f6f8fa;
-      border: 1px solid #d0d7de;
-      border-radius: 6px;
-      padding: 1rem;
-      font-size: 0.82rem;
-      line-height: 1.6;
-      overflow-x: auto;
+    .move-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .step-nav {
+      margin-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .step-button {
+      min-height: 48px;
+      padding: 12px 18px;
+      min-width: 140px;
+    }
+
+    .step-button.primary {
+      background: linear-gradient(135deg, var(--brand), #0d8ac8);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .step-button[disabled] {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .notice {
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      padding: 14px 16px;
+      margin-top: 18px;
+    }
+
+    .notice.warning {
+      border-color: rgba(178, 107, 0, 0.24);
+      background: var(--warn-soft);
+    }
+
+    .notice.success {
+      border-color: rgba(31, 122, 77, 0.22);
+      background: rgba(31, 122, 77, 0.12);
+    }
+
+    .code-preview {
+      margin-top: 14px;
+      background: #10161f;
+      color: #d9e8f8;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 16px;
+      max-height: 340px;
+      overflow: auto;
       white-space: pre-wrap;
       word-break: break-word;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     }
 
-    .next-steps {
-      background: #dafbe1;
-      border: 1px solid #2da44e40;
-      border-radius: 8px;
-      padding: 1.25rem 1.5rem;
+    .output-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .next-steps h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: #116329;
+    .placeholder {
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px dashed var(--border);
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.06);
+      text-align: center;
+      line-height: 1.7;
     }
 
-    .next-steps ol {
-      padding-left: 1.25rem;
-      font-size: 0.9rem;
-      line-height: 1.8;
-      color: #24292f;
+    .preview h2 {
+      margin: 0 0 16px;
+      font-size: 1.2rem;
     }
 
-    .next-steps code {
-      background: #fff;
-      border: 1px solid #d0d7de;
-      border-radius: 3px;
-      padding: 0.1em 0.3em;
-      font-size: 0.85em;
+    .preview-block {
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--panel-strong);
+      padding: 14px 16px;
+      margin-top: 14px;
     }
 
-    a { color: #0969da; }
+    .preview-block strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.94rem;
+    }
+
+    .preview-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+
+    .preview-list li + li {
+      margin-top: 4px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .wizard-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .preview {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding-inline: 12px;
+      }
+
+      .hero-main,
+      .hero-side,
+      .wizard,
+      .preview {
+        border-radius: 20px;
+      }
+
+      .progress {
+        grid-template-columns: 1fr;
+      }
+
+      .step-header {
+        flex-direction: column;
+      }
+
+      .range-row,
+      .selected-item {
+        grid-template-columns: 1fr;
+      }
+
+      .selected-item {
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="container">
+  <div class="shell">
+    <section class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">MyDailyUpdater setup flow</div>
+        <h1>Build your digest in five guided steps.</h1>
+        <p class="lead">
+          Pick your feeds, tune the filters, choose weekly and monthly rollups,
+          connect notifications, and leave with ready-to-paste YAML files.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#wizard-root">Start the wizard</a>
+          <a class="button button-secondary" href="manual-config.md">Prefer manual setup?</a>
+        </div>
+      </div>
 
-  <h1>MyDailyUpdater Setup Wizard</h1>
-  <p class="subtitle">Answer a few questions and get your config files, ready to copy in.</p>
+      <aside class="hero-side">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-live="polite">
+          Switch theme
+        </button>
 
-  <!-- Step 1: Research profile -->
-  <div class="card">
-    <h2><span class="step-badge">1</span> What's your research area?</h2>
-    <div class="option-grid" id="profile-grid">
-      <div class="option-card selected" data-profile="ai">
-        <div class="option-title">AI / ML / LLM</div>
-        <div class="option-desc">Foundation models, diffusion, agents, multimodal</div>
-      </div>
-      <div class="option-card" data-profile="robotics">
-        <div class="option-title">Robotics / Embodied AI</div>
-        <div class="option-desc">Robot learning, sim-to-real, manipulation</div>
-      </div>
-      <div class="option-card" data-profile="medical">
-        <div class="option-title">Medical AI</div>
-        <div class="option-desc">Imaging, radiology, clinical NLP</div>
-      </div>
-      <div class="option-card" data-profile="nlp">
-        <div class="option-title">NLP / Text / Reasoning</div>
-        <div class="option-desc">Language models, QA, summarisation</div>
-      </div>
-      <div class="option-card" data-profile="cv">
-        <div class="option-title">Computer Vision</div>
-        <div class="option-desc">Detection, segmentation, representation learning</div>
-      </div>
-      <div class="option-card" data-profile="custom">
-        <div class="option-title">Custom keywords</div>
-        <div class="option-desc">I'll type my own topics</div>
-      </div>
-    </div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <strong>6</strong>
+            <span>Built-in feed sources that can be mixed and ordered.</span>
+          </div>
+          <div class="stat-card">
+            <strong>5</strong>
+            <span>Wizard steps from source picking to final copy blocks.</span>
+          </div>
+          <div class="stat-card">
+            <strong>0</strong>
+            <span>Secrets written to YAML. Webhooks stay out of generated files.</span>
+          </div>
+          <div class="stat-card">
+            <strong>1</strong>
+            <span>Single place to preview the final repo configuration.</span>
+          </div>
+        </div>
 
-    <div id="custom-keywords-section" style="display:none;">
-      <label>Your keywords <span class="hint">(one per line)</span></label>
-      <textarea id="custom-keywords" rows="5"
-        style="width:100%;padding:0.5rem 0.75rem;border:1px solid #d0d7de;border-radius:6px;font-size:0.9rem;font-family:monospace;resize:vertical;margin-bottom:0.5rem;"
-        placeholder="neural network&#10;retrieval augmented generation&#10;federated learning"></textarea>
-      <label>arXiv categories <span class="hint">(e.g. cs.AI, cs.LG, cs.CV)</span></label>
-      <input type="text" id="custom-categories" placeholder="cs.AI, cs.LG" />
-    </div>
-  </div>
+        <p class="note">
+          This page runs entirely in your browser. It generates file contents for
+          your repo without sending your choices anywhere else.
+        </p>
+      </aside>
+    </section>
 
-  <!-- Step 2: Extras -->
-  <div class="card">
-    <h2><span class="step-badge">2</span> Which extras do you want?</h2>
-    <div class="toggle-row">
-      <div class="toggle-label">
-        Hacker News
-        <small>Top AI/ML stories each day</small>
-      </div>
-      <label class="toggle">
-        <input type="checkbox" id="toggle-hn" checked />
-        <span class="toggle-slider"></span>
-      </label>
-    </div>
-    <div class="toggle-row">
-      <div class="toggle-label">
-        GitHub Trending
-        <small>Today's most-starred repos</small>
-      </div>
-      <label class="toggle">
-        <input type="checkbox" id="toggle-gh" checked />
-        <span class="toggle-slider"></span>
-      </label>
-    </div>
-    <div class="toggle-row">
-      <div class="toggle-label">
-        Weather
-        <small>Today's forecast for your city</small>
-      </div>
-      <label class="toggle">
-        <input type="checkbox" id="toggle-weather" checked />
-        <span class="toggle-slider"></span>
-      </label>
-    </div>
-    <div class="toggle-row">
-      <div class="toggle-label">
-        Postdoc &amp; research jobs
-        <small>From jobs.ac.uk, FindAPostDoc, EURAXESS</small>
-      </div>
-      <label class="toggle">
-        <input type="checkbox" id="toggle-jobs" />
-        <span class="toggle-slider"></span>
-      </label>
-    </div>
-    <div class="toggle-row">
-      <div class="toggle-label">
-        Supervisor / lab page monitor
-        <small>Alert when a professor's page changes</small>
-      </div>
-      <label class="toggle">
-        <input type="checkbox" id="toggle-supervisor" />
-        <span class="toggle-slider"></span>
-      </label>
+    <div class="wizard-layout" id="wizard-root">
+      <section class="wizard" aria-labelledby="wizard-heading">
+        <div class="progress" id="progress"></div>
+
+        <div class="step-header">
+          <div>
+            <h2 id="wizard-heading">Setup Wizard</h2>
+            <p id="step-description"></p>
+          </div>
+          <div class="step-pill" id="step-pill">Step 1 of 5</div>
+        </div>
+
+        <div id="step-errors" aria-live="polite"></div>
+        <div id="step-panel"></div>
+
+        <div class="step-nav">
+          <button class="step-button" id="back-button" type="button">Back</button>
+          <button class="step-button primary" id="next-button" type="button">Next</button>
+        </div>
+      </section>
+
+      <aside class="preview" aria-labelledby="preview-heading">
+        <h2 id="preview-heading">Live summary</h2>
+        <p>
+          The sidebar updates as you move through the wizard so you can see the
+          selected feeds, expected files, and deployment reminders before copying
+          anything into your repo.
+        </p>
+
+        <div class="preview-block">
+          <strong>Selected feed order</strong>
+          <ol class="preview-list" id="preview-order"></ol>
+        </div>
+
+        <div class="preview-block">
+          <strong>Files that will be generated</strong>
+          <ul class="preview-list" id="preview-files"></ul>
+        </div>
+
+        <div class="preview-block">
+          <strong>Notifications</strong>
+          <div id="preview-notifications" class="status-note"></div>
+        </div>
+
+        <div class="preview-block">
+          <strong>Current step focus</strong>
+          <div id="preview-focus" class="status-note"></div>
+        </div>
+      </aside>
     </div>
   </div>
 
-  <!-- Step 3: Language & city -->
-  <div class="card">
-    <h2><span class="step-badge">3</span> Language &amp; city</h2>
-    <label>Summary language</label>
-    <select id="language">
-      <option value="en">English</option>
-      <option value="zh">Chinese (中文)</option>
-      <option value="fr">French (Français)</option>
-      <option value="de">German (Deutsch)</option>
-      <option value="ja">Japanese (日本語)</option>
-      <option value="ko">Korean (한국어)</option>
-      <option value="es">Spanish (Español)</option>
-      <option value="pt">Portuguese (Português)</option>
-    </select>
+  <script>
+    const STEP_META = [
+      {
+        title: "Choose your feeds",
+        blurb: "Select the sources you want in your digest and order how they appear on the final page.",
+      },
+      {
+        title: "Configure each feed",
+        blurb: "Only the feeds you selected show up here, each with its own configuration card.",
+      },
+      {
+        title: "Weekly and monthly rollups",
+        blurb: "Decide which selected sections should show up in weekly and monthly summaries.",
+      },
+      {
+        title: "Notifications",
+        blurb: "Enable sinks like Slack without putting secrets into YAML.",
+      },
+      {
+        title: "Generate and copy",
+        blurb: "Review the generated files, copy them into your repo, then trigger your first workflow.",
+      },
+    ];
 
-    <label id="city-label" for="city">Your city <span class="hint">(for weather — leave blank to skip)</span></label>
-    <input type="text" id="city" placeholder="Edinburgh" />
-  </div>
-
-  <button class="generate-btn" onclick="generate()">Generate my config files</button>
-
-  <!-- Output -->
-  <div class="output-section" id="output-section">
-
-    <div class="output-block">
-      <h3>
-        <span>📄 config/sources.yaml</span>
-        <button class="copy-btn" onclick="copyBlock('sources-output', this)">Copy</button>
-      </h3>
-      <pre id="sources-output"></pre>
-    </div>
-
-    <div class="output-block">
-      <h3>
-        <span>📄 config/extensions/arxiv.yaml</span>
-        <button class="copy-btn" onclick="copyBlock('arxiv-output', this)">Copy</button>
-      </h3>
-      <pre id="arxiv-output"></pre>
-    </div>
-
-    <div class="next-steps">
-      <h3>What to do next</h3>
-      <ol>
-        <li>In your forked repo, open <code>config/sources.yaml</code> and replace its contents with the first block above.</li>
-        <li>Open <code>config/extensions/arxiv.yaml</code> and replace its contents with the second block.</li>
-        <li>Commit the changes (just edit and save — GitHub's web editor works fine).</li>
-        <li>Go to <strong>Actions → Daily Digest → Run workflow</strong> to trigger the first run.</li>
-        <li>Your site will be live in about 5 minutes.</li>
-      </ol>
-    </div>
-  </div>
-
-</div>
-
-<script>
-// ── Profile data ─────────────────────────────────────────────────────────────
-const PROFILES = {
-  ai: {
-    categories: ["cs.AI", "cs.LG", "cs.CL", "cs.CV", "stat.ML"],
-    must_include: [
-      "large language model", "foundation model", "diffusion model",
-      "agent", "multimodal", "RLHF", "alignment",
-    ],
-    boost_keywords: ["GPT", "LLaMA", "Gemini", "Claude", "LoRA", "RAG", "chain-of-thought"],
-  },
-  robotics: {
-    categories: ["cs.RO", "cs.AI", "cs.LG", "cs.CV"],
-    must_include: [
-      "robot learning", "reinforcement learning", "sim-to-real",
-      "manipulation", "navigation", "embodied",
-    ],
-    boost_keywords: ["MuJoCo", "IsaacGym", "imitation learning", "world model"],
-  },
-  medical: {
-    categories: ["cs.CV", "cs.AI", "cs.LG", "eess.IV", "q-bio.QM"],
-    must_include: [
-      "medical imaging", "clinical", "radiology", "pathology",
-      "electronic health record",
-    ],
-    boost_keywords: ["CT", "MRI", "X-ray", "histology", "MIMIC", "segmentation"],
-  },
-  nlp: {
-    categories: ["cs.CL", "cs.AI", "cs.LG"],
-    must_include: [
-      "language model", "reasoning", "question answering",
-      "summarisation", "machine translation",
-    ],
-    boost_keywords: ["BERT", "T5", "instruction tuning", "benchmark", "hallucination"],
-  },
-  cv: {
-    categories: ["cs.CV", "cs.AI", "cs.LG"],
-    must_include: [
-      "object detection", "image segmentation", "visual representation",
-      "self-supervised", "contrastive learning",
-    ],
-    boost_keywords: ["ViT", "CLIP", "SAM", "DINO", "zero-shot", "few-shot"],
-  },
-};
-
-// ── Profile selection ─────────────────────────────────────────────────────────
-let selectedProfile = "ai";
-
-document.querySelectorAll(".option-card").forEach((card) => {
-  card.addEventListener("click", () => {
-    document.querySelectorAll(".option-card").forEach((c) => c.classList.remove("selected"));
-    card.classList.add("selected");
-    selectedProfile = card.dataset.profile;
-    const customSection = document.getElementById("custom-keywords-section");
-    customSection.style.display = selectedProfile === "custom" ? "block" : "none";
-  });
-});
-
-// ── Weather toggle hides city field ──────────────────────────────────────────
-document.getElementById("toggle-weather").addEventListener("change", function () {
-  document.getElementById("city-label").style.opacity = this.checked ? "1" : "0.4";
-  document.getElementById("city").disabled = !this.checked;
-});
-
-// ── Generate ─────────────────────────────────────────────────────────────────
-function generate() {
-  const lang = document.getElementById("language").value;
-  const city = document.getElementById("city").value.trim() || "Edinburgh";
-  const useHN = document.getElementById("toggle-hn").checked;
-  const useGH = document.getElementById("toggle-gh").checked;
-  const useWeather = document.getElementById("toggle-weather").checked;
-  const useJobs = document.getElementById("toggle-jobs").checked;
-  const useSupervisor = document.getElementById("toggle-supervisor").checked;
-
-  // Build display_order (only enabled sources)
-  const order = [];
-  if (useWeather) order.push("weather");
-  order.push("arxiv");
-  if (useGH) order.push("github_trending");
-  if (useHN) order.push("hacker_news");
-  if (useJobs) order.push("postdoc_jobs");
-  if (useSupervisor) order.push("supervisor_updates");
-
-  // sources.yaml
-  const sourcesLines = [
-    "display_order:",
-    ...order.map((k) => `  - ${k}`),
-    "",
-    "arxiv:",
-    "  enabled: true",
-    "  max_papers_per_run: 300",
-    "",
-    `hacker_news:`,
-    `  enabled: ${useHN}`,
-    "",
-    `postdoc_jobs:`,
-    `  enabled: ${useJobs}`,
-    "",
-    `supervisor_updates:`,
-    `  enabled: ${useSupervisor}`,
-    "",
-    `github_trending:`,
-    `  enabled: ${useGH}`,
-    "  max_repos: 15",
-    "",
-    `weather:`,
-    `  enabled: ${useWeather}`,
-    `  city: "${city}"`,
-    "  timezone: auto",
-    "",
-    `language: "${lang}"`,
-    "",
-    "llm:",
-    '  scoring_model: "google/gemini-2.5-flash-lite-preview-09-2025"',
-    '  summarization_model: "google/gemini-2.5-flash-lite-preview-09-2025"',
-    '  base_url: "https://openrouter.ai/api/v1"',
-    "",
-    "pages:",
-    '  base_url: ""',
-    "",
-    "sinks:",
-    "  slack:",
-    "    enabled: false",
-    "    max_papers: 5",
-    "    max_hn: 3",
-    "    max_github: 3",
-  ];
-
-  document.getElementById("sources-output").textContent = sourcesLines.join("\n");
-
-  // arxiv.yaml
-  let profile;
-  if (selectedProfile === "custom") {
-    const rawKeywords = document.getElementById("custom-keywords").value
-      .split("\n")
-      .map((k) => k.trim())
-      .filter(Boolean);
-    const rawCats = document.getElementById("custom-categories").value
-      .split(",")
-      .map((c) => c.trim())
-      .filter(Boolean);
-    profile = {
-      categories: rawCats.length ? rawCats : ["cs.AI", "cs.LG"],
-      must_include: rawKeywords.length ? rawKeywords : ["machine learning"],
-      boost_keywords: [],
+    const SOURCE_DEFS = {
+      weather: {
+        key: "weather",
+        title: "Weather",
+        desc: "A one-glance local forecast at the top of your digest.",
+        category: "Daily context",
+        output: "sources.yaml",
+      },
+      arxiv: {
+        key: "arxiv",
+        title: "arXiv",
+        desc: "Fresh papers filtered by your own research interests and summarized by AI.",
+        category: "Research",
+        output: "sources.yaml + config/extensions/arxiv.yaml",
+      },
+      github_trending: {
+        key: "github_trending",
+        title: "GitHub Trending",
+        desc: "The repos attracting the most stars today, condensed into one list.",
+        category: "Builders",
+        output: "sources.yaml",
+      },
+      hacker_news: {
+        key: "hacker_news",
+        title: "Hacker News",
+        desc: "High-signal AI and engineering stories filtered by score.",
+        category: "News",
+        output: "sources.yaml + config/extensions/hacker_news.yaml",
+      },
+      postdoc_jobs: {
+        key: "postdoc_jobs",
+        title: "Postdoc Jobs",
+        desc: "Research vacancies stitched together from jobs boards and search pages.",
+        category: "Career",
+        output: "sources.yaml + config/extensions/postdoc_jobs.yaml",
+      },
+      supervisor_updates: {
+        key: "supervisor_updates",
+        title: "Supervisor Updates",
+        desc: "Watch professor or lab pages and summarize what changed.",
+        category: "Monitoring",
+        output: "sources.yaml + config/extensions/supervisor_updates.yaml",
+      },
     };
-  } else {
-    profile = PROFILES[selectedProfile];
-  }
 
-  const arxivLines = [
-    "categories:",
-    ...profile.categories.map((c) => `  - ${c}`),
-    "",
-    "must_include:",
-    ...profile.must_include.map((k) => `  - ${k}`),
-    "",
-    "boost_keywords:",
-    ...profile.boost_keywords.map((k) => `  - ${k}`),
-    "",
-    "llm_score_threshold: 7",
-  ];
+    const DEFAULT_SOURCE_ORDER = [
+      "weather",
+      "arxiv",
+      "github_trending",
+      "hacker_news",
+      "postdoc_jobs",
+      "supervisor_updates",
+    ];
 
-  document.getElementById("arxiv-output").textContent = arxivLines.join("\n");
+    const DEFAULT_ENABLED = new Set(["weather", "arxiv", "github_trending", "hacker_news"]);
 
-  // Show output
-  const out = document.getElementById("output-section");
-  out.classList.add("visible");
-  out.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+    const ARXIV_PROFILES = {
+      ai: {
+        label: "AI / ML",
+        summary: "Foundation models, agents, multimodal systems, and general machine learning.",
+        categories: ["cs.AI", "cs.LG", "cs.CL", "cs.CV", "stat.ML"],
+        must_include: [
+          "large language model",
+          "foundation model",
+          "diffusion model",
+          "agent",
+          "multimodal",
+          "alignment",
+        ],
+        boost_keywords: ["GPT", "LLaMA", "Gemini", "Claude", "LoRA", "RAG"],
+      },
+      robotics: {
+        label: "Robotics",
+        summary: "Robot learning, navigation, embodied agents, and sim-to-real transfer.",
+        categories: ["cs.RO", "cs.AI", "cs.LG", "cs.CV"],
+        must_include: [
+          "robot learning",
+          "reinforcement learning",
+          "sim-to-real",
+          "manipulation",
+          "embodied",
+        ],
+        boost_keywords: ["MuJoCo", "IsaacGym", "imitation learning", "world model"],
+      },
+      medical: {
+        label: "Medical AI",
+        summary: "Medical imaging, clinical AI, radiology, pathology, and health records.",
+        categories: ["cs.CV", "cs.AI", "cs.LG", "eess.IV", "q-bio.QM"],
+        must_include: [
+          "medical imaging",
+          "clinical",
+          "radiology",
+          "pathology",
+          "electronic health record",
+        ],
+        boost_keywords: ["CT", "MRI", "X-ray", "histology", "MIMIC", "segmentation"],
+      },
+      nlp: {
+        label: "NLP",
+        summary: "Language models, reasoning, summarization, and text-focused evaluation.",
+        categories: ["cs.CL", "cs.AI", "cs.LG"],
+        must_include: [
+          "language model",
+          "reasoning",
+          "question answering",
+          "summarisation",
+          "machine translation",
+        ],
+        boost_keywords: ["BERT", "T5", "instruction tuning", "hallucination", "benchmark"],
+      },
+      cv: {
+        label: "Computer Vision",
+        summary: "Detection, segmentation, visual representations, and multimodal perception.",
+        categories: ["cs.CV", "cs.AI", "cs.LG"],
+        must_include: [
+          "object detection",
+          "image segmentation",
+          "visual representation",
+          "self-supervised",
+          "contrastive learning",
+        ],
+        boost_keywords: ["ViT", "CLIP", "SAM", "DINO", "zero-shot", "few-shot"],
+      },
+    };
 
-// ── Copy button ───────────────────────────────────────────────────────────────
-function copyBlock(id, btn) {
-  const text = document.getElementById(id).textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    btn.textContent = "Copied!";
-    btn.classList.add("copied");
-    setTimeout(() => {
-      btn.textContent = "Copy";
-      btn.classList.remove("copied");
-    }, 2000);
-  });
-}
-</script>
+    const LANGUAGE_OPTIONS = [
+      ["en", "English"],
+      ["zh", "Chinese (中文)"],
+      ["fr", "French (Français)"],
+      ["de", "German (Deutsch)"],
+      ["ja", "Japanese (日本語)"],
+      ["ko", "Korean (한국어)"],
+      ["es", "Spanish (Español)"],
+      ["pt", "Portuguese (Português)"],
+    ];
+
+    const TIMEZONE_OPTIONS = [
+      ["auto", "Auto detect"],
+      ["UTC", "UTC"],
+      ["Europe/London", "Europe/London"],
+      ["Europe/Paris", "Europe/Paris"],
+      ["America/New_York", "America/New_York"],
+      ["America/Los_Angeles", "America/Los_Angeles"],
+      ["Asia/Shanghai", "Asia/Shanghai"],
+      ["Asia/Tokyo", "Asia/Tokyo"],
+      ["Australia/Sydney", "Australia/Sydney"],
+    ];
+
+    const DEFAULT_HN_KEYWORDS = [
+      "AI",
+      "LLM",
+      "machine learning",
+      "computer vision",
+      "GPU",
+      "agent",
+      "agentic",
+      "benchmark",
+      "research",
+    ];
+
+    const DEFAULT_JOB_EXCLUDE = ["chemistry", "economics", "social science", "humanities"];
+    const DEFAULT_JOB_TERMS = ["machine learning", "computer vision", "medical imaging"];
+
+    const state = {
+      currentStep: 1,
+      sources: DEFAULT_SOURCE_ORDER.map((key) => ({
+        key,
+        enabled: DEFAULT_ENABLED.has(key),
+      })),
+      global: {
+        language: "en",
+      },
+      arxiv: {
+        presets: ["ai"],
+        customKeywords: [],
+        customCategories: [],
+        threshold: 7,
+        maxPapers: 300,
+      },
+      weather: {
+        city: "Edinburgh",
+        timezone: "auto",
+      },
+      hacker_news: {
+        min_score: 50,
+        max_items: 20,
+      },
+      github_trending: {
+        max_repos: 15,
+      },
+      postdoc_jobs: {
+        search_terms: [...DEFAULT_JOB_TERMS],
+        threshold: 7,
+      },
+      supervisor_updates: {
+        urls: [],
+      },
+      schedule: {
+        weekly: {},
+        monthly: {},
+      },
+      sinks: {
+        slack: {
+          enabled: false,
+          max_papers: 5,
+          max_hn: 3,
+          max_github: 3,
+          webhook: "",
+        },
+      },
+    };
+
+    const progressEl = document.getElementById("progress");
+    const stepPanelEl = document.getElementById("step-panel");
+    const stepDescriptionEl = document.getElementById("step-description");
+    const stepPillEl = document.getElementById("step-pill");
+    const stepErrorsEl = document.getElementById("step-errors");
+    const backButtonEl = document.getElementById("back-button");
+    const nextButtonEl = document.getElementById("next-button");
+    const previewOrderEl = document.getElementById("preview-order");
+    const previewFilesEl = document.getElementById("preview-files");
+    const previewNotificationsEl = document.getElementById("preview-notifications");
+    const previewFocusEl = document.getElementById("preview-focus");
+    const themeToggleEl = document.getElementById("theme-toggle");
+
+    let draggedSourceKey = null;
+
+    function loadTheme() {
+      const saved = localStorage.getItem("wizard-theme");
+      if (saved === "light" || saved === "dark") {
+        document.body.dataset.theme = saved;
+      }
+      updateThemeButton();
+    }
+
+    function updateThemeButton() {
+      const activeTheme = document.body.dataset.theme || "system";
+      const labels = {
+        system: "Theme: system",
+        light: "Theme: light",
+        dark: "Theme: dark",
+      };
+      themeToggleEl.textContent = labels[activeTheme];
+    }
+
+    themeToggleEl.addEventListener("click", () => {
+      const current = document.body.dataset.theme || "system";
+      const next = current === "system" ? "light" : current === "light" ? "dark" : "system";
+      if (next === "system") {
+        delete document.body.dataset.theme;
+        localStorage.removeItem("wizard-theme");
+      } else {
+        document.body.dataset.theme = next;
+        localStorage.setItem("wizard-theme", next);
+      }
+      updateThemeButton();
+    });
+
+    backButtonEl.addEventListener("click", () => {
+      if (state.currentStep > 1) {
+        state.currentStep -= 1;
+        render();
+      }
+    });
+
+    nextButtonEl.addEventListener("click", () => {
+      const validation = validateStep(state.currentStep);
+      if (validation.length) {
+        renderErrors(validation);
+        return;
+      }
+
+      if (state.currentStep < 5) {
+        state.currentStep += 1;
+        render();
+        return;
+      }
+
+      state.currentStep = 1;
+      render();
+      document.getElementById("wizard-root").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    function selectedSources() {
+      return state.sources.filter((source) => source.enabled);
+    }
+
+    function selectedSourceKeys() {
+      return selectedSources().map((source) => source.key);
+    }
+
+    function getSourceDef(key) {
+      return SOURCE_DEFS[key];
+    }
+
+    function unique(values) {
+      return [...new Set(values.filter(Boolean))];
+    }
+
+    function normaliseTag(value) {
+      return value.trim().replace(/\s+/g, " ");
+    }
+
+    function moveSource(key, direction) {
+      const index = state.sources.findIndex((item) => item.key === key);
+      const targetIndex = index + direction;
+      if (index < 0 || targetIndex < 0 || targetIndex >= state.sources.length) {
+        return;
+      }
+      const [moved] = state.sources.splice(index, 1);
+      state.sources.splice(targetIndex, 0, moved);
+      render();
+    }
+
+    function toggleSource(key) {
+      const source = state.sources.find((item) => item.key === key);
+      if (!source) {
+        return;
+      }
+      source.enabled = !source.enabled;
+      ensureScheduleState();
+      render();
+    }
+
+    function reorderSource(fromKey, toKey) {
+      if (!fromKey || !toKey || fromKey === toKey) {
+        return;
+      }
+      const fromIndex = state.sources.findIndex((item) => item.key === fromKey);
+      const toIndex = state.sources.findIndex((item) => item.key === toKey);
+      if (fromIndex < 0 || toIndex < 0) {
+        return;
+      }
+      const [moved] = state.sources.splice(fromIndex, 1);
+      state.sources.splice(toIndex, 0, moved);
+      render();
+    }
+
+    function ensureScheduleState() {
+      for (const period of ["weekly", "monthly"]) {
+        for (const { key } of selectedSources()) {
+          if (!state.schedule[period][key]) {
+            state.schedule[period][key] = {
+              enabled: true,
+              top_n: defaultTopN(key),
+            };
+          }
+        }
+      }
+    }
+
+    function defaultTopN(key) {
+      const defaults = {
+        weather: 1,
+        arxiv: 7,
+        github_trending: 5,
+        hacker_news: 5,
+        postdoc_jobs: 5,
+        supervisor_updates: 5,
+      };
+      return defaults[key] || 5;
+    }
+
+    function getCombinedArxivProfile() {
+      const selected = state.arxiv.presets.length ? state.arxiv.presets : ["ai"];
+      const categories = [];
+      const mustInclude = [];
+      const boostKeywords = [];
+
+      for (const presetKey of selected) {
+        const preset = ARXIV_PROFILES[presetKey];
+        if (!preset) {
+          continue;
+        }
+        categories.push(...preset.categories);
+        mustInclude.push(...preset.must_include);
+        boostKeywords.push(...preset.boost_keywords);
+      }
+
+      const mergedCategories = unique([...categories, ...state.arxiv.customCategories]);
+      const mergedKeywords = unique([...mustInclude, ...state.arxiv.customKeywords]);
+      return {
+        categories: mergedCategories.length ? mergedCategories : ARXIV_PROFILES.ai.categories,
+        must_include: mergedKeywords.length ? mergedKeywords : ARXIV_PROFILES.ai.must_include,
+        boost_keywords: unique(boostKeywords),
+      };
+    }
+
+    function getHackerNewsKeywords() {
+      const arxivKeywords = getCombinedArxivProfile().must_include;
+      return unique([...arxivKeywords, ...DEFAULT_HN_KEYWORDS]).slice(0, 16);
+    }
+
+    function getJobSearchTerms() {
+      return state.postdoc_jobs.search_terms.length
+        ? state.postdoc_jobs.search_terms
+        : [...DEFAULT_JOB_TERMS];
+    }
+
+    function buildJobSources() {
+      const terms = getJobSearchTerms().slice(0, 3);
+      const rssSources = [
+        {
+          url: "https://www.jobs.ac.uk/jobs/academic-or-research/?format=rss",
+          name: "jobs.ac.uk Research",
+        },
+        {
+          url: "https://www.jobs.ac.uk/jobs/computer-science/?format=rss",
+          name: "jobs.ac.uk CS",
+        },
+        {
+          url: "https://www.jobs.ac.uk/jobs/artificial-intelligence/?format=rss",
+          name: "jobs.ac.uk AI",
+        },
+      ];
+
+      const jinaSources = [];
+      for (const term of terms) {
+        const encoded = encodeURIComponent(term);
+        jinaSources.push(
+          {
+            url: `https://www.findapostdoc.com/search/?Keywords=${encoded}`,
+            name: `FindAPostDoc ${term}`,
+            type: "findapostdoc",
+          },
+          {
+            url: `https://academicpositions.com/find-jobs?keywords=${encoded}`,
+            name: `AcademicPositions ${term}`,
+            type: "academicpositions",
+          },
+        );
+      }
+
+      jinaSources.push({
+        url: "https://euraxess.ec.europa.eu/jobs/search?f%5B0%5D=offer_type%3Ajob_offer&f%5B1%5D=positions%3Apostdoc_positions",
+        name: "EURAXESS Postdoc",
+        type: "euraxess",
+      });
+
+      return { rssSources, jinaSources };
+    }
+
+    function buildSupervisorEntries() {
+      return state.supervisor_updates.urls.map((url, index) => ({
+        name: `Monitor ${index + 1}`,
+        url,
+        institution: "",
+        notes: "",
+      }));
+    }
+
+    function getGeneratedFiles() {
+      const files = ["config/sources.yaml"];
+      const keys = selectedSourceKeys();
+      if (keys.includes("arxiv")) {
+        files.push("config/extensions/arxiv.yaml");
+      }
+      if (keys.includes("hacker_news")) {
+        files.push("config/extensions/hacker_news.yaml");
+      }
+      if (keys.includes("postdoc_jobs")) {
+        files.push("config/extensions/postdoc_jobs.yaml");
+      }
+      if (keys.includes("supervisor_updates")) {
+        files.push("config/extensions/supervisor_updates.yaml");
+      }
+      return files;
+    }
+
+    function yamlScalar(value) {
+      if (typeof value === "number") {
+        return String(value);
+      }
+      if (typeof value === "boolean") {
+        return value ? "true" : "false";
+      }
+      if (value === null || value === undefined) {
+        return '""';
+      }
+      if (value === "auto") {
+        return '"auto"';
+      }
+      return JSON.stringify(String(value));
+    }
+
+    function pushYamlList(lines, key, values, indent = "") {
+      lines.push(`${indent}${key}:`);
+      if (!values.length) {
+        lines.push(`${indent}  []`);
+        return;
+      }
+      for (const value of values) {
+        lines.push(`${indent}  - ${yamlScalar(value)}`);
+      }
+    }
+
+    function buildSourcesYaml() {
+      ensureScheduleState();
+      const order = selectedSourceKeys();
+      const lines = [
+        "# Generated by the Setup Wizard",
+        "",
+        "display_order:",
+        ...order.map((key) => `  - ${key}`),
+        "",
+        "arxiv:",
+        `  enabled: ${yamlScalar(order.includes("arxiv"))}`,
+        `  max_papers_per_run: ${yamlScalar(state.arxiv.maxPapers)}`,
+        "",
+        "hacker_news:",
+        `  enabled: ${yamlScalar(order.includes("hacker_news"))}`,
+        "",
+        "postdoc_jobs:",
+        `  enabled: ${yamlScalar(order.includes("postdoc_jobs"))}`,
+        "",
+        "supervisor_updates:",
+        `  enabled: ${yamlScalar(order.includes("supervisor_updates"))}`,
+        "",
+        "github_trending:",
+        `  enabled: ${yamlScalar(order.includes("github_trending"))}`,
+        `  max_repos: ${yamlScalar(state.github_trending.max_repos)}`,
+        "",
+        "weather:",
+        `  enabled: ${yamlScalar(order.includes("weather"))}`,
+        `  city: ${yamlScalar(state.weather.city)}`,
+        `  timezone: ${yamlScalar(state.weather.timezone)}`,
+        "",
+        `language: ${yamlScalar(state.global.language)}`,
+        "",
+        "llm:",
+        '  scoring_model: "google/gemini-2.5-flash-lite-preview-09-2025"',
+        '  summarization_model: "google/gemini-2.5-flash-lite-preview-09-2025"',
+        '  base_url: "https://openrouter.ai/api/v1"',
+        "",
+        "pages:",
+        '  base_url: ""',
+        "",
+        "# Future-ready rollup preferences. Safe to keep even before the backend",
+        "# starts using them directly.",
+        "weekly:",
+      ];
+
+      for (const key of order) {
+        const item = state.schedule.weekly[key];
+        lines.push(`  ${key}:`);
+        lines.push(`    enabled: ${yamlScalar(item.enabled)}`);
+        lines.push(`    top_n: ${yamlScalar(item.top_n)}`);
+      }
+
+      lines.push("");
+      lines.push("monthly:");
+      for (const key of order) {
+        const item = state.schedule.monthly[key];
+        lines.push(`  ${key}:`);
+        lines.push(`    enabled: ${yamlScalar(item.enabled)}`);
+        lines.push(`    top_n: ${yamlScalar(item.top_n)}`);
+      }
+
+      lines.push("");
+      lines.push("sinks:");
+      lines.push("  slack:");
+      lines.push(`    enabled: ${yamlScalar(state.sinks.slack.enabled)}`);
+      lines.push("    # Add SLACK_WEBHOOK_URL as a GitHub Actions secret");
+      lines.push(`    max_papers: ${yamlScalar(state.sinks.slack.max_papers)}`);
+      lines.push(`    max_hn: ${yamlScalar(state.sinks.slack.max_hn)}`);
+      lines.push(`    max_github: ${yamlScalar(state.sinks.slack.max_github)}`);
+      return lines.join("\n");
+    }
+
+    function buildArxivYaml() {
+      const profile = getCombinedArxivProfile();
+      const lines = ["# Generated by the Setup Wizard", ""];
+      pushYamlList(lines, "categories", profile.categories);
+      lines.push("");
+      pushYamlList(lines, "must_include", profile.must_include);
+      lines.push("");
+      pushYamlList(lines, "boost_keywords", profile.boost_keywords);
+      lines.push("");
+      lines.push(`llm_score_threshold: ${yamlScalar(state.arxiv.threshold)}`);
+      return lines.join("\n");
+    }
+
+    function buildHackerNewsYaml() {
+      const lines = ["# Generated by the Setup Wizard", ""];
+      lines.push(`min_score: ${yamlScalar(state.hacker_news.min_score)}`);
+      lines.push(`max_items: ${yamlScalar(state.hacker_news.max_items)}`);
+      lines.push("");
+      pushYamlList(lines, "keywords", getHackerNewsKeywords());
+      return lines.join("\n");
+    }
+
+    function buildPostdocYaml() {
+      const { rssSources, jinaSources } = buildJobSources();
+      const lines = ["# Generated by the Setup Wizard", ""];
+      lines.push("rss_sources:");
+      for (const source of rssSources) {
+        lines.push(`  - url: ${yamlScalar(source.url)}`);
+        lines.push(`    name: ${yamlScalar(source.name)}`);
+      }
+      lines.push("");
+      lines.push("jina_sources:");
+      for (const source of jinaSources) {
+        lines.push(`  - url: ${yamlScalar(source.url)}`);
+        lines.push(`    name: ${yamlScalar(source.name)}`);
+        lines.push(`    type: ${yamlScalar(source.type)}`);
+      }
+      lines.push("");
+      pushYamlList(lines, "filter_keywords", unique([...getJobSearchTerms(), "postdoc", "research associate", "fellowship"]), "");
+      lines.push("");
+      pushYamlList(lines, "exclude_keywords", DEFAULT_JOB_EXCLUDE, "");
+      lines.push("");
+      lines.push(`llm_score_threshold: ${yamlScalar(state.postdoc_jobs.threshold)}`);
+      return lines.join("\n");
+    }
+
+    function buildSupervisorYaml() {
+      const entries = buildSupervisorEntries();
+      const lines = ["# Generated by the Setup Wizard", ""];
+      if (!entries.length) {
+        lines.push("supervisors: []");
+        return lines.join("\n");
+      }
+      lines.push("supervisors:");
+      for (const entry of entries) {
+        lines.push(`  - name: ${yamlScalar(entry.name)}`);
+        lines.push(`    url: ${yamlScalar(entry.url)}`);
+        lines.push(`    institution: ${yamlScalar(entry.institution)}`);
+        lines.push(`    notes: ${yamlScalar(entry.notes)}`);
+      }
+      return lines.join("\n");
+    }
+
+    function getGeneratedOutputs() {
+      const outputs = [
+        {
+          path: "config/sources.yaml",
+          body: buildSourcesYaml(),
+          description: "Main switches, display order, language, rollup preferences, and sink config.",
+        },
+      ];
+      const keys = selectedSourceKeys();
+      if (keys.includes("arxiv")) {
+        outputs.push({
+          path: "config/extensions/arxiv.yaml",
+          body: buildArxivYaml(),
+          description: "arXiv profile presets, custom keywords, categories, and score threshold.",
+        });
+      }
+      if (keys.includes("hacker_news")) {
+        outputs.push({
+          path: "config/extensions/hacker_news.yaml",
+          body: buildHackerNewsYaml(),
+          description: "Hacker News score threshold, max stories, and keyword filter list.",
+        });
+      }
+      if (keys.includes("postdoc_jobs")) {
+        outputs.push({
+          path: "config/extensions/postdoc_jobs.yaml",
+          body: buildPostdocYaml(),
+          description: "Job board sources, generated search routes, and relevance filters.",
+        });
+      }
+      if (keys.includes("supervisor_updates")) {
+        outputs.push({
+          path: "config/extensions/supervisor_updates.yaml",
+          body: buildSupervisorYaml(),
+          description: "The URLs you want to monitor for lab or supervisor updates.",
+        });
+      }
+      return outputs;
+    }
+
+    function setNested(path, value) {
+      const parts = path.split(".");
+      let target = state;
+      for (let index = 0; index < parts.length - 1; index += 1) {
+        target = target[parts[index]];
+      }
+      target[parts[parts.length - 1]] = value;
+    }
+
+    function getNested(path) {
+      return path.split(".").reduce((value, part) => value[part], state);
+    }
+
+    function readInputValue(input) {
+      if (input.type === "checkbox") {
+        return input.checked;
+      }
+      if (input.type === "number" || input.type === "range") {
+        const parsed = Number(input.value);
+        return Number.isFinite(parsed) ? parsed : getNested(input.dataset.path);
+      }
+      return input.value;
+    }
+
+    function renderErrors(errors) {
+      if (!errors.length) {
+        stepErrorsEl.innerHTML = "";
+        return;
+      }
+
+      stepErrorsEl.innerHTML = `
+        <div class="notice warning">
+          <strong>Please fix this before moving on:</strong>
+          <ul class="preview-list">
+            ${errors.map((error) => `<li>${error}</li>`).join("")}
+          </ul>
+        </div>
+      `;
+    }
+
+    function validateStep(stepNumber) {
+      const errors = [];
+      if (stepNumber === 1 && !selectedSources().length) {
+        errors.push("Choose at least one feed source before continuing.");
+      }
+
+      if (stepNumber === 2) {
+        if (selectedSourceKeys().includes("weather") && !state.weather.city.trim()) {
+          errors.push("Add a city for the weather source or turn the weather source off.");
+        }
+        if (selectedSourceKeys().includes("postdoc_jobs") && !getJobSearchTerms().length) {
+          errors.push("Add at least one postdoc search term.");
+        }
+      }
+
+      return errors;
+    }
+
+    function renderProgress() {
+      progressEl.innerHTML = STEP_META.map((step, index) => {
+        const stepNumber = index + 1;
+        const classes = ["progress-step"];
+        if (stepNumber === state.currentStep) {
+          classes.push("is-active");
+        } else if (stepNumber < state.currentStep) {
+          classes.push("is-complete");
+        }
+        return `
+          <div class="${classes.join(" ")}" aria-current="${stepNumber === state.currentStep ? "step" : "false"}">
+            <div class="step-number">Step ${stepNumber}</div>
+            <strong>${step.title}</strong>
+            <span>${step.blurb}</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderPreview() {
+      const order = selectedSources();
+      previewOrderEl.innerHTML = order.length
+        ? order.map((source) => `<li>${getSourceDef(source.key).title}</li>`).join("")
+        : "<li>No feeds selected yet.</li>";
+
+      previewFilesEl.innerHTML = getGeneratedFiles().map((file) => `<li>${file}</li>`).join("");
+
+      if (state.sinks.slack.enabled) {
+        previewNotificationsEl.textContent = state.sinks.slack.webhook.trim()
+          ? "Slack is enabled. Remember to store the webhook as a GitHub secret instead of pasting it into YAML."
+          : "Slack is enabled. You still need to add SLACK_WEBHOOK_URL as a repository secret.";
+      } else {
+        previewNotificationsEl.textContent = "No notification sink enabled yet. The website output will still work normally.";
+      }
+
+      previewFocusEl.textContent = STEP_META[state.currentStep - 1].blurb;
+    }
+
+    function renderStep1() {
+      const selected = new Set(selectedSourceKeys());
+      stepPanelEl.innerHTML = `
+        <div class="stack">
+          <div>
+            <h3 class="section-title">Pick the sources to include</h3>
+            <div class="card-grid">
+              ${state.sources.map(({ key, enabled }) => {
+                const def = getSourceDef(key);
+                return `
+                  <button class="source-card ${enabled ? "is-selected" : ""}" type="button" data-toggle-source="${key}">
+                    <span class="checkmark" aria-hidden="true">${enabled ? "✓" : "+"}</span>
+                    <div class="source-title">
+                      <strong>${def.title}</strong>
+                      <span class="pill">${def.category}</span>
+                    </div>
+                    <p>${def.desc}</p>
+                    <div class="meta">
+                      <span class="pill">${enabled ? "Selected" : "Optional"}</span>
+                      <span class="pill">${def.output}</span>
+                    </div>
+                  </button>
+                `;
+              }).join("")}
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>Order the selected feeds</h3>
+            <p>
+              This order maps directly to <code>display_order</code> in
+              <code>config/sources.yaml</code>. Drag rows, or use the move buttons if you
+              prefer the keyboard.
+            </p>
+
+            ${selectedSources().length ? `
+              <ul class="selected-list" id="selected-list">
+                ${selectedSources().map(({ key }) => `
+                  <li class="selected-item" draggable="true" data-source-item="${key}">
+                    <span class="drag-handle" aria-hidden="true">::</span>
+                    <div class="selected-meta">
+                      <strong>${getSourceDef(key).title}</strong>
+                      <p>${getSourceDef(key).desc}</p>
+                    </div>
+                    <div class="move-controls">
+                      <button class="move-button" type="button" data-move-up="${key}">Move up</button>
+                      <button class="move-button" type="button" data-move-down="${key}">Move down</button>
+                    </div>
+                  </li>
+                `).join("")}
+              </ul>
+            ` : `
+              <div class="placeholder">
+                Turn on at least one feed. Unselected feeds will be skipped in later steps.
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+
+      stepPanelEl.querySelectorAll("[data-toggle-source]").forEach((button) => {
+        button.addEventListener("click", () => toggleSource(button.dataset.toggleSource));
+      });
+
+      stepPanelEl.querySelectorAll("[data-move-up]").forEach((button) => {
+        button.addEventListener("click", () => moveSource(button.dataset.moveUp, -1));
+      });
+
+      stepPanelEl.querySelectorAll("[data-move-down]").forEach((button) => {
+        button.addEventListener("click", () => moveSource(button.dataset.moveDown, 1));
+      });
+
+      stepPanelEl.querySelectorAll("[data-source-item]").forEach((item) => {
+        item.addEventListener("dragstart", () => {
+          draggedSourceKey = item.dataset.sourceItem;
+          item.classList.add("is-dragging");
+        });
+        item.addEventListener("dragend", () => {
+          draggedSourceKey = null;
+          item.classList.remove("is-dragging");
+        });
+        item.addEventListener("dragover", (event) => {
+          event.preventDefault();
+        });
+        item.addEventListener("drop", (event) => {
+          event.preventDefault();
+          reorderSource(draggedSourceKey, item.dataset.sourceItem);
+        });
+      });
+    }
+
+    function renderTagEditor(title, path, items, placeholder, helper = "") {
+      return `
+        <div class="tag-editor">
+          <label>${title}</label>
+          ${helper ? `<div class="helper-text">${helper}</div>` : ""}
+          <div class="tag-list">
+            ${items.length
+              ? items.map((item, index) => `
+                <span class="tag">
+                  ${item}
+                  <button type="button" aria-label="Remove ${item}" data-remove-tag="${path}" data-remove-index="${index}">
+                    ×
+                  </button>
+                </span>
+              `).join("")
+              : '<span class="helper-text">No custom entries added yet.</span>'}
+          </div>
+          <div class="inline-action">
+            <input type="text" data-tag-input="${path}" placeholder="${placeholder}" />
+            <button class="small-button" type="button" data-add-tag="${path}">Add</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderStep2() {
+      const keys = selectedSourceKeys();
+      const profile = getCombinedArxivProfile();
+      stepPanelEl.innerHTML = keys.length ? `
+        <div class="stack">
+          <div class="config-card">
+            <h3>Global language</h3>
+            <p>This language is applied across summaries, rollups, and sinks.</p>
+            <div class="field-grid">
+              <div class="field">
+                <label for="language-select">Summary language</label>
+                <select id="language-select" data-path="global.language">
+                  ${LANGUAGE_OPTIONS.map(([value, label]) => `
+                    <option value="${value}" ${state.global.language === value ? "selected" : ""}>${label}</option>
+                  `).join("")}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          ${keys.includes("arxiv") ? `
+            <div class="config-card">
+              <h3>arXiv</h3>
+              <p>Mix one or more preset research profiles, then add any custom categories or keywords you care about.</p>
+              <div class="preset-grid">
+                ${Object.entries(ARXIV_PROFILES).map(([key, preset]) => `
+                  <div class="preset">
+                    <label>
+                      <input
+                        type="checkbox"
+                        data-arxiv-preset="${key}"
+                        ${state.arxiv.presets.includes(key) ? "checked" : ""}
+                      />
+                      <span>${preset.label}</span>
+                    </label>
+                    <div class="helper-text">${preset.summary}</div>
+                  </div>
+                `).join("")}
+              </div>
+
+              <div class="field-grid">
+                <div class="field">
+                  <label for="arxiv-max-papers">Max papers fetched per run</label>
+                  <input
+                    id="arxiv-max-papers"
+                    type="number"
+                    min="25"
+                    max="1000"
+                    step="25"
+                    value="${state.arxiv.maxPapers}"
+                    data-path="arxiv.maxPapers"
+                  />
+                </div>
+                <div class="field">
+                  <label for="arxiv-threshold">LLM score threshold</label>
+                  <div class="range-row">
+                    <input
+                      id="arxiv-threshold"
+                      type="range"
+                      min="0"
+                      max="10"
+                      step="1"
+                      value="${state.arxiv.threshold}"
+                      data-path="arxiv.threshold"
+                    />
+                    <input
+                      type="number"
+                      min="0"
+                      max="10"
+                      step="1"
+                      value="${state.arxiv.threshold}"
+                      data-path="arxiv.threshold"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              ${renderTagEditor(
+                "Custom keywords",
+                "arxiv.customKeywords",
+                state.arxiv.customKeywords,
+                "Add a keyword such as agentic or world model",
+                "These are merged with the selected presets and become extra must_include terms."
+              )}
+
+              ${renderTagEditor(
+                "Custom arXiv categories",
+                "arxiv.customCategories",
+                state.arxiv.customCategories,
+                "Add a category such as cs.CY",
+                "Use these if your work spans categories not covered by the preset profiles."
+              )}
+
+              <div class="notice success">
+                <strong>Current merged profile preview</strong>
+                <div class="helper-text">Categories: ${profile.categories.join(", ")}</div>
+                <div class="helper-text">Required keywords: ${profile.must_include.slice(0, 10).join(", ")}${profile.must_include.length > 10 ? ", ..." : ""}</div>
+              </div>
+            </div>
+          ` : ""}
+
+          ${keys.includes("weather") ? `
+            <div class="config-card">
+              <h3>Weather</h3>
+              <p>The current backend expects one city, so the wizard writes a single weather location for now.</p>
+              <div class="field-grid">
+                <div class="field">
+                  <label for="weather-city">City</label>
+                  <input id="weather-city" type="text" value="${state.weather.city}" data-path="weather.city" placeholder="Edinburgh" />
+                </div>
+                <div class="field">
+                  <label for="weather-timezone">Timezone</label>
+                  <select id="weather-timezone" data-path="weather.timezone">
+                    ${TIMEZONE_OPTIONS.map(([value, label]) => `
+                      <option value="${value}" ${state.weather.timezone === value ? "selected" : ""}>${label}</option>
+                    `).join("")}
+                  </select>
+                </div>
+              </div>
+            </div>
+          ` : ""}
+
+          ${keys.includes("hacker_news") ? `
+            <div class="config-card">
+              <h3>Hacker News</h3>
+              <p>Set the score floor and the maximum number of stories to pull in each day.</p>
+              <div class="field-grid">
+                <div class="field">
+                  <label for="hn-score">Score threshold</label>
+                  <div class="range-row">
+                    <input id="hn-score" type="range" min="10" max="200" step="5" value="${state.hacker_news.min_score}" data-path="hacker_news.min_score" />
+                    <input type="number" min="10" max="200" step="5" value="${state.hacker_news.min_score}" data-path="hacker_news.min_score" />
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="hn-max">Max stories</label>
+                  <input id="hn-max" type="number" min="1" max="50" step="1" value="${state.hacker_news.max_items}" data-path="hacker_news.max_items" />
+                </div>
+              </div>
+              <div class="notice">
+                <strong>Keyword strategy</strong>
+                <div class="helper-text">The wizard will derive the HN keyword list from your arXiv interests plus a default tech-news baseline.</div>
+              </div>
+            </div>
+          ` : ""}
+
+          ${keys.includes("github_trending") ? `
+            <div class="config-card">
+              <h3>GitHub Trending</h3>
+              <p>Keep this small if you want the digest to stay tight and highly scannable.</p>
+              <div class="field-grid">
+                <div class="field">
+                  <label for="github-max">Max repos</label>
+                  <input id="github-max" type="number" min="1" max="50" step="1" value="${state.github_trending.max_repos}" data-path="github_trending.max_repos" />
+                </div>
+              </div>
+            </div>
+          ` : ""}
+
+          ${keys.includes("postdoc_jobs") ? `
+            <div class="config-card">
+              <h3>Postdoc Jobs</h3>
+              <p>Search terms are used to generate job-board routes and relevance keywords for the jobs extension config file.</p>
+              <div class="field-grid">
+                <div class="field">
+                  <label for="jobs-threshold">LLM score threshold</label>
+                  <div class="range-row">
+                    <input id="jobs-threshold" type="range" min="0" max="10" step="1" value="${state.postdoc_jobs.threshold}" data-path="postdoc_jobs.threshold" />
+                    <input type="number" min="0" max="10" step="1" value="${state.postdoc_jobs.threshold}" data-path="postdoc_jobs.threshold" />
+                  </div>
+                </div>
+              </div>
+
+              ${renderTagEditor(
+                "Search terms",
+                "postdoc_jobs.search_terms",
+                state.postdoc_jobs.search_terms,
+                "Add a subject such as multimodal learning",
+                "The first few terms become generated search routes for FindAPostDoc and AcademicPositions."
+              )}
+            </div>
+          ` : ""}
+
+          ${keys.includes("supervisor_updates") ? `
+            <div class="config-card">
+              <h3>Supervisor Updates</h3>
+              <p>Add the URLs you want the monitor to watch. Each URL becomes an entry in <code>supervisor_updates.yaml</code>.</p>
+              ${renderTagEditor(
+                "URLs to monitor",
+                "supervisor_updates.urls",
+                state.supervisor_updates.urls,
+                "Add a lab or professor URL",
+                "You can keep this empty for now and fill it in later if you only want the rest of the wizard output today."
+              )}
+            </div>
+          ` : ""}
+        </div>
+      ` : `
+        <div class="placeholder">
+          Step 2 is empty because no feed sources are selected yet. Go back to Step 1 and turn at least one source on.
+        </div>
+      `;
+
+      stepPanelEl.querySelectorAll("[data-path]").forEach((input) => {
+        const eventName = input.type === "checkbox" ? "change" : "input";
+        input.addEventListener(eventName, () => {
+          const path = input.dataset.path;
+          setNested(path, readInputValue(input));
+          if (state.currentStep === 5) {
+            renderStep5();
+          }
+        });
+      });
+
+      stepPanelEl.querySelectorAll("[data-arxiv-preset]").forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+          const key = checkbox.dataset.arxivPreset;
+          if (checkbox.checked) {
+            state.arxiv.presets = unique([...state.arxiv.presets, key]);
+          } else {
+            state.arxiv.presets = state.arxiv.presets.filter((item) => item !== key);
+          }
+          renderStep2();
+          renderPreview();
+        });
+      });
+
+      wireTagEditor("arxiv.customKeywords");
+      wireTagEditor("arxiv.customCategories");
+      wireTagEditor("postdoc_jobs.search_terms");
+      wireTagEditor("supervisor_updates.urls");
+    }
+
+    function wireTagEditor(path) {
+      const input = stepPanelEl.querySelector(`[data-tag-input="${path}"]`);
+      const addButton = stepPanelEl.querySelector(`[data-add-tag="${path}"]`);
+
+      if (input && addButton) {
+        const submit = () => {
+          const raw = normaliseTag(input.value);
+          if (!raw) {
+            return;
+          }
+          const parts = path.split(".");
+          const items = state[parts[0]][parts[1]];
+          state[parts[0]][parts[1]] = unique([...items, raw]);
+          input.value = "";
+          renderStep2();
+          renderPreview();
+        };
+
+        addButton.addEventListener("click", submit);
+        input.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            submit();
+          }
+        });
+      }
+
+      stepPanelEl.querySelectorAll(`[data-remove-tag="${path}"]`).forEach((button) => {
+        button.addEventListener("click", () => {
+          const index = Number(button.dataset.removeIndex);
+          const parts = path.split(".");
+          state[parts[0]][parts[1]] = state[parts[0]][parts[1]].filter((_, itemIndex) => itemIndex !== index);
+          renderStep2();
+          renderPreview();
+        });
+      });
+    }
+
+    function renderStep3() {
+      ensureScheduleState();
+      const keys = selectedSourceKeys();
+      stepPanelEl.innerHTML = keys.length ? `
+        <div class="stack">
+          ${["weekly", "monthly"].map((period) => `
+            <div class="config-card">
+              <h3>${period === "weekly" ? "Weekly summary" : "Monthly summary"}</h3>
+              <p>
+                These preferences only include feeds selected in Step 1. The generated YAML is future-ready even before the rollup backend starts consuming every field.
+              </p>
+              <div class="stack">
+                ${keys.map((key) => `
+                  <div class="toggle-card">
+                    <div>
+                      <strong>${getSourceDef(key).title}</strong>
+                      <div class="helper-text">${getSourceDef(key).desc}</div>
+                    </div>
+                    <div class="field-grid" style="margin: 0; min-width: min(340px, 100%);">
+                      <div class="field">
+                        <label>
+                          <input
+                            type="checkbox"
+                            data-path="schedule.${period}.${key}.enabled"
+                            ${state.schedule[period][key].enabled ? "checked" : ""}
+                          />
+                          Include
+                        </label>
+                      </div>
+                      <div class="field">
+                        <label>Top N</label>
+                        <input
+                          type="number"
+                          min="1"
+                          max="50"
+                          step="1"
+                          value="${state.schedule[period][key].top_n}"
+                          data-path="schedule.${period}.${key}.top_n"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      ` : `
+        <div class="placeholder">
+          Weekly and monthly preferences appear here once you select at least one feed source.
+        </div>
+      `;
+
+      stepPanelEl.querySelectorAll("[data-path]").forEach((input) => {
+        const eventName = input.type === "checkbox" ? "change" : "input";
+        input.addEventListener(eventName, () => {
+          const path = input.dataset.path;
+          setNested(path, readInputValue(input));
+        });
+      });
+    }
+
+    function renderStep4() {
+      stepPanelEl.innerHTML = `
+        <div class="stack">
+          <div class="config-card">
+            <h3>Slack</h3>
+            <p>
+              Enable Slack if you want a compact message in addition to the published site.
+              Webhook URLs stay out of YAML and should be stored as repo secrets.
+            </p>
+
+            <div class="checkbox-row">
+              <div>
+                <strong>Enable Slack sink</strong>
+                <div class="helper-text">This writes only the non-secret sink settings into <code>config/sources.yaml</code>.</div>
+              </div>
+              <label>
+                <input type="checkbox" data-path="sinks.slack.enabled" ${state.sinks.slack.enabled ? "checked" : ""} />
+                <span class="sr-only">Enable Slack</span>
+              </label>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="slack-max-papers">Max papers</label>
+                <input id="slack-max-papers" type="number" min="1" max="20" step="1" value="${state.sinks.slack.max_papers}" data-path="sinks.slack.max_papers" />
+              </div>
+              <div class="field">
+                <label for="slack-max-hn">Max HN stories</label>
+                <input id="slack-max-hn" type="number" min="1" max="20" step="1" value="${state.sinks.slack.max_hn}" data-path="sinks.slack.max_hn" />
+              </div>
+              <div class="field">
+                <label for="slack-max-github">Max GitHub repos</label>
+                <input id="slack-max-github" type="number" min="1" max="20" step="1" value="${state.sinks.slack.max_github}" data-path="sinks.slack.max_github" />
+              </div>
+            </div>
+
+            <div class="field-full">
+              <label for="slack-webhook">Slack webhook URL <span class="hint">(stored locally only, never written to YAML)</span></label>
+              <input
+                id="slack-webhook"
+                type="url"
+                value="${state.sinks.slack.webhook}"
+                data-path="sinks.slack.webhook"
+                placeholder="https://hooks.slack.com/services/..."
+              />
+            </div>
+
+            <div class="notice warning">
+              <strong>Secret handling</strong>
+              <div class="helper-text">
+                In copy-paste mode, add your webhook as a GitHub Actions secret named <code>SLACK_WEBHOOK_URL</code>.
+                The generated YAML keeps only non-secret Slack settings.
+              </div>
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <div class="mini-panel toggle-card is-disabled">
+              <div>
+                <h3>Discord</h3>
+                <p>Planned as a future sink with the same content controls as Slack.</p>
+              </div>
+              <span class="pill">Coming soon</span>
+            </div>
+            <div class="mini-panel toggle-card is-disabled">
+              <div>
+                <h3>Email</h3>
+                <p>Placeholder for a future SMTP or SendGrid based delivery path.</p>
+              </div>
+              <span class="pill">Coming soon</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      stepPanelEl.querySelectorAll("[data-path]").forEach((input) => {
+        const eventName = input.type === "checkbox" ? "change" : "input";
+        input.addEventListener(eventName, () => {
+          const path = input.dataset.path;
+          setNested(path, readInputValue(input));
+          renderPreview();
+        });
+      });
+    }
+
+    function renderStep5() {
+      const outputs = getGeneratedOutputs();
+      stepPanelEl.innerHTML = `
+        <div class="stack">
+          ${outputs.map((output, index) => `
+            <div class="output-card">
+              <div class="output-header">
+                <div>
+                  <h3>${output.path}</h3>
+                  <p>${output.description}</p>
+                </div>
+                <button class="copy-button" type="button" data-copy-output="${index}">Copy</button>
+              </div>
+              <pre class="code-preview" id="output-${index}">${escapeHtml(output.body)}</pre>
+            </div>
+          `).join("")}
+
+          ${state.sinks.slack.enabled ? `
+            <div class="notice warning">
+              <strong>Before your first run</strong>
+              <div class="helper-text">
+                Add <code>SLACK_WEBHOOK_URL</code> as a GitHub Actions secret.
+                ${state.sinks.slack.webhook.trim()
+                  ? "You already typed a webhook here, so you can paste that value into the secret form."
+                  : "You have not entered a webhook URL here yet, so remember to grab it before enabling Slack in production."}
+              </div>
+            </div>
+          ` : ""}
+
+          <div class="mini-panel">
+            <h3>Optional one-click deploy</h3>
+            <p>
+              The roadmap includes a future browser-only deploy flow using the GitHub Contents
+              API and Secrets API. This panel is intentionally a placeholder for that next phase.
+            </p>
+            <div class="notice">
+              <strong>Planned scope</strong>
+              <div class="helper-text">Commit generated config files to <code>main</code>, write secrets securely, then remind the user to revoke the PAT.</div>
+            </div>
+          </div>
+
+          <div class="notice success">
+            <strong>Suggested next steps</strong>
+            <ol class="preview-list">
+              <li>Copy each generated block into the matching file in your fork.</li>
+              <li>Add <code>OPENROUTER_API_KEY</code> as a GitHub Actions secret.</li>
+              <li>If Slack is enabled, add <code>SLACK_WEBHOOK_URL</code> too.</li>
+              <li>Go to Actions and run <strong>Daily Digest</strong> once to confirm the setup.</li>
+            </ol>
+          </div>
+        </div>
+      `;
+
+      stepPanelEl.querySelectorAll("[data-copy-output]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const index = Number(button.dataset.copyOutput);
+          const output = outputs[index];
+          await navigator.clipboard.writeText(output.body);
+          const previous = button.textContent;
+          button.textContent = "Copied";
+          setTimeout(() => {
+            button.textContent = previous;
+          }, 1800);
+        });
+      });
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function updateNav() {
+      backButtonEl.disabled = state.currentStep === 1;
+      nextButtonEl.textContent = state.currentStep === 5 ? "Start over" : "Next";
+    }
+
+    function renderCurrentStep() {
+      if (state.currentStep === 1) {
+        renderStep1();
+      } else if (state.currentStep === 2) {
+        renderStep2();
+      } else if (state.currentStep === 3) {
+        renderStep3();
+      } else if (state.currentStep === 4) {
+        renderStep4();
+      } else {
+        renderStep5();
+      }
+    }
+
+    function render() {
+      ensureScheduleState();
+      renderErrors([]);
+      renderProgress();
+      renderPreview();
+      stepDescriptionEl.textContent = STEP_META[state.currentStep - 1].blurb;
+      stepPillEl.textContent = `Step ${state.currentStep} of 5`;
+      updateNav();
+      renderCurrentStep();
+    }
+
+    loadTheme();
+    ensureScheduleState();
+    render();
+  </script>
 </body>
 </html>
