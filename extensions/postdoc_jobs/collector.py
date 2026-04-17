@@ -191,7 +191,10 @@ def enrich_job_details(job: dict[str, Any], request_timeout: float = 20.0) -> di
 
     try:
         response = httpx.get(
-            url, timeout=request_timeout, follow_redirects=True, headers={"User-Agent": "Linnet/1.0"}
+            url,
+            timeout=request_timeout,
+            follow_redirects=True,
+            headers={"User-Agent": "Linnet/1.0"},
         )
         response.raise_for_status()
     except Exception:
