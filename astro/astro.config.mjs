@@ -7,7 +7,7 @@ const DATA_ROOT = resolve(process.cwd(), '../docs/data');
 
 export default defineConfig({
   site: 'https://yuyangxueed.github.io',
-  base: '/linnet',
+  base: '/Linnet',
   integrations: [mdx()],
   output: 'static',
   vite: {

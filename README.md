@@ -15,7 +15,7 @@
 
 Fork this repo, drop in one API key, and get your own searchable digest site running in under 5 minutes. No server, no subscription, no manual reading.
 
-**[See a live example →](https://yuyangxueed.github.io/linnet)** · **[Setup Wizard →](https://yuyangxueed.github.io/linnet/setup/)** · **[Manual config guide →](astro/public/setup/manual-config.md)**
+**[See a live example →](https://yuyangxueed.github.io/Linnet)** · **[Setup Wizard →](https://yuyangxueed.github.io/Linnet/setup/)** · **[Manual config guide →](astro/public/setup/manual-config.md)**
 
 > **Important:** the public wizard is a generator for your own fork. It does **not** modify this demo site or this repository. Today it generates config for copy-paste; browser-side one-click deploy is not enabled yet.
 >
@@ -62,7 +62,7 @@ Go to **Settings → Pages → Source: GitHub Actions** (not "Deploy from a bran
 
 ### 4. Open the wizard and generate config
 
-Use the [Setup Wizard](https://yuyangxueed.github.io/linnet/setup/) for the fast path. It walks through source selection, ordering, sink choices, and generated files for **your fork**.
+Use the [Setup Wizard](https://yuyangxueed.github.io/Linnet/setup/) for the fast path. It walks through source selection, ordering, sink choices, and generated files for **your fork**.
 
 If you prefer to edit everything yourself, use [`astro/public/setup/manual-config.md`](astro/public/setup/manual-config.md) instead.
 
