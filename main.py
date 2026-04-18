@@ -36,11 +36,6 @@ from publishers.data_publisher import (
     write_monthly_json,
     write_weekly_json,
 )
-from publishers.pages_publisher import (
-    render_daily_page,
-    render_monthly_page,
-    render_weekly_page,
-)
 from sinks import SINK_REGISTRY
 
 
@@ -129,9 +124,7 @@ def run_daily(sources: dict, dry_run: bool = False) -> None:
     display_order = sources.get("display_order", [ext_class.key for ext_class in REGISTRY])
     payload = build_daily_payload(date_str, sections, meta, display_order)
     json_path = write_daily_json(payload)
-    md_path = render_daily_page(payload)
     print(f"Written: {json_path}")
-    print(f"Written: {md_path}")
 
     # ── Deliver to enabled sinks ─────────────────────────────────────
     sinks_cfg = sources.get("sinks", {})
@@ -175,9 +168,7 @@ def run_weekly() -> None:
 
     payload = build_weekly_payload(dates, period, summary, data_dir)
     json_path = write_weekly_json(payload)
-    md_path = render_weekly_page(payload)
     print(f"Written: {json_path}")
-    print(f"Written: {md_path}")
 
 
 def run_monthly() -> None:
@@ -208,9 +199,7 @@ def run_monthly() -> None:
 
     payload = build_monthly_payload(dates, period, summary, data_dir)
     json_path = write_monthly_json(payload)
-    md_path = render_monthly_page(payload)
     print(f"Written: {json_path}")
-    print(f"Written: {md_path}")
 
 
 def check_today() -> None:
