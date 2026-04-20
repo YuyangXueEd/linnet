@@ -1,6 +1,6 @@
 {
   "date": "2026-04-20",
-  "generated_at": "2026-04-20T23:30:11.609493+00:00",
+  "generated_at": "2026-04-20T23:42:16.921738+00:00",
   "sections_ordered": [
     {
       "key": "quote_of_day",
@@ -9,9 +9,9 @@
       "icon": "✦",
       "items": [
         {
-          "quote": "Love begins by taking care of the closest ones - the ones at home.",
-          "author": "Mother Teresa",
-          "category": "love"
+          "quote": "When I was young, I was just about hard work. But as I got older, I did experience anxiety, doubt, judgment, and it's so easy to lose yourself for a second.",
+          "author": "Jennifer Lopez",
+          "category": "experience"
         }
       ],
       "meta": {
@@ -48,7 +48,7 @@
             "cs.AI",
             "cs.CV"
           ],
-          "abstract": "MARCH is a multi-agent framework for CT report generation that mimics the hierarchical structure of radiology departments. It employs specialized agents (Resident, Fellow, Attending) to perform iterative drafting, retrieval-augmented revision, and consensus-based verification to mitigate clinical hallucinations. This approach significantly improves both the clinical fidelity and linguistic accuracy of automated reports compared to monolithic models.",
+          "abstract": "MARCH is a multi-agent framework for CT report generation that mimics the hierarchical structure of radiology departments to improve clinical fidelity. It employs specialized agents—Resident for drafting, Fellows for retrieval-augmented revision, and an Attending for orchestrating consensus discourse—to iteratively verify findings. This approach effectively mitigates clinical hallucinations and outperforms existing monolithic models on the RadGenome-ChestCT dataset.",
           "url": "http://arxiv.org/abs/2604.16175v1",
           "pdf_url": "https://arxiv.org/pdf/2604.16175v1",
           "score": 9.0,
@@ -72,7 +72,7 @@
             "cs.AI",
             "cs.CV"
           ],
-          "abstract": "UniEditBench introduces a unified and cost-effective benchmark for evaluating both image and video editing models using a shared protocol, addressing the fragmentation in current evaluation methods. Its core contribution is a structured taxonomy covering diverse operations (including challenging compositional tasks) and the use of a distilled, lightweight MLLM judge to provide scalable evaluations that better align with human preference than traditional automatic metrics.",
+          "abstract": "UniEditBench introduces a unified and cost-effective benchmark for evaluating both image and video editing models using a shared protocol, addressing the fragmentation in current evaluation methods. Its core contribution is providing a structured taxonomy of diverse editing operations and enabling scalable assessment by distilling a powerful MLLM judge into a lightweight, efficient evaluator. This allows for fairer cross-paradigm comparisons without incurring prohibitive computational costs.",
           "url": "http://arxiv.org/abs/2604.15871v1",
           "pdf_url": "https://arxiv.org/pdf/2604.15871v1",
           "score": 9.0,
@@ -81,6 +81,28 @@
           "primary_category": "cs.AI",
           "primary_category_anchor": "cs-ai",
           "primary_category_rank": 0
+        },
+        {
+          "id": "2604.16256v1",
+          "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
+          "authors": [
+            "Yige Xu",
+            "Yongjie Wang",
+            "Zizhuo Wu",
+            "Kaisong Song",
+            "Jun Lin"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.CV"
+          ],
+          "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their text-only capabilities. The core method introduces **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. The contribution is demonstrating a consistent and substantial performance gap, showing VLMs significantly outperform on text-only inputs compared to image-based reasoning, suggesting limitations in their visual grounding.",
+          "url": "http://arxiv.org/abs/2604.16256v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
+          "score": 9.0,
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
         },
         {
           "id": "2604.16054v1",
@@ -96,7 +118,7 @@
             "cs.AI",
             "cs.CV"
           ],
-          "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning capabilities of Multimodal Large Language Models (MLLMs) through eight tasks categorized by Abstraction, Relation, and Transformation. The core contribution is demonstrating a significant gap, where top MLLMs score below 50% accuracy compared to 80% for humans, revealing limitations in visual attention, internal manipulation, and concept abstraction.",
+          "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning abilities of Multimodal Large Language Models (MLLMs) through eight tasks categorized by Abstraction, Relation, and Transformation. The benchmark reveals a significant gap, with top MLLMs scoring below 50% accuracy compared to 80% for humans. This highlights current MLLMs' limitations in crucial fluid intelligence processes like pattern induction and mental manipulation.",
           "url": "http://arxiv.org/abs/2604.16054v1",
           "pdf_url": "https://arxiv.org/pdf/2604.16054v1",
           "score": 8.0,
@@ -105,6 +127,26 @@
           "primary_category": "cs.AI",
           "primary_category_anchor": "cs-ai",
           "primary_category_rank": 0
+        },
+        {
+          "id": "2604.16264v1",
+          "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
+          "authors": [
+            "Seulgi Kim",
+            "Mohit Prabhushankar",
+            "Ghassan AlRegib"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CV"
+          ],
+          "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs) by addressing information disparity *before* fusion. $\\text{MoIR}$ explicitly identifies tokens with lower information density and routes complementary information from a stronger modality to them. This information-level routing mechanism ensures a more balanced and robust fusion process compared to methods that only adjust attention allocation.",
+          "url": "http://arxiv.org/abs/2604.16264v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
+          "score": 8.0,
+          "primary_category": "cs.LG",
+          "primary_category_anchor": "cs-lg",
+          "primary_category_rank": 1
         },
         {
           "id": "2604.16076v1",
@@ -120,7 +162,7 @@
             "cs.LG",
             "cs.NE"
           ],
-          "abstract": "This paper introduces Prototype-Grounded Concept Models (PGCMs) to address the lack of verifiability in Concept Bottleneck Models (CBMs). PGCMs ground abstract concepts in learned visual prototypes, providing explicit image-part evidence for concept activation. This grounding allows for direct inspection and targeted human intervention to correct concept misalignments, achieving comparable predictive performance to CBMs while significantly enhancing transparency and interpretability.",
+          "abstract": "This paper introduces Prototype-Grounded Concept Models (PGCMs) to address the lack of verifiability in Concept Bottleneck Models (CBMs). PGCMs ground abstract concepts in learned visual prototypes, providing explicit image evidence for concept activation. This grounding allows for direct inspection and targeted human intervention to correct concept misalignments, achieving comparable predictive performance to CBMs while significantly enhancing transparency and interpretability.",
           "url": "http://arxiv.org/abs/2604.16076v1",
           "pdf_url": "https://arxiv.org/pdf/2604.16076v1",
           "score": 7.0,
@@ -142,7 +184,7 @@
             "cs.AI",
             "cs.CV"
           ],
-          "abstract": "This paper introduces CBC-SLP, a novel method for robust multispectral semantic segmentation that handles both missing and full modalities. The core method employs a **Structured Latent Projection (SLP)** approach to explicitly preserve both modality-invariant and modality-specific information, avoiding the performance trade-offs seen in models that rely solely on shared representations. This design ensures high performance regardless of modality availability.",
+          "abstract": "This paper introduces CBC-SLP, a novel method for robust multispectral semantic segmentation that handles both missing and full modalities. The core method employs a **Structured Latent Projection (SLP)** to explicitly learn and preserve both modality-invariant and modality-specific information, avoiding the performance trade-off seen in models relying solely on shared representations. This approach ensures high performance even when all modalities are available while maintaining robustness to missing data.",
           "url": "http://arxiv.org/abs/2604.15856v1",
           "pdf_url": "https://arxiv.org/pdf/2604.15856v1",
           "score": 7.0,
@@ -151,48 +193,6 @@
           "primary_category": "cs.AI",
           "primary_category_anchor": "cs-ai",
           "primary_category_rank": 0
-        },
-        {
-          "id": "2604.16264v1",
-          "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
-          "authors": [
-            "Seulgi Kim",
-            "Mohit Prabhushankar",
-            "Ghassan AlRegib"
-          ],
-          "categories": [
-            "cs.LG",
-            "cs.CV"
-          ],
-          "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs). $\\text{MoIR}$ addresses the limitation of attention-based methods by employing an **information-level fusion** strategy. It explicitly reduces information disparity *before* fusion by identifying less informative tokens and routing complementary information from a stronger modality, thereby balancing the input signals.",
-          "url": "http://arxiv.org/abs/2604.16264v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
-          "score": 8.0,
-          "primary_category": "cs.LG",
-          "primary_category_anchor": "cs-lg",
-          "primary_category_rank": 1
-        },
-        {
-          "id": "2604.16256v1",
-          "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
-          "authors": [
-            "Yige Xu",
-            "Yongjie Wang",
-            "Zizhuo Wu",
-            "Kaisong Song",
-            "Jun Lin"
-          ],
-          "categories": [
-            "cs.CL",
-            "cs.CV"
-          ],
-          "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their textual components. The core method introduces **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. The contribution is the finding that VLMs exhibit a **substantial performance gap**, consistently excelling on text-only inputs compared to image-based reasoning, suggesting limitations in their visual grounding.",
-          "url": "http://arxiv.org/abs/2604.16256v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
-          "score": 9.0,
-          "primary_category": "cs.CL",
-          "primary_category_anchor": "cs-cl",
-          "primary_category_rank": 2
         }
       ],
       "meta": {
@@ -207,9 +207,73 @@
       "payload_key": "hacker_news",
       "title": "Hacker News",
       "icon": "🔥",
-      "items": [],
+      "items": [
+        {
+          "id": 47831621,
+          "title": "GitHub's fake star economy",
+          "url": "https://awesomeagents.ai/news/github-fake-stars-investigation/",
+          "score": 727,
+          "created_at": "2026-04-20T08:26:52Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47831621",
+          "summary": "An investigation revealed a thriving economy on GitHub involving the buying and selling of fake repository stars, often facilitated by automated bots."
+        },
+        {
+          "id": 47834565,
+          "title": "Qwen3.6-Max-Preview: Smarter, Sharper, Still Evolving",
+          "url": "https://qwen.ai/blog?id=qwen3.6-max-preview",
+          "score": 505,
+          "created_at": "2026-04-20T14:05:34Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47834565",
+          "summary": "Alibaba has previewed Qwen3.6-Max, a new iteration of its large language model that promises enhanced intelligence and performance while remaining under active development."
+        },
+        {
+          "id": 47833247,
+          "title": "Atlassian enables default data collection to train AI",
+          "url": "https://letsdatascience.com/news/atlassian-enables-default-data-collection-to-train-ai-f71343d8",
+          "score": 475,
+          "created_at": "2026-04-20T12:23:39Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47833247",
+          "summary": "Atlassian has enabled data collection by default to train its artificial intelligence models, impacting user data usage."
+        },
+        {
+          "id": 47839951,
+          "title": "AI Resistance: some recent anti-AI stuff that’s worth discussing",
+          "url": "https://stephvee.ca/blog/artificial%20intelligence/ai-resistance-is-growing/",
+          "score": 283,
+          "created_at": "2026-04-20T20:19:13Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47839951",
+          "summary": "The tech news story discusses the growing resistance to Artificial Intelligence, highlighting recent anti-AI developments and arguments that warrant further consideration."
+        },
+        {
+          "id": 47831437,
+          "title": "OpenClaw isn't fooling me. I remember MS-DOS",
+          "url": "https://www.flyingpenguin.com/build-an-openclaw-free-secure-always-on-local-ai-agent/",
+          "score": 265,
+          "created_at": "2026-04-20T07:49:48Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47831437",
+          "summary": "The article details how to build an OpenClaw local AI agent, emphasizing its free, secure, and always-on nature, drawing a nostalgic comparison to MS-DOS."
+        },
+        {
+          "id": 47835928,
+          "title": "Deezer says 44% of songs uploaded to its platform daily are AI-generated",
+          "url": "https://techcrunch.com/2026/04/20/deezer-says-44-of-songs-uploaded-to-its-platform-daily-are-ai-generated/",
+          "score": 263,
+          "created_at": "2026-04-20T15:41:02Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47835928",
+          "summary": "Deezer reports that nearly half of the music uploaded to its platform each day is now being generated by artificial intelligence."
+        },
+        {
+          "id": 47835646,
+          "title": "I prompted ChatGPT, Claude, Perplexity, and Gemini and watched my Nginx logs",
+          "url": "https://surfacedby.com/blog/nginx-logs-ai-traffic-vs-referral-traffic",
+          "score": 124,
+          "created_at": "2026-04-20T15:22:01Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47835646",
+          "summary": "The author analyzed Nginx logs to compare the traffic patterns generated by interactions with various AI models (ChatGPT, Claude, Perplexity, Gemini) against traditional referral traffic."
+        }
+      ],
       "meta": {
-        "count": 0
+        "count": 7
       }
     },
     {
@@ -223,7 +287,7 @@
           "url": "https://github.com/Fincept-Corporation/FinceptTerminal",
           "description": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
           "stars_today": 3129,
-          "total_stars": 9447,
+          "total_stars": 9454,
           "language": "Python",
           "topics": [],
           "summary": "FinceptTerminal is a modern finance application providing advanced market analytics, investment research, and economic data tools for interactive exploration and data-driven decision-making."
@@ -233,27 +297,27 @@
           "url": "https://github.com/ruvnet/RuView",
           "description": "π RuView: WiFi DensePose turns commodity WiFi signals into real-time human pose estimation, vital sign monitoring, and presence detection — all without a single pixel of video.",
           "stars_today": 716,
-          "total_stars": 48163,
+          "total_stars": 48167,
           "language": "Rust",
           "topics": [],
-          "summary": "RuView is a system that leverages commodity WiFi signals to perform real-time human pose estimation, vital sign monitoring, and presence detection without using any video data."
+          "summary": "RuView is a system that uses commodity WiFi signals to perform real-time human pose estimation, vital sign monitoring, and presence detection without requiring any video input."
         },
         {
           "full_name": "thunderbird/thunderbolt",
           "url": "https://github.com/thunderbird/thunderbolt",
           "description": "AI You Control: Choose your models. Own your data. Eliminate vendor lock-in.",
           "stars_today": 667,
-          "total_stars": 2792,
+          "total_stars": 2794,
           "language": "TypeScript",
           "topics": [],
-          "summary": "Thunderbolt is an AI platform enabling users to control their models, own their data, and avoid vendor lock-in by offering flexible model choices."
+          "summary": "Thunderbolt is an AI platform enabling users to control their models, own their data, and avoid vendor lock-in by offering model choice and data sovereignty."
         },
         {
           "full_name": "paperless-ngx/paperless-ngx",
           "url": "https://github.com/paperless-ngx/paperless-ngx",
           "description": "A community-supported supercharged document management system: scan, index and archive all your documents",
           "stars_today": 611,
-          "total_stars": 39400,
+          "total_stars": 39403,
           "language": "Python",
           "topics": [],
           "summary": "Paperless-ngx is a community-supported document management system that allows users to scan, index, and archive all their documents efficiently."
@@ -263,17 +327,17 @@
           "url": "https://github.com/tractorjuice/arc-kit",
           "description": "Enterprise Architecture Governance & Vendor Procurement Toolkit",
           "stars_today": 334,
-          "total_stars": 1320,
+          "total_stars": 1324,
           "language": "HTML",
           "topics": [],
-          "summary": "Arc-Kit is an enterprise architecture governance and vendor procurement toolkit providing structured processes and resources for managing architectural standards and acquiring necessary technologies."
+          "summary": "Arc-Kit is an enterprise architecture governance and vendor procurement toolkit designed to streamline and manage architectural compliance and the acquisition of necessary technologies."
         },
         {
           "full_name": "koala73/worldmonitor",
           "url": "https://github.com/koala73/worldmonitor",
           "description": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
           "stars_today": 477,
-          "total_stars": 50022,
+          "total_stars": 50029,
           "language": "TypeScript",
           "topics": [],
           "summary": "WorldMonitor is a real-time global intelligence dashboard that uses AI to aggregate news, monitor geopolitics, and track infrastructure within a unified situational awareness interface."
@@ -283,7 +347,7 @@
           "url": "https://github.com/openai/openai-agents-python",
           "description": "A lightweight, powerful framework for multi-agent workflows",
           "stars_today": 909,
-          "total_stars": 23910,
+          "total_stars": 23913,
           "language": "Python",
           "topics": [],
           "summary": "The `openai-agents-python` repository provides a lightweight, powerful framework for building and managing complex multi-agent workflows using Python."
@@ -293,7 +357,7 @@
           "url": "https://github.com/deepseek-ai/DeepGEMM",
           "description": "DeepGEMM: clean and efficient FP8 GEMM kernels with fine-grained scaling",
           "stars_today": 155,
-          "total_stars": 6818,
+          "total_stars": 6821,
           "language": "Cuda",
           "topics": [],
           "summary": "DeepGEMM provides clean and efficient FP8 General Matrix Multiplication (GEMM) kernels featuring fine-grained scaling for optimized performance."
@@ -303,10 +367,10 @@
           "url": "https://github.com/pi-hole/pi-hole",
           "description": "A black hole for Internet advertisements",
           "stars_today": 154,
-          "total_stars": 57146,
+          "total_stars": 57149,
           "language": "Shell",
           "topics": [],
-          "summary": "Pi-hole is a network-level advertisement and tracking blocker that functions as a DNS sinkhole, protecting all devices on your network."
+          "summary": "Pi-hole functions as a network-level advertisement blocker, acting as a DNS sinkhole to filter ads and trackers for all connected devices."
         }
       ],
       "meta": {
@@ -325,9 +389,9 @@
   },
   "quote_of_day": [
     {
-      "quote": "Love begins by taking care of the closest ones - the ones at home.",
-      "author": "Mother Teresa",
-      "category": "love"
+      "quote": "When I was young, I was just about hard work. But as I got older, I did experience anxiety, doubt, judgment, and it's so easy to lose yourself for a second.",
+      "author": "Jennifer Lopez",
+      "category": "experience"
     }
   ],
   "hitokoto": [],
@@ -345,7 +409,7 @@
         "cs.AI",
         "cs.CV"
       ],
-      "abstract": "MARCH is a multi-agent framework for CT report generation that mimics the hierarchical structure of radiology departments. It employs specialized agents (Resident, Fellow, Attending) to perform iterative drafting, retrieval-augmented revision, and consensus-based verification to mitigate clinical hallucinations. This approach significantly improves both the clinical fidelity and linguistic accuracy of automated reports compared to monolithic models.",
+      "abstract": "MARCH is a multi-agent framework for CT report generation that mimics the hierarchical structure of radiology departments to improve clinical fidelity. It employs specialized agents—Resident for drafting, Fellows for retrieval-augmented revision, and an Attending for orchestrating consensus discourse—to iteratively verify findings. This approach effectively mitigates clinical hallucinations and outperforms existing monolithic models on the RadGenome-ChestCT dataset.",
       "url": "http://arxiv.org/abs/2604.16175v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16175v1",
       "score": 9.0,
@@ -369,7 +433,7 @@
         "cs.AI",
         "cs.CV"
       ],
-      "abstract": "UniEditBench introduces a unified and cost-effective benchmark for evaluating both image and video editing models using a shared protocol, addressing the fragmentation in current evaluation methods. Its core contribution is a structured taxonomy covering diverse operations (including challenging compositional tasks) and the use of a distilled, lightweight MLLM judge to provide scalable evaluations that better align with human preference than traditional automatic metrics.",
+      "abstract": "UniEditBench introduces a unified and cost-effective benchmark for evaluating both image and video editing models using a shared protocol, addressing the fragmentation in current evaluation methods. Its core contribution is providing a structured taxonomy of diverse editing operations and enabling scalable assessment by distilling a powerful MLLM judge into a lightweight, efficient evaluator. This allows for fairer cross-paradigm comparisons without incurring prohibitive computational costs.",
       "url": "http://arxiv.org/abs/2604.15871v1",
       "pdf_url": "https://arxiv.org/pdf/2604.15871v1",
       "score": 9.0,
@@ -378,6 +442,28 @@
       "primary_category": "cs.AI",
       "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
+    },
+    {
+      "id": "2604.16256v1",
+      "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
+      "authors": [
+        "Yige Xu",
+        "Yongjie Wang",
+        "Zizhuo Wu",
+        "Kaisong Song",
+        "Jun Lin"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their text-only capabilities. The core method introduces **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. The contribution is demonstrating a consistent and substantial performance gap, showing VLMs significantly outperform on text-only inputs compared to image-based reasoning, suggesting limitations in their visual grounding.",
+      "url": "http://arxiv.org/abs/2604.16256v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
+      "score": 9.0,
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
     },
     {
       "id": "2604.16054v1",
@@ -393,7 +479,7 @@
         "cs.AI",
         "cs.CV"
       ],
-      "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning capabilities of Multimodal Large Language Models (MLLMs) through eight tasks categorized by Abstraction, Relation, and Transformation. The core contribution is demonstrating a significant gap, where top MLLMs score below 50% accuracy compared to 80% for humans, revealing limitations in visual attention, internal manipulation, and concept abstraction.",
+      "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning abilities of Multimodal Large Language Models (MLLMs) through eight tasks categorized by Abstraction, Relation, and Transformation. The benchmark reveals a significant gap, with top MLLMs scoring below 50% accuracy compared to 80% for humans. This highlights current MLLMs' limitations in crucial fluid intelligence processes like pattern induction and mental manipulation.",
       "url": "http://arxiv.org/abs/2604.16054v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16054v1",
       "score": 8.0,
@@ -402,6 +488,26 @@
       "primary_category": "cs.AI",
       "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
+    },
+    {
+      "id": "2604.16264v1",
+      "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
+      "authors": [
+        "Seulgi Kim",
+        "Mohit Prabhushankar",
+        "Ghassan AlRegib"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs) by addressing information disparity *before* fusion. $\\text{MoIR}$ explicitly identifies tokens with lower information density and routes complementary information from a stronger modality to them. This information-level routing mechanism ensures a more balanced and robust fusion process compared to methods that only adjust attention allocation.",
+      "url": "http://arxiv.org/abs/2604.16264v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
+      "score": 8.0,
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
     },
     {
       "id": "2604.16076v1",
@@ -417,7 +523,7 @@
         "cs.LG",
         "cs.NE"
       ],
-      "abstract": "This paper introduces Prototype-Grounded Concept Models (PGCMs) to address the lack of verifiability in Concept Bottleneck Models (CBMs). PGCMs ground abstract concepts in learned visual prototypes, providing explicit image-part evidence for concept activation. This grounding allows for direct inspection and targeted human intervention to correct concept misalignments, achieving comparable predictive performance to CBMs while significantly enhancing transparency and interpretability.",
+      "abstract": "This paper introduces Prototype-Grounded Concept Models (PGCMs) to address the lack of verifiability in Concept Bottleneck Models (CBMs). PGCMs ground abstract concepts in learned visual prototypes, providing explicit image evidence for concept activation. This grounding allows for direct inspection and targeted human intervention to correct concept misalignments, achieving comparable predictive performance to CBMs while significantly enhancing transparency and interpretability.",
       "url": "http://arxiv.org/abs/2604.16076v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16076v1",
       "score": 7.0,
@@ -439,7 +545,7 @@
         "cs.AI",
         "cs.CV"
       ],
-      "abstract": "This paper introduces CBC-SLP, a novel method for robust multispectral semantic segmentation that handles both missing and full modalities. The core method employs a **Structured Latent Projection (SLP)** approach to explicitly preserve both modality-invariant and modality-specific information, avoiding the performance trade-offs seen in models that rely solely on shared representations. This design ensures high performance regardless of modality availability.",
+      "abstract": "This paper introduces CBC-SLP, a novel method for robust multispectral semantic segmentation that handles both missing and full modalities. The core method employs a **Structured Latent Projection (SLP)** to explicitly learn and preserve both modality-invariant and modality-specific information, avoiding the performance trade-off seen in models relying solely on shared representations. This approach ensures high performance even when all modalities are available while maintaining robustness to missing data.",
       "url": "http://arxiv.org/abs/2604.15856v1",
       "pdf_url": "https://arxiv.org/pdf/2604.15856v1",
       "score": 7.0,
@@ -448,48 +554,6 @@
       "primary_category": "cs.AI",
       "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16264v1",
-      "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
-      "authors": [
-        "Seulgi Kim",
-        "Mohit Prabhushankar",
-        "Ghassan AlRegib"
-      ],
-      "categories": [
-        "cs.LG",
-        "cs.CV"
-      ],
-      "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs). $\\text{MoIR}$ addresses the limitation of attention-based methods by employing an **information-level fusion** strategy. It explicitly reduces information disparity *before* fusion by identifying less informative tokens and routing complementary information from a stronger modality, thereby balancing the input signals.",
-      "url": "http://arxiv.org/abs/2604.16264v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
-      "score": 8.0,
-      "primary_category": "cs.LG",
-      "primary_category_anchor": "cs-lg",
-      "primary_category_rank": 1
-    },
-    {
-      "id": "2604.16256v1",
-      "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
-      "authors": [
-        "Yige Xu",
-        "Yongjie Wang",
-        "Zizhuo Wu",
-        "Kaisong Song",
-        "Jun Lin"
-      ],
-      "categories": [
-        "cs.CL",
-        "cs.CV"
-      ],
-      "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their textual components. The core method introduces **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. The contribution is the finding that VLMs exhibit a **substantial performance gap**, consistently excelling on text-only inputs compared to image-based reasoning, suggesting limitations in their visual grounding.",
-      "url": "http://arxiv.org/abs/2604.16256v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
-      "score": 9.0,
-      "primary_category": "cs.CL",
-      "primary_category_anchor": "cs-cl",
-      "primary_category_rank": 2
     }
   ],
   "papers": [
@@ -506,7 +570,7 @@
         "cs.AI",
         "cs.CV"
       ],
-      "abstract": "MARCH is a multi-agent framework for CT report generation that mimics the hierarchical structure of radiology departments. It employs specialized agents (Resident, Fellow, Attending) to perform iterative drafting, retrieval-augmented revision, and consensus-based verification to mitigate clinical hallucinations. This approach significantly improves both the clinical fidelity and linguistic accuracy of automated reports compared to monolithic models.",
+      "abstract": "MARCH is a multi-agent framework for CT report generation that mimics the hierarchical structure of radiology departments to improve clinical fidelity. It employs specialized agents—Resident for drafting, Fellows for retrieval-augmented revision, and an Attending for orchestrating consensus discourse—to iteratively verify findings. This approach effectively mitigates clinical hallucinations and outperforms existing monolithic models on the RadGenome-ChestCT dataset.",
       "url": "http://arxiv.org/abs/2604.16175v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16175v1",
       "score": 9.0,
@@ -530,7 +594,7 @@
         "cs.AI",
         "cs.CV"
       ],
-      "abstract": "UniEditBench introduces a unified and cost-effective benchmark for evaluating both image and video editing models using a shared protocol, addressing the fragmentation in current evaluation methods. Its core contribution is a structured taxonomy covering diverse operations (including challenging compositional tasks) and the use of a distilled, lightweight MLLM judge to provide scalable evaluations that better align with human preference than traditional automatic metrics.",
+      "abstract": "UniEditBench introduces a unified and cost-effective benchmark for evaluating both image and video editing models using a shared protocol, addressing the fragmentation in current evaluation methods. Its core contribution is providing a structured taxonomy of diverse editing operations and enabling scalable assessment by distilling a powerful MLLM judge into a lightweight, efficient evaluator. This allows for fairer cross-paradigm comparisons without incurring prohibitive computational costs.",
       "url": "http://arxiv.org/abs/2604.15871v1",
       "pdf_url": "https://arxiv.org/pdf/2604.15871v1",
       "score": 9.0,
@@ -539,6 +603,28 @@
       "primary_category": "cs.AI",
       "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
+    },
+    {
+      "id": "2604.16256v1",
+      "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
+      "authors": [
+        "Yige Xu",
+        "Yongjie Wang",
+        "Zizhuo Wu",
+        "Kaisong Song",
+        "Jun Lin"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their text-only capabilities. The core method introduces **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. The contribution is demonstrating a consistent and substantial performance gap, showing VLMs significantly outperform on text-only inputs compared to image-based reasoning, suggesting limitations in their visual grounding.",
+      "url": "http://arxiv.org/abs/2604.16256v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
+      "score": 9.0,
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
     },
     {
       "id": "2604.16054v1",
@@ -554,7 +640,7 @@
         "cs.AI",
         "cs.CV"
       ],
-      "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning capabilities of Multimodal Large Language Models (MLLMs) through eight tasks categorized by Abstraction, Relation, and Transformation. The core contribution is demonstrating a significant gap, where top MLLMs score below 50% accuracy compared to 80% for humans, revealing limitations in visual attention, internal manipulation, and concept abstraction.",
+      "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning abilities of Multimodal Large Language Models (MLLMs) through eight tasks categorized by Abstraction, Relation, and Transformation. The benchmark reveals a significant gap, with top MLLMs scoring below 50% accuracy compared to 80% for humans. This highlights current MLLMs' limitations in crucial fluid intelligence processes like pattern induction and mental manipulation.",
       "url": "http://arxiv.org/abs/2604.16054v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16054v1",
       "score": 8.0,
@@ -563,6 +649,26 @@
       "primary_category": "cs.AI",
       "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
+    },
+    {
+      "id": "2604.16264v1",
+      "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
+      "authors": [
+        "Seulgi Kim",
+        "Mohit Prabhushankar",
+        "Ghassan AlRegib"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs) by addressing information disparity *before* fusion. $\\text{MoIR}$ explicitly identifies tokens with lower information density and routes complementary information from a stronger modality to them. This information-level routing mechanism ensures a more balanced and robust fusion process compared to methods that only adjust attention allocation.",
+      "url": "http://arxiv.org/abs/2604.16264v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
+      "score": 8.0,
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
     },
     {
       "id": "2604.16076v1",
@@ -578,7 +684,7 @@
         "cs.LG",
         "cs.NE"
       ],
-      "abstract": "This paper introduces Prototype-Grounded Concept Models (PGCMs) to address the lack of verifiability in Concept Bottleneck Models (CBMs). PGCMs ground abstract concepts in learned visual prototypes, providing explicit image-part evidence for concept activation. This grounding allows for direct inspection and targeted human intervention to correct concept misalignments, achieving comparable predictive performance to CBMs while significantly enhancing transparency and interpretability.",
+      "abstract": "This paper introduces Prototype-Grounded Concept Models (PGCMs) to address the lack of verifiability in Concept Bottleneck Models (CBMs). PGCMs ground abstract concepts in learned visual prototypes, providing explicit image evidence for concept activation. This grounding allows for direct inspection and targeted human intervention to correct concept misalignments, achieving comparable predictive performance to CBMs while significantly enhancing transparency and interpretability.",
       "url": "http://arxiv.org/abs/2604.16076v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16076v1",
       "score": 7.0,
@@ -600,7 +706,7 @@
         "cs.AI",
         "cs.CV"
       ],
-      "abstract": "This paper introduces CBC-SLP, a novel method for robust multispectral semantic segmentation that handles both missing and full modalities. The core method employs a **Structured Latent Projection (SLP)** approach to explicitly preserve both modality-invariant and modality-specific information, avoiding the performance trade-offs seen in models that rely solely on shared representations. This design ensures high performance regardless of modality availability.",
+      "abstract": "This paper introduces CBC-SLP, a novel method for robust multispectral semantic segmentation that handles both missing and full modalities. The core method employs a **Structured Latent Projection (SLP)** to explicitly learn and preserve both modality-invariant and modality-specific information, avoiding the performance trade-off seen in models relying solely on shared representations. This approach ensures high performance even when all modalities are available while maintaining robustness to missing data.",
       "url": "http://arxiv.org/abs/2604.15856v1",
       "pdf_url": "https://arxiv.org/pdf/2604.15856v1",
       "score": 7.0,
@@ -609,58 +715,80 @@
       "primary_category": "cs.AI",
       "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16264v1",
-      "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
-      "authors": [
-        "Seulgi Kim",
-        "Mohit Prabhushankar",
-        "Ghassan AlRegib"
-      ],
-      "categories": [
-        "cs.LG",
-        "cs.CV"
-      ],
-      "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs). $\\text{MoIR}$ addresses the limitation of attention-based methods by employing an **information-level fusion** strategy. It explicitly reduces information disparity *before* fusion by identifying less informative tokens and routing complementary information from a stronger modality, thereby balancing the input signals.",
-      "url": "http://arxiv.org/abs/2604.16264v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
-      "score": 8.0,
-      "primary_category": "cs.LG",
-      "primary_category_anchor": "cs-lg",
-      "primary_category_rank": 1
-    },
-    {
-      "id": "2604.16256v1",
-      "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
-      "authors": [
-        "Yige Xu",
-        "Yongjie Wang",
-        "Zizhuo Wu",
-        "Kaisong Song",
-        "Jun Lin"
-      ],
-      "categories": [
-        "cs.CL",
-        "cs.CV"
-      ],
-      "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their textual components. The core method introduces **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. The contribution is the finding that VLMs exhibit a **substantial performance gap**, consistently excelling on text-only inputs compared to image-based reasoning, suggesting limitations in their visual grounding.",
-      "url": "http://arxiv.org/abs/2604.16256v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
-      "score": 9.0,
-      "primary_category": "cs.CL",
-      "primary_category_anchor": "cs-cl",
-      "primary_category_rank": 2
     }
   ],
-  "hacker_news": [],
+  "hacker_news": [
+    {
+      "id": 47831621,
+      "title": "GitHub's fake star economy",
+      "url": "https://awesomeagents.ai/news/github-fake-stars-investigation/",
+      "score": 727,
+      "created_at": "2026-04-20T08:26:52Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47831621",
+      "summary": "An investigation revealed a thriving economy on GitHub involving the buying and selling of fake repository stars, often facilitated by automated bots."
+    },
+    {
+      "id": 47834565,
+      "title": "Qwen3.6-Max-Preview: Smarter, Sharper, Still Evolving",
+      "url": "https://qwen.ai/blog?id=qwen3.6-max-preview",
+      "score": 505,
+      "created_at": "2026-04-20T14:05:34Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47834565",
+      "summary": "Alibaba has previewed Qwen3.6-Max, a new iteration of its large language model that promises enhanced intelligence and performance while remaining under active development."
+    },
+    {
+      "id": 47833247,
+      "title": "Atlassian enables default data collection to train AI",
+      "url": "https://letsdatascience.com/news/atlassian-enables-default-data-collection-to-train-ai-f71343d8",
+      "score": 475,
+      "created_at": "2026-04-20T12:23:39Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47833247",
+      "summary": "Atlassian has enabled data collection by default to train its artificial intelligence models, impacting user data usage."
+    },
+    {
+      "id": 47839951,
+      "title": "AI Resistance: some recent anti-AI stuff that’s worth discussing",
+      "url": "https://stephvee.ca/blog/artificial%20intelligence/ai-resistance-is-growing/",
+      "score": 283,
+      "created_at": "2026-04-20T20:19:13Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47839951",
+      "summary": "The tech news story discusses the growing resistance to Artificial Intelligence, highlighting recent anti-AI developments and arguments that warrant further consideration."
+    },
+    {
+      "id": 47831437,
+      "title": "OpenClaw isn't fooling me. I remember MS-DOS",
+      "url": "https://www.flyingpenguin.com/build-an-openclaw-free-secure-always-on-local-ai-agent/",
+      "score": 265,
+      "created_at": "2026-04-20T07:49:48Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47831437",
+      "summary": "The article details how to build an OpenClaw local AI agent, emphasizing its free, secure, and always-on nature, drawing a nostalgic comparison to MS-DOS."
+    },
+    {
+      "id": 47835928,
+      "title": "Deezer says 44% of songs uploaded to its platform daily are AI-generated",
+      "url": "https://techcrunch.com/2026/04/20/deezer-says-44-of-songs-uploaded-to-its-platform-daily-are-ai-generated/",
+      "score": 263,
+      "created_at": "2026-04-20T15:41:02Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47835928",
+      "summary": "Deezer reports that nearly half of the music uploaded to its platform each day is now being generated by artificial intelligence."
+    },
+    {
+      "id": 47835646,
+      "title": "I prompted ChatGPT, Claude, Perplexity, and Gemini and watched my Nginx logs",
+      "url": "https://surfacedby.com/blog/nginx-logs-ai-traffic-vs-referral-traffic",
+      "score": 124,
+      "created_at": "2026-04-20T15:22:01Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47835646",
+      "summary": "The author analyzed Nginx logs to compare the traffic patterns generated by interactions with various AI models (ChatGPT, Claude, Perplexity, Gemini) against traditional referral traffic."
+    }
+  ],
   "github_trending": [
     {
       "full_name": "Fincept-Corporation/FinceptTerminal",
       "url": "https://github.com/Fincept-Corporation/FinceptTerminal",
       "description": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
       "stars_today": 3129,
-      "total_stars": 9447,
+      "total_stars": 9454,
       "language": "Python",
       "topics": [],
       "summary": "FinceptTerminal is a modern finance application providing advanced market analytics, investment research, and economic data tools for interactive exploration and data-driven decision-making."
@@ -670,27 +798,27 @@
       "url": "https://github.com/ruvnet/RuView",
       "description": "π RuView: WiFi DensePose turns commodity WiFi signals into real-time human pose estimation, vital sign monitoring, and presence detection — all without a single pixel of video.",
       "stars_today": 716,
-      "total_stars": 48163,
+      "total_stars": 48167,
       "language": "Rust",
       "topics": [],
-      "summary": "RuView is a system that leverages commodity WiFi signals to perform real-time human pose estimation, vital sign monitoring, and presence detection without using any video data."
+      "summary": "RuView is a system that uses commodity WiFi signals to perform real-time human pose estimation, vital sign monitoring, and presence detection without requiring any video input."
     },
     {
       "full_name": "thunderbird/thunderbolt",
       "url": "https://github.com/thunderbird/thunderbolt",
       "description": "AI You Control: Choose your models. Own your data. Eliminate vendor lock-in.",
       "stars_today": 667,
-      "total_stars": 2792,
+      "total_stars": 2794,
       "language": "TypeScript",
       "topics": [],
-      "summary": "Thunderbolt is an AI platform enabling users to control their models, own their data, and avoid vendor lock-in by offering flexible model choices."
+      "summary": "Thunderbolt is an AI platform enabling users to control their models, own their data, and avoid vendor lock-in by offering model choice and data sovereignty."
     },
     {
       "full_name": "paperless-ngx/paperless-ngx",
       "url": "https://github.com/paperless-ngx/paperless-ngx",
       "description": "A community-supported supercharged document management system: scan, index and archive all your documents",
       "stars_today": 611,
-      "total_stars": 39400,
+      "total_stars": 39403,
       "language": "Python",
       "topics": [],
       "summary": "Paperless-ngx is a community-supported document management system that allows users to scan, index, and archive all their documents efficiently."
@@ -700,17 +828,17 @@
       "url": "https://github.com/tractorjuice/arc-kit",
       "description": "Enterprise Architecture Governance & Vendor Procurement Toolkit",
       "stars_today": 334,
-      "total_stars": 1320,
+      "total_stars": 1324,
       "language": "HTML",
       "topics": [],
-      "summary": "Arc-Kit is an enterprise architecture governance and vendor procurement toolkit providing structured processes and resources for managing architectural standards and acquiring necessary technologies."
+      "summary": "Arc-Kit is an enterprise architecture governance and vendor procurement toolkit designed to streamline and manage architectural compliance and the acquisition of necessary technologies."
     },
     {
       "full_name": "koala73/worldmonitor",
       "url": "https://github.com/koala73/worldmonitor",
       "description": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
       "stars_today": 477,
-      "total_stars": 50022,
+      "total_stars": 50029,
       "language": "TypeScript",
       "topics": [],
       "summary": "WorldMonitor is a real-time global intelligence dashboard that uses AI to aggregate news, monitor geopolitics, and track infrastructure within a unified situational awareness interface."
@@ -720,7 +848,7 @@
       "url": "https://github.com/openai/openai-agents-python",
       "description": "A lightweight, powerful framework for multi-agent workflows",
       "stars_today": 909,
-      "total_stars": 23910,
+      "total_stars": 23913,
       "language": "Python",
       "topics": [],
       "summary": "The `openai-agents-python` repository provides a lightweight, powerful framework for building and managing complex multi-agent workflows using Python."
@@ -730,7 +858,7 @@
       "url": "https://github.com/deepseek-ai/DeepGEMM",
       "description": "DeepGEMM: clean and efficient FP8 GEMM kernels with fine-grained scaling",
       "stars_today": 155,
-      "total_stars": 6818,
+      "total_stars": 6821,
       "language": "Cuda",
       "topics": [],
       "summary": "DeepGEMM provides clean and efficient FP8 General Matrix Multiplication (GEMM) kernels featuring fine-grained scaling for optimized performance."
@@ -740,10 +868,10 @@
       "url": "https://github.com/pi-hole/pi-hole",
       "description": "A black hole for Internet advertisements",
       "stars_today": 154,
-      "total_stars": 57146,
+      "total_stars": 57149,
       "language": "Shell",
       "topics": [],
-      "summary": "Pi-hole is a network-level advertisement and tracking blocker that functions as a DNS sinkhole, protecting all devices on your network."
+      "summary": "Pi-hole functions as a network-level advertisement blocker, acting as a DNS sinkhole to filter ads and trackers for all connected devices."
     }
   ],
   "postdoc_jobs": [],
