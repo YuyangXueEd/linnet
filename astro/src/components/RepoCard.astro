@@ -1,4 +1,12 @@
 ---
+/**
+ * RepoCard — tiered GitHub repo display.
+ *
+ * Tier 1 (idx 0):  Hero  — full-width, large avatar, prominent stats
+ * Tier 2 (idx 1-2): Mid  — 2-column card with avatar
+ * Tier 3 (idx 3+):  Row  — compact single-line entry
+ */
+
 interface Props {
   repo: {
     name?: string;
@@ -6,66 +14,372 @@ interface Props {
     description?: string;
     url?: string;
     stars?: number;
+    total_stars?: number;
     forks?: number;
     language?: string;
     stars_today?: number;
     summary?: string;
   };
+  _idx?: number;
 }
-const { repo } = Astro.props;
+
+const { repo, _idx = 0 } = Astro.props;
 const displayName = repo.full_name ?? repo.name ?? 'Unknown';
+const [owner, repoName] = displayName.includes('/') ? displayName.split('/') : ['', displayName];
+const desc = repo.summary ?? repo.description ?? '';
+const totalStars = repo.total_stars ?? repo.stars;
+const avatarUrl = owner ? `https://github.com/${owner}.png?size=80` : null;
+const isHot = (repo.stars_today ?? 0) >= 50;
 ---
-<article class="repo-card panel panel--strong">
-  <div class="repo-card__header">
-    <h3 class="repo-card__name">
-      {repo.url ? (
-        <a href={repo.url} target="_blank" rel="noopener" class="mono">{displayName}</a>
-      ) : (
-        <span class="mono">{displayName}</span>
+
+{_idx === 0 && (
+  <div class="repo-hero">
+    <div class="repo-hero__left">
+      {avatarUrl && (
+        <img class="repo-avatar repo-avatar--lg" src={avatarUrl} alt={owner} loading="lazy" width="64" height="64" />
       )}
-    </h3>
-    <div class="repo-card__badges">
-      {repo.language && <span class="chip">{repo.language}</span>}
-      {repo.stars != null && (
-        <span class="chip chip--warm">⭐ {repo.stars.toLocaleString()}</span>
-      )}
+      <div class="repo-hero__meta">
+        <div class="repo-hero__kicker">
+          <span class="repo-kicker-label">Trending №01</span>
+          {repo.language && <span class="repo-lang-pill">{repo.language}</span>}
+          {isHot && <span class="repo-hot-badge">🔥 trending</span>}
+        </div>
+        <h3 class="repo-hero__name">
+          {repo.url
+            ? <a href={repo.url} target="_blank" rel="noopener">{repoName || displayName}</a>
+            : (repoName || displayName)
+          }
+        </h3>
+        {owner && <div class="repo-hero__owner">{owner}</div>}
+        {desc && <p class="repo-hero__desc">{desc}</p>}
+      </div>
+    </div>
+    <div class="repo-hero__stats">
+      <div class="repo-stat">
+        <div class="repo-stat__val">{totalStars != null ? totalStars.toLocaleString() : '—'}</div>
+        <div class="repo-stat__label">stars</div>
+      </div>
       {repo.stars_today != null && repo.stars_today > 0 && (
-        <span class="chip chip--accent">+{repo.stars_today} today</span>
+        <div class="repo-stat repo-stat--accent">
+          <div class="repo-stat__val">+{repo.stars_today.toLocaleString()}</div>
+          <div class="repo-stat__label">today</div>
+        </div>
+      )}
+      {repo.forks != null && (
+        <div class="repo-stat">
+          <div class="repo-stat__val">{repo.forks.toLocaleString()}</div>
+          <div class="repo-stat__label">forks</div>
+        </div>
       )}
     </div>
   </div>
-  {(repo.description || repo.summary) && (
-    <p class="repo-card__desc">{repo.summary ?? repo.description}</p>
-  )}
-</article>
+)}
+
+{_idx >= 1 && _idx <= 2 && (
+  <div class="repo-mid">
+    <div class="repo-mid__top">
+      {avatarUrl && (
+        <img class="repo-avatar repo-avatar--sm" src={avatarUrl} alt={owner} loading="lazy" width="32" height="32" />
+      )}
+      <div class="repo-mid__nameblock">
+        <div class="repo-mid__name">
+          {repo.url
+            ? <a href={repo.url} target="_blank" rel="noopener">{repoName || displayName}</a>
+            : (repoName || displayName)
+          }
+        </div>
+        {owner && <div class="repo-mid__owner">{owner}</div>}
+      </div>
+      {repo.language && <span class="repo-lang-pill repo-lang-pill--sm">{repo.language}</span>}
+    </div>
+    {desc && <p class="repo-mid__desc">{desc}</p>}
+    <div class="repo-mid__stats">
+      {totalStars != null && <span>★ {totalStars.toLocaleString()}</span>}
+      {repo.stars_today != null && repo.stars_today > 0 && (
+        <span class="repo-today">+{repo.stars_today} today</span>
+      )}
+    </div>
+  </div>
+)}
+
+{_idx >= 3 && (
+  <div class="repo-row">
+    {avatarUrl && (
+      <img class="repo-avatar repo-avatar--xs" src={avatarUrl} alt={owner} loading="lazy" width="20" height="20" />
+    )}
+    <span class="repo-row__name">
+      {repo.url
+        ? <a href={repo.url} target="_blank" rel="noopener">{displayName}</a>
+        : displayName
+      }
+    </span>
+    {repo.language && <span class="repo-row__lang">{repo.language}</span>}
+    <span class="repo-row__sep">·</span>
+    {totalStars != null && <span class="repo-row__stars">★ {totalStars.toLocaleString()}</span>}
+    {repo.stars_today != null && repo.stars_today > 0 && (
+      <span class="repo-today">+{repo.stars_today}</span>
+    )}
+  </div>
+)}
 
 <style>
-.repo-card {
-  padding: 1rem 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+/* ── Shared ──────────────────────────────────────────── */
+.repo-avatar {
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  flex-shrink: 0;
+  display: block;
 }
 
-.repo-card__header { display: flex; flex-direction: column; gap: 0.45rem; }
+.repo-lang-pill {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  border: 1px solid var(--rule);
+  padding: 2px 7px;
+  white-space: nowrap;
+}
 
-.repo-card__name {
-  font-size: 0.88rem;
+.repo-lang-pill--sm { font-size: 0.58rem; padding: 1px 5px; }
+
+.repo-hot-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
   font-weight: 700;
 }
 
-.repo-card__name a {
-  color: var(--site-brand);
-  text-decoration: none;
+.repo-today {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
-.repo-card__name a:hover { text-decoration: underline; }
+/* ── Tier 1: Hero ────────────────────────────────────── */
+.repo-hero {
+  padding: 24px 28px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+}
 
-.repo-card__badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.repo-hero__left {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
 
-.repo-card__desc {
+.repo-avatar--lg { width: 64px; height: 64px; }
+
+.repo-hero__meta { flex: 1; min-width: 0; }
+
+.repo-hero__kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.repo-kicker-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.repo-hero__name {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0;
+}
+
+.repo-hero__name a { color: inherit; text-decoration: none; }
+.repo-hero__name a:hover { color: var(--accent); text-decoration: none; }
+
+.repo-hero__owner {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin-top: 3px;
+}
+
+.repo-hero__desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  line-height: 1.55;
+  margin: 10px 0 0;
+}
+
+.repo-hero__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--rule);
+  padding-left: 28px;
+}
+
+.repo-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: right;
+}
+
+.repo-stat__val {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.repo-stat--accent .repo-stat__val { color: var(--accent); }
+
+.repo-stat__label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* ── Tier 2: Mid ─────────────────────────────────────── */
+.repo-mid {
+  padding: 18px 20px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.repo-mid__top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.repo-avatar--sm { width: 32px; height: 32px; }
+
+.repo-mid__nameblock { flex: 1; min-width: 0; }
+
+.repo-mid__name {
+  font-family: var(--font-mono);
   font-size: 0.84rem;
-  color: var(--site-text-muted);
-  line-height: 1.6;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repo-mid__name a { color: inherit; text-decoration: none; }
+.repo-mid__name a:hover { color: var(--accent); text-decoration: none; }
+
+.repo-mid__owner {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+}
+
+.repo-mid__desc {
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.repo-mid__stats {
+  display: flex;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+/* ── Tier 3: Row ─────────────────────────────────────── */
+.repo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+}
+
+.repo-avatar--xs { width: 20px; height: 20px; }
+
+.repo-row__name {
+  font-family: var(--font-mono);
+  font-size: 0.81rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.repo-row__name a { color: inherit; text-decoration: none; }
+.repo-row__name a:hover { color: var(--accent); text-decoration: none; }
+
+.repo-row__lang {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.repo-row__sep { color: var(--rule); }
+
+.repo-row__stars {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--ink-muted);
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .repo-hero {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .repo-hero__stats {
+    flex-direction: row;
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+    width: 100%;
+    text-align: left;
+  }
+  .repo-stat { text-align: left; }
 }
 </style>

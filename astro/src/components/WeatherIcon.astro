@@ -1,0 +1,94 @@
+---
+/**
+ * WeatherIcon — maps WMO weather codes to inline SVG icons.
+ *
+ * All paths stored here. Add new icons by extending the ICONS map.
+ * Styled with CSS custom props so they automatically follow the color scheme.
+ *
+ * WMO code reference:
+ *   0        = Clear sky
+ *   1, 2, 3  = Mainly clear, partly cloudy, overcast
+ *   45, 48   = Fog
+ *   51-57    = Drizzle
+ *   61-67    = Rain
+ *   71-77    = Snow
+ *   80-82    = Rain showers
+ *   85-86    = Snow showers
+ *   95       = Thunderstorm
+ *   96, 99   = Thunderstorm with hail
+ */
+
+interface Props {
+  code?: number;
+  size?: number;
+}
+
+const { code = 0, size = 56 } = Astro.props;
+
+// Each entry: [strokePaths, fillPaths (optional)]
+// Uses currentColor for stroke, accentColor for fill highlights
+type IconDef = { paths: string; accent?: string };
+
+const ICONS: Record<string, IconDef> = {
+  // ── Clear sky (0) ──────────────────────────────────────────────────────────
+  clear: {
+    paths: '<circle cx="12" cy="12" r="4.5"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="6.64" y2="6.64"/><line x1="17.36" y1="17.36" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="6.64" y2="17.36"/><line x1="17.36" y1="6.64" x2="19.07" y2="4.93"/>',
+  },
+  // ── Partly cloudy (1-2) ────────────────────────────────────────────────────
+  partly_cloudy: {
+    paths: '<circle cx="15" cy="9" r="3.5"/><line x1="15" y1="3" x2="15" y2="5"/><line x1="21" y1="9" x2="19" y2="9"/><line x1="17.5" y1="4.5" x2="16" y2="6"/><path d="M8 19a4 4 0 0 1 0-8 5 5 0 0 1 9.3 2A3.5 3.5 0 0 1 16 19z"/>',
+  },
+  // ── Overcast (3) ──────────────────────────────────────────────────────────
+  cloudy: {
+    paths: '<path d="M6 19a5 5 0 0 1-.1-10 6 6 0 0 1 11.6.6A4 4 0 0 1 18 19z"/>',
+  },
+  // ── Fog (45, 48) ──────────────────────────────────────────────────────────
+  fog: {
+    paths: '<path d="M5 9a5 5 0 0 1 4.9-5 6 6 0 0 1 11.1 2A3.5 3.5 0 0 1 20 9z"/><line x1="3" y1="13" x2="21" y2="13"/><line x1="5" y1="17" x2="19" y2="17"/><line x1="7" y1="21" x2="17" y2="21"/>',
+  },
+  // ── Drizzle (51-57) ───────────────────────────────────────────────────────
+  drizzle: {
+    paths: '<path d="M8 18a4 4 0 0 1 0-8 5 5 0 0 1 9.5 1.5A3.5 3.5 0 0 1 17 18z"/><line x1="9" y1="21" x2="9" y2="22.5" stroke-linecap="round"/><line x1="13" y1="21" x2="13" y2="22.5" stroke-linecap="round"/><line x1="17" y1="21" x2="17" y2="22.5" stroke-linecap="round"/>',
+  },
+  // ── Rain (61-67, 80-82) ───────────────────────────────────────────────────
+  rain: {
+    paths: '<path d="M8 18a4 4 0 0 1 0-8 5 5 0 0 1 9.5 1.5A3.5 3.5 0 0 1 17 18z"/><line x1="9" y1="21" x2="8" y2="23" stroke-linecap="round"/><line x1="13" y1="21" x2="12" y2="23" stroke-linecap="round"/><line x1="17" y1="21" x2="16" y2="23" stroke-linecap="round"/><line x1="11" y1="23" x2="10" y2="25" stroke-linecap="round"/>',
+  },
+  // ── Snow (71-77, 85-86) ───────────────────────────────────────────────────
+  snow: {
+    paths: '<path d="M8 17a4 4 0 0 1 0-8 5 5 0 0 1 9.5 1.5A3.5 3.5 0 0 1 17 17z"/><line x1="11" y1="20" x2="11" y2="24"/><line x1="13" y1="20" x2="13" y2="24"/><line x1="9" y1="21" x2="15" y2="21"/><line x1="9" y1="23" x2="15" y2="23"/><line x1="9.5" y1="21" x2="8.5" y2="22.5"/><line x1="14.5" y1="21" x2="15.5" y2="22.5"/>',
+  },
+  // ── Thunderstorm (95-99) ──────────────────────────────────────────────────
+  thunder: {
+    paths: '<path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.5 1.5A3.5 3.5 0 0 1 17 18z"/><polyline points="13,11 10,17 14,17 11,23"/>',
+  },
+};
+
+function iconForCode(wmo: number): IconDef {
+  if (wmo === 0)                              return ICONS.clear;
+  if (wmo <= 2)                               return ICONS.partly_cloudy;
+  if (wmo === 3)                              return ICONS.cloudy;
+  if (wmo === 45 || wmo === 48)               return ICONS.fog;
+  if (wmo >= 51 && wmo <= 57)                 return ICONS.drizzle;
+  if ((wmo >= 61 && wmo <= 67) || (wmo >= 80 && wmo <= 82)) return ICONS.rain;
+  if ((wmo >= 71 && wmo <= 77) || (wmo >= 85 && wmo <= 86)) return ICONS.snow;
+  if (wmo >= 95)                              return ICONS.thunder;
+  return ICONS.cloudy;
+}
+
+const icon = iconForCode(code);
+---
+
+<svg
+  class="weather-svg-icon"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="var(--accent)"
+  stroke-width="1.4"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  set:html={icon.paths}
+/>

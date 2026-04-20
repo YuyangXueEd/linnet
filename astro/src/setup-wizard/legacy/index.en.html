@@ -256,6 +256,54 @@
       font-size: 0.95rem;
     }
 
+    .hero-helper {
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+      max-width: 60ch;
+    }
+
+    .onboarding-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0 0 24px;
+    }
+
+    .onboarding-card {
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .onboarding-card strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      margin-bottom: 12px;
+    }
+
+    .onboarding-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      letter-spacing: -0.01em;
+    }
+
+    .onboarding-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+
     .wizard-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.8fr);
@@ -894,6 +942,10 @@
         padding-inline: 12px;
       }
 
+      .onboarding-strip {
+        grid-template-columns: 1fr;
+      }
+
       .hero-main,
       .hero-side,
       .wizard,
@@ -924,17 +976,23 @@
   <div class="shell">
     <section class="hero">
       <div class="hero-main">
-        <div class="eyebrow">Linnet setup flow</div>
-        <h1>Build your digest in five guided steps.</h1>
+        <div class="eyebrow">Your personal AI morning briefing</div>
+        <h1>Set up the briefing you wish arrived before your first coffee.</h1>
         <p class="lead">
-          Pick your feeds, tune the filters, choose weekly and monthly rollups,
-          connect notifications, and leave with ready-to-paste YAML files.
+          Start with a few simple choices. Linnet helps you decide what to track,
+          where you want it delivered, and how to hand off the current GitHub setup
+          without feeling buried in config files.
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#wizard-root">Start the wizard</a>
+          <a class="button button-primary" href="#wizard-root">Start with the first win</a>
+          <a class="button button-secondary" href="../daily/">See a live briefing</a>
           <a class="button button-secondary" href="manual-config.md">Prefer manual setup?</a>
           <a class="button button-secondary" href="zh/">中文设置入口</a>
         </div>
+        <p class="hero-helper">
+          The current path still ends in your own GitHub repo, secrets, and Actions run.
+          This wizard exists to make that handoff feel guided, explicit, and much less intimidating.
+        </p>
       </div>
 
       <aside class="hero-side">
@@ -944,12 +1002,12 @@
 
         <div class="stat-grid">
           <div class="stat-card">
-            <strong>Built-in sources</strong>
-            <span>Start with six built-in feeds, then mix and reorder the ones you want.</span>
+            <strong>30-second first win</strong>
+            <span>Start by choosing what deserves your attention before touching deeper settings.</span>
           </div>
           <div class="stat-card">
-            <strong>Five guided steps</strong>
-            <span>Move from picking sources to generated config files without leaving the page.</span>
+            <strong>Calm GitHub handoff</strong>
+            <span>The page shows what happens next so the repo steps feel like infrastructure, not mystery.</span>
           </div>
           <div class="stat-card">
             <strong>Secrets stay out</strong>
@@ -957,15 +1015,33 @@
           </div>
           <div class="stat-card">
             <strong>Live preview</strong>
-            <span>See the source order, generated files, and reminder notes update as you go.</span>
+            <span>See the future briefing shape, generated files, and reminder notes update as you go.</span>
           </div>
         </div>
 
         <p class="note">
-          This page runs entirely in your browser. It generates file contents for
-          your repo without sending your choices anywhere else.
+          This page runs entirely in your browser. It drafts the setup for your repo
+          without sending your choices anywhere else.
         </p>
       </aside>
+    </section>
+
+    <section class="onboarding-strip" aria-label="Setup overview">
+      <article class="onboarding-card">
+        <strong>1</strong>
+        <h2>Choose what to follow</h2>
+        <p>Pick the sources that should earn a spot in your morning briefing.</p>
+      </article>
+      <article class="onboarding-card">
+        <strong>2</strong>
+        <h2>Let Linnet draft the setup</h2>
+        <p>The wizard prepares the files, reminders, and ordering so you do not start from a blank config.</p>
+      </article>
+      <article class="onboarding-card">
+        <strong>3</strong>
+        <h2>Do one GitHub handoff</h2>
+        <p>Copy the files, add the required secret, run once, and come back to a finished briefing.</p>
+      </article>
     </section>
 
     <div class="wizard-layout" id="wizard-root">
@@ -974,7 +1050,7 @@
 
         <div class="step-header">
           <div>
-            <h2 id="wizard-heading">Setup Wizard</h2>
+            <h2 id="wizard-heading">Build your briefing</h2>
             <p id="step-description"></p>
           </div>
           <div class="step-pill" id="step-pill">Step 1 of 5</div>
@@ -990,30 +1066,30 @@
       </section>
 
       <aside class="preview" aria-labelledby="preview-heading">
-        <h2 id="preview-heading">Live summary</h2>
+        <h2 id="preview-heading">What your setup is building</h2>
         <p>
-          The sidebar updates as you move through the wizard so you can see the
-          selected feeds, expected files, and deployment reminders before copying
-          anything into your repo.
+          As you move through the wizard, this sidebar keeps the end result visible:
+          your briefing shape, the files Linnet will prepare, and the delivery reminders
+          you will need for the final GitHub handoff.
         </p>
 
         <div class="preview-block">
-          <strong>Selected feed order</strong>
+          <strong>Sections in your briefing</strong>
           <ol class="preview-list" id="preview-order"></ol>
         </div>
 
         <div class="preview-block">
-          <strong>Files that will be generated</strong>
+          <strong>Files Linnet will prepare</strong>
           <ul class="preview-list" id="preview-files"></ul>
         </div>
 
         <div class="preview-block">
-          <strong>Notifications</strong>
+          <strong>Delivery reminders</strong>
           <div id="preview-notifications" class="status-note"></div>
         </div>
 
         <div class="preview-block">
-          <strong>Current step focus</strong>
+          <strong>Current step</strong>
           <div id="preview-focus" class="status-note"></div>
         </div>
       </aside>
@@ -1023,24 +1099,24 @@
   <script>
     const STEP_META = [
       {
-        title: "Choose your feeds",
-        blurb: "Select the sources you want in your digest and order how they appear on the final page.",
+        title: "Choose what to track",
+        blurb: "Pick the sources that deserve space in your morning briefing and set the first reading order.",
       },
       {
-        title: "Configure each feed",
-        blurb: "Only the feeds you selected show up here, each with its own configuration card.",
+        title: "Shape your briefing",
+        blurb: "Only your chosen sources appear here, so you can tune them without extra clutter.",
       },
       {
-        title: "Weekly and monthly rollups",
-        blurb: "Decide which selected sections should show up in weekly and monthly summaries.",
+        title: "Set the recap rhythm",
+        blurb: "Choose what should roll up into weekly and monthly summaries for slower review.",
       },
       {
-        title: "Notifications",
-        blurb: "Enable sinks like Slack without putting secrets into YAML.",
+        title: "Choose delivery",
+        blurb: "Enable notifications without ever pasting secrets into YAML.",
       },
       {
-        title: "Generate and copy",
-        blurb: "Review the generated files, copy them into your repo, then trigger your first workflow.",
+        title: "Copy and launch",
+        blurb: "Review the generated files, secret reminders, and next actions before the GitHub handoff.",
       },
     ];
 

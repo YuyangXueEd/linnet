@@ -1,0 +1,270 @@
+---
+/**
+ * /daily/[date]/arxiv/ — full arXiv paper listing for a given date.
+ * Shows all papers that passed the LLM filter, not just top 10.
+ */
+import Base from '@/layouts/Base.astro';
+import { readdir, readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+
+declare const __DATA_ROOT__: string;
+const DATA_DIR = resolve(__DATA_ROOT__, 'daily');
+
+export async function getStaticPaths() {
+  const dir = resolve(__DATA_ROOT__, 'daily');
+  const files = await readdir(dir);
+  return files
+    .filter((f: string) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f))
+    .map((f: string) => ({ params: { date: f.replace('.json', '') } }));
+}
+
+const { date } = Astro.params;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const data: any = JSON.parse(await readFile(resolve(DATA_DIR, `${date}.json`), 'utf-8'));
+
+interface Paper {
+  id?: string;
+  title: string;
+  authors?: string[];
+  categories?: string[];
+  primary_category?: string;
+  abstract?: string;
+  abstract_zh?: string;
+  summary?: string;
+  url?: string;
+  pdf_url?: string;
+  score?: number;
+}
+
+const allSections = data.sections_ordered ?? [];
+const arxivSection = allSections.find((s: { key: string }) => s.key === 'arxiv' || s.key === 'papers');
+const papers: Paper[] = arxivSection?.items ?? data.papers ?? data.arxiv ?? [];
+const meta = arxivSection?.meta ?? {};
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const dateHuman = (() => {
+  try {
+    return new Date(`${date}T12:00:00`).toLocaleDateString('en-GB', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+    });
+  } catch { return date as string; }
+})();
+---
+
+<Base title={`arXiv — ${date} — Linnet`} description={`Full arXiv paper list for ${date}`}>
+  <div class="page-wrap">
+
+    <header class="page-header">
+      <a href={`${base}/daily/${date}/`} class="back-link">← Back to {date}</a>
+      <h1 class="page-title">From the Archive</h1>
+      <p class="page-subtitle">{dateHuman} · {papers.length} papers</p>
+      {meta.papers_fetched && (
+        <p class="page-meta">
+          {meta.papers_fetched} fetched
+          {meta.papers_after_keyword_filter && ` → ${meta.papers_after_keyword_filter} after keyword filter`}
+          {meta.papers_after_llm_filter && ` → ${meta.papers_after_llm_filter} after LLM filter`}
+        </p>
+      )}
+    </header>
+
+    <div class="papers-list">
+      {papers.map((paper, i) => {
+        const abstract = String(paper.abstract_zh ?? paper.abstract ?? paper.summary ?? '');
+        const authors = paper.authors ?? [];
+        const shortAuthors = authors.slice(0, 3).join(', ') + (authors.length > 3 ? ' et al.' : '');
+        const category = paper.primary_category ?? (paper.categories ?? [])[0] ?? '';
+        return (
+          <div class="paper-row">
+            <div class="paper-row__num">№{String(i + 1).padStart(2, '0')}</div>
+            <div class="paper-row__body">
+              <div class="paper-row__kicker">
+                {category && <span class="paper-row__cat">{category}</span>}
+                {paper.id && <span class="paper-row__id">arxiv:{paper.id}</span>}
+              </div>
+              <h3 class="paper-row__title">
+                {paper.url
+                  ? <a href={paper.url} target="_blank" rel="noopener">{paper.title}</a>
+                  : paper.title
+                }
+              </h3>
+              {shortAuthors && <p class="paper-row__authors">{shortAuthors}</p>}
+              {abstract && (
+                <p class="paper-row__abstract">
+                  {abstract.length > 320 ? abstract.slice(0, 320) + '…' : abstract}
+                </p>
+              )}
+              <div class="paper-row__links">
+                {paper.url && <a href={paper.url} target="_blank" rel="noopener" class="paper-row__link">abstract</a>}
+                {paper.pdf_url && <a href={paper.pdf_url} target="_blank" rel="noopener" class="paper-row__link paper-row__link--dim">pdf</a>}
+              </div>
+            </div>
+            {paper.score != null && (
+              <div class="paper-row__score">{paper.score.toFixed(0)}</div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+
+    <div class="page-footer">
+      <a href={`${base}/daily/${date}/`} class="back-link">← Back to daily digest</a>
+    </div>
+
+  </div>
+</Base>
+
+<style>
+.page-wrap {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.page-header {
+  padding: 48px 0 28px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 0;
+}
+
+.back-link {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.back-link:hover { color: var(--accent); text-decoration: none; }
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.page-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 8px 0 0;
+}
+
+.page-meta {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin: 4px 0 0;
+}
+
+.papers-list { margin-top: 0; }
+
+.paper-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 40px;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.paper-row__num {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+.paper-row__kicker {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.paper-row__cat { color: var(--accent); font-weight: 700; }
+.paper-row__id  { color: var(--ink-muted); }
+
+.paper-row__title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.paper-row__title a { color: inherit; text-decoration: none; }
+.paper-row__title a:hover { color: var(--accent); text-decoration: none; }
+
+.paper-row__authors {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.81rem;
+  color: var(--ink-muted);
+  margin: 4px 0 0;
+}
+
+.paper-row__abstract {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 8px 0 0;
+}
+
+.paper-row__links {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.paper-row__link {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.paper-row__link--dim { color: var(--ink); border-bottom-color: var(--ink); }
+.paper-row__link:hover { opacity: 0.7; text-decoration: none; }
+
+.paper-row__score {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: right;
+  letter-spacing: -0.02em;
+}
+
+.page-footer {
+  padding: 32px 0 48px;
+  border-top: 1px solid var(--ink);
+  margin-top: 24px;
+}
+
+@media (max-width: 640px) {
+  .paper-row { grid-template-columns: 36px 1fr 36px; gap: 12px; }
+  .page-title { font-size: 1.75rem; }
+}
+</style>

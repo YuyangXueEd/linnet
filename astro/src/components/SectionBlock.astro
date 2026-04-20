@@ -1,11 +1,39 @@
 ---
-import PaperCard from './PaperCard.astro';
-import HNCard from './HNCard.astro';
-import RepoCard from './RepoCard.astro';
-import WeatherBlock from './WeatherBlock.astro';
-import JobCard from './JobCard.astro';
-import GenericCard from './GenericCard.astro';
+/**
+ * SectionBlock — registry-driven section dispatcher.
+ *
+ * Adding a new extension UI requires only two edits here:
+ *   1. Import the card component (one line)
+ *   2. Add it to COMPONENTS (one line)
+ *
+ * Everything else (layout, title, icon) comes from registry.ts.
+ */
+import { getExtension } from '@/lib/registry';
+import Icon from './Icon.astro';
 
+// ── Card imports ──────────────────────────────────────────────────────────
+import PaperCard    from './PaperCard.astro';
+import HNCard       from './HNCard.astro';
+import RepoCard     from './RepoCard.astro';
+import WeatherBlock from './WeatherBlock.astro';
+import JobCard      from './JobCard.astro';
+import GenericCard  from './GenericCard.astro';
+// New extensions: add import here, then one line in COMPONENTS below.
+
+// ── COMPONENTS map ────────────────────────────────────────────────────────
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const COMPONENTS: Record<string, any> = {
+  arxiv:              PaperCard,
+  papers:             PaperCard,    // legacy key alias
+  hacker_news:        HNCard,
+  github_trending:    RepoCard,
+  postdoc_jobs:       JobCard,
+  jobs:               JobCard,      // legacy key alias
+  supervisor_updates: GenericCard,
+  // my_new_extension: MyNewCard,   ← add new extensions here
+};
+
+// ── Props ─────────────────────────────────────────────────────────────────
 interface Section {
   key: string;
   payload_key?: string;
@@ -17,76 +45,273 @@ interface Section {
 
 interface Props {
   section: Section;
+  roman?: string;
+  /** Total section count — used for page-turn nav */
+  totalSections?: number;
+  /** Section index — used for page-turn nav */
+  sectionIndex?: number;
 }
 
-const { section } = Astro.props;
+const { section, roman, sectionIndex = 0, totalSections = 1 } = Astro.props;
 const { key, title, icon, items } = section;
+
 const anchorId = key.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-const isEmpty = !items || items.length === 0;
+const isEmpty  = !items || items.length === 0;
+
+const regMeta      = getExtension(key);
+const displayTitle = regMeta?.title ?? title;
+const layout       = regMeta?.layout ?? 'stack';
+
+const gridClass = layout === 'columns-3'
+  ? 'feed-grid feed-grid--3col'
+  : layout === 'columns-2'
+    ? 'feed-grid feed-grid--2col'
+    : 'feed-grid';
+
+const CardComp = COMPONENTS[key] ?? GenericCard;
+const subtitle = regMeta?.subtitle ?? '';
+const iconName = regMeta?.icon ?? '';
+
+// Paper tier-3 items (idx >= 5) go into a separate 2-col grid
+const PAPER_KEYS = new Set(['arxiv', 'papers']);
+const isPapers   = PAPER_KEYS.has(key);
+const MAX_PAPERS = 10;
+
+// Repos use editorial (tiered) layout — no uniform grid wrapper
+const isRepos = key === 'github_trending';
+
+// HN first item spans full width, rest in 2-col grid
+const isHN = key === 'hacker_news';
 
 type ItemType = Record<string, unknown>;
+const visibleItems = isPapers ? (items as ItemType[]).slice(0, MAX_PAPERS) : (items as ItemType[]);
+const totalPapers  = items?.length ?? 0;
 ---
-<section class="feed-section" id={anchorId}>
-  <div class="section-header">
-    {icon && <span class="section-icon" aria-hidden="true">{icon}</span>}
-    <h2>{title}</h2>
-    {!isEmpty && <span class="chip mono">{items.length}</span>}
+
+<section class="feed-section" id={anchorId}
+  data-section-index={sectionIndex}
+  data-total-sections={totalSections}>
+  <div class="section-head">
+    <div class="section-head__left">
+      {roman && <span class="section-roman">§ {roman}</span>}
+      {iconName && <Icon name={iconName} size={22} color="var(--ink)" />}
+      <h2 class="section-head__title">{displayTitle}</h2>
+    </div>
+    <span class="section-head__sub">{subtitle}</span>
+    {!isEmpty && <span class="section-head__count">
+      {isPapers && totalPapers > MAX_PAPERS ? `${MAX_PAPERS} of ${totalPapers}` : items.length}
+    </span>}
   </div>
 
   {isEmpty && (
     <p class="section-empty">No items for this section today.</p>
   )}
 
-  {!isEmpty && key === 'weather' && (
-    <WeatherBlock items={items as Parameters<typeof WeatherBlock>[0]['items']} />
-  )}
-
-  {!isEmpty && (key === 'arxiv' || key === 'papers') && (
-    <div class="feed-grid">
-      {(items as ItemType[]).map(p => <PaperCard paper={p as Parameters<typeof PaperCard>[0]['paper']} />)}
+  {/* Weather — full-width block */}
+  {!isEmpty && layout === 'single' && (
+    <div class="section-body">
+      <WeatherBlock items={items as Parameters<typeof WeatherBlock>[0]['items']} />
     </div>
   )}
 
-  {!isEmpty && key === 'hacker_news' && (
-    <div class="feed-grid feed-grid--2col">
-      {(items as ItemType[]).map(i => <HNCard item={i as Parameters<typeof HNCard>[0]['item']} />)}
+  {/* arXiv — editorial layout with tier-3 in a 2-col compact grid */}
+  {!isEmpty && isPapers && (
+    <div class="section-feed">
+      {visibleItems.map((item, i) => {
+        if (i < 5) {
+          return <CardComp paper={item} item={item} repo={item} job={item} _idx={i} />;
+        }
+        return null;
+      })}
+      {visibleItems.some((_, i) => i >= 5) && (
+        <div class="papers-compact-grid">
+          {visibleItems.filter((_, i) => i >= 5).map((item, compactIdx) => (
+            <CardComp paper={item} item={item} repo={item} job={item} _idx={compactIdx + 5} />
+          ))}
+        </div>
+      )}
+      {totalPapers > MAX_PAPERS && (
+        <div class="papers-more-link">
+          <a href={`./arxiv/`} class="papers-more-anchor">
+            See all {totalPapers} papers →
+          </a>
+        </div>
+      )}
     </div>
   )}
 
-  {!isEmpty && key === 'github_trending' && (
-    <div class="feed-grid feed-grid--2col">
-      {(items as ItemType[]).map(r => <RepoCard repo={r as Parameters<typeof RepoCard>[0]['repo']} />)}
+  {/* GitHub Trending — tiered: hero → compact rows */}
+  {!isEmpty && isRepos && (
+    <div class="section-feed">
+      <div class="repos-hero-wrap">
+        <CardComp paper={(items as ItemType[])[0]} item={(items as ItemType[])[0]} repo={(items as ItemType[])[0]} job={(items as ItemType[])[0]} _idx={0} />
+      </div>
+      {items.length > 1 && (
+        <div class="repos-mid-stack">
+          {(items as ItemType[]).slice(1, 3).map((item, i) => (
+            <CardComp paper={item} item={item} repo={item} job={item} _idx={i + 1} />
+          ))}
+        </div>
+      )}
+      {items.length > 3 && (
+        <div class="repos-rows">
+          {(items as ItemType[]).slice(3).map((item, i) => (
+            <CardComp paper={item} item={item} repo={item} job={item} _idx={i + 3} />
+          ))}
+        </div>
+      )}
     </div>
   )}
 
-  {!isEmpty && (key === 'postdoc_jobs' || key === 'jobs') && (
-    <div class="feed-grid">
-      {(items as ItemType[]).map(j => <JobCard job={j as Parameters<typeof JobCard>[0]['job']} />)}
+  {/* Hacker News — featured first, rest in stack */}
+  {!isEmpty && isHN && (
+    <div class="section-feed">
+      {/* featured top story spans full width */}
+      <CardComp paper={(items as ItemType[])[0]} item={(items as ItemType[])[0]} repo={(items as ItemType[])[0]} job={(items as ItemType[])[0]} _idx={0} />
+      {items.length > 1 && (
+        <div class="hn-rows">
+          {(items as ItemType[]).slice(1).map((item, i) => (
+            <CardComp paper={item} item={item} repo={item} job={item} _idx={i + 1} />
+          ))}
+        </div>
+      )}
     </div>
   )}
 
-  {!isEmpty && key === 'supervisor_updates' && (
-    <div class="feed-grid">
-      {(items as ItemType[]).map(u => <GenericCard item={u} />)}
-    </div>
-  )}
-
-  {!isEmpty && !['weather','arxiv','papers','hacker_news','github_trending','postdoc_jobs','jobs','supervisor_updates'].includes(key) && (
-    <div class="feed-grid">
-      {(items as ItemType[]).map(u => <GenericCard item={u} />)}
+  {/* All other card-style layouts */}
+  {!isEmpty && layout !== 'single' && !isPapers && !isRepos && !isHN && (
+    <div class:list={[gridClass, 'section-feed']}>
+      {(items as ItemType[]).map((item, i) => (
+        <CardComp paper={item} item={item} repo={item} job={item} _idx={i} />
+      ))}
     </div>
   )}
 </section>
 
 <style>
-.feed-section { margin-bottom: 2rem; }
+.feed-section { margin-bottom: 2.5rem; }
+
+/* ── Section header ── */
+.section-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: baseline;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 0;
+}
+
+.section-head__left {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.section-roman {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.section-head__title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.section-head__sub {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.section-head__count {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+.section-body  { margin-top: 22px; }
+.section-feed  { margin-top: 8px; }
+
+/* ── arXiv tier-3 compact 2-col grid ── */
+.papers-compact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--rule);
+}
+
+.papers-more-link {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+  text-align: right;
+}
+
+.papers-more-anchor {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+.papers-more-anchor:hover { opacity: 0.7; text-decoration: none; }
+
+/* ── GitHub tiered feed ── */
+.repos-hero-wrap { margin-bottom: 16px; }
+
+.repos-mid-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.repos-mid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.repos-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HN grid ── */
+.hn-rows {
+  display: flex;
+  flex-direction: column;
+}
 
 .section-empty {
   font-size: 0.88rem;
-  color: var(--site-text-muted);
+  color: var(--ink-muted);
   padding: 1.25rem;
-  border: 1px dashed var(--site-border);
-  border-radius: 18px;
+  border: 1px dashed var(--rule);
   text-align: center;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .papers-compact-grid { grid-template-columns: 1fr; }
+  .repos-feed { grid-template-columns: 1fr; }
 }
 </style>

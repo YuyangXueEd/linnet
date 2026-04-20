@@ -6,86 +6,249 @@ interface Props {
     score?: number;
     by?: string;
     time?: number;
+    created_at?: string;
     descendants?: number;
     summary?: string;
     hn_url?: string;
+    comments_url?: string;
   };
+  _idx?: number;
 }
-const { item } = Astro.props;
-const domain = item.url ? new URL(item.url).hostname.replace('www.', '') : null;
-const timeStr = item.time ? new Date(item.time * 1000).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : null;
+const { item, _idx = 0 } = Astro.props;
+const domain  = item.url ? (() => { try { return new URL(item.url).hostname.replace('www.', ''); } catch { return null; } })() : null;
+const timeStr = item.created_at
+  ? new Date(item.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
+  : item.time
+    ? new Date(item.time * 1000).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
+    : null;
+const hnUrl = item.comments_url ?? item.hn_url;
+const commentCount = item.descendants ?? null;
+const isFeatured = _idx === 0;
 ---
-<article class="hn-card panel panel--strong">
-  <div class="hn-card__top">
-    {item.score != null && <span class="score-badge">{item.score}</span>}
-    <div class="hn-card__meta mono">
-      {domain && <span class="chip">{domain}</span>}
-      {timeStr && <span class="hn-card__time">{timeStr}</span>}
+
+{isFeatured ? (
+  <div class="hn-featured">
+    <div class="hn-featured__score-col">
+      <div class="hn-featured__score">{item.score ?? '—'}</div>
+      <div class="hn-featured__pts">pts</div>
+    </div>
+    <div class="hn-featured__body">
+      <div class="hn-featured__eyebrow">Top story</div>
+      <div class="hn-featured__title">
+        {item.url
+          ? <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
+          : item.title
+        }
+      </div>
+      {item.summary && <p class="hn-featured__summary">{item.summary}</p>}
+      <div class="hn-featured__meta">
+        {domain && <span>{domain}</span>}
+        {commentCount != null && <span>{commentCount} comments</span>}
+        {timeStr && <span>{timeStr}</span>}
+        {hnUrl && (
+          <a href={hnUrl} target="_blank" rel="noopener" class="hn-featured__discuss">
+            discuss on HN →
+          </a>
+        )}
+      </div>
     </div>
   </div>
-  <h3 class="hn-card__title">
-    {item.url ? (
-      <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
-    ) : (
-      item.title
-    )}
-  </h3>
-  {item.summary && <p class="hn-card__summary">{item.summary}</p>}
-  <div class="hn-card__footer">
-    {item.hn_url && (
-      <a href={item.hn_url} target="_blank" rel="noopener" class="hn-card__discuss mono">
-        {item.descendants ?? 0} comments →
-      </a>
-    )}
+) : (
+  <div class="hn-card">
+    <div class="hn-card__score">{item.score ?? '—'}</div>
+
+    <div class="hn-card__body">
+      <div class="hn-card__title">
+        {item.url
+          ? <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
+          : item.title
+        }
+      </div>
+      <div class="hn-card__meta">
+        {domain && <span>{domain}</span>}
+        {commentCount != null && <span>{commentCount} comments</span>}
+        {timeStr && <span>{timeStr}</span>}
+      </div>
+    </div>
+
+    <div class="hn-card__arrow">
+      {hnUrl && (
+        <a href={hnUrl} target="_blank" rel="noopener" aria-label="Discussion thread">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      )}
+    </div>
   </div>
-</article>
+)}
 
 <style>
-.hn-card {
-  padding: 1rem 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+/* ── Featured (idx 0) ─────────────────────────────────── */
+.hn-featured {
+  padding: 24px 28px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 28px;
+  align-items: start;
 }
 
-.hn-card__top {
+.hn-featured__score-col {
+  border-right: 1px solid var(--rule);
+  padding-right: 24px;
+  text-align: center;
+}
+
+.hn-featured__score {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.hn-featured__pts {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+.hn-featured__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.hn-featured__title {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  word-break: break-word;
+}
+
+.hn-featured__title a { color: inherit; text-decoration: none; }
+.hn-featured__title a:hover { color: var(--accent); text-decoration: none; }
+
+.hn-featured__summary {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  font-style: italic;
+  margin: 10px 0 0;
+}
+
+.hn-featured__meta {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
   display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
+  align-items: center;
+  margin-top: 14px;
 }
 
-.hn-card__meta { display: flex; align-items: center; gap: 6px; }
+.hn-featured__meta span + span::before { content: '·'; margin-right: 6px; color: var(--rule); }
 
-.hn-card__time {
-  font-size: 0.74rem;
-  color: var(--site-text-muted);
-  font-family: "JetBrains Mono", monospace;
+.hn-featured__discuss {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  margin-left: 4px;
 }
+
+.hn-featured__discuss:hover { opacity: 0.7; text-decoration: none; }
+
+/* ── Regular card ─────────────────────────────────────── */
+.hn-card {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 18px;
+  align-items: baseline;
+}
+
+.hn-card__score {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.hn-card__body { display: flex; flex-direction: column; gap: 4px; }
 
 .hn-card__title {
-  font-size: 0.97rem;
-  font-weight: 700;
-  line-height: 1.45;
-  color: var(--site-text);
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  word-break: break-word;
 }
 
 .hn-card__title a { color: inherit; text-decoration: none; }
-.hn-card__title a:hover { color: var(--site-brand); }
+.hn-card__title a:hover { color: var(--accent); text-decoration: none; }
 
-.hn-card__summary {
-  font-size: 0.86rem;
-  color: var(--site-text-muted);
-  line-height: 1.65;
+.hn-card__meta {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
-.hn-card__footer { margin-top: auto; }
+.hn-card__meta span + span::before { content: '·'; margin-right: 6px; color: var(--rule); }
 
-.hn-card__discuss {
-  font-size: 0.76rem;
-  color: var(--site-text-muted);
-  text-decoration: none;
+.hn-card__arrow {
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
 }
 
-.hn-card__discuss:hover { color: var(--site-brand); }
+.hn-card__arrow a { color: inherit; text-decoration: none; display: flex; }
+.hn-card__arrow a:hover { color: var(--ink); }
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hn-featured {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .hn-featured__score-col {
+    border-right: none;
+    padding-right: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    text-align: left;
+  }
+}
 </style>

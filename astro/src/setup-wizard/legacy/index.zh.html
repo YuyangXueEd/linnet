@@ -256,6 +256,54 @@
       font-size: 0.95rem;
     }
 
+    .hero-helper {
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+      max-width: 60ch;
+    }
+
+    .onboarding-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0 0 24px;
+    }
+
+    .onboarding-card {
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .onboarding-card strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      margin-bottom: 12px;
+    }
+
+    .onboarding-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      letter-spacing: -0.01em;
+    }
+
+    .onboarding-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+
     .wizard-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.8fr);
@@ -894,6 +942,10 @@
         padding-inline: 12px;
       }
 
+      .onboarding-strip {
+        grid-template-columns: 1fr;
+      }
+
       .hero-main,
       .hero-side,
       .wizard,
@@ -924,16 +976,23 @@
   <div class="shell">
     <section class="hero">
       <div class="hero-main">
-        <div class="eyebrow">Linnet 中文设置</div>
-        <h1>用五个步骤，把你的摘要站慢慢配好。</h1>
+        <div class="eyebrow">你的个人 AI 晨间简报</div>
+        <h1>把那份你希望咖啡前就收到的晨报先搭起来。</h1>
         <p class="lead">
-          选择你想看的信息源，调整过滤条件，设置周报和月报，再决定通知方式，最后拿到可以直接粘贴回仓库的 YAML 文件。
+          先从几个最容易回答的问题开始。Linnet 会帮你决定要追踪什么、
+          想把简报送到哪里，以及怎样把当前基于 GitHub 的部署流程变成一条清晰可走的路径，
+          而不是一上来就把你扔进配置文件里。
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#wizard-root">开始配置</a>
+          <a class="button button-primary" href="#wizard-root">先拿到第一次爽点</a>
+          <a class="button button-secondary" href="../../daily/">先看一份真实简报</a>
           <a class="button button-secondary" href="../manual-config.md">更想手动配置？</a>
           <a class="button button-secondary" href="../">English Setup</a>
         </div>
+        <p class="hero-helper">
+          现在这条路径最后仍然会落到你自己的 GitHub 仓库、Secrets 和 Actions 上。
+          这个向导存在的意义，就是让那段交接过程变得更有引导、更明确，也没那么吓人。
+        </p>
       </div>
 
       <aside class="hero-side">
@@ -943,12 +1002,12 @@
 
         <div class="stat-grid">
           <div class="stat-card">
-            <strong>内置信息源</strong>
-            <span>先从 6 个内置来源开始，需要哪些就选哪些，顺序也可以自己调。</span>
+            <strong>30 秒第一次爽点</strong>
+            <span>先决定什么值得你每天早上看，而不是一开始就陷进细节设置。</span>
           </div>
           <div class="stat-card">
-            <strong>五步完成</strong>
-            <span>从挑信息源到拿到可复制的配置文件，整个流程都在这一页里完成。</span>
+            <strong>平静完成 GitHub 交接</strong>
+            <span>页面会提前说明接下来会发生什么，让仓库步骤更像基础设施而不是障碍。</span>
           </div>
           <div class="stat-card">
             <strong>密钥不入库</strong>
@@ -956,14 +1015,32 @@
           </div>
           <div class="stat-card">
             <strong>边配边看</strong>
-            <span>信息源顺序、生成文件和提醒说明都会在右侧实时更新。</span>
+            <span>未来简报的结构、生成文件和提醒说明都会在右侧实时更新。</span>
           </div>
         </div>
 
         <p class="note">
-          这个页面完全在浏览器里运行。它只帮你生成配置内容，不会把你的选择上传到别的地方。
+          这个页面完全在浏览器里运行。它只帮你起草仓库所需的设置内容，不会把你的选择上传到别的地方。
         </p>
       </aside>
+    </section>
+
+    <section class="onboarding-strip" aria-label="配置概览">
+      <article class="onboarding-card">
+        <strong>1</strong>
+        <h2>决定你要追什么</h2>
+        <p>先把真正值得进入晨间简报的信息源挑出来。</p>
+      </article>
+      <article class="onboarding-card">
+        <strong>2</strong>
+        <h2>让 Linnet 帮你起草配置</h2>
+        <p>向导会先把文件、顺序和提醒准备好，你不用从一张空白配置开始。</p>
+      </article>
+      <article class="onboarding-card">
+        <strong>3</strong>
+        <h2>做一次 GitHub 交接</h2>
+        <p>复制文件、补上必要 Secret、跑一次流程，然后回来收获一份成型的简报。</p>
+      </article>
     </section>
 
     <div class="wizard-layout" id="wizard-root">
@@ -972,7 +1049,7 @@
 
         <div class="step-header">
           <div>
-            <h2 id="wizard-heading">中文设置向导</h2>
+            <h2 id="wizard-heading">开始搭你的简报</h2>
             <p id="step-description"></p>
           </div>
           <div class="step-pill" id="step-pill">第 1 步，共 5 步</div>
@@ -988,28 +1065,29 @@
       </section>
 
       <aside class="preview" aria-labelledby="preview-heading">
-        <h2 id="preview-heading">实时摘要</h2>
+        <h2 id="preview-heading">你正在搭出的结果</h2>
         <p>
-          右侧会随着你的选择实时更新。你可以边配置边看到信息源顺序、即将生成的文件，以及需要提前准备的 Secret。
+          当你一路往下配置时，右侧会一直把终点展示给你看：
+          未来简报长什么样、Linnet 会准备哪些文件，以及最后 GitHub 交接时需要注意什么。
         </p>
 
         <div class="preview-block">
-          <strong>信息源顺序</strong>
+          <strong>简报里的内容顺序</strong>
           <ol class="preview-list" id="preview-order"></ol>
         </div>
 
         <div class="preview-block">
-          <strong>将生成的文件</strong>
+          <strong>Linnet 会准备的文件</strong>
           <ul class="preview-list" id="preview-files"></ul>
         </div>
 
         <div class="preview-block">
-          <strong>通知方式</strong>
+          <strong>交付提醒</strong>
           <div id="preview-notifications" class="status-note"></div>
         </div>
 
         <div class="preview-block">
-          <strong>当前步骤说明</strong>
+          <strong>当前步骤</strong>
           <div id="preview-focus" class="status-note"></div>
         </div>
       </aside>
@@ -1019,24 +1097,24 @@
   <script>
     const STEP_META = [
       {
-        title: "选择信息源",
-        blurb: "选择想放进摘要里的信息源，并决定它们在最终页面中的展示顺序。",
+        title: "决定追踪什么",
+        blurb: "先挑出值得进入晨间简报的信息源，并排出最初的阅读顺序。",
       },
       {
-        title: "配置每个信息源",
-        blurb: "这里只会显示你上一步选中的信息源，每个信息源都有自己的配置卡片。",
+        title: "塑造你的简报",
+        blurb: "这里只显示你选中的来源，让你在没有杂音的情况下慢慢调顺它们。",
       },
       {
-        title: "周报与月报",
-        blurb: "决定哪些已选内容要进入周报和月报，以及各自保留多少条。",
+        title: "设定复盘节奏",
+        blurb: "决定哪些内容要进入周报和月报，方便慢一点的回顾节奏。",
       },
       {
-        title: "通知设置",
-        blurb: "配置通知渠道，同时把密钥留在 Secret 里，不写进 YAML。",
+        title: "选择送达方式",
+        blurb: "开启通知渠道，同时继续把密钥留在 Secret 里，而不是写进 YAML。",
       },
       {
-        title: "生成并复制",
-        blurb: "检查生成结果，把内容粘贴回仓库，然后触发第一次 workflow。",
+        title: "复制并启动",
+        blurb: "检查生成结果、Secret 提醒和下一步动作，再完成最后的 GitHub 交接。",
       },
     ];
 

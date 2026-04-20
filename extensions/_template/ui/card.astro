@@ -1,0 +1,135 @@
+---
+/**
+ * Card template for Linnet extensions.
+ *
+ * HOW TO USE:
+ *   1. Copy this file to:
+ *        astro/src/components/cards/{your_extension_key}.astro
+ *      Example: astro/src/components/cards/rss_feed.astro
+ *
+ *   2. Update the Props interface to match your extension's JSON output fields.
+ *
+ *   3. Register in astro/src/lib/registry.ts — add one entry to REGISTRY.
+ *
+ *   4. Import and add to the COMPONENTS map in astro/src/components/SectionBlock.astro.
+ *
+ *   5. Done. Your card appears in the daily digest automatically.
+ *
+ * All CSS variables (--ink, --accent, --rule, etc.) come from global.css.
+ * You do not need to define any colours — just use the token names.
+ * See UI_GUIDE.md for the full token reference.
+ */
+
+interface Props {
+  item: {
+    // Replace these fields with what your Python extension actually emits in JSON.
+    title?: string;
+    name?: string;
+    summary?: string;
+    description?: string;
+    url?: string;
+    label?: string;
+    category?: string;
+    score?: number;
+    // Add any other fields your extension provides.
+    [key: string]: unknown;
+  };
+}
+
+const { item } = Astro.props;
+
+// Pull display values — adapt these to your actual field names.
+const title   = String(item.title ?? item.name ?? item.label ?? 'Untitled');
+const body    = String(item.summary ?? item.description ?? '');
+const url     = typeof item.url === 'string' ? item.url : undefined;
+const tag     = typeof item.category === 'string' ? item.category : undefined;
+const score   = typeof item.score === 'number' ? item.score : undefined;
+
+// Truncate body for readability.
+const bodyText = body.length > 300 ? body.slice(0, 300) + '…' : body;
+---
+
+<article class="ext-card">
+  <div class="ext-card__top">
+    {tag   && <span class="ext-card__tag">{tag}</span>}
+    {score != null && <span class="ext-card__score">{score.toFixed(0)}</span>}
+  </div>
+
+  <h4 class="ext-card__title">
+    {url
+      ? <a href={url} target="_blank" rel="noopener">{title}</a>
+      : title
+    }
+  </h4>
+
+  {bodyText && <p class="ext-card__body">{bodyText}</p>}
+</article>
+
+<style>
+/*
+ * All values use global design tokens — do not hardcode colours or fonts here.
+ * Tweak spacing and layout to fit your content; keep the token references.
+ */
+
+.ext-card {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ext-card__top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Category tag — mono uppercase label, accent coloured */
+.ext-card__tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Numeric relevance score */
+.ext-card__score {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-left: auto;
+  letter-spacing: -0.02em;
+}
+
+/* Title — display serif, medium weight */
+.ext-card__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.ext-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+.ext-card__title a:hover {
+  color: var(--accent);
+}
+
+/* Body — body serif, muted */
+.ext-card__body {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0;
+}
+</style>

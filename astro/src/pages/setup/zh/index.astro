@@ -1,33 +1,177 @@
 ---
 import Base from '@/layouts/Base.astro';
 import { loadSetupWizard } from '@/utils/setupWizard';
+import { EXTENSION_LIST } from '@/lib/registry';
 
 const { bodyHtml, css, script } = loadSetupWizard('zh');
+
+const totalExtensions = EXTENSION_LIST.length;
 ---
+
 <Base
-  title="中文设置向导"
-  description="通过交互式设置向导，用五个步骤配置你的 Linnet 摘要站。"
+  title="搭好你的晨间简报 — Linnet"
+  description="通过 Linnet 的交互式向导，把分散的信息源整理成一份可交付的个人晨间简报。"
   lang="zh-CN"
 >
-  <div class="setup-page setup-page--zh">
-    <Fragment set:html={bodyHtml} />
+  <div class="setup-shell">
+
+    <!-- ── Page masthead ──────────────────────────────────── -->
+    <header class="setup-masthead">
+      <div class="setup-masthead__kicker">配置向导</div>
+      <h1 class="setup-masthead__title">搭好你的晨间简报</h1>
+      <p class="setup-masthead__sub">
+        从 {totalExtensions} 个扩展中选择 · 生成可直接提交的配置文件 · 一次 GitHub 操作完成部署。
+      </p>
+    </header>
+
+    <!-- ── Wizard body ────────────────────────────────────── -->
+    <div class="setup-body">
+      <Fragment set:html={bodyHtml} />
+    </div>
+
   </div>
+
+  <!-- Legacy wizard CSS (stripped of :root/body/theme rules by setupWizard.ts) -->
   <style is:inline set:html={css}></style>
+
+  <!-- CJK editorial overrides — placed AFTER legacy CSS for cascade priority -->
+  <style is:inline>
+  /* ── Typography — CJK serif stack ──────────────────────── */
+  .setup-body .shell { max-width: none; font-family: var(--font-body); }
+  .setup-body h1, .setup-body h2, .setup-body h3,
+  .setup-body .step-header h2, .setup-body .preview h2,
+  .setup-body .stat-card strong, .setup-body .onboarding-card h2,
+  .setup-body .source-card .source-title {
+    font-family: var(--font-display);
+    /* CJK headlines: no negative tracking, slightly generous */
+    letter-spacing: 0.02em;
+    font-weight: 700;
+  }
+  .setup-body .eyebrow, .setup-body .step-number, .setup-body .step-pill,
+  .setup-body .results-note, .setup-body .pill, .setup-body .label-chip,
+  .setup-body .filter-chip { font-family: var(--font-mono); }
+  .setup-body .code-preview { font-family: var(--font-mono); }
+
+  /* ── Flatten border-radius (editorial = sharp edges) ────── */
+  .setup-body .hero-main, .setup-body .hero-side, .setup-body .wizard,
+  .setup-body .preview, .setup-body .onboarding-card, .setup-body .source-card,
+  .setup-body .config-card, .setup-body .info-card, .setup-body .output-card,
+  .setup-body .mini-panel, .setup-body .stat-card, .setup-body .progress-step,
+  .setup-body .preview-block, .setup-body .notice, .setup-body .placeholder,
+  .setup-body .selected-item, .setup-body .checkbox-row, .setup-body .toggle-card,
+  .setup-body .preset, .setup-body .code-preview { border-radius: 0; }
+  .setup-body .button, .setup-body .step-button, .setup-body .small-button,
+  .setup-body .copy-button, .setup-body .move-button { border-radius: 0; }
+  .setup-body .filter-chip, .setup-body .pill, .setup-body .label-chip,
+  .setup-body .tag, .setup-body .step-pill { border-radius: 0; }
+  .setup-body input[type="text"], .setup-body input[type="number"],
+  .setup-body input[type="url"], .setup-body select,
+  .setup-body textarea { border-radius: 0; font-family: var(--font-body); }
+  .setup-body .checkmark { border-radius: 0; }
+
+  /* ── Shadows — subtle, no blue tint ────────────────────── */
+  .setup-body .hero-main, .setup-body .hero-side, .setup-body .wizard,
+  .setup-body .preview, .setup-body .onboarding-card {
+    box-shadow: none; backdrop-filter: none; background: var(--paper);
+  }
+  .setup-body .source-card:hover { box-shadow: 0 4px 16px rgba(26,24,20,0.08); }
+
+  /* ── Buttons — editorial style ─────────────────────────── */
+  .setup-body .button-primary, .setup-body .step-button.primary {
+    background: var(--ink); color: var(--paper); box-shadow: none;
+    /* CJK buttons: no uppercase, readable size */
+    text-transform: none; letter-spacing: 0.05em; font-family: var(--font-ui);
+  }
+  .setup-body .button-primary:hover, .setup-body .step-button.primary:hover { background: var(--ink-soft); }
+  .setup-body .button-secondary {
+    background: transparent; border-color: var(--rule);
+    text-transform: none; letter-spacing: 0.05em; font-family: var(--font-ui);
+  }
+
+  /* ── Focus states ──────────────────────────────────────── */
+  .setup-body input:focus, .setup-body select:focus, .setup-body textarea:focus,
+  .setup-body button:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ── Eyebrow — CJK kicker (no uppercase/wide-tracking) ─── */
+  .setup-body .eyebrow {
+    color: var(--accent); font-size: 0.75rem;
+    letter-spacing: 0.1em; text-transform: none;
+  }
+  .setup-body .eyebrow::before { background: var(--accent); }
+
+  /* ── Links & accent colors ─────────────────────────────── */
+  .setup-body a { color: var(--accent); }
+  .setup-body .code-preview { background: var(--site-code-bg, #1c1611); color: var(--site-code-text, #f0e7d4); border-color: var(--rule); }
+  .setup-body .source-card.is-selected { border-color: var(--accent); background: var(--accent-soft); }
+  .setup-body .progress-step.is-active { border-color: var(--accent); background: var(--accent-soft); }
+  .setup-body .progress-step.is-complete { border-color: var(--sage); background: rgba(90,122,92,0.08); }
+
+  /* ── Chip colors — editorial gold ──────────────────────── */
+  .setup-body .pill { background: var(--gold-soft); border-color: var(--chip-border); color: var(--chip-text); }
+  .setup-body .filter-chip.is-active { background: var(--gold-soft); color: var(--chip-text); border-color: var(--chip-border); }
+
+  /* ── CJK line-height fixes ──────────────────────────────── */
+  .setup-body p, .setup-body li, .setup-body label { line-height: 1.85; }
+  .setup-body h1, .setup-body h2, .setup-body h3 { line-height: 1.3; }
+  </style>
+
   <script is:inline set:html={script}></script>
 </Base>
 
 <style>
-.setup-page {
-  padding: 2rem 1rem 3rem;
+.setup-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 64px;
 }
 
-.setup-page--zh {
-  font-family: "Avenir Next", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+/* ── Masthead ──────────────────────────────────────────── */
+.setup-masthead {
+  padding: 48px 0 28px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 40px;
+}
+
+.setup-masthead__kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  /* CJK kicker: reduced tracking, no uppercase transform */
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.setup-masthead__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  /* CJK headlines must not have negative letter-spacing */
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+
+.setup-masthead__sub {
+  font-family: var(--font-body);
+  /* CJK has no true italic — use normal style */
+  font-style: normal;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.85;
+}
+
+/* ── Wizard body — no wrapper panel, let legacy breathe ── */
+.setup-body {
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 @media (max-width: 720px) {
-  .setup-page {
-    padding: 1.5rem 0.75rem 2.5rem;
-  }
+  .setup-masthead { padding: 36px 0 20px; }
+  .setup-shell { padding: 0 1rem 48px; }
 }
 </style>

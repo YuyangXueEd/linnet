@@ -1,111 +1,670 @@
 ---
 import Base from '@/layouts/Base.astro';
-import { readdir } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 declare const __DATA_ROOT__: string;
-const dailyDir = resolve(__DATA_ROOT__, 'daily');
+
+interface DigestItem {
+  title?: string;
+  name?: string;
+  label?: string;
+  query?: string;
+  condition?: string;
+  temp_max_c?: number;
+}
+
+interface DigestSection {
+  key?: string;
+  title?: string;
+  items?: DigestItem[];
+}
+
+interface DigestPreviewLine {
+  section: string;
+  title: string;
+  detail: string;
+}
+
+const dailyDir  = resolve(__DATA_ROOT__, 'daily');
 const weeklyDir = resolve(__DATA_ROOT__, 'weekly');
 
-const dailyFiles = await readdir(dailyDir).catch((): string[] => []);
+const dailyFiles  = await readdir(dailyDir).catch((): string[] => []);
 const weeklyFiles = await readdir(weeklyDir).catch((): string[] => []);
+
 const latestDate = dailyFiles
   .filter((f: string) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f))
   .sort().at(-1)?.replace('.json', '') ?? null;
-const totalDays = dailyFiles.filter((f: string) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).length;
+
+const totalDays  = dailyFiles.filter((f: string) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).length;
 const totalWeeks = weeklyFiles.filter((f: string) => /^\d{4}-W\d{2}\.json$/.test(f)).length;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const previewLines = latestDate
+  ? await loadDigestPreview(resolve(dailyDir, `${latestDate}.json`))
+  : fallbackPreviewLines();
+
+const features = [
+  {
+    roman: 'I',
+    head: 'One finished briefing replaces ten open tabs.',
+    body: 'Papers, stories, repos, and weather grouped into a readable flow — compiled while you sleep.',
+  },
+  {
+    roman: 'II',
+    head: 'Quiet infrastructure that stays out of the way.',
+    body: 'GitHub Actions runs the pipeline; GitHub Pages hosts the result. No server to maintain.',
+  },
+  {
+    roman: 'III',
+    head: 'A guided wizard, not a raw config file.',
+    body: 'Pick your sources, set preferences, and receive ready-to-commit YAML — no manual editing required.',
+  },
+];
+
+const beforeState = [
+  'Too many tabs, newsletters, and alerts competing for attention.',
+  'Important updates hidden between low-signal noise.',
+  'Morning context depends on how much time you have that day.',
+];
+
+const afterState = [
+  'One finished briefing waiting for you before the workday starts.',
+  'Papers, stories, repos, and reminders grouped into a readable flow.',
+  'A repeatable routine you can trust instead of a pile of open tabs.',
+];
+
+async function loadDigestPreview(filePath: string): Promise<DigestPreviewLine[]> {
+  try {
+    const raw = await readFile(filePath, 'utf8');
+    const parsed = JSON.parse(raw) as { sections_ordered?: DigestSection[] };
+    const sections = parsed.sections_ordered ?? [];
+    const lines = sections.flatMap(buildPreviewLine).slice(0, 4);
+    return lines.length > 0 ? lines : fallbackPreviewLines();
+  } catch { return fallbackPreviewLines(); }
+}
+
+function buildPreviewLine(section: DigestSection): DigestPreviewLine[] {
+  const firstItem = section.items?.[0];
+  if (!firstItem) return [];
+  const sectionLabel = section.title ?? 'Briefing section';
+  if (section.key === 'weather') {
+    const place     = firstText(firstItem.label) ?? firstText(firstItem.query) ?? 'Your city';
+    const condition = firstText(firstItem.condition) ?? 'Today';
+    const high      = typeof firstItem.temp_max_c === 'number'
+      ? `High ${Math.round(firstItem.temp_max_c)}°C`
+      : 'Morning context, already included';
+    return [{ section: sectionLabel, title: `${place}: ${condition}`, detail: high }];
+  }
+  const title = firstText(firstItem.title) ?? firstText(firstItem.name) ?? firstText(firstItem.label) ?? 'Fresh update';
+  return [{ section: sectionLabel, title, detail: previewDetail(section.key) }];
+}
+
+function firstText(value: unknown): string | null {
+  return typeof value === 'string' && value.trim() ? value.trim() : null;
+}
+
+function previewDetail(key: string | undefined): string {
+  switch (key) {
+    case 'arxiv':           return 'Top paper, pre-ranked for your morning read';
+    case 'hacker_news':     return 'High-signal story worth your attention';
+    case 'github_trending': return 'Repository momentum without the browsing spiral';
+    case 'postdoc_jobs':    return 'New role surfaced automatically';
+    case 'supervisor_updates': return 'Tracked page changes, already summarized';
+    default:                return 'Included in the finished briefing';
+  }
+}
+
+function fallbackPreviewLines(): DigestPreviewLine[] {
+  return [
+    { section: 'arXiv Papers',     title: 'A top paper, summarized before breakfast',  detail: 'You see the why-it-matters first, not a wall of abstracts' },
+    { section: 'Hacker News',      title: 'Only the stories worth opening',             detail: 'High-signal threads surface without endless refreshing' },
+    { section: 'GitHub Trending',  title: 'Repository momentum in one glance',          detail: 'Know what is moving without checking another feed' },
+  ];
+}
 ---
-<Base title="Home" description="Daily AI/CV/Medical Imaging research updates — auto-generated at UK midnight">
-  <div class="page-wrap" style="padding-top:2rem;padding-bottom:4rem;">
 
-    <section class="hero panel" style="padding:2rem;margin-bottom:1.5rem;">
-      <div class="kicker">Live digest demo</div>
-      <h1 style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.06;margin-bottom:.75rem;">
-        One research briefing,<br/>refreshed every day.
-      </h1>
-      <p style="color:var(--site-text-muted);font-size:1.05rem;line-height:1.75;max-width:560px;">
-        This site is a live example of what your own <strong>Linnet</strong> digest looks like after
-        forking the repo, adding one API key, and letting GitHub Actions do the rest.
+<Base
+  title="Linnet — Personal AI Morning Briefing"
+  description="Linnet turns scattered feeds into one calm morning briefing so you can start the day informed."
+>
+  <div class="cover-wrap">
+
+    <!-- ── Masthead ──────────────────────────────────────────── -->
+    <header class="cover-masthead">
+      <div class="cover-masthead__kicker">Personal AI Morning Briefing</div>
+      <h1 class="cover-masthead__title">Linnet</h1>
+      <p class="cover-masthead__tagline">
+        One finished briefing, compiled while you slept.
       </p>
-      <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem;">
-        <a href={`${base}/setup/`} class="btn btn--primary">Open Setup Wizard</a>
-        <a href={`${base}/daily/`} class="btn btn--secondary">Browse Digests</a>
-        <a href="https://github.com/YuyangXueEd/linnet" class="btn btn--secondary" target="_blank" rel="noopener">Fork on GitHub</a>
+      <div class="cover-masthead__stats">
+        <span>{totalDays} daily issues</span>
+        <span class="cover-masthead__dot">·</span>
+        <span>{totalWeeks} weekly rollups</span>
+        <span class="cover-masthead__dot">·</span>
+        <span>Open source</span>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat panel--strong">
-          <strong>{totalDays}</strong>
-          <span>Daily issues</span>
-        </div>
-        <div class="hero-stat panel--strong">
-          <strong>{totalWeeks}</strong>
-          <span>Weekly digests</span>
-        </div>
-        <div class="hero-stat panel--strong">
-          <strong>6+</strong>
-          <span>Sources</span>
-        </div>
-        <div class="hero-stat panel--strong">
-          <strong>2</strong>
-          <span>Delivery sinks</span>
-        </div>
-      </div>
-    </section>
+    </header>
 
-    {latestDate && (
-      <a href={`${base}/daily/${latestDate}/`} class="latest-cta panel">
-        <div>
-          <div class="kicker">Latest issue</div>
-          <p style="font-size:1.15rem;font-weight:700;color:var(--site-text);">{latestDate}</p>
-        </div>
-        <span class="btn btn--primary" style="white-space:nowrap;">Read →</span>
+    <!-- ── Action bar ────────────────────────────────────────── -->
+    <div class="cover-actions">
+      <a href={`${base}/setup/`} class="cover-btn cover-btn--primary">Start the Setup Wizard</a>
+      <a href={latestDate ? `${base}/daily/${latestDate}/` : `${base}/daily/`} class="cover-btn cover-btn--ghost">
+        Read today's briefing →
       </a>
-    )}
+    </div>
 
-    <div class="feature-grid" style="margin-top:1.5rem;">
-      <div class="feature-card panel">
-        <div class="kicker">Sources</div>
-        <h2>Everything in one place</h2>
-        <p>arXiv papers · Hacker News · GitHub Trending · Weather · Postdoc jobs · Custom URLs</p>
+    <!-- ── Lead section: 2-col broadsheet ───────────────────── -->
+    <div class="cover-lead">
+
+      <!-- Left column: editorial preview of latest issue -->
+      <div class="cover-lead__main">
+        <div class="cover-lead__rule-head">
+          <span class="cover-section-label">Latest Issue</span>
+          {latestDate && (
+            <a href={`${base}/daily/${latestDate}/`} class="cover-date-link">{latestDate}</a>
+          )}
+        </div>
+
+        <div class="cover-preview">
+          {previewLines.map((line, i) => (
+            <article class:list={['cover-preview-item', { 'cover-preview-item--lead': i === 0 }]}>
+              <div class="cover-preview__kicker">{line.section}</div>
+              <h3 class="cover-preview__title">{line.title}</h3>
+              <p class="cover-preview__detail">{line.detail}</p>
+            </article>
+          ))}
+        </div>
+
+        {latestDate && (
+          <a href={`${base}/daily/${latestDate}/`} class="cover-read-link">
+            Read the full briefing for {latestDate} →
+          </a>
+        )}
       </div>
-      <div class="feature-card panel">
-        <div class="kicker">Delivery</div>
-        <h2>Reaches you anywhere</h2>
-        <p>GitHub Pages site · Slack digest · ServerChan push · More sinks coming</p>
+
+      <!-- Right column: feature list -->
+      <aside class="cover-lead__aside">
+        <div class="cover-section-label">What Linnet Does</div>
+        <div class="cover-features">
+          {features.map(f => (
+            <div class="cover-feature">
+              <span class="cover-feature__roman">§{f.roman}</span>
+              <div>
+                <h3 class="cover-feature__head">{f.head}</h3>
+                <p class="cover-feature__body">{f.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </aside>
+    </div>
+
+    <!-- ── Before / After comparison ────────────────────────── -->
+    <div class="cover-compare">
+      <div class="cover-compare__col">
+        <div class="cover-section-label cover-section-label--muted">Before Linnet</div>
+        <h2 class="cover-compare__head">A morning run by tabs, feeds, and missed context.</h2>
+        <ul class="cover-compare__list">
+          {beforeState.map(item => <li>{item}</li>)}
+        </ul>
       </div>
-      <div class="feature-card panel">
-        <div class="kicker">Zero maintenance</div>
-        <h2>Runs on GitHub Actions</h2>
-        <p>Fork, add one API key, done. Publishes at midnight UTC every day.</p>
-      </div>
-      <div class="feature-card panel">
-        <div class="kicker">Open source</div>
-        <h2>Extend it freely</h2>
-        <p>Add a new source extension in under an hour. Community-driven and MIT licensed.</p>
+      <div class="cover-compare__divider" aria-hidden="true"></div>
+      <div class="cover-compare__col">
+        <div class="cover-section-label">After Linnet</div>
+        <h2 class="cover-compare__head cover-compare__head--accent">A finished briefing waiting in one place.</h2>
+        <ul class="cover-compare__list">
+          {afterState.map(item => <li>{item}</li>)}
+        </ul>
       </div>
     </div>
 
-    <div class="panel" style="padding:1.5rem;margin-top:1.5rem;text-align:center;">
-      <p style="color:var(--site-text-muted);margin-bottom:1rem;">Find Linnet useful? Help keep it running.</p>
-      <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;">
-        <a href={`${base}/support/`} class="btn btn--secondary">Support the project</a>
-        <a href="https://github.com/YuyangXueEd/linnet" class="btn btn--secondary" target="_blank" rel="noopener">⭐ Star on GitHub</a>
+    <!-- ── Infrastructure note ───────────────────────────────── -->
+    <div class="cover-infra">
+      <div class="cover-section-label">How It Works Today</div>
+      <p class="cover-infra__note">
+        The setup wizard drafts your config files and walks you through a one-time GitHub handoff.
+        After that, Actions runs the pipeline nightly and Pages hosts the result — no server needed.
+      </p>
+      <ol class="cover-infra__steps">
+        <li><span><strong>Choose your sources.</strong> Tell Linnet what deserves your attention.</span></li>
+        <li><span><strong>Generate the config.</strong> The wizard drafts the files and reminder notes.</span></li>
+        <li><span><strong>Commit once on GitHub.</strong> Wake up to a finished briefing from then on.</span></li>
+      </ol>
+      <div class="cover-infra__actions">
+        <a href={`${base}/setup/`} class="cover-btn cover-btn--primary">Open the wizard</a>
+        <a href="https://github.com/YuyangXueEd/linnet" class="cover-ext-link" target="_blank" rel="noopener">
+          View on GitHub ↗
+        </a>
       </div>
     </div>
+
+    <!-- ── Colophon ──────────────────────────────────────────── -->
+    <div class="cover-colophon">
+      linnet is open source · star the repo if it saves you time · built quietly with python + astro
+    </div>
+
   </div>
 </Base>
 
 <style>
-.hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: .75rem; margin-top: 1.5rem; }
-.hero-stat { padding: .9rem 1rem; border-radius: 18px; border: 1px solid var(--site-border); }
-.hero-stat strong { display: block; font-size: 1.5rem; font-weight: 800; color: var(--site-brand); line-height: 1.1; }
-.hero-stat span { font-size: .82rem; color: var(--site-text-muted); }
-.latest-cta { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; text-decoration: none !important; transition: transform .15s; }
-.latest-cta:hover { transform: translateY(-2px); }
-.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-.feature-card { padding: 1.25rem; display: flex; flex-direction: column; gap: .4rem; }
-.feature-card h2 { font-size: 1.05rem; font-weight: 700; color: var(--site-text); }
-.feature-card p { font-size: .88rem; color: var(--site-text-muted); line-height: 1.65; }
+/* ── Page shell ────────────────────────────────────────── */
+.cover-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 64px;
+}
+
+/* ── Masthead ──────────────────────────────────────────── */
+.cover-masthead {
+  padding: 56px 0 28px;
+  border-bottom: 2px solid var(--ink);
+  text-align: center;
+}
+
+.cover-masthead__kicker {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 16px;
+}
+
+.cover-masthead__title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 14vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+  color: var(--ink);
+  margin: 0;
+}
+
+.cover-masthead__tagline {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.125rem;
+  color: var(--ink-soft);
+  margin: 20px 0 0;
+}
+
+.cover-masthead__stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.cover-masthead__dot { color: var(--accent); }
+
+/* ── Action bar ────────────────────────────────────────── */
+.cover-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.cover-btn {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px 24px;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  transition: background 0.15s, color 0.15s;
+}
+
+.cover-btn--primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.cover-btn--primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.cover-btn--ghost:hover {
+  background: var(--ink);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+/* ── Section label ─────────────────────────────────────── */
+.cover-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.cover-section-label--muted { color: var(--ink-muted); }
+
+/* ── Lead 2-col grid ───────────────────────────────────── */
+.cover-lead {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 0;
+  border-bottom: 2px solid var(--ink);
+  margin-top: 0;
+}
+
+.cover-lead__main {
+  padding: 32px 40px 40px 0;
+  border-right: 1px solid var(--rule);
+}
+
+.cover-lead__aside {
+  padding: 32px 0 40px 40px;
+}
+
+.cover-lead__rule-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.cover-date-link {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+.cover-date-link:hover { color: var(--accent); text-decoration: none; }
+
+/* ── Preview items ─────────────────────────────────────── */
+.cover-preview { display: flex; flex-direction: column; gap: 0; }
+
+.cover-preview-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.cover-preview-item:last-child { border-bottom: none; }
+
+.cover-preview-item--lead { padding-top: 0; }
+
+.cover-preview__kicker {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.cover-preview__title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.cover-preview-item--lead .cover-preview__title {
+  font-size: 1.375rem;
+}
+
+.cover-preview__detail {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.cover-read-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+.cover-read-link:hover { opacity: 0.7; text-decoration: none; }
+
+/* ── Feature list ──────────────────────────────────────── */
+.cover-features {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cover-feature {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  align-items: start;
+}
+
+.cover-feature:first-child { padding-top: 0; }
+.cover-feature:last-child { border-bottom: none; }
+
+.cover-feature__roman {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.cover-feature__head {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.cover-feature__body {
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Before / After ────────────────────────────────────── */
+.cover-compare {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+  padding: 40px 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.cover-compare__col { padding: 0 40px; }
+.cover-compare__col:first-child { padding-left: 0; }
+.cover-compare__col:last-child  { padding-right: 0; }
+
+.cover-compare__divider {
+  background: var(--rule);
+  width: 1px;
+}
+
+.cover-compare__head {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 12px 0 16px;
+}
+
+.cover-compare__head--accent { color: var(--accent); }
+
+.cover-compare__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cover-compare__list li {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+}
+
+.cover-compare__list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.cover-compare__col:last-child .cover-compare__list li::before {
+  color: var(--accent);
+  content: '✓';
+  font-size: 0.7rem;
+}
+
+/* ── Infrastructure note ───────────────────────────────── */
+.cover-infra {
+  padding: 40px 0 0;
+}
+
+.cover-infra__note {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  max-width: 64ch;
+  margin: 12px 0 24px;
+}
+
+.cover-infra__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  counter-reset: steps;
+}
+
+.cover-infra__steps li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  align-items: start;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  counter-increment: steps;
+}
+
+.cover-infra__steps li::before {
+  content: counter(steps);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--bg);
+  background: var(--ink);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cover-infra__steps li strong { color: var(--ink); }
+
+.cover-infra__actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.cover-ext-link {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+.cover-ext-link:hover { color: var(--accent); text-decoration: none; }
+
+/* ── Colophon ──────────────────────────────────────────── */
+.cover-colophon {
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cover-lead {
+    grid-template-columns: 1fr;
+  }
+  .cover-lead__main {
+    padding: 28px 0 32px;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cover-lead__aside { padding: 28px 0 0; }
+
+  .cover-compare {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .cover-compare__divider { display: none; }
+  .cover-compare__col { padding: 0; }
+}
+
+@media (max-width: 480px) {
+  .cover-actions { flex-direction: column; align-items: stretch; }
+  .cover-btn { text-align: center; }
+  .cover-masthead { padding: 40px 0 20px; }
+}
 </style>

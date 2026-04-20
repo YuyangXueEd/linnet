@@ -19,6 +19,14 @@ display_order:
   - postdoc_jobs
   - supervisor_updates
 
+# Quote extensions — used as tagline replacement only, not shown as feed sections.
+# Enable one at a time. quote_of_day requires API_NINJAS_KEY secret.
+quote_of_day:
+  enabled: false  # set to true + add API_NINJAS_KEY GitHub secret
+
+hitokoto:
+  enabled: false  # set to true for Chinese-language briefings (no key needed)
+
 arxiv:
   enabled: true
 

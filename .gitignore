@@ -31,9 +31,12 @@ docs/monthly/
 *.swp
 
 # Claude Code
+.agents/
 .claude/
 .codex
 .codebuddy/
+.skills-lock.json
+AGENTS.md
 
 superpowers/
 
