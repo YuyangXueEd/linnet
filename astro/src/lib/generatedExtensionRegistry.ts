@@ -192,7 +192,7 @@ export const GENERATED_EXTENSION_REGISTRY = {
   },
   "arxiv": {
     "key": "arxiv",
-    "title": "From the Archive",
+    "title": "From the arXiv",
     "subtitle": "arXiv preprints",
     "icon": "paper",
     "defaultOrder": 2,
