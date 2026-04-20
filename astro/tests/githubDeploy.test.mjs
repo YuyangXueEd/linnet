@@ -44,6 +44,7 @@ test('buildGitHubCallPreview includes contents and secrets endpoints', () => {
     'PUT /repos/openai/linnet/contents/config/sources.yaml',
     'GET /repos/openai/linnet/actions/secrets/public-key',
     'PUT /repos/openai/linnet/actions/secrets/OPENROUTER_API_KEY',
+    'POST /repos/openai/linnet/actions/workflows/daily.yml/dispatches',
   ]);
 });
 
@@ -56,8 +57,12 @@ test('buildGitHubCallPreview supports non-OpenRouter secret names', () => {
   });
 
   assert.equal(
-    preview.at(-1),
+    preview.at(-2),
     'PUT /repos/openai/linnet/actions/secrets/OPENAI_API_KEY',
+  );
+  assert.equal(
+    preview.at(-1),
+    'POST /repos/openai/linnet/actions/workflows/daily.yml/dispatches',
   );
 });
 
