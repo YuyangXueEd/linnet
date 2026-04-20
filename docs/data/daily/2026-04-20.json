@@ -1,42 +1,16 @@
 {
   "date": "2026-04-20",
-  "generated_at": "2026-04-20T15:04:28.465298+00:00",
+  "generated_at": "2026-04-20T23:18:27.269969+00:00",
   "sections_ordered": [
     {
       "key": "weather",
       "payload_key": "weather",
       "title": "Weather",
       "icon": "🌦️",
-      "items": [
-        {
-          "query": "Edinburgh",
-          "label": "Edinburgh, Scotland, United Kingdom",
-          "resolved_name": "Edinburgh",
-          "region": "Scotland",
-          "country": "United Kingdom",
-          "latitude": 55.95206,
-          "longitude": -3.19648,
-          "timezone": "Europe/London",
-          "forecast_date": "2026-04-20",
-          "condition": "Overcast",
-          "weather_code": 3,
-          "temperature_c": 11.0,
-          "apparent_temperature_c": 7.1,
-          "temp_max_c": 11.0,
-          "temp_min_c": 6.4,
-          "humidity_pct": 51,
-          "wind_speed_kmh": 13.3,
-          "precipitation_probability_pct": 66,
-          "is_day": true,
-          "sunrise": "2026-04-20T05:54",
-          "sunset": "2026-04-20T20:29",
-          "source": "Open-Meteo",
-          "source_url": "https://open-meteo.com/"
-        }
-      ],
+      "items": [],
       "meta": {
-        "count": 1,
-        "city": "Edinburgh"
+        "count": 0,
+        "city": ""
       }
     },
     {
@@ -45,73 +19,6 @@
       "title": "arXiv Papers",
       "icon": "📄",
       "items": [
-        {
-          "id": "2604.16060v1",
-          "title": "Chain-of-Thought Degrades Visual Spatial Reasoning Capabilities of Multimodal LLMs",
-          "authors": [
-            "Sai Srinivas Kancheti",
-            "Aditya Sanjiv Kanade",
-            "Vineeth N. Balasubramanian",
-            "Tanuja Ganu"
-          ],
-          "categories": [
-            "cs.CV",
-            "cs.AI"
-          ],
-          "abstract": "This paper demonstrates that employing Chain-of-Thought (CoT) prompting significantly degrades the visual spatial reasoning capabilities of Multimodal Large Language Models (MRMs) across numerous benchmarks. The authors reveal that MRMs and CoT-prompted models exhibit severe shortcut learning, often hallucinating visual details from textual priors even without an image present. This suggests CoT is ineffective for spatial tasks and necessitates the development of vision-centric reasoning paradigms.",
-          "url": "http://arxiv.org/abs/2604.16060v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16060v1",
-          "score": 9.0,
-          "figure_url": "https://arxiv.org/html/2604.16060v1/x1.png",
-          "figure_caption": "(Left) CoT vs Non-CoT performance of open-source MRMs. (Right) Bar chart showing the average accuracy of various families of MLMs over 13 benchmark datasets. For each model, the left bar shows the accuracy achieved by CoT prompting, and the right bar shows for base prompt (non-CoT). We observe CoT prompting drops performance over a wide range of backbones and model scales, including Qwen3-VL-8B-Thinking Bai et al. ( 2025a ) , a model with explicitly enhanced spatial perception.",
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
-          "primary_category_rank": 0
-        },
-        {
-          "id": "2604.16256v1",
-          "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
-          "authors": [
-            "Yige Xu",
-            "Yongjie Wang",
-            "Zizhuo Wu",
-            "Kaisong Song",
-            "Jun Lin"
-          ],
-          "categories": [
-            "cs.CV",
-            "cs.CL"
-          ],
-          "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their textual components. The authors introduce **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. Their core finding is a consistent and substantial performance gap, indicating that VLMs significantly underperform when relying solely on visual input compared to text-only input.",
-          "url": "http://arxiv.org/abs/2604.16256v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
-          "score": 9.0,
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
-          "primary_category_rank": 0
-        },
-        {
-          "id": "2604.16104v1",
-          "title": "Dual-Modal Lung Cancer AI: Interpretable Radiology and Microscopy with Clinical Risk Integration",
-          "authors": [
-            "Baramee Sukumal",
-            "Aueaphum Aueawatthanaphisut"
-          ],
-          "categories": [
-            "cs.CV",
-            "cs.AI",
-            "eess.IV"
-          ],
-          "abstract": "This paper introduces a dual-modal AI framework that fuses features extracted from CT radiology and H\\&E histopathology, enhanced with clinical metadata, for lung cancer diagnosis and subtype classification. The core contribution is this integrated approach, which leverages both imaging modalities to improve diagnostic robustness and employs various Explainable AI techniques to provide interpretable insights into the predictions.",
-          "url": "http://arxiv.org/abs/2604.16104v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16104v1",
-          "score": 9.0,
-          "figure_url": "https://arxiv.org/html/2604.16104v1/fig_ct_scan.png",
-          "figure_caption": "Example chest CT images demonstrating a suspected lung tumor region across axial, coronal, and sagittal planes. CT imaging is commonly used for lung cancer screening and detection.",
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
-          "primary_category_rank": 0
-        },
         {
           "id": "2604.16175v1",
           "title": "MARCH: Multi-Agent Radiology Clinical Hierarchy for CT Report Generation",
@@ -122,103 +29,41 @@
             "Yifan Peng"
           ],
           "categories": [
-            "cs.CV",
-            "cs.AI"
+            "cs.AI",
+            "cs.CV"
           ],
-          "abstract": "MARCH is a multi-agent framework for CT report generation that mimics the hierarchical structure of radiology departments. It employs specialized agents (Resident, Fellows, Attending) to perform initial drafting, retrieval-augmented revision, and iterative, consensus-driven verification. This approach significantly improves clinical fidelity and linguistic accuracy compared to monolithic models by incorporating collaborative oversight.",
+          "abstract": "MARCH is a multi-agent framework that mimics the hierarchical structure of radiology departments to generate more clinically accurate CT reports. It employs specialized agents—Resident for drafting, Fellows for retrieval-augmented revision, and an Attending for orchestrating consensus discourse—to iteratively verify findings. This approach significantly improves clinical fidelity and linguistic accuracy compared to monolithic models.",
           "url": "http://arxiv.org/abs/2604.16175v1",
           "pdf_url": "https://arxiv.org/pdf/2604.16175v1",
           "score": 9.0,
           "figure_url": "https://arxiv.org/html/2604.16175v1/x1.png",
           "figure_caption": "Overview of the MARCH framework. It consists of three main stages: 1) Initial Report Drafting, 2) Retrieval-Augmented Report Revision, and 3) Consensus-Driven Finalization.",
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
           "primary_category_rank": 0
         },
         {
-          "id": "2604.16083v1",
-          "title": "DINOv3 Beats Specialized Detectors: A Simple Foundation Model Baseline for Image Forensics",
+          "id": "2604.15871v1",
+          "title": "UniEditBench: A Unified and Cost-Effective Benchmark for Image and Video Editing via Distilled MLLMs",
           "authors": [
-            "Jieming Yu",
-            "Qiuxiao Feng",
-            "Zhuohan Wang",
-            "Xiaochen Ma"
+            "Lifan Jiang",
+            "Tianrun Wu",
+            "Yuhang Pei",
+            "Chenyang Wang",
+            "Boxi Wu"
           ],
           "categories": [
+            "cs.AI",
             "cs.CV"
           ],
-          "abstract": "This paper introduces DINOv3 adapted with LoRA and a lightweight decoder as a simple yet powerful foundation model baseline for image forensics, specifically for manipulation localization. The core method leverages the frozen DINOv3 backbone, fine-tuning only a small fraction of parameters via LoRA, which proves more stable and effective than full fine-tuning. This approach significantly outperforms specialized detectors, achieving substantial F1 score improvements across multiple benchmarks with far fewer trainable parameters.",
-          "url": "http://arxiv.org/abs/2604.16083v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16083v1",
-          "score": 8.0,
-          "figure_url": "https://arxiv.org/html/2604.16083v1/x1.png",
-          "figure_caption": "Overview of our framework. A frozen DINOv3 ViT backbone with LoRA injected on QKV projections produces dense patch tokens, which are reshaped into a 2D feature map and decoded by a lightweight convolutional segmentation head into a pixel-level manipulation mask.",
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
-          "primary_category_rank": 0
-        },
-        {
-          "id": "2604.16044v1",
-          "title": "Elucidating the SNR-t Bias of Diffusion Probabilistic Models",
-          "authors": [
-            "Meng Yu",
-            "Lei Sun",
-            "Jianhao Zeng",
-            "Xiangxiang Chu",
-            "Kun Zhan"
-          ],
-          "categories": [
-            "cs.CV"
-          ],
-          "abstract": "This paper identifies and analyzes the Signal-to-Noise Ratio-timestep (SNR-t) bias in Diffusion Probabilistic Models, where the SNR of the denoised sample misaligns with its timestep during inference, degrading generation quality. The authors provide theoretical and empirical evidence for this issue. They propose a simple, effective differential correction method that leverages frequency decomposition to mitigate this bias by better aligning the denoising process with the expected SNR at each timestep.",
-          "url": "http://arxiv.org/abs/2604.16044v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16044v1",
-          "score": 8.0,
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
-          "primary_category_rank": 0
-        },
-        {
-          "id": "2604.16010v1",
-          "title": "IA-CLAHE: Image-Adaptive Clip Limit Estimation for CLAHE",
-          "authors": [
-            "Rikuto Otsuka",
-            "Yuho Shoji",
-            "Yuka Ogino",
-            "Takahiro Toizumi",
-            "Atsushi Ito"
-          ],
-          "categories": [
-            "cs.CV"
-          ],
-          "abstract": "This paper introduces IA-CLAHE, an image-adaptive method for Contrast Limited Adaptive Histogram Equalization. The core method adaptively estimates the tile-wise contrast limiting parameter (clip limit) based on the local histogram distribution, overcoming the over-enhancement issue of fixed-parameter CLAHE. This is achieved by training a lightweight estimator using a differentiable extension of CLAHE, allowing end-to-end optimization without requiring pre-searched ground-truth limits.",
-          "url": "http://arxiv.org/abs/2604.16010v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16010v1",
-          "score": 8.0,
-          "figure_url": "https://arxiv.org/html/2604.16010v1/x1.png",
-          "figure_caption": "Comparison between conventional CLAHE and the proposed IA-CLAHE. (a) Conventional CLAHE applies a single global clip limit to all tiles, visualized as the dashed line in the middle-left histogram. This fixed parameter often causes over-enhancement in already bright regions. (b) IA-CLAHE predicts tile-wise clip limits (orange lines in the middle-right histogram) using a lightweight estimator and applies them through a differentiable CLAHE module. This adaptive strategy enhances details in dark regions while preserving well-exposed areas.",
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
-          "primary_category_rank": 0
-        },
-        {
-          "id": "2604.16264v1",
-          "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
-          "authors": [
-            "Seulgi Kim",
-            "Mohit Prabhushankar",
-            "Ghassan AlRegib"
-          ],
-          "categories": [
-            "cs.CV",
-            "cs.LG"
-          ],
-          "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs). $\\text{MoIR}$ addresses the limitation of attention-based methods by employing an **information-level fusion** strategy that explicitly reduces information disparity *before* fusion. It achieves this by identifying less informative tokens and routing complementary information from a stronger modality, thereby ensuring a more balanced and robust multimodal representation.",
-          "url": "http://arxiv.org/abs/2604.16264v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
-          "score": 8.0,
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
+          "abstract": "UniEditBench introduces a unified and cost-effective benchmark for evaluating both image and video editing models, addressing the fragmentation and lack of reliable video evaluation in existing methods. It establishes a shared protocol covering diverse operations like addition, replacement, and challenging compositional tasks. Crucially, the benchmark enables scalable evaluation by distilling a powerful MLLM judge into a lightweight model, overcoming the high cost of using large models directly for assessment.",
+          "url": "http://arxiv.org/abs/2604.15871v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.15871v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.15871v1/x1.png",
+          "figure_caption": "Figure 1. Overview of the UniEditBench framework. (A) Dataset Composition & Detailed Taxonomy: Displays the structured task taxonomy and data distribution, comprising 633 image and 77 video samples across diverse editing operations (e.g., content modification, attribute transformation, and compositional reasoning tasks like counting and reordering). (B) Evaluation Pipeline with Expert Distillation: Our pipeline provides a source prompt, target prompt, and edited prompt for each sample pair to accommodate various editing paradigms. Additionally, the editing results, original images, and prompt information are input into our 4B/8B discriminative models, which are distilled from the Qwen3-VL-235B-A22B model, to obtain the final judgments. (C) Comprehensive Benchmark Results: Radar charts display the aggregated evaluation results of editing methods on UniEditBench, assessed by the distilled 4B and 8B reward models (top: image benchmark; bottom: video benchmark).",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
           "primary_category_rank": 0
         },
         {
@@ -232,132 +77,113 @@
             "Tanuja Ganu"
           ],
           "categories": [
-            "cs.CV",
-            "cs.AI"
+            "cs.AI",
+            "cs.CV"
           ],
-          "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning capabilities of Multimodal Large Language Models (MLLMs) across tasks categorized by Abstraction, Relation, and Transformation. The core contribution is demonstrating a significant gap, where top MLLMs score below 50% accuracy compared to 80% for humans, highlighting limitations in their visual attention, perceptual manipulation, and concept abstraction.",
+          "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning abilities of Multimodal Large Language Models (MLLMs) across Abstraction, Relation, and Transformation tasks. By comparing MLLM performance against human scores on these fluid intelligence-inspired tests, the authors demonstrate that top MLLMs significantly underperform humans (below 50% vs. 80% accuracy). The contribution highlights current MLLMs' limitations in visual attention, internal manipulation, and abstract concept formation.",
           "url": "http://arxiv.org/abs/2604.16054v1",
           "pdf_url": "https://arxiv.org/pdf/2604.16054v1",
           "score": 8.0,
           "figure_url": "https://arxiv.org/html/2604.16054v1/figures/Dataset_figure.png",
           "figure_caption": "Overview of the eight tasks in the proposed Mind’s Eye benchmark : Each panel shows an example image-question pair of the benchmark",
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
           "primary_category_rank": 0
         },
         {
-          "id": "2604.16034v1",
-          "title": "Ranking XAI Methods for Head and Neck Cancer Outcome Prediction",
+          "id": "2604.16076v1",
+          "title": "Prototype-Grounded Concept Models for Verifiable Concept Alignment",
           "authors": [
-            "Baoqiang Ma",
-            "Djennifer K. Madzia-Madzou",
-            "Rosa C. J. Kraaijveld",
-            "Jin Ouyang"
+            "Stefano Colamonaco",
+            "David Debot",
+            "Pietro Barbiero",
+            "Giuseppe Marra"
           ],
           "categories": [
-            "cs.CV",
-            "physics.data-an"
+            "cs.AI",
+            "cs.LG",
+            "cs.NE"
           ],
-          "abstract": "This paper comprehensively evaluates and ranks 13 Explainable AI (XAI) methods for predicting Head and Neck Cancer outcomes using PET/CT data, addressing the critical clinical barrier of AI interpretability. The evaluation uses 24 diverse metrics covering faithfulness, robustness, complexity, and plausibility, unlike previous empirical selections. The core contribution is demonstrating significant variation across methods, highlighting Integrated Gradients (IG) and DeepLIFT (DL) as top performers across key interpretability aspects.",
-          "url": "http://arxiv.org/abs/2604.16034v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16034v1",
-          "score": 8.0,
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
+          "abstract": "This paper introduces Prototype-Grounded Concept Models (PGCMs) to address the lack of verifiability in Concept Bottleneck Models (CBMs). PGCMs ground abstract concepts in learned visual prototypes, providing explicit image evidence for each concept. This grounding allows for direct inspection and targeted human intervention to correct concept misalignments, achieving comparable predictive performance to CBMs while significantly enhancing transparency and interpretability.",
+          "url": "http://arxiv.org/abs/2604.16076v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.16076v1",
+          "score": 7.0,
+          "figure_url": "https://arxiv.org/html/2604.16076v1/VISUAL.png",
+          "figure_caption": "Comparison between standard neural networks, Concept Bottleneck Models (CBMs), and our Prototype-Grounded Concept Models (PGCMs). While CBMs explain predictions in terms of high-level concepts, they provide no way to verify what those concepts mean visually. PGCMs ground each concept in learned visual prototypes, making concept semantics explicit and inspectable.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
           "primary_category_rank": 0
         },
         {
-          "id": "2604.16248v1",
-          "title": "Where Do Vision-Language Models Fail? World Scale Analysis for Image Geolocalization",
+          "id": "2604.15856v1",
+          "title": "Robust Multispectral Semantic Segmentation under Missing or Full Modalities via Structured Latent Projection",
           "authors": [
-            "Siddhant Bharadwaj",
-            "Ashish Vashist",
-            "Fahimul Aleem",
-            "Shruti Vyas"
+            "Irem Ulku",
+            "Erdem Akagündüz",
+            "Ömer Özgür Tanrıöver"
           ],
           "categories": [
+            "cs.AI",
             "cs.CV"
           ],
-          "abstract": "This paper systematically evaluates state-of-the-art Vision-Language Models (VLMs) for zero-shot, country-level image geolocalization using only ground-view imagery and prompt-based prediction. The core contribution is a world-scale analysis revealing significant performance variation across models, demonstrating the potential of VLM semantic reasoning for coarse localization while highlighting their current limitations in capturing fine-grained geographic details.",
-          "url": "http://arxiv.org/abs/2604.16248v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16248v1",
-          "score": 8.0,
-          "figure_url": "https://arxiv.org/html/2604.16248v1/x1.png",
-          "figure_caption": "Overview of the evaluation pipeline. A ground-level image and a structured prompt are passed to each of the three VLM families ( ≤ \\( \\leq \\) 8B parameters), which output Top-5 country predictions. Performance is assessed via Top-1/Top-5 accuracy and a multi-dimensional evaluation framework comprising Environmental Stratification (urban/rural and six biome categories), Error Structure Analysis (neighbor hop distance), and Geographic Error Reasonableness (GER) score, the latter two applied only to incorrect predictions.",
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
+          "abstract": "This paper introduces CBC-SLP, a novel method for robust multispectral semantic segmentation that handles both missing and full sensor modalities. The core method utilizes a **Structured Latent Projection (SLP)** to explicitly preserve both modality-invariant and modality-specific information, avoiding the performance trade-off seen in models that rely solely on shared representations. This approach ensures high accuracy regardless of data availability by strategically structuring the latent space.",
+          "url": "http://arxiv.org/abs/2604.15856v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.15856v1",
+          "score": 7.0,
+          "figure_url": "https://arxiv.org/html/2604.15856v1/figures/Hunan_28965_s2_8_4_3.png",
+          "figure_caption": "Multispectral optical (false RGB: infrared-red-green channels) image on the left and DEM height map on the right, both from the Hunan image set [ 17 ] . While the multispectral image highlights surface reflectance and land-cover differences, the DEM height map reveals the terrain structure, providing complementary information for scene interpretation.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
           "primary_category_rank": 0
         },
         {
-          "id": "2604.16284v1",
-          "title": "Enhancing Hazy Wildlife Imagery: AnimalHaze3k and IncepDehazeGan",
+          "id": "2604.16264v1",
+          "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
           "authors": [
-            "Shivarth Rai",
-            "Tejeswar Pokuri"
+            "Seulgi Kim",
+            "Mohit Prabhushankar",
+            "Ghassan AlRegib"
           ],
           "categories": [
+            "cs.LG",
             "cs.CV"
           ],
-          "abstract": "This paper introduces **AnimalHaze3k**, a synthetic dataset of 3,477 hazy wildlife images created using a physics-based pipeline. The core method is the novel **IncepDehazeGan** architecture, which uses inception blocks and residual connections within a GAN framework to achieve state-of-the-art image dehazing performance. This significantly improves downstream animal detection tasks, offering ecologists a robust tool for monitoring in hazy conditions.",
-          "url": "http://arxiv.org/abs/2604.16284v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16284v1",
-          "score": 7.0,
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
-          "primary_category_rank": 0
+          "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs). Unlike attention-based methods, $\\text{MoIR}$ operates at the information level by explicitly reducing information disparity *before* fusion. It achieves this by identifying less informative tokens and routing complementary information from a stronger modality to the weaker one, thereby ensuring balanced input quality for robust multimodal reasoning.",
+          "url": "http://arxiv.org/abs/2604.16264v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
+          "score": 8.0,
+          "primary_category": "cs.LG",
+          "primary_category_anchor": "cs-lg",
+          "primary_category_rank": 1
         },
         {
-          "id": "2604.16298v1",
-          "title": "FineCog-Nav: Integrating Fine-grained Cognitive Modules for Zero-shot Multimodal UAV Navigation",
+          "id": "2604.16256v1",
+          "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
           "authors": [
-            "Dian Shao",
-            "Zhengzheng Xu",
-            "Peiyang Wang",
-            "Like Liu",
-            "Yule Wang"
+            "Yige Xu",
+            "Yongjie Wang",
+            "Zizhuo Wu",
+            "Kaisong Song",
+            "Jun Lin"
           ],
           "categories": [
-            "cs.CV",
-            "cs.RO"
+            "cs.CL",
+            "cs.CV"
           ],
-          "abstract": "FineCog-Nav introduces a cognitive-inspired framework for zero-shot UAV navigation by integrating several fine-grained, specialized modules (e.g., perception, memory, reasoning) driven by moderate foundation models. This modular approach, featuring structured communication protocols, aims to overcome the limitations of generic large model reliance in existing methods, leading to improved performance and interpretability. The authors also release AerialVLN-Fine, a benchmark designed for fine-grained evaluation of these navigation capabilities.",
-          "url": "http://arxiv.org/abs/2604.16298v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16298v1",
-          "score": 7.0,
-          "figure_url": "https://arxiv.org/html/2604.16298v1/x1.png",
-          "figure_caption": "We propose FineCog-Nav, a framework designed to simulate diverse human cognitive functions.",
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
-          "primary_category_rank": 0
-        },
-        {
-          "id": "2604.16147v1",
-          "title": "SWNet: A Cross-Spectral Network for Camouflaged Weed Detection",
-          "authors": [
-            "Henry O. Velesaca",
-            "Luigi Miranda",
-            "Angel D. Sappa"
-          ],
-          "categories": [
-            "cs.CV",
-            "cs.AI"
-          ],
-          "abstract": "SWNet is a cross-spectral network designed to detect camouflaged weeds by integrating Visible and Near-Infrared (NIR) data. It uses a Pyramid Vision Transformer backbone and a Bimodal Gated Fusion Module to dynamically combine spectral information, exploiting NIR differences in chlorophyll reflectance to distinguish targets invisible in the visible spectrum. The core contribution is an effective architecture that overcomes homochromatic camouflage challenges in dense agricultural settings.",
-          "url": "http://arxiv.org/abs/2604.16147v1",
-          "pdf_url": "https://arxiv.org/pdf/2604.16147v1",
-          "score": 7.0,
-          "figure_url": "https://arxiv.org/html/2604.16147v1/x1.png",
-          "figure_caption": "The overall architecture of the proposed SWNet.",
-          "primary_category": "cs.CV",
-          "primary_category_anchor": "cs-cv",
-          "primary_category_rank": 0
+          "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their textual components. The authors introduce **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. Their core finding is a consistent and substantial performance gap, indicating that VLMs significantly underperform when relying solely on visual input compared to text-only input, suggesting limitations in their visual reasoning capabilities.",
+          "url": "http://arxiv.org/abs/2604.16256v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
+          "score": 9.0,
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
         }
       ],
       "meta": {
         "papers_fetched": 100,
-        "papers_after_keyword_filter": 46,
-        "papers_after_llm_filter": 14,
-        "count": 14
+        "papers_after_keyword_filter": 50,
+        "papers_after_llm_filter": 7,
+        "count": 7
       }
     },
     {
@@ -371,7 +197,7 @@
           "url": "https://github.com/Fincept-Corporation/FinceptTerminal",
           "description": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
           "stars_today": 3129,
-          "total_stars": 8722,
+          "total_stars": 9428,
           "language": "Python",
           "topics": [],
           "summary": "FinceptTerminal is a modern finance application providing advanced market analytics, investment research, and economic data tools for interactive exploration and data-driven decision-making."
@@ -381,17 +207,17 @@
           "url": "https://github.com/ruvnet/RuView",
           "description": "π RuView: WiFi DensePose turns commodity WiFi signals into real-time human pose estimation, vital sign monitoring, and presence detection — all without a single pixel of video.",
           "stars_today": 716,
-          "total_stars": 47963,
+          "total_stars": 48158,
           "language": "Rust",
           "topics": [],
-          "summary": "RuView is a WiFi-based system that transforms commodity WiFi signals into real-time human pose estimation, vital sign monitoring, and presence detection without using any video."
+          "summary": "RuView is a system that leverages commodity WiFi signals to perform real-time human pose estimation, vital sign monitoring, and presence detection without using any video."
         },
         {
           "full_name": "thunderbird/thunderbolt",
           "url": "https://github.com/thunderbird/thunderbolt",
           "description": "AI You Control: Choose your models. Own your data. Eliminate vendor lock-in.",
           "stars_today": 667,
-          "total_stars": 2621,
+          "total_stars": 2786,
           "language": "TypeScript",
           "topics": [],
           "summary": "Thunderbolt is an AI platform enabling users to control their models, own their data, and avoid vendor lock-in by offering model choice and data sovereignty."
@@ -401,7 +227,7 @@
           "url": "https://github.com/paperless-ngx/paperless-ngx",
           "description": "A community-supported supercharged document management system: scan, index and archive all your documents",
           "stars_today": 611,
-          "total_stars": 39238,
+          "total_stars": 39397,
           "language": "Python",
           "topics": [],
           "summary": "Paperless-ngx is a community-supported document management system that allows users to scan, index, and archive all their documents efficiently."
@@ -411,17 +237,17 @@
           "url": "https://github.com/tractorjuice/arc-kit",
           "description": "Enterprise Architecture Governance & Vendor Procurement Toolkit",
           "stars_today": 334,
-          "total_stars": 1221,
+          "total_stars": 1317,
           "language": "HTML",
           "topics": [],
-          "summary": "Arc-Kit is an enterprise architecture governance and vendor procurement toolkit designed to streamline and manage organizational technology strategy and purchasing processes."
+          "summary": "Arc-Kit is an enterprise architecture governance and vendor procurement toolkit designed to streamline and manage organizational architecture processes."
         },
         {
           "full_name": "koala73/worldmonitor",
           "url": "https://github.com/koala73/worldmonitor",
           "description": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
-          "stars_today": 343,
-          "total_stars": 49642,
+          "stars_today": 477,
+          "total_stars": 50018,
           "language": "TypeScript",
           "topics": [],
           "summary": "WorldMonitor is a real-time global intelligence dashboard that uses AI to aggregate news, monitor geopolitics, and track infrastructure within a unified situational awareness interface."
@@ -431,17 +257,17 @@
           "url": "https://github.com/openai/openai-agents-python",
           "description": "A lightweight, powerful framework for multi-agent workflows",
           "stars_today": 909,
-          "total_stars": 23751,
+          "total_stars": 23904,
           "language": "Python",
           "topics": [],
-          "summary": "The `openai-agents-python` repository provides a lightweight, powerful Python framework for orchestrating and managing complex multi-agent workflows powered by OpenAI models."
+          "summary": "The `openai-agents-python` repository provides a lightweight, powerful Python framework designed to facilitate the creation and management of complex multi-agent workflows orchestrated by OpenAI models."
         },
         {
           "full_name": "deepseek-ai/DeepGEMM",
           "url": "https://github.com/deepseek-ai/DeepGEMM",
           "description": "DeepGEMM: clean and efficient FP8 GEMM kernels with fine-grained scaling",
           "stars_today": 155,
-          "total_stars": 6766,
+          "total_stars": 6816,
           "language": "Cuda",
           "topics": [],
           "summary": "DeepGEMM provides clean and efficient FP8 General Matrix Multiplication (GEMM) kernels featuring fine-grained scaling for optimized performance."
@@ -451,24 +277,14 @@
           "url": "https://github.com/pi-hole/pi-hole",
           "description": "A black hole for Internet advertisements",
           "stars_today": 154,
-          "total_stars": 56899,
+          "total_stars": 57141,
           "language": "Shell",
           "topics": [],
-          "summary": "Pi-hole functions as a DNS sinkhole, blocking internet advertisements and trackers across your entire network for improved performance and privacy."
-        },
-        {
-          "full_name": "XTLS/Xray-core",
-          "url": "https://github.com/XTLS/Xray-core",
-          "description": "Xray, Penetrates Everything. Also the best v2ray-core. Where the magic happens. An open platform for various uses.",
-          "stars_today": 52,
-          "total_stars": 37345,
-          "language": "Go",
-          "topics": [],
-          "summary": "XTLS/Xray-core is a versatile, high-performance proxy platform, functioning as an advanced v2ray-core replacement designed for robust network penetration across various use cases."
+          "summary": "Pi-hole functions as a network-level advertisement and tracking blocker, acting as a DNS sinkhole for unwanted content across your entire network."
         }
       ],
       "meta": {
-        "count": 10
+        "count": 9
       }
     },
     {
@@ -476,154 +292,35 @@
       "payload_key": "hacker_news",
       "title": "Hacker News",
       "icon": "🔥",
-      "items": [
-        {
-          "id": 47833247,
-          "title": "Atlassian Enables Default Data Collection to Train AI",
-          "url": "https://letsdatascience.com/news/atlassian-enables-default-data-collection-to-train-ai-f71343d8",
-          "score": 94,
-          "created_at": "2026-04-20T12:23:39Z",
-          "comments_url": "https://news.ycombinator.com/item?id=47833247",
-          "summary": "Atlassian has enabled the default collection of customer data to train its artificial intelligence models."
-        },
-        {
-          "id": 47826328,
-          "title": "Uber’s Anthropic AI push hits a wall",
-          "url": "https://finance.yahoo.com/sectors/technology/articles/ubers-anthropic-ai-push-hits-223109852.html",
-          "score": 93,
-          "created_at": "2026-04-19T18:13:32Z",
-          "comments_url": "https://news.ycombinator.com/item?id=47826328",
-          "summary": "Uber's strategic push to integrate Anthropic's AI technology has reportedly stalled due to internal disagreements and challenges in aligning the partnership with the company's core business strategy."
-        },
-        {
-          "id": 47827985,
-          "title": "CEOs admit AI had no impact on employment or productivity",
-          "url": "https://fortune.com/article/why-do-thousands-of-ceos-believe-ai-not-having-impact-productivity-employment-study/",
-          "score": 85,
-          "created_at": "2026-04-19T21:56:22Z",
-          "comments_url": "https://news.ycombinator.com/item?id=47827985",
-          "summary": "A recent study reveals that thousands of CEOs acknowledge that artificial intelligence has not yet significantly impacted their companies' employment levels or overall productivity."
-        },
-        {
-          "id": 47828444,
-          "title": "Swiss AI Initiative (2023)",
-          "url": "https://www.swiss-ai.org",
-          "score": 85,
-          "created_at": "2026-04-19T22:58:35Z",
-          "comments_url": "https://news.ycombinator.com/item?id=47828444",
-          "summary": "The Swiss AI Initiative (2023) is a national effort focused on advancing artificial intelligence research, innovation, and application within Switzerland."
-        },
-        {
-          "id": 47830071,
-          "title": "A cache-friendly IPv6 LPM with AVX-512 (linearized B+-tree, real BGP benchmarks)",
-          "url": "https://github.com/esutcu/planb-lpm",
-          "score": 52,
-          "created_at": "2026-04-20T03:24:21Z",
-          "comments_url": "https://news.ycombinator.com/item?id=47830071",
-          "summary": "This GitHub project presents a cache-friendly IPv6 Longest Prefix Match (LPM) implementation utilizing AVX-512 instructions and a linearized B+-tree structure, benchmarked against real BGP data."
-        }
-      ],
+      "items": [],
       "meta": {
-        "count": 5
+        "count": 0
       }
     },
     {
-      "key": "postdoc_jobs",
-      "payload_key": "jobs",
-      "title": "Postdoc Jobs",
-      "icon": "💼",
+      "key": "quote_of_day",
+      "payload_key": "quote_of_day",
+      "title": "Words for the Morning",
+      "icon": "✦",
       "items": [],
-      "meta": {}
-    },
-    {
-      "key": "supervisor_updates",
-      "payload_key": "supervisor_updates",
-      "title": "Supervisor Updates",
-      "icon": "👨‍🏫",
-      "items": [],
-      "meta": {}
+      "meta": {
+        "count": 0
+      }
     }
   ],
   "meta": {
     "papers_fetched": 100,
-    "papers_after_keyword_filter": 46,
-    "papers_after_llm_filter": 14,
+    "papers_after_keyword_filter": 50,
+    "papers_after_llm_filter": 7,
     "llm_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "scoring_model": "google/gemini-2.5-flash-lite-preview-09-2025",
     "summarization_model": "google/gemini-2.5-flash-lite-preview-09-2025",
-    "duration_seconds": 47
+    "duration_seconds": 31
   },
   "quote_of_day": [],
   "hitokoto": [],
   "arxiv": [
     {
-      "id": "2604.16060v1",
-      "title": "Chain-of-Thought Degrades Visual Spatial Reasoning Capabilities of Multimodal LLMs",
-      "authors": [
-        "Sai Srinivas Kancheti",
-        "Aditya Sanjiv Kanade",
-        "Vineeth N. Balasubramanian",
-        "Tanuja Ganu"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "abstract": "This paper demonstrates that employing Chain-of-Thought (CoT) prompting significantly degrades the visual spatial reasoning capabilities of Multimodal Large Language Models (MRMs) across numerous benchmarks. The authors reveal that MRMs and CoT-prompted models exhibit severe shortcut learning, often hallucinating visual details from textual priors even without an image present. This suggests CoT is ineffective for spatial tasks and necessitates the development of vision-centric reasoning paradigms.",
-      "url": "http://arxiv.org/abs/2604.16060v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16060v1",
-      "score": 9.0,
-      "figure_url": "https://arxiv.org/html/2604.16060v1/x1.png",
-      "figure_caption": "(Left) CoT vs Non-CoT performance of open-source MRMs. (Right) Bar chart showing the average accuracy of various families of MLMs over 13 benchmark datasets. For each model, the left bar shows the accuracy achieved by CoT prompting, and the right bar shows for base prompt (non-CoT). We observe CoT prompting drops performance over a wide range of backbones and model scales, including Qwen3-VL-8B-Thinking Bai et al. ( 2025a ) , a model with explicitly enhanced spatial perception.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16256v1",
-      "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
-      "authors": [
-        "Yige Xu",
-        "Yongjie Wang",
-        "Zizhuo Wu",
-        "Kaisong Song",
-        "Jun Lin"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.CL"
-      ],
-      "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their textual components. The authors introduce **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. Their core finding is a consistent and substantial performance gap, indicating that VLMs significantly underperform when relying solely on visual input compared to text-only input.",
-      "url": "http://arxiv.org/abs/2604.16256v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
-      "score": 9.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16104v1",
-      "title": "Dual-Modal Lung Cancer AI: Interpretable Radiology and Microscopy with Clinical Risk Integration",
-      "authors": [
-        "Baramee Sukumal",
-        "Aueaphum Aueawatthanaphisut"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.AI",
-        "eess.IV"
-      ],
-      "abstract": "This paper introduces a dual-modal AI framework that fuses features extracted from CT radiology and H\\&E histopathology, enhanced with clinical metadata, for lung cancer diagnosis and subtype classification. The core contribution is this integrated approach, which leverages both imaging modalities to improve diagnostic robustness and employs various Explainable AI techniques to provide interpretable insights into the predictions.",
-      "url": "http://arxiv.org/abs/2604.16104v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16104v1",
-      "score": 9.0,
-      "figure_url": "https://arxiv.org/html/2604.16104v1/fig_ct_scan.png",
-      "figure_caption": "Example chest CT images demonstrating a suspected lung tumor region across axial, coronal, and sagittal planes. CT imaging is commonly used for lung cancer screening and detection.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
       "id": "2604.16175v1",
       "title": "MARCH: Multi-Agent Radiology Clinical Hierarchy for CT Report Generation",
       "authors": [
@@ -633,103 +330,41 @@
         "Yifan Peng"
       ],
       "categories": [
-        "cs.CV",
-        "cs.AI"
+        "cs.AI",
+        "cs.CV"
       ],
-      "abstract": "MARCH is a multi-agent framework for CT report generation that mimics the hierarchical structure of radiology departments. It employs specialized agents (Resident, Fellows, Attending) to perform initial drafting, retrieval-augmented revision, and iterative, consensus-driven verification. This approach significantly improves clinical fidelity and linguistic accuracy compared to monolithic models by incorporating collaborative oversight.",
+      "abstract": "MARCH is a multi-agent framework that mimics the hierarchical structure of radiology departments to generate more clinically accurate CT reports. It employs specialized agents—Resident for drafting, Fellows for retrieval-augmented revision, and an Attending for orchestrating consensus discourse—to iteratively verify findings. This approach significantly improves clinical fidelity and linguistic accuracy compared to monolithic models.",
       "url": "http://arxiv.org/abs/2604.16175v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16175v1",
       "score": 9.0,
       "figure_url": "https://arxiv.org/html/2604.16175v1/x1.png",
       "figure_caption": "Overview of the MARCH framework. It consists of three main stages: 1) Initial Report Drafting, 2) Retrieval-Augmented Report Revision, and 3) Consensus-Driven Finalization.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
-      "id": "2604.16083v1",
-      "title": "DINOv3 Beats Specialized Detectors: A Simple Foundation Model Baseline for Image Forensics",
+      "id": "2604.15871v1",
+      "title": "UniEditBench: A Unified and Cost-Effective Benchmark for Image and Video Editing via Distilled MLLMs",
       "authors": [
-        "Jieming Yu",
-        "Qiuxiao Feng",
-        "Zhuohan Wang",
-        "Xiaochen Ma"
+        "Lifan Jiang",
+        "Tianrun Wu",
+        "Yuhang Pei",
+        "Chenyang Wang",
+        "Boxi Wu"
       ],
       "categories": [
+        "cs.AI",
         "cs.CV"
       ],
-      "abstract": "This paper introduces DINOv3 adapted with LoRA and a lightweight decoder as a simple yet powerful foundation model baseline for image forensics, specifically for manipulation localization. The core method leverages the frozen DINOv3 backbone, fine-tuning only a small fraction of parameters via LoRA, which proves more stable and effective than full fine-tuning. This approach significantly outperforms specialized detectors, achieving substantial F1 score improvements across multiple benchmarks with far fewer trainable parameters.",
-      "url": "http://arxiv.org/abs/2604.16083v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16083v1",
-      "score": 8.0,
-      "figure_url": "https://arxiv.org/html/2604.16083v1/x1.png",
-      "figure_caption": "Overview of our framework. A frozen DINOv3 ViT backbone with LoRA injected on QKV projections produces dense patch tokens, which are reshaped into a 2D feature map and decoded by a lightweight convolutional segmentation head into a pixel-level manipulation mask.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16044v1",
-      "title": "Elucidating the SNR-t Bias of Diffusion Probabilistic Models",
-      "authors": [
-        "Meng Yu",
-        "Lei Sun",
-        "Jianhao Zeng",
-        "Xiangxiang Chu",
-        "Kun Zhan"
-      ],
-      "categories": [
-        "cs.CV"
-      ],
-      "abstract": "This paper identifies and analyzes the Signal-to-Noise Ratio-timestep (SNR-t) bias in Diffusion Probabilistic Models, where the SNR of the denoised sample misaligns with its timestep during inference, degrading generation quality. The authors provide theoretical and empirical evidence for this issue. They propose a simple, effective differential correction method that leverages frequency decomposition to mitigate this bias by better aligning the denoising process with the expected SNR at each timestep.",
-      "url": "http://arxiv.org/abs/2604.16044v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16044v1",
-      "score": 8.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16010v1",
-      "title": "IA-CLAHE: Image-Adaptive Clip Limit Estimation for CLAHE",
-      "authors": [
-        "Rikuto Otsuka",
-        "Yuho Shoji",
-        "Yuka Ogino",
-        "Takahiro Toizumi",
-        "Atsushi Ito"
-      ],
-      "categories": [
-        "cs.CV"
-      ],
-      "abstract": "This paper introduces IA-CLAHE, an image-adaptive method for Contrast Limited Adaptive Histogram Equalization. The core method adaptively estimates the tile-wise contrast limiting parameter (clip limit) based on the local histogram distribution, overcoming the over-enhancement issue of fixed-parameter CLAHE. This is achieved by training a lightweight estimator using a differentiable extension of CLAHE, allowing end-to-end optimization without requiring pre-searched ground-truth limits.",
-      "url": "http://arxiv.org/abs/2604.16010v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16010v1",
-      "score": 8.0,
-      "figure_url": "https://arxiv.org/html/2604.16010v1/x1.png",
-      "figure_caption": "Comparison between conventional CLAHE and the proposed IA-CLAHE. (a) Conventional CLAHE applies a single global clip limit to all tiles, visualized as the dashed line in the middle-left histogram. This fixed parameter often causes over-enhancement in already bright regions. (b) IA-CLAHE predicts tile-wise clip limits (orange lines in the middle-right histogram) using a lightweight estimator and applies them through a differentiable CLAHE module. This adaptive strategy enhances details in dark regions while preserving well-exposed areas.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16264v1",
-      "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
-      "authors": [
-        "Seulgi Kim",
-        "Mohit Prabhushankar",
-        "Ghassan AlRegib"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.LG"
-      ],
-      "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs). $\\text{MoIR}$ addresses the limitation of attention-based methods by employing an **information-level fusion** strategy that explicitly reduces information disparity *before* fusion. It achieves this by identifying less informative tokens and routing complementary information from a stronger modality, thereby ensuring a more balanced and robust multimodal representation.",
-      "url": "http://arxiv.org/abs/2604.16264v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
-      "score": 8.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "abstract": "UniEditBench introduces a unified and cost-effective benchmark for evaluating both image and video editing models, addressing the fragmentation and lack of reliable video evaluation in existing methods. It establishes a shared protocol covering diverse operations like addition, replacement, and challenging compositional tasks. Crucially, the benchmark enables scalable evaluation by distilling a powerful MLLM judge into a lightweight model, overcoming the high cost of using large models directly for assessment.",
+      "url": "http://arxiv.org/abs/2604.15871v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.15871v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.15871v1/x1.png",
+      "figure_caption": "Figure 1. Overview of the UniEditBench framework. (A) Dataset Composition & Detailed Taxonomy: Displays the structured task taxonomy and data distribution, comprising 633 image and 77 video samples across diverse editing operations (e.g., content modification, attribute transformation, and compositional reasoning tasks like counting and reordering). (B) Evaluation Pipeline with Expert Distillation: Our pipeline provides a source prompt, target prompt, and edited prompt for each sample pair to accommodate various editing paradigms. Additionally, the editing results, original images, and prompt information are input into our 4B/8B discriminative models, which are distilled from the Qwen3-VL-235B-A22B model, to obtain the final judgments. (C) Comprehensive Benchmark Results: Radar charts display the aggregated evaluation results of editing methods on UniEditBench, assessed by the distilled 4B and 8B reward models (top: image benchmark; bottom: video benchmark).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
@@ -743,196 +378,110 @@
         "Tanuja Ganu"
       ],
       "categories": [
-        "cs.CV",
-        "cs.AI"
+        "cs.AI",
+        "cs.CV"
       ],
-      "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning capabilities of Multimodal Large Language Models (MLLMs) across tasks categorized by Abstraction, Relation, and Transformation. The core contribution is demonstrating a significant gap, where top MLLMs score below 50% accuracy compared to 80% for humans, highlighting limitations in their visual attention, perceptual manipulation, and concept abstraction.",
+      "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning abilities of Multimodal Large Language Models (MLLMs) across Abstraction, Relation, and Transformation tasks. By comparing MLLM performance against human scores on these fluid intelligence-inspired tests, the authors demonstrate that top MLLMs significantly underperform humans (below 50% vs. 80% accuracy). The contribution highlights current MLLMs' limitations in visual attention, internal manipulation, and abstract concept formation.",
       "url": "http://arxiv.org/abs/2604.16054v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16054v1",
       "score": 8.0,
       "figure_url": "https://arxiv.org/html/2604.16054v1/figures/Dataset_figure.png",
       "figure_caption": "Overview of the eight tasks in the proposed Mind’s Eye benchmark : Each panel shows an example image-question pair of the benchmark",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
-      "id": "2604.16034v1",
-      "title": "Ranking XAI Methods for Head and Neck Cancer Outcome Prediction",
+      "id": "2604.16076v1",
+      "title": "Prototype-Grounded Concept Models for Verifiable Concept Alignment",
       "authors": [
-        "Baoqiang Ma",
-        "Djennifer K. Madzia-Madzou",
-        "Rosa C. J. Kraaijveld",
-        "Jin Ouyang"
+        "Stefano Colamonaco",
+        "David Debot",
+        "Pietro Barbiero",
+        "Giuseppe Marra"
       ],
       "categories": [
-        "cs.CV",
-        "physics.data-an"
+        "cs.AI",
+        "cs.LG",
+        "cs.NE"
       ],
-      "abstract": "This paper comprehensively evaluates and ranks 13 Explainable AI (XAI) methods for predicting Head and Neck Cancer outcomes using PET/CT data, addressing the critical clinical barrier of AI interpretability. The evaluation uses 24 diverse metrics covering faithfulness, robustness, complexity, and plausibility, unlike previous empirical selections. The core contribution is demonstrating significant variation across methods, highlighting Integrated Gradients (IG) and DeepLIFT (DL) as top performers across key interpretability aspects.",
-      "url": "http://arxiv.org/abs/2604.16034v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16034v1",
-      "score": 8.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "abstract": "This paper introduces Prototype-Grounded Concept Models (PGCMs) to address the lack of verifiability in Concept Bottleneck Models (CBMs). PGCMs ground abstract concepts in learned visual prototypes, providing explicit image evidence for each concept. This grounding allows for direct inspection and targeted human intervention to correct concept misalignments, achieving comparable predictive performance to CBMs while significantly enhancing transparency and interpretability.",
+      "url": "http://arxiv.org/abs/2604.16076v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16076v1",
+      "score": 7.0,
+      "figure_url": "https://arxiv.org/html/2604.16076v1/VISUAL.png",
+      "figure_caption": "Comparison between standard neural networks, Concept Bottleneck Models (CBMs), and our Prototype-Grounded Concept Models (PGCMs). While CBMs explain predictions in terms of high-level concepts, they provide no way to verify what those concepts mean visually. PGCMs ground each concept in learned visual prototypes, making concept semantics explicit and inspectable.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
-      "id": "2604.16248v1",
-      "title": "Where Do Vision-Language Models Fail? World Scale Analysis for Image Geolocalization",
+      "id": "2604.15856v1",
+      "title": "Robust Multispectral Semantic Segmentation under Missing or Full Modalities via Structured Latent Projection",
       "authors": [
-        "Siddhant Bharadwaj",
-        "Ashish Vashist",
-        "Fahimul Aleem",
-        "Shruti Vyas"
+        "Irem Ulku",
+        "Erdem Akagündüz",
+        "Ömer Özgür Tanrıöver"
       ],
       "categories": [
+        "cs.AI",
         "cs.CV"
       ],
-      "abstract": "This paper systematically evaluates state-of-the-art Vision-Language Models (VLMs) for zero-shot, country-level image geolocalization using only ground-view imagery and prompt-based prediction. The core contribution is a world-scale analysis revealing significant performance variation across models, demonstrating the potential of VLM semantic reasoning for coarse localization while highlighting their current limitations in capturing fine-grained geographic details.",
-      "url": "http://arxiv.org/abs/2604.16248v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16248v1",
-      "score": 8.0,
-      "figure_url": "https://arxiv.org/html/2604.16248v1/x1.png",
-      "figure_caption": "Overview of the evaluation pipeline. A ground-level image and a structured prompt are passed to each of the three VLM families ( ≤ \\( \\leq \\) 8B parameters), which output Top-5 country predictions. Performance is assessed via Top-1/Top-5 accuracy and a multi-dimensional evaluation framework comprising Environmental Stratification (urban/rural and six biome categories), Error Structure Analysis (neighbor hop distance), and Geographic Error Reasonableness (GER) score, the latter two applied only to incorrect predictions.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "abstract": "This paper introduces CBC-SLP, a novel method for robust multispectral semantic segmentation that handles both missing and full sensor modalities. The core method utilizes a **Structured Latent Projection (SLP)** to explicitly preserve both modality-invariant and modality-specific information, avoiding the performance trade-off seen in models that rely solely on shared representations. This approach ensures high accuracy regardless of data availability by strategically structuring the latent space.",
+      "url": "http://arxiv.org/abs/2604.15856v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.15856v1",
+      "score": 7.0,
+      "figure_url": "https://arxiv.org/html/2604.15856v1/figures/Hunan_28965_s2_8_4_3.png",
+      "figure_caption": "Multispectral optical (false RGB: infrared-red-green channels) image on the left and DEM height map on the right, both from the Hunan image set [ 17 ] . While the multispectral image highlights surface reflectance and land-cover differences, the DEM height map reveals the terrain structure, providing complementary information for scene interpretation.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
-      "id": "2604.16284v1",
-      "title": "Enhancing Hazy Wildlife Imagery: AnimalHaze3k and IncepDehazeGan",
+      "id": "2604.16264v1",
+      "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
       "authors": [
-        "Shivarth Rai",
-        "Tejeswar Pokuri"
+        "Seulgi Kim",
+        "Mohit Prabhushankar",
+        "Ghassan AlRegib"
       ],
       "categories": [
+        "cs.LG",
         "cs.CV"
       ],
-      "abstract": "This paper introduces **AnimalHaze3k**, a synthetic dataset of 3,477 hazy wildlife images created using a physics-based pipeline. The core method is the novel **IncepDehazeGan** architecture, which uses inception blocks and residual connections within a GAN framework to achieve state-of-the-art image dehazing performance. This significantly improves downstream animal detection tasks, offering ecologists a robust tool for monitoring in hazy conditions.",
-      "url": "http://arxiv.org/abs/2604.16284v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16284v1",
-      "score": 7.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
+      "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs). Unlike attention-based methods, $\\text{MoIR}$ operates at the information level by explicitly reducing information disparity *before* fusion. It achieves this by identifying less informative tokens and routing complementary information from a stronger modality to the weaker one, thereby ensuring balanced input quality for robust multimodal reasoning.",
+      "url": "http://arxiv.org/abs/2604.16264v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
+      "score": 8.0,
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
     },
     {
-      "id": "2604.16298v1",
-      "title": "FineCog-Nav: Integrating Fine-grained Cognitive Modules for Zero-shot Multimodal UAV Navigation",
+      "id": "2604.16256v1",
+      "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
       "authors": [
-        "Dian Shao",
-        "Zhengzheng Xu",
-        "Peiyang Wang",
-        "Like Liu",
-        "Yule Wang"
+        "Yige Xu",
+        "Yongjie Wang",
+        "Zizhuo Wu",
+        "Kaisong Song",
+        "Jun Lin"
       ],
       "categories": [
-        "cs.CV",
-        "cs.RO"
+        "cs.CL",
+        "cs.CV"
       ],
-      "abstract": "FineCog-Nav introduces a cognitive-inspired framework for zero-shot UAV navigation by integrating several fine-grained, specialized modules (e.g., perception, memory, reasoning) driven by moderate foundation models. This modular approach, featuring structured communication protocols, aims to overcome the limitations of generic large model reliance in existing methods, leading to improved performance and interpretability. The authors also release AerialVLN-Fine, a benchmark designed for fine-grained evaluation of these navigation capabilities.",
-      "url": "http://arxiv.org/abs/2604.16298v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16298v1",
-      "score": 7.0,
-      "figure_url": "https://arxiv.org/html/2604.16298v1/x1.png",
-      "figure_caption": "We propose FineCog-Nav, a framework designed to simulate diverse human cognitive functions.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16147v1",
-      "title": "SWNet: A Cross-Spectral Network for Camouflaged Weed Detection",
-      "authors": [
-        "Henry O. Velesaca",
-        "Luigi Miranda",
-        "Angel D. Sappa"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "abstract": "SWNet is a cross-spectral network designed to detect camouflaged weeds by integrating Visible and Near-Infrared (NIR) data. It uses a Pyramid Vision Transformer backbone and a Bimodal Gated Fusion Module to dynamically combine spectral information, exploiting NIR differences in chlorophyll reflectance to distinguish targets invisible in the visible spectrum. The core contribution is an effective architecture that overcomes homochromatic camouflage challenges in dense agricultural settings.",
-      "url": "http://arxiv.org/abs/2604.16147v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16147v1",
-      "score": 7.0,
-      "figure_url": "https://arxiv.org/html/2604.16147v1/x1.png",
-      "figure_caption": "The overall architecture of the proposed SWNet.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
+      "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their textual components. The authors introduce **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. Their core finding is a consistent and substantial performance gap, indicating that VLMs significantly underperform when relying solely on visual input compared to text-only input, suggesting limitations in their visual reasoning capabilities.",
+      "url": "http://arxiv.org/abs/2604.16256v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
+      "score": 9.0,
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
     }
   ],
   "papers": [
     {
-      "id": "2604.16060v1",
-      "title": "Chain-of-Thought Degrades Visual Spatial Reasoning Capabilities of Multimodal LLMs",
-      "authors": [
-        "Sai Srinivas Kancheti",
-        "Aditya Sanjiv Kanade",
-        "Vineeth N. Balasubramanian",
-        "Tanuja Ganu"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "abstract": "This paper demonstrates that employing Chain-of-Thought (CoT) prompting significantly degrades the visual spatial reasoning capabilities of Multimodal Large Language Models (MRMs) across numerous benchmarks. The authors reveal that MRMs and CoT-prompted models exhibit severe shortcut learning, often hallucinating visual details from textual priors even without an image present. This suggests CoT is ineffective for spatial tasks and necessitates the development of vision-centric reasoning paradigms.",
-      "url": "http://arxiv.org/abs/2604.16060v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16060v1",
-      "score": 9.0,
-      "figure_url": "https://arxiv.org/html/2604.16060v1/x1.png",
-      "figure_caption": "(Left) CoT vs Non-CoT performance of open-source MRMs. (Right) Bar chart showing the average accuracy of various families of MLMs over 13 benchmark datasets. For each model, the left bar shows the accuracy achieved by CoT prompting, and the right bar shows for base prompt (non-CoT). We observe CoT prompting drops performance over a wide range of backbones and model scales, including Qwen3-VL-8B-Thinking Bai et al. ( 2025a ) , a model with explicitly enhanced spatial perception.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16256v1",
-      "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
-      "authors": [
-        "Yige Xu",
-        "Yongjie Wang",
-        "Zizhuo Wu",
-        "Kaisong Song",
-        "Jun Lin"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.CL"
-      ],
-      "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their textual components. The authors introduce **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. Their core finding is a consistent and substantial performance gap, indicating that VLMs significantly underperform when relying solely on visual input compared to text-only input.",
-      "url": "http://arxiv.org/abs/2604.16256v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
-      "score": 9.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16104v1",
-      "title": "Dual-Modal Lung Cancer AI: Interpretable Radiology and Microscopy with Clinical Risk Integration",
-      "authors": [
-        "Baramee Sukumal",
-        "Aueaphum Aueawatthanaphisut"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.AI",
-        "eess.IV"
-      ],
-      "abstract": "This paper introduces a dual-modal AI framework that fuses features extracted from CT radiology and H\\&E histopathology, enhanced with clinical metadata, for lung cancer diagnosis and subtype classification. The core contribution is this integrated approach, which leverages both imaging modalities to improve diagnostic robustness and employs various Explainable AI techniques to provide interpretable insights into the predictions.",
-      "url": "http://arxiv.org/abs/2604.16104v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16104v1",
-      "score": 9.0,
-      "figure_url": "https://arxiv.org/html/2604.16104v1/fig_ct_scan.png",
-      "figure_caption": "Example chest CT images demonstrating a suspected lung tumor region across axial, coronal, and sagittal planes. CT imaging is commonly used for lung cancer screening and detection.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
       "id": "2604.16175v1",
       "title": "MARCH: Multi-Agent Radiology Clinical Hierarchy for CT Report Generation",
       "authors": [
@@ -942,103 +491,41 @@
         "Yifan Peng"
       ],
       "categories": [
-        "cs.CV",
-        "cs.AI"
+        "cs.AI",
+        "cs.CV"
       ],
-      "abstract": "MARCH is a multi-agent framework for CT report generation that mimics the hierarchical structure of radiology departments. It employs specialized agents (Resident, Fellows, Attending) to perform initial drafting, retrieval-augmented revision, and iterative, consensus-driven verification. This approach significantly improves clinical fidelity and linguistic accuracy compared to monolithic models by incorporating collaborative oversight.",
+      "abstract": "MARCH is a multi-agent framework that mimics the hierarchical structure of radiology departments to generate more clinically accurate CT reports. It employs specialized agents—Resident for drafting, Fellows for retrieval-augmented revision, and an Attending for orchestrating consensus discourse—to iteratively verify findings. This approach significantly improves clinical fidelity and linguistic accuracy compared to monolithic models.",
       "url": "http://arxiv.org/abs/2604.16175v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16175v1",
       "score": 9.0,
       "figure_url": "https://arxiv.org/html/2604.16175v1/x1.png",
       "figure_caption": "Overview of the MARCH framework. It consists of three main stages: 1) Initial Report Drafting, 2) Retrieval-Augmented Report Revision, and 3) Consensus-Driven Finalization.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
-      "id": "2604.16083v1",
-      "title": "DINOv3 Beats Specialized Detectors: A Simple Foundation Model Baseline for Image Forensics",
+      "id": "2604.15871v1",
+      "title": "UniEditBench: A Unified and Cost-Effective Benchmark for Image and Video Editing via Distilled MLLMs",
       "authors": [
-        "Jieming Yu",
-        "Qiuxiao Feng",
-        "Zhuohan Wang",
-        "Xiaochen Ma"
+        "Lifan Jiang",
+        "Tianrun Wu",
+        "Yuhang Pei",
+        "Chenyang Wang",
+        "Boxi Wu"
       ],
       "categories": [
+        "cs.AI",
         "cs.CV"
       ],
-      "abstract": "This paper introduces DINOv3 adapted with LoRA and a lightweight decoder as a simple yet powerful foundation model baseline for image forensics, specifically for manipulation localization. The core method leverages the frozen DINOv3 backbone, fine-tuning only a small fraction of parameters via LoRA, which proves more stable and effective than full fine-tuning. This approach significantly outperforms specialized detectors, achieving substantial F1 score improvements across multiple benchmarks with far fewer trainable parameters.",
-      "url": "http://arxiv.org/abs/2604.16083v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16083v1",
-      "score": 8.0,
-      "figure_url": "https://arxiv.org/html/2604.16083v1/x1.png",
-      "figure_caption": "Overview of our framework. A frozen DINOv3 ViT backbone with LoRA injected on QKV projections produces dense patch tokens, which are reshaped into a 2D feature map and decoded by a lightweight convolutional segmentation head into a pixel-level manipulation mask.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16044v1",
-      "title": "Elucidating the SNR-t Bias of Diffusion Probabilistic Models",
-      "authors": [
-        "Meng Yu",
-        "Lei Sun",
-        "Jianhao Zeng",
-        "Xiangxiang Chu",
-        "Kun Zhan"
-      ],
-      "categories": [
-        "cs.CV"
-      ],
-      "abstract": "This paper identifies and analyzes the Signal-to-Noise Ratio-timestep (SNR-t) bias in Diffusion Probabilistic Models, where the SNR of the denoised sample misaligns with its timestep during inference, degrading generation quality. The authors provide theoretical and empirical evidence for this issue. They propose a simple, effective differential correction method that leverages frequency decomposition to mitigate this bias by better aligning the denoising process with the expected SNR at each timestep.",
-      "url": "http://arxiv.org/abs/2604.16044v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16044v1",
-      "score": 8.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16010v1",
-      "title": "IA-CLAHE: Image-Adaptive Clip Limit Estimation for CLAHE",
-      "authors": [
-        "Rikuto Otsuka",
-        "Yuho Shoji",
-        "Yuka Ogino",
-        "Takahiro Toizumi",
-        "Atsushi Ito"
-      ],
-      "categories": [
-        "cs.CV"
-      ],
-      "abstract": "This paper introduces IA-CLAHE, an image-adaptive method for Contrast Limited Adaptive Histogram Equalization. The core method adaptively estimates the tile-wise contrast limiting parameter (clip limit) based on the local histogram distribution, overcoming the over-enhancement issue of fixed-parameter CLAHE. This is achieved by training a lightweight estimator using a differentiable extension of CLAHE, allowing end-to-end optimization without requiring pre-searched ground-truth limits.",
-      "url": "http://arxiv.org/abs/2604.16010v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16010v1",
-      "score": 8.0,
-      "figure_url": "https://arxiv.org/html/2604.16010v1/x1.png",
-      "figure_caption": "Comparison between conventional CLAHE and the proposed IA-CLAHE. (a) Conventional CLAHE applies a single global clip limit to all tiles, visualized as the dashed line in the middle-left histogram. This fixed parameter often causes over-enhancement in already bright regions. (b) IA-CLAHE predicts tile-wise clip limits (orange lines in the middle-right histogram) using a lightweight estimator and applies them through a differentiable CLAHE module. This adaptive strategy enhances details in dark regions while preserving well-exposed areas.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16264v1",
-      "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
-      "authors": [
-        "Seulgi Kim",
-        "Mohit Prabhushankar",
-        "Ghassan AlRegib"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.LG"
-      ],
-      "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs). $\\text{MoIR}$ addresses the limitation of attention-based methods by employing an **information-level fusion** strategy that explicitly reduces information disparity *before* fusion. It achieves this by identifying less informative tokens and routing complementary information from a stronger modality, thereby ensuring a more balanced and robust multimodal representation.",
-      "url": "http://arxiv.org/abs/2604.16264v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
-      "score": 8.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "abstract": "UniEditBench introduces a unified and cost-effective benchmark for evaluating both image and video editing models, addressing the fragmentation and lack of reliable video evaluation in existing methods. It establishes a shared protocol covering diverse operations like addition, replacement, and challenging compositional tasks. Crucially, the benchmark enables scalable evaluation by distilling a powerful MLLM judge into a lightweight model, overcoming the high cost of using large models directly for assessment.",
+      "url": "http://arxiv.org/abs/2604.15871v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.15871v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.15871v1/x1.png",
+      "figure_caption": "Figure 1. Overview of the UniEditBench framework. (A) Dataset Composition & Detailed Taxonomy: Displays the structured task taxonomy and data distribution, comprising 633 image and 77 video samples across diverse editing operations (e.g., content modification, attribute transformation, and compositional reasoning tasks like counting and reordering). (B) Evaluation Pipeline with Expert Distillation: Our pipeline provides a source prompt, target prompt, and edited prompt for each sample pair to accommodate various editing paradigms. Additionally, the editing results, original images, and prompt information are input into our 4B/8B discriminative models, which are distilled from the Qwen3-VL-235B-A22B model, to obtain the final judgments. (C) Comprehensive Benchmark Results: Radar charts display the aggregated evaluation results of editing methods on UniEditBench, assessed by the distilled 4B and 8B reward models (top: image benchmark; bottom: video benchmark).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
@@ -1052,181 +539,116 @@
         "Tanuja Ganu"
       ],
       "categories": [
-        "cs.CV",
-        "cs.AI"
+        "cs.AI",
+        "cs.CV"
       ],
-      "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning capabilities of Multimodal Large Language Models (MLLMs) across tasks categorized by Abstraction, Relation, and Transformation. The core contribution is demonstrating a significant gap, where top MLLMs score below 50% accuracy compared to 80% for humans, highlighting limitations in their visual attention, perceptual manipulation, and concept abstraction.",
+      "abstract": "This paper introduces \"Mind's Eye,\" a novel benchmark designed to assess the visual cognitive and visuospatial reasoning abilities of Multimodal Large Language Models (MLLMs) across Abstraction, Relation, and Transformation tasks. By comparing MLLM performance against human scores on these fluid intelligence-inspired tests, the authors demonstrate that top MLLMs significantly underperform humans (below 50% vs. 80% accuracy). The contribution highlights current MLLMs' limitations in visual attention, internal manipulation, and abstract concept formation.",
       "url": "http://arxiv.org/abs/2604.16054v1",
       "pdf_url": "https://arxiv.org/pdf/2604.16054v1",
       "score": 8.0,
       "figure_url": "https://arxiv.org/html/2604.16054v1/figures/Dataset_figure.png",
       "figure_caption": "Overview of the eight tasks in the proposed Mind’s Eye benchmark : Each panel shows an example image-question pair of the benchmark",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
-      "id": "2604.16034v1",
-      "title": "Ranking XAI Methods for Head and Neck Cancer Outcome Prediction",
+      "id": "2604.16076v1",
+      "title": "Prototype-Grounded Concept Models for Verifiable Concept Alignment",
       "authors": [
-        "Baoqiang Ma",
-        "Djennifer K. Madzia-Madzou",
-        "Rosa C. J. Kraaijveld",
-        "Jin Ouyang"
+        "Stefano Colamonaco",
+        "David Debot",
+        "Pietro Barbiero",
+        "Giuseppe Marra"
       ],
       "categories": [
-        "cs.CV",
-        "physics.data-an"
+        "cs.AI",
+        "cs.LG",
+        "cs.NE"
       ],
-      "abstract": "This paper comprehensively evaluates and ranks 13 Explainable AI (XAI) methods for predicting Head and Neck Cancer outcomes using PET/CT data, addressing the critical clinical barrier of AI interpretability. The evaluation uses 24 diverse metrics covering faithfulness, robustness, complexity, and plausibility, unlike previous empirical selections. The core contribution is demonstrating significant variation across methods, highlighting Integrated Gradients (IG) and DeepLIFT (DL) as top performers across key interpretability aspects.",
-      "url": "http://arxiv.org/abs/2604.16034v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16034v1",
-      "score": 8.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "abstract": "This paper introduces Prototype-Grounded Concept Models (PGCMs) to address the lack of verifiability in Concept Bottleneck Models (CBMs). PGCMs ground abstract concepts in learned visual prototypes, providing explicit image evidence for each concept. This grounding allows for direct inspection and targeted human intervention to correct concept misalignments, achieving comparable predictive performance to CBMs while significantly enhancing transparency and interpretability.",
+      "url": "http://arxiv.org/abs/2604.16076v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16076v1",
+      "score": 7.0,
+      "figure_url": "https://arxiv.org/html/2604.16076v1/VISUAL.png",
+      "figure_caption": "Comparison between standard neural networks, Concept Bottleneck Models (CBMs), and our Prototype-Grounded Concept Models (PGCMs). While CBMs explain predictions in terms of high-level concepts, they provide no way to verify what those concepts mean visually. PGCMs ground each concept in learned visual prototypes, making concept semantics explicit and inspectable.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
-      "id": "2604.16248v1",
-      "title": "Where Do Vision-Language Models Fail? World Scale Analysis for Image Geolocalization",
+      "id": "2604.15856v1",
+      "title": "Robust Multispectral Semantic Segmentation under Missing or Full Modalities via Structured Latent Projection",
       "authors": [
-        "Siddhant Bharadwaj",
-        "Ashish Vashist",
-        "Fahimul Aleem",
-        "Shruti Vyas"
+        "Irem Ulku",
+        "Erdem Akagündüz",
+        "Ömer Özgür Tanrıöver"
       ],
       "categories": [
+        "cs.AI",
         "cs.CV"
       ],
-      "abstract": "This paper systematically evaluates state-of-the-art Vision-Language Models (VLMs) for zero-shot, country-level image geolocalization using only ground-view imagery and prompt-based prediction. The core contribution is a world-scale analysis revealing significant performance variation across models, demonstrating the potential of VLM semantic reasoning for coarse localization while highlighting their current limitations in capturing fine-grained geographic details.",
-      "url": "http://arxiv.org/abs/2604.16248v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16248v1",
-      "score": 8.0,
-      "figure_url": "https://arxiv.org/html/2604.16248v1/x1.png",
-      "figure_caption": "Overview of the evaluation pipeline. A ground-level image and a structured prompt are passed to each of the three VLM families ( ≤ \\( \\leq \\) 8B parameters), which output Top-5 country predictions. Performance is assessed via Top-1/Top-5 accuracy and a multi-dimensional evaluation framework comprising Environmental Stratification (urban/rural and six biome categories), Error Structure Analysis (neighbor hop distance), and Geographic Error Reasonableness (GER) score, the latter two applied only to incorrect predictions.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
+      "abstract": "This paper introduces CBC-SLP, a novel method for robust multispectral semantic segmentation that handles both missing and full sensor modalities. The core method utilizes a **Structured Latent Projection (SLP)** to explicitly preserve both modality-invariant and modality-specific information, avoiding the performance trade-off seen in models that rely solely on shared representations. This approach ensures high accuracy regardless of data availability by strategically structuring the latent space.",
+      "url": "http://arxiv.org/abs/2604.15856v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.15856v1",
+      "score": 7.0,
+      "figure_url": "https://arxiv.org/html/2604.15856v1/figures/Hunan_28965_s2_8_4_3.png",
+      "figure_caption": "Multispectral optical (false RGB: infrared-red-green channels) image on the left and DEM height map on the right, both from the Hunan image set [ 17 ] . While the multispectral image highlights surface reflectance and land-cover differences, the DEM height map reveals the terrain structure, providing complementary information for scene interpretation.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
       "primary_category_rank": 0
     },
     {
-      "id": "2604.16284v1",
-      "title": "Enhancing Hazy Wildlife Imagery: AnimalHaze3k and IncepDehazeGan",
+      "id": "2604.16264v1",
+      "title": "Information Router for Mitigating Modality Dominance in Vision-Language Models",
       "authors": [
-        "Shivarth Rai",
-        "Tejeswar Pokuri"
+        "Seulgi Kim",
+        "Mohit Prabhushankar",
+        "Ghassan AlRegib"
       ],
       "categories": [
+        "cs.LG",
         "cs.CV"
       ],
-      "abstract": "This paper introduces **AnimalHaze3k**, a synthetic dataset of 3,477 hazy wildlife images created using a physics-based pipeline. The core method is the novel **IncepDehazeGan** architecture, which uses inception blocks and residual connections within a GAN framework to achieve state-of-the-art image dehazing performance. This significantly improves downstream animal detection tasks, offering ecologists a robust tool for monitoring in hazy conditions.",
-      "url": "http://arxiv.org/abs/2604.16284v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16284v1",
-      "score": 7.0,
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
+      "abstract": "This paper introduces the **Multi-modal Information Router ($\\text{MoIR}$)** to combat modality dominance in Vision-Language Models (VLMs). Unlike attention-based methods, $\\text{MoIR}$ operates at the information level by explicitly reducing information disparity *before* fusion. It achieves this by identifying less informative tokens and routing complementary information from a stronger modality to the weaker one, thereby ensuring balanced input quality for robust multimodal reasoning.",
+      "url": "http://arxiv.org/abs/2604.16264v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16264v1",
+      "score": 8.0,
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
     },
     {
-      "id": "2604.16298v1",
-      "title": "FineCog-Nav: Integrating Fine-grained Cognitive Modules for Zero-shot Multimodal UAV Navigation",
+      "id": "2604.16256v1",
+      "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
       "authors": [
-        "Dian Shao",
-        "Zhengzheng Xu",
-        "Peiyang Wang",
-        "Like Liu",
-        "Yule Wang"
+        "Yige Xu",
+        "Yongjie Wang",
+        "Zizhuo Wu",
+        "Kaisong Song",
+        "Jun Lin"
       ],
       "categories": [
-        "cs.CV",
-        "cs.RO"
+        "cs.CL",
+        "cs.CV"
       ],
-      "abstract": "FineCog-Nav introduces a cognitive-inspired framework for zero-shot UAV navigation by integrating several fine-grained, specialized modules (e.g., perception, memory, reasoning) driven by moderate foundation models. This modular approach, featuring structured communication protocols, aims to overcome the limitations of generic large model reliance in existing methods, leading to improved performance and interpretability. The authors also release AerialVLN-Fine, a benchmark designed for fine-grained evaluation of these navigation capabilities.",
-      "url": "http://arxiv.org/abs/2604.16298v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16298v1",
-      "score": 7.0,
-      "figure_url": "https://arxiv.org/html/2604.16298v1/x1.png",
-      "figure_caption": "We propose FineCog-Nav, a framework designed to simulate diverse human cognitive functions.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
-    },
-    {
-      "id": "2604.16147v1",
-      "title": "SWNet: A Cross-Spectral Network for Camouflaged Weed Detection",
-      "authors": [
-        "Henry O. Velesaca",
-        "Luigi Miranda",
-        "Angel D. Sappa"
-      ],
-      "categories": [
-        "cs.CV",
-        "cs.AI"
-      ],
-      "abstract": "SWNet is a cross-spectral network designed to detect camouflaged weeds by integrating Visible and Near-Infrared (NIR) data. It uses a Pyramid Vision Transformer backbone and a Bimodal Gated Fusion Module to dynamically combine spectral information, exploiting NIR differences in chlorophyll reflectance to distinguish targets invisible in the visible spectrum. The core contribution is an effective architecture that overcomes homochromatic camouflage challenges in dense agricultural settings.",
-      "url": "http://arxiv.org/abs/2604.16147v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.16147v1",
-      "score": 7.0,
-      "figure_url": "https://arxiv.org/html/2604.16147v1/x1.png",
-      "figure_caption": "The overall architecture of the proposed SWNet.",
-      "primary_category": "cs.CV",
-      "primary_category_anchor": "cs-cv",
-      "primary_category_rank": 0
+      "abstract": "This paper rigorously investigates whether Vision-Language Models (VLMs) perform genuine vision-grounded reasoning or rely on their textual components. The authors introduce **CrossMath**, a novel benchmark where problems are presented in text-only, image-only, and combined formats with strictly identical information content. Their core finding is a consistent and substantial performance gap, indicating that VLMs significantly underperform when relying solely on visual input compared to text-only input, suggesting limitations in their visual reasoning capabilities.",
+      "url": "http://arxiv.org/abs/2604.16256v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
+      "score": 9.0,
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
     }
   ],
-  "hacker_news": [
-    {
-      "id": 47833247,
-      "title": "Atlassian Enables Default Data Collection to Train AI",
-      "url": "https://letsdatascience.com/news/atlassian-enables-default-data-collection-to-train-ai-f71343d8",
-      "score": 94,
-      "created_at": "2026-04-20T12:23:39Z",
-      "comments_url": "https://news.ycombinator.com/item?id=47833247",
-      "summary": "Atlassian has enabled the default collection of customer data to train its artificial intelligence models."
-    },
-    {
-      "id": 47826328,
-      "title": "Uber’s Anthropic AI push hits a wall",
-      "url": "https://finance.yahoo.com/sectors/technology/articles/ubers-anthropic-ai-push-hits-223109852.html",
-      "score": 93,
-      "created_at": "2026-04-19T18:13:32Z",
-      "comments_url": "https://news.ycombinator.com/item?id=47826328",
-      "summary": "Uber's strategic push to integrate Anthropic's AI technology has reportedly stalled due to internal disagreements and challenges in aligning the partnership with the company's core business strategy."
-    },
-    {
-      "id": 47827985,
-      "title": "CEOs admit AI had no impact on employment or productivity",
-      "url": "https://fortune.com/article/why-do-thousands-of-ceos-believe-ai-not-having-impact-productivity-employment-study/",
-      "score": 85,
-      "created_at": "2026-04-19T21:56:22Z",
-      "comments_url": "https://news.ycombinator.com/item?id=47827985",
-      "summary": "A recent study reveals that thousands of CEOs acknowledge that artificial intelligence has not yet significantly impacted their companies' employment levels or overall productivity."
-    },
-    {
-      "id": 47828444,
-      "title": "Swiss AI Initiative (2023)",
-      "url": "https://www.swiss-ai.org",
-      "score": 85,
-      "created_at": "2026-04-19T22:58:35Z",
-      "comments_url": "https://news.ycombinator.com/item?id=47828444",
-      "summary": "The Swiss AI Initiative (2023) is a national effort focused on advancing artificial intelligence research, innovation, and application within Switzerland."
-    },
-    {
-      "id": 47830071,
-      "title": "A cache-friendly IPv6 LPM with AVX-512 (linearized B+-tree, real BGP benchmarks)",
-      "url": "https://github.com/esutcu/planb-lpm",
-      "score": 52,
-      "created_at": "2026-04-20T03:24:21Z",
-      "comments_url": "https://news.ycombinator.com/item?id=47830071",
-      "summary": "This GitHub project presents a cache-friendly IPv6 Longest Prefix Match (LPM) implementation utilizing AVX-512 instructions and a linearized B+-tree structure, benchmarked against real BGP data."
-    }
-  ],
+  "hacker_news": [],
   "github_trending": [
     {
       "full_name": "Fincept-Corporation/FinceptTerminal",
       "url": "https://github.com/Fincept-Corporation/FinceptTerminal",
       "description": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
       "stars_today": 3129,
-      "total_stars": 8722,
+      "total_stars": 9428,
       "language": "Python",
       "topics": [],
       "summary": "FinceptTerminal is a modern finance application providing advanced market analytics, investment research, and economic data tools for interactive exploration and data-driven decision-making."
@@ -1236,17 +658,17 @@
       "url": "https://github.com/ruvnet/RuView",
       "description": "π RuView: WiFi DensePose turns commodity WiFi signals into real-time human pose estimation, vital sign monitoring, and presence detection — all without a single pixel of video.",
       "stars_today": 716,
-      "total_stars": 47963,
+      "total_stars": 48158,
       "language": "Rust",
       "topics": [],
-      "summary": "RuView is a WiFi-based system that transforms commodity WiFi signals into real-time human pose estimation, vital sign monitoring, and presence detection without using any video."
+      "summary": "RuView is a system that leverages commodity WiFi signals to perform real-time human pose estimation, vital sign monitoring, and presence detection without using any video."
     },
     {
       "full_name": "thunderbird/thunderbolt",
       "url": "https://github.com/thunderbird/thunderbolt",
       "description": "AI You Control: Choose your models. Own your data. Eliminate vendor lock-in.",
       "stars_today": 667,
-      "total_stars": 2621,
+      "total_stars": 2786,
       "language": "TypeScript",
       "topics": [],
       "summary": "Thunderbolt is an AI platform enabling users to control their models, own their data, and avoid vendor lock-in by offering model choice and data sovereignty."
@@ -1256,7 +678,7 @@
       "url": "https://github.com/paperless-ngx/paperless-ngx",
       "description": "A community-supported supercharged document management system: scan, index and archive all your documents",
       "stars_today": 611,
-      "total_stars": 39238,
+      "total_stars": 39397,
       "language": "Python",
       "topics": [],
       "summary": "Paperless-ngx is a community-supported document management system that allows users to scan, index, and archive all their documents efficiently."
@@ -1266,17 +688,17 @@
       "url": "https://github.com/tractorjuice/arc-kit",
       "description": "Enterprise Architecture Governance & Vendor Procurement Toolkit",
       "stars_today": 334,
-      "total_stars": 1221,
+      "total_stars": 1317,
       "language": "HTML",
       "topics": [],
-      "summary": "Arc-Kit is an enterprise architecture governance and vendor procurement toolkit designed to streamline and manage organizational technology strategy and purchasing processes."
+      "summary": "Arc-Kit is an enterprise architecture governance and vendor procurement toolkit designed to streamline and manage organizational architecture processes."
     },
     {
       "full_name": "koala73/worldmonitor",
       "url": "https://github.com/koala73/worldmonitor",
       "description": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
-      "stars_today": 343,
-      "total_stars": 49642,
+      "stars_today": 477,
+      "total_stars": 50018,
       "language": "TypeScript",
       "topics": [],
       "summary": "WorldMonitor is a real-time global intelligence dashboard that uses AI to aggregate news, monitor geopolitics, and track infrastructure within a unified situational awareness interface."
@@ -1286,17 +708,17 @@
       "url": "https://github.com/openai/openai-agents-python",
       "description": "A lightweight, powerful framework for multi-agent workflows",
       "stars_today": 909,
-      "total_stars": 23751,
+      "total_stars": 23904,
       "language": "Python",
       "topics": [],
-      "summary": "The `openai-agents-python` repository provides a lightweight, powerful Python framework for orchestrating and managing complex multi-agent workflows powered by OpenAI models."
+      "summary": "The `openai-agents-python` repository provides a lightweight, powerful Python framework designed to facilitate the creation and management of complex multi-agent workflows orchestrated by OpenAI models."
     },
     {
       "full_name": "deepseek-ai/DeepGEMM",
       "url": "https://github.com/deepseek-ai/DeepGEMM",
       "description": "DeepGEMM: clean and efficient FP8 GEMM kernels with fine-grained scaling",
       "stars_today": 155,
-      "total_stars": 6766,
+      "total_stars": 6816,
       "language": "Cuda",
       "topics": [],
       "summary": "DeepGEMM provides clean and efficient FP8 General Matrix Multiplication (GEMM) kernels featuring fine-grained scaling for optimized performance."
@@ -1306,50 +728,14 @@
       "url": "https://github.com/pi-hole/pi-hole",
       "description": "A black hole for Internet advertisements",
       "stars_today": 154,
-      "total_stars": 56899,
+      "total_stars": 57141,
       "language": "Shell",
       "topics": [],
-      "summary": "Pi-hole functions as a DNS sinkhole, blocking internet advertisements and trackers across your entire network for improved performance and privacy."
-    },
-    {
-      "full_name": "XTLS/Xray-core",
-      "url": "https://github.com/XTLS/Xray-core",
-      "description": "Xray, Penetrates Everything. Also the best v2ray-core. Where the magic happens. An open platform for various uses.",
-      "stars_today": 52,
-      "total_stars": 37345,
-      "language": "Go",
-      "topics": [],
-      "summary": "XTLS/Xray-core is a versatile, high-performance proxy platform, functioning as an advanced v2ray-core replacement designed for robust network penetration across various use cases."
+      "summary": "Pi-hole functions as a network-level advertisement and tracking blocker, acting as a DNS sinkhole for unwanted content across your entire network."
     }
   ],
   "postdoc_jobs": [],
   "jobs": [],
   "supervisor_updates": [],
-  "weather": [
-    {
-      "query": "Edinburgh",
-      "label": "Edinburgh, Scotland, United Kingdom",
-      "resolved_name": "Edinburgh",
-      "region": "Scotland",
-      "country": "United Kingdom",
-      "latitude": 55.95206,
-      "longitude": -3.19648,
-      "timezone": "Europe/London",
-      "forecast_date": "2026-04-20",
-      "condition": "Overcast",
-      "weather_code": 3,
-      "temperature_c": 11.0,
-      "apparent_temperature_c": 7.1,
-      "temp_max_c": 11.0,
-      "temp_min_c": 6.4,
-      "humidity_pct": 51,
-      "wind_speed_kmh": 13.3,
-      "precipitation_probability_pct": 66,
-      "is_day": true,
-      "sunrise": "2026-04-20T05:54",
-      "sunset": "2026-04-20T20:29",
-      "source": "Open-Meteo",
-      "source_url": "https://open-meteo.com/"
-    }
-  ]
+  "weather": []
 }
