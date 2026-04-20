@@ -1,0 +1,681 @@
+---
+import Base from '@/layouts/Base.astro';
+import { readdir, readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+
+declare const __DATA_ROOT__: string;
+
+interface DigestItem {
+  title?: string;
+  name?: string;
+  label?: string;
+  query?: string;
+  condition?: string;
+  temp_max_c?: number;
+}
+
+interface DigestSection {
+  key?: string;
+  title?: string;
+  items?: DigestItem[];
+}
+
+interface DigestPreviewLine {
+  section: string;
+  title: string;
+  detail: string;
+}
+
+const dailyDir  = resolve(__DATA_ROOT__, 'daily');
+const weeklyDir = resolve(__DATA_ROOT__, 'weekly');
+
+const dailyFiles  = await readdir(dailyDir).catch((): string[] => []);
+const weeklyFiles = await readdir(weeklyDir).catch((): string[] => []);
+
+const latestDate = dailyFiles
+  .filter((f: string) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f))
+  .sort().at(-1)?.replace('.json', '') ?? null;
+
+const totalDays  = dailyFiles.filter((f: string) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).length;
+const totalWeeks = weeklyFiles.filter((f: string) => /^\d{4}-W\d{2}\.json$/.test(f)).length;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const previewLines = latestDate
+  ? await loadDigestPreview(resolve(dailyDir, `${latestDate}.json`))
+  : fallbackPreviewLines();
+
+const features = [
+  {
+    roman: 'I',
+    head: '不用再开十个标签页了。',
+    body: '论文、资讯、仓库动态、天气，你睡着的时候已经整理好，醒来直接看。',
+  },
+  {
+    roman: 'II',
+    head: '跑在 GitHub 上，不用维护服务器。',
+    body: 'Actions 负责每天定时跑流程，Pages 负责托管结果，你不需要管任何基础设施。',
+  },
+  {
+    roman: 'III',
+    head: '向导帮你生成配置，不用手写。',
+    body: '选好你关注的内容来源，向导生成好配置文件，放进仓库，之后就不用动了。',
+  },
+];
+
+const beforeState = [
+  '每天早上要刷好几个地方，经常漏掉重要的东西。',
+  '有价值的内容埋在噪音里，看到也不知道该不该点开。',
+  '今天能看多少，全看有没有时间，没有固定节奏。',
+];
+
+const afterState = [
+  '醒来就有一份整理好的简报等着你，不用到处找。',
+  '论文、新闻、仓库、提醒，分好类放在一起，扫一遍就够了。',
+  '固定的节奏，靠自动化，不靠意志力。',
+];
+
+async function loadDigestPreview(filePath: string): Promise<DigestPreviewLine[]> {
+  try {
+    const raw = await readFile(filePath, 'utf8');
+    const parsed = JSON.parse(raw) as { sections_ordered?: DigestSection[] };
+    const sections = parsed.sections_ordered ?? [];
+    const lines = sections.flatMap(buildPreviewLine).slice(0, 4);
+    return lines.length > 0 ? lines : fallbackPreviewLines();
+  } catch { return fallbackPreviewLines(); }
+}
+
+function buildPreviewLine(section: DigestSection): DigestPreviewLine[] {
+  const firstItem = section.items?.[0];
+  if (!firstItem) return [];
+  const sectionLabel = section.title ?? '简报栏目';
+  if (section.key === 'weather') {
+    const place     = firstText(firstItem.label) ?? firstText(firstItem.query) ?? '所在城市';
+    const condition = firstText(firstItem.condition) ?? '今日天气';
+    const high      = typeof firstItem.temp_max_c === 'number'
+      ? `最高 ${Math.round(firstItem.temp_max_c)}°C`
+      : '天气已包含在简报里';
+    return [{ section: sectionLabel, title: `${place}：${condition}`, detail: high }];
+  }
+  const title = firstText(firstItem.title) ?? firstText(firstItem.name) ?? firstText(firstItem.label) ?? '最新内容';
+  return [{ section: sectionLabel, title, detail: previewDetail(section.key) }];
+}
+
+function firstText(value: unknown): string | null {
+  return typeof value === 'string' && value.trim() ? value.trim() : null;
+}
+
+function previewDetail(key: string | undefined): string {
+  switch (key) {
+    case 'arxiv':            return '按相关度打分，最值得看的排在前面';
+    case 'hacker_news':      return '高分讨论，过滤掉低信噪比的内容';
+    case 'github_trending':  return '今天动静最大的仓库，不用自己去刷';
+    case 'postdoc_jobs':     return '自动抓取，新职位不会漏掉';
+    case 'supervisor_updates': return '监控页面变动，有更新自动摘要';
+    default:                 return '已整理进今日简报';
+  }
+}
+
+function fallbackPreviewLines(): DigestPreviewLine[] {
+  return [
+    { section: 'arXiv 论文',    title: '今天值得看的论文，已经帮你摘好要点',   detail: '先看结论和意义，不用硬啃摘要' },
+    { section: 'Hacker News', title: '只留下值得点开的讨论',                 detail: '高分帖子自动过滤，不用自己刷' },
+    { section: 'GitHub 趋势',   title: '今天动静最大的仓库一眼看完',           detail: '知道在动什么，不用专门去刷榜' },
+  ];
+}
+---
+
+<Base
+  title="Linnet — 个人 AI 晨间简报"
+  description="Linnet 把分散的信息源整理成一份每天早上等你看的简报。"
+  lang="zh-CN"
+>
+  <div class="cover-wrap">
+
+    <!-- ── Masthead ──────────────────────────────────────────── -->
+    <header class="cover-masthead">
+      <div class="cover-masthead__kicker">个人 AI 晨间简报</div>
+      <h1 class="cover-masthead__title">Linnet</h1>
+      <p class="cover-masthead__tagline">
+        你睡着的时候，它已经帮你整理好了。
+      </p>
+      <div class="cover-masthead__stats">
+        <span>已生成 {totalDays} 期日报</span>
+        <span class="cover-masthead__dot">·</span>
+        <span>{totalWeeks} 期周报</span>
+        <span class="cover-masthead__dot">·</span>
+        <span>开源项目</span>
+      </div>
+    </header>
+
+    <!-- ── Action bar ────────────────────────────────────────── -->
+    <div class="cover-actions">
+      <a href={`${base}/setup/zh/`} class="cover-btn cover-btn--primary">开始配置</a>
+      <a href={latestDate ? `${base}/daily/${latestDate}/` : `${base}/daily/`} class="cover-btn cover-btn--ghost">
+        看今天的简报 →
+      </a>
+      <a href={`${base}/`} class="cover-lang-link">EN</a>
+    </div>
+
+    <!-- ── Lead section: 2-col broadsheet ───────────────────── -->
+    <div class="cover-lead">
+
+      <!-- Left column: editorial preview of latest issue -->
+      <div class="cover-lead__main">
+        <div class="cover-lead__rule-head">
+          <span class="cover-section-label">最新一期</span>
+          {latestDate && (
+            <a href={`${base}/daily/${latestDate}/`} class="cover-date-link">{latestDate}</a>
+          )}
+        </div>
+
+        <div class="cover-preview">
+          {previewLines.map((line, i) => (
+            <article class:list={['cover-preview-item', { 'cover-preview-item--lead': i === 0 }]}>
+              <div class="cover-preview__kicker">{line.section}</div>
+              <h3 class="cover-preview__title">{line.title}</h3>
+              <p class="cover-preview__detail">{line.detail}</p>
+            </article>
+          ))}
+        </div>
+
+        {latestDate && (
+          <a href={`${base}/daily/${latestDate}/`} class="cover-read-link">
+            看 {latestDate} 完整简报 →
+          </a>
+        )}
+      </div>
+
+      <!-- Right column: feature list -->
+      <aside class="cover-lead__aside">
+        <div class="cover-section-label">Linnet 做什么</div>
+        <div class="cover-features">
+          {features.map(f => (
+            <div class="cover-feature">
+              <span class="cover-feature__roman">§{f.roman}</span>
+              <div>
+                <h3 class="cover-feature__head">{f.head}</h3>
+                <p class="cover-feature__body">{f.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </aside>
+    </div>
+
+    <!-- ── Before / After comparison ────────────────────────── -->
+    <div class="cover-compare">
+      <div class="cover-compare__col">
+        <div class="cover-section-label cover-section-label--muted">用 Linnet 之前</div>
+        <h2 class="cover-compare__head">每天早上靠意志力刷一圈，刷完还是不踏实。</h2>
+        <ul class="cover-compare__list">
+          {beforeState.map(item => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="cover-compare__divider" aria-hidden="true"></div>
+      <div class="cover-compare__col">
+        <div class="cover-section-label">用 Linnet 之后</div>
+        <h2 class="cover-compare__head cover-compare__head--accent">一份简报等在那里，打开就能开始这一天。</h2>
+        <ul class="cover-compare__list">
+          {afterState.map(item => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── Infrastructure note ───────────────────────────────── -->
+    <div class="cover-infra">
+      <div class="cover-section-label">怎么跑起来的</div>
+      <p class="cover-infra__note">
+        配置向导帮你生成好所有配置文件，做一次 GitHub 操作之后，
+        Actions 每天自动跑流程，Pages 托管结果，你不需要维护任何东西。
+      </p>
+      <ol class="cover-infra__steps">
+        <li><span><strong>选好你关注的内容来源。</strong>论文、资讯、仓库、天气，按需勾选。</span></li>
+        <li><span><strong>向导生成配置文件。</strong>不用手写，复制进仓库就行。</span></li>
+        <li><span><strong>做一次 GitHub 操作。</strong>之后每天醒来简报已经准备好了。</span></li>
+      </ol>
+      <div class="cover-infra__actions">
+        <a href={`${base}/setup/zh/`} class="cover-btn cover-btn--primary">打开配置向导</a>
+        <a href="https://github.com/YuyangXueEd/linnet" class="cover-ext-link" target="_blank" rel="noopener">
+          在 GitHub 上查看 ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- ── Colophon ──────────────────────────────────────────── -->
+    <div class="cover-colophon">
+      linnet 开源 · 如果省了你的时间，给个 star · 用 python + astro 搭的
+    </div>
+
+  </div>
+</Base>
+
+<style>
+/* ── Page shell ────────────────────────────────────────── */
+.cover-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 64px;
+}
+
+/* ── Masthead ──────────────────────────────────────────── */
+.cover-masthead {
+  padding: 56px 0 28px;
+  border-bottom: 2px solid var(--ink);
+  text-align: center;
+}
+
+.cover-masthead__kicker {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  margin-bottom: 16px;
+}
+
+.cover-masthead__title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 14vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+  color: var(--ink);
+  margin: 0;
+}
+
+.cover-masthead__tagline {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--ink-soft);
+  margin: 20px 0 0;
+  line-height: 1.85;
+}
+
+.cover-masthead__stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+.cover-masthead__dot { color: var(--accent); }
+
+/* ── Action bar ────────────────────────────────────────── */
+.cover-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.cover-btn {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 10px 24px;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  transition: background 0.15s, color 0.15s;
+}
+
+.cover-btn--primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.cover-btn--primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.cover-btn--ghost:hover {
+  background: var(--ink);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.cover-lang-link {
+  margin-left: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.cover-lang-link:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  text-decoration: none;
+}
+
+/* ── Section label ─────────────────────────────────────── */
+.cover-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.cover-section-label--muted { color: var(--ink-muted); }
+
+/* ── Lead 2-col grid ───────────────────────────────────── */
+.cover-lead {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.cover-lead__main {
+  padding: 32px 40px 40px 0;
+  border-right: 1px solid var(--rule);
+}
+
+.cover-lead__aside {
+  padding: 32px 0 40px 40px;
+}
+
+.cover-lead__rule-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.cover-date-link {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+.cover-date-link:hover { color: var(--accent); text-decoration: none; }
+
+/* ── Preview items ─────────────────────────────────────── */
+.cover-preview { display: flex; flex-direction: column; gap: 0; }
+
+.cover-preview-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.cover-preview-item:last-child { border-bottom: none; }
+.cover-preview-item--lead { padding-top: 0; }
+
+.cover-preview__kicker {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.cover-preview__title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+
+.cover-preview-item--lead .cover-preview__title {
+  font-size: 1.375rem;
+}
+
+.cover-preview__detail {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.cover-read-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+.cover-read-link:hover { opacity: 0.7; text-decoration: none; }
+
+/* ── Feature list ──────────────────────────────────────── */
+.cover-features {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cover-feature {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  align-items: start;
+}
+
+.cover-feature:first-child { padding-top: 0; }
+.cover-feature:last-child { border-bottom: none; }
+
+.cover-feature__roman {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.cover-feature__head {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+
+.cover-feature__body {
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── Before / After ────────────────────────────────────── */
+.cover-compare {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+  padding: 40px 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.cover-compare__col { padding: 0 40px; }
+.cover-compare__col:first-child { padding-left: 0; }
+.cover-compare__col:last-child  { padding-right: 0; }
+
+.cover-compare__divider {
+  background: var(--rule);
+  width: 1px;
+}
+
+.cover-compare__head {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 12px 0 16px;
+  line-height: 1.4;
+}
+
+.cover-compare__head--accent { color: var(--accent); }
+
+.cover-compare__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cover-compare__list li {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  padding-left: 16px;
+  position: relative;
+}
+
+.cover-compare__list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.cover-compare__col:last-child .cover-compare__list li::before {
+  color: var(--accent);
+  content: '✓';
+  font-size: 0.7rem;
+}
+
+/* ── Infrastructure note ───────────────────────────────── */
+.cover-infra {
+  padding: 40px 0 0;
+}
+
+.cover-infra__note {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink-soft);
+  line-height: 1.85;
+  max-width: 64ch;
+  margin: 12px 0 24px;
+}
+
+.cover-infra__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  counter-reset: steps;
+}
+
+.cover-infra__steps li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  align-items: start;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  counter-increment: steps;
+}
+
+.cover-infra__steps li::before {
+  content: counter(steps);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--bg);
+  background: var(--ink);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cover-infra__steps li strong { color: var(--ink); }
+
+.cover-infra__actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.cover-ext-link {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+.cover-ext-link:hover { color: var(--accent); text-decoration: none; }
+
+/* ── Colophon ──────────────────────────────────────────── */
+.cover-colophon {
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cover-lead {
+    grid-template-columns: 1fr;
+  }
+  .cover-lead__main {
+    padding: 28px 0 32px;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cover-lead__aside { padding: 28px 0 0; }
+
+  .cover-compare {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .cover-compare__divider { display: none; }
+  .cover-compare__col { padding: 0; }
+}
+
+@media (max-width: 480px) {
+  .cover-actions { flex-direction: column; align-items: stretch; }
+  .cover-btn { text-align: center; }
+  .cover-masthead { padding: 40px 0 20px; }
+  .cover-lang-link { text-align: center; }
+}
+</style>

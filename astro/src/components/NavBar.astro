@@ -49,9 +49,7 @@ const links = [
 
 <script>
 const btn = document.getElementById('theme-toggle');
-const stored = localStorage.getItem('theme');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const initial = stored ?? (prefersDark ? 'dark' : 'light');
+const initial = localStorage.getItem('theme') || 'light';
 
 document.documentElement.dataset.theme = initial;
 
