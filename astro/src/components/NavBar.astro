@@ -23,8 +23,10 @@ const links = isZh
     ];
 
 const homeHref   = isZh ? `${base}/zh/` : `${base}/`;
-const langHref   = isZh ? `${base}/`    : `${base}/zh/`;
-const langLabel  = isZh ? 'EN'          : '中';
+const langHref   = isZh
+  ? (current === 'setup' ? `${base}/setup/`    : `${base}/`)
+  : (current === 'setup' ? `${base}/setup/zh/` : `${base}/zh/`);
+const langLabel  = isZh ? 'EN' : '中';
 ---
 
 <nav class="navbar">

@@ -1,19 +1,13 @@
----
-title: Manual Configuration
-nav_order: 2
-parent: Setup
----
-
-# Manual Configuration
+# Manual Configuration Guide
 
 Prefer to configure everything by hand? This page walks through every step.
-If you'd rather use the interactive wizard, go to the [Setup Wizard](index.html) instead.
+If you'd rather use the interactive wizard, open the [Setup Wizard](https://yuyangxueed.github.io/Linnet/setup/) instead.
 
 ---
 
 ## Step 1 — Fork this repo
 
-Click **Fork** at the top of the [GitHub page](https://github.com/YuyangXueEd/linnet).
+Click **Fork** at the top of the [GitHub page](https://github.com/YuyangXueEd/Linnet).
 GitHub will create your own copy with all the automation included.
 
 ---
@@ -33,7 +27,7 @@ This is the only required credential. [OpenRouter](https://openrouter.ai) lets y
 
 ## Step 3 — Enable GitHub Pages
 
-Go to: **Settings → Pages → Source: Deploy from a branch → Branch: `main`, folder: `/docs`**
+Go to: **Settings → Pages → Source: GitHub Actions**
 
 Click **Save**. Your site URL will appear there — it looks like `https://YOUR-USERNAME.github.io/Linnet`.
 
@@ -41,7 +35,7 @@ Click **Save**. Your site URL will appear there — it looks like `https://YOUR-
 
 ## Step 4 — Pick your research topics
 
-Open [config/extensions/arxiv.yaml](../../config/extensions/arxiv.yaml). It has four ready-made profiles —
+Open [`config/extensions/arxiv.yaml`](../config/extensions/arxiv.yaml). It has four ready-made profiles —
 uncomment the one closest to your work and edit the keywords freely:
 
 ```yaml
@@ -56,7 +50,7 @@ uncomment the one closest to your work and edit the keywords freely:
 # PROFILE D: Computational Biology / Bioinformatics
 ```
 
-Want summaries in a different language? Open [config/sources.yaml](../../config/sources.yaml) and
+Want summaries in a different language? Open [`config/sources.yaml`](../config/sources.yaml) and
 change `language: "en"` to `"zh"`, `"fr"`, `"de"`, `"ja"`, `"ko"`, `"es"`, or any other language code.
 
 ---
@@ -71,7 +65,7 @@ Your site will be live in about 5 minutes.
 
 ## Turn sources on and off
 
-Open [config/sources.yaml](../../config/sources.yaml) and set `enabled: true` or `enabled: false`
+Open [`config/sources.yaml`](../config/sources.yaml) and set `enabled: true` or `enabled: false`
 for each source:
 
 ```yaml
@@ -94,6 +88,12 @@ postdoc_jobs:
 
 supervisor_updates:
   enabled: false         # professor/lab page monitor — turn on if you want these
+
+quote_of_day:
+  enabled: false         # daily quote as briefing tagline (English, requires API_NINJAS_KEY)
+
+hitokoto:
+  enabled: false         # 一言 daily quote as briefing tagline (Chinese, no key needed)
 ```
 
 You can also switch AI models here, point `llm.base_url` at another OpenAI-compatible provider, or cap how many papers get fetched per day.
@@ -139,7 +139,7 @@ If you want a lighter notification path, especially for Chinese-language workflo
 1. Open [sct.ftqq.com/sendkey](https://sct.ftqq.com/sendkey)
 2. Copy your SendKey
 3. Add it as a secret: **Settings → Secrets and variables → Actions → New repository secret**, name it `SERVERCHAN_SENDKEY`
-4. Enable it in [config/sources.yaml](../../config/sources.yaml):
+4. Enable it in [`config/sources.yaml`](../config/sources.yaml):
 
 ```yaml
 sinks:
@@ -164,7 +164,7 @@ In addition to the website, you can receive a daily Slack message:
 3. Scroll down → **Add New Webhook to Workspace** → choose your channel → **Allow**
 4. Copy the webhook URL (looks like `https://hooks.slack.com/services/T.../B.../...`)
 5. Add it as a secret: **Settings → Secrets and variables → Actions → New repository secret**, name it `SLACK_WEBHOOK_URL`
-6. Enable it in [config/sources.yaml](../../config/sources.yaml):
+6. Enable it in [`config/sources.yaml`](../config/sources.yaml):
 
 ```yaml
 sinks:

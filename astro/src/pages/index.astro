@@ -251,9 +251,9 @@ function fallbackPreviewLines(): DigestPreviewLine[] {
 <style>
 /* ── Page shell ────────────────────────────────────────── */
 .cover-wrap {
-  max-width: 900px;
+  max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 2rem 64px;
+  padding: 0 3rem 64px;
 }
 
 /* ── Masthead ──────────────────────────────────────────── */
@@ -359,7 +359,7 @@ function fallbackPreviewLines(): DigestPreviewLine[] {
 /* ── Lead 2-col grid ───────────────────────────────────── */
 .cover-lead {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 3fr 2fr;
   gap: 0;
   border-bottom: 2px solid var(--ink);
   margin-top: 0;

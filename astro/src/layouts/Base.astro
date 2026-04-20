@@ -1,6 +1,8 @@
 ---
 import NavBar from '@/components/NavBar.astro';
 import '@/styles/global.css';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 
 interface Props {
   title: string;
@@ -17,6 +19,33 @@ const {
 } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Read site-owner color theme from sources.yaml (theme: block)
+const THEME_VARS: Record<string, string> = {
+  bg: '--bg', 'bg-deep': '--bg-deep', paper: '--paper',
+  ink: '--ink', 'ink-soft': '--ink-soft', 'ink-muted': '--ink-muted',
+  accent: '--accent', 'accent-deep': '--accent-deep',
+  gold: '--gold', sage: '--sage',
+};
+let themeOverrideCss = '';
+try {
+  const yaml = await readFile(resolve(process.cwd(), '../config/sources.yaml'), 'utf-8');
+  const parseBlock = (block: string) =>
+    block.split('\n').filter(Boolean)
+      .map(l => { const m = l.match(/^\s*([\w-]+):\s*["']?(#[0-9a-fA-F]{3,8})["']?/); return m ? `  ${THEME_VARS[m[1]] ?? '--' + m[1]}: ${m[2]};` : null; })
+      .filter(Boolean) as string[];
+  const themeMatch = yaml.match(/^theme:\s*\n((?:[ \t]+\S.*\n?)*)/m);
+  if (themeMatch) {
+    const overrides = parseBlock(themeMatch[1]);
+    if (overrides.length) themeOverrideCss = `:root {\n${overrides.join('\n')}\n}`;
+  }
+  const themeDarkMatch = yaml.match(/^theme_dark:\s*\n((?:[ \t]+\S.*\n?)*)/m);
+  if (themeDarkMatch) {
+    const darkOverrides = parseBlock(themeDarkMatch[1]);
+    if (darkOverrides.length) themeOverrideCss += `\n[data-theme="dark"] {\n${darkOverrides.join('\n')}\n}`;
+  }
+} catch {}
+---
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -34,6 +63,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonicalURL} />
   {ogImage && <meta property="og:image" content={ogImage} />}
+  {themeOverrideCss && <style set:html={themeOverrideCss}></style>}
   <!-- Theme init: prevent flash -->
   <script is:inline>
     const t = localStorage.getItem('theme') || 'light';

@@ -24,9 +24,8 @@
   --gold-soft:    #f0e4c8;
   --sage:         #5a7a5c;
 
-  /* Layout */
   --nav-height:   64px;
-  --max-w:        1160px;
+  --max-w:        1360px;
   --shadow:       0 2px 16px rgba(26, 24, 20, 0.10);
 
   /* ── Backward-compat aliases for pre-redesign components ── */
@@ -255,13 +254,13 @@ img { max-width: 100%; height: auto; display: block; }
 .page-wrap {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
 }
 
 .page-wrap--wide {
-  max-width: 1280px;
+  max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
 }
 
 /* ── Panel / paper surface ─────────────────────────────────────── */
@@ -424,7 +423,7 @@ hr.divider--double {
 @media (max-width: 768px) {
   .feed-grid--2col { grid-template-columns: 1fr; column-gap: 0; }
   .feed-grid--3col { grid-template-columns: 1fr; }
-  .page-wrap, .page-wrap--wide { padding: 0 1rem; }
+  .page-wrap, .page-wrap--wide { padding: 0 1.25rem; }
 }
 
 @media (max-width: 640px) {

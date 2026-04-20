@@ -322,51 +322,85 @@
     }
 
     .progress {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 22px;
+      position: relative;
+      margin-bottom: 28px;
+      padding: 8px 0 4px;
+    }
+
+    .progress-track {
+      position: absolute;
+      top: 23px;
+      left: calc(100% / 12);
+      right: calc(100% / 12);
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--brand);
+      transition: width 0.35s ease;
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
     }
 
     .progress-step {
-      padding: 12px 10px;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background: var(--panel-strong);
-      min-height: 92px;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 6px;
-      justify-content: space-between;
+      flex: 1;
     }
 
-    .progress-step.is-active {
-      border-color: rgba(21, 101, 192, 0.32);
-      background: linear-gradient(180deg, var(--brand-soft), var(--panel-strong));
-      transform: translateY(-1px);
-    }
-
-    .progress-step.is-complete {
-      border-color: rgba(0, 137, 123, 0.28);
-      background: linear-gradient(180deg, var(--accent-soft), var(--panel-strong));
-    }
-
-    .progress-step .step-number {
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .step-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--panel-strong);
+      display: grid;
+      place-items: center;
+      font-size: 0.72rem;
+      font-weight: 700;
       color: var(--muted);
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
     }
 
-    .progress-step strong {
-      font-size: 0.96rem;
-      line-height: 1.35;
+    .progress-step.is-active .step-dot {
+      border-color: var(--brand);
+      border-width: 2px;
+      color: var(--brand);
+      font-weight: 800;
     }
 
-    .progress-step span {
+    .progress-step.is-complete .step-dot {
+      border-color: var(--border);
       color: var(--muted);
       font-size: 0.85rem;
-      line-height: 1.4;
+    }
+
+    .step-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.3;
+      max-width: 72px;
+      letter-spacing: 0.01em;
+    }
+
+    .progress-step.is-active .step-label {
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    .progress-step.is-complete .step-label {
+      color: var(--accent);
     }
 
     .step-header {
@@ -479,8 +513,30 @@
 
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 14px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .card-grid::-webkit-scrollbar {
+      width: 6px;
+    }
+    .card-grid::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .card-grid::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    .category-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      font-weight: 600;
     }
 
     .source-card,
@@ -986,8 +1042,7 @@
         <div class="hero-actions">
           <a class="button button-primary" href="#wizard-root">Start with the first win</a>
           <a class="button button-secondary" href="../daily/">See a live briefing</a>
-          <a class="button button-secondary" href="manual-config.md">Prefer manual setup?</a>
-          <a class="button button-secondary" href="zh/">中文设置入口</a>
+          <a class="button button-secondary" href="https://github.com/YuyangXueEd/Linnet/blob/main/dev_docs/manual-config.md" target="_blank" rel="noopener">Prefer manual setup?</a>
         </div>
         <p class="hero-helper">
           The current path still ends in your own GitHub repo, secrets, and Actions run.
@@ -1053,7 +1108,7 @@
             <h2 id="wizard-heading">Build your briefing</h2>
             <p id="step-description"></p>
           </div>
-          <div class="step-pill" id="step-pill">Step 1 of 5</div>
+          <div class="step-pill" id="step-pill">Step 1 of 6</div>
         </div>
 
         <div id="step-errors" aria-live="polite"></div>
@@ -1115,6 +1170,10 @@
         blurb: "Enable notifications without ever pasting secrets into YAML.",
       },
       {
+        title: "Choose your look",
+        blurb: "Pick a colour palette for your digest site. The choice is saved in sources.yaml and applied at build time.",
+      },
+      {
         title: "Copy and launch",
         blurb: "Review the generated files, secret reminders, and next actions before the GitHub handoff.",
       },
@@ -1169,6 +1228,14 @@
         labels: ["supervisor", "lab", "professor", "monitoring", "updates", "watch"],
         output: "sources.yaml + config/extensions/supervisor_updates.yaml",
       },
+      quote_of_day: {
+        key: "quote_of_day",
+        title: "Quote of the Day",
+        desc: "A short motivational or literary quote as your briefing tagline. No API key needed.",
+        category: "Daily context",
+        labels: ["quote", "tagline", "daily", "inspiration", "morning"],
+        output: "sources.yaml",
+      },
     };
 
     const DEFAULT_SOURCE_ORDER = [
@@ -1178,14 +1245,15 @@
       "hacker_news",
       "postdoc_jobs",
       "supervisor_updates",
+      "quote_of_day",
     ];
 
     const DEFAULT_ENABLED = new Set(["weather", "arxiv", "github_trending", "hacker_news"]);
 
     const ARXIV_PROFILES = {
       ai: {
-        label: "AI / ML",
-        summary: "Foundation models, agents, multimodal systems, and general machine learning.",
+        label: "AI / ML / LLM",
+        summary: "Foundation models, agents, diffusion, RLHF, alignment, and general machine learning.",
         categories: ["cs.AI", "cs.LG", "cs.CL", "cs.CV", "stat.ML"],
         must_include: [
           "large language model",
@@ -1193,61 +1261,61 @@
           "diffusion model",
           "agent",
           "multimodal",
+          "RLHF",
           "alignment",
         ],
-        boost_keywords: ["GPT", "LLaMA", "Gemini", "Claude", "LoRA", "RAG"],
+        boost_keywords: ["GPT", "LLaMA", "Gemini", "Claude", "LoRA", "RAG", "chain-of-thought"],
       },
-      robotics: {
-        label: "Robotics",
-        summary: "Robot learning, navigation, embodied agents, and sim-to-real transfer.",
-        categories: ["cs.RO", "cs.AI", "cs.LG", "cs.CV"],
+      astro: {
+        label: "Astrophysics",
+        summary: "Galaxy, black holes, dark matter, gravitational waves, exoplanets, and cosmology.",
+        categories: ["astro-ph.GA", "astro-ph.HE", "astro-ph.SR", "astro-ph.CO", "astro-ph.EP"],
         must_include: [
-          "robot learning",
-          "reinforcement learning",
-          "sim-to-real",
-          "manipulation",
-          "embodied",
+          "galaxy",
+          "black hole",
+          "dark matter",
+          "gravitational wave",
+          "exoplanet",
+          "stellar",
+          "cosmology",
         ],
-        boost_keywords: ["MuJoCo", "IsaacGym", "imitation learning", "world model"],
+        boost_keywords: ["JWST", "Hubble", "Chandra", "redshift", "nebula", "supernova", "CMB"],
       },
-      medical: {
-        label: "Medical AI",
-        summary: "Medical imaging, clinical AI, radiology, pathology, and health records.",
-        categories: ["cs.CV", "cs.AI", "cs.LG", "eess.IV", "q-bio.QM"],
+      chemistry: {
+        label: "Chemistry / Materials",
+        summary: "Molecular dynamics, DFT, catalysis, synthesis, polymers, and nanostructures.",
+        categories: ["cond-mat.mtrl-sci", "physics.chem-ph", "cond-mat.soft", "q-bio.BM"],
         must_include: [
-          "medical imaging",
-          "clinical",
-          "radiology",
-          "pathology",
-          "electronic health record",
+          "molecular dynamics",
+          "density functional theory",
+          "catalyst",
+          "synthesis",
+          "polymer",
+          "nanostructure",
+          "reaction mechanism",
         ],
-        boost_keywords: ["CT", "MRI", "X-ray", "histology", "MIMIC", "segmentation"],
+        boost_keywords: ["DFT", "MD simulation", "force field", "spectroscopy", "crystallography", "zeolite"],
       },
-      nlp: {
-        label: "NLP",
-        summary: "Language models, reasoning, summarization, and text-focused evaluation.",
-        categories: ["cs.CL", "cs.AI", "cs.LG"],
+      compbio: {
+        label: "Computational Biology",
+        summary: "Genomics, protein structure, single-cell, gene expression, and bioinformatics.",
+        categories: ["q-bio.GN", "q-bio.QM", "q-bio.MN", "cs.LG", "stat.ML"],
         must_include: [
-          "language model",
-          "reasoning",
-          "question answering",
-          "summarisation",
-          "machine translation",
+          "genomics",
+          "protein structure",
+          "single-cell",
+          "gene expression",
+          "sequence alignment",
+          "phylogenetics",
         ],
-        boost_keywords: ["BERT", "T5", "instruction tuning", "hallucination", "benchmark"],
+        boost_keywords: ["AlphaFold", "CRISPR", "RNA-seq", "variant calling", "GWAS", "metagenomics"],
       },
-      cv: {
-        label: "Computer Vision",
-        summary: "Detection, segmentation, visual representations, and multimodal perception.",
-        categories: ["cs.CV", "cs.AI", "cs.LG"],
-        must_include: [
-          "object detection",
-          "image segmentation",
-          "visual representation",
-          "self-supervised",
-          "contrastive learning",
-        ],
-        boost_keywords: ["ViT", "CLIP", "SAM", "DINO", "zero-shot", "few-shot"],
+      custom: {
+        label: "Custom",
+        summary: "Build your own profile from scratch using the custom fields below.",
+        categories: [],
+        must_include: [],
+        boost_keywords: [],
       },
     };
 
@@ -1287,6 +1355,17 @@
     ];
 
     const DEFAULT_JOB_EXCLUDE = ["chemistry", "economics", "social science", "humanities"];
+
+    const TOP_N_MAX = {
+      weather: 1,
+      arxiv: 20,
+      github_trending: 15,
+      hacker_news: 20,
+      postdoc_jobs: 15,
+      supervisor_updates: 10,
+      quote_of_day: 1,
+      hitokoto: 1,
+    };
     const DEFAULT_JOB_TERMS = ["machine learning", "computer vision", "medical imaging"];
 
     const state = {
@@ -1306,8 +1385,9 @@
         presets: ["ai"],
         customKeywords: [],
         customCategories: [],
+        customBoosts: [],
         threshold: 7,
-        maxPapers: 300,
+        maxPapers: 100,
       },
       weather: {
         city: "Edinburgh",
@@ -1318,7 +1398,7 @@
         max_items: 20,
       },
       github_trending: {
-        max_repos: 15,
+        max_repos: 10,
       },
       postdoc_jobs: {
         search_terms: [...DEFAULT_JOB_TERMS],
@@ -1347,6 +1427,17 @@
           max_jobs: 3,
           sendkey: "",
         },
+      },
+      theme: {
+        bgPreset: "press",
+        accentPreset: "robin",
+        customBg: "",
+        customAccent: "",
+        customDark: false,
+        darkBgPreset: "ink",
+        darkAccentPreset: "robin",
+        customDarkBg: "",
+        customDarkAccent: "",
       },
     };
 
@@ -1396,10 +1487,30 @@
       updateThemeButton();
     });
 
+    progressEl.addEventListener("click", (e) => {
+      const stepEl = e.target.closest(".progress-step");
+      if (!stepEl) return;
+      const targetStep = parseInt(stepEl.dataset.targetStep, 10);
+      if (!targetStep || targetStep === state.currentStep) return;
+
+      if (targetStep > state.currentStep) {
+        const validation = validateStep(state.currentStep);
+        if (validation.length) {
+          renderErrors(validation);
+          return;
+        }
+      }
+
+      state.currentStep = targetStep;
+      render();
+      document.getElementById("wizard-root").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
     backButtonEl.addEventListener("click", () => {
       if (state.currentStep > 1) {
         state.currentStep -= 1;
         render();
+        document.getElementById("wizard-root").scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
 
@@ -1410,13 +1521,11 @@
         return;
       }
 
-      if (state.currentStep < 5) {
+      if (state.currentStep < 6) {
         state.currentStep += 1;
-        render();
-        return;
+      } else {
+        state.currentStep = 1;
       }
-
-      state.currentStep = 1;
       render();
       document.getElementById("wizard-root").scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -1541,10 +1650,14 @@
 
       const mergedCategories = unique([...categories, ...state.arxiv.customCategories]);
       const mergedKeywords = unique([...mustInclude, ...state.arxiv.customKeywords]);
+      const mergedBoosts = unique([...boostKeywords, ...state.arxiv.customBoosts]);
+      
+      // If user checks Custom and has NO custom categories, it still falls back to AI categories
+      // so it doesn't break the arXiv API by sending an empty category list.
       return {
         categories: mergedCategories.length ? mergedCategories : ARXIV_PROFILES.ai.categories,
         must_include: mergedKeywords.length ? mergedKeywords : ARXIV_PROFILES.ai.must_include,
-        boost_keywords: unique(boostKeywords),
+        boost_keywords: mergedBoosts,
       };
     }
 
@@ -1678,6 +1791,9 @@
         "supervisor_updates:",
         `  enabled: ${yamlScalar(order.includes("supervisor_updates"))}`,
         "",
+        "quote_of_day:",
+        `  enabled: ${yamlScalar(order.includes("quote_of_day"))}`,
+        "",
         "github_trending:",
         `  enabled: ${yamlScalar(order.includes("github_trending"))}`,
         `  max_repos: ${yamlScalar(state.github_trending.max_repos)}`,
@@ -1697,6 +1813,18 @@
         "pages:",
         '  base_url: ""',
         "",
+        ...(!isDefaultTheme() ? [
+          "theme:",
+          `  bg: "${getThemeBg()}"`,
+          `  accent: "${getThemeAccent()}"`,
+          "",
+        ] : []),
+        ...(state.theme.customDark && !isDefaultDarkTheme() ? [
+          "theme_dark:",
+          `  bg: "${getThemeDarkBg()}"`,
+          `  accent: "${getThemeDarkAccent()}"`,
+          "",
+        ] : []),
         "# Future-ready rollup preferences. Safe to keep even before the backend",
         "# starts using them directly.",
         "weekly:",
@@ -1899,22 +2027,21 @@
     }
 
     function renderProgress() {
-      progressEl.innerHTML = STEP_META.map((step, index) => {
-        const stepNumber = index + 1;
-        const classes = ["progress-step"];
-        if (stepNumber === state.currentStep) {
-          classes.push("is-active");
-        } else if (stepNumber < state.currentStep) {
-          classes.push("is-complete");
-        }
-        return `
-          <div class="${classes.join(" ")}" aria-current="${stepNumber === state.currentStep ? "step" : "false"}">
-            <div class="step-number">Step ${stepNumber}</div>
-            <strong>${step.title}</strong>
-            <span>${step.blurb}</span>
-          </div>
-        `;
-      }).join("");
+      const total = STEP_META.length;
+      const pct = ((state.currentStep - 1) / (total - 1)) * 100;
+      progressEl.innerHTML = `
+        <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+        <div class="progress-steps">
+          ${STEP_META.map((step, index) => {
+            const n = index + 1;
+            const cls = ["progress-step", n === state.currentStep ? "is-active" : n < state.currentStep ? "is-complete" : ""].filter(Boolean).join(" ");
+            return `<div class="${cls}" style="cursor: pointer" data-target-step="${n}" aria-current="${n === state.currentStep ? "step" : "false"}">
+              <div class="step-dot">${n < state.currentStep ? "✓" : n}</div>
+              <div class="step-label">${step.title}</div>
+            </div>`;
+          }).join("")}
+        </div>
+      `;
     }
 
     function renderPreview() {
@@ -1987,15 +2114,10 @@
                     <span class="checkmark" aria-hidden="true">${enabled ? "✓" : "+"}</span>
                     <div class="source-title">
                       <strong>${def.title}</strong>
-                      <span class="pill">${def.category}</span>
                     </div>
                     <p>${def.desc}</p>
-                    <div class="meta">
-                      <span class="pill">${enabled ? "Selected" : "Optional"}</span>
-                      <span class="pill">${def.output}</span>
-                    </div>
                     <div class="label-row">
-                      ${(def.labels || []).slice(0, 4).map((label) => `<span class="label-chip">${label}</span>`).join("")}
+                      <span class="category-label">${def.category}</span>
                     </div>
                   </button>
                 `;
@@ -2198,6 +2320,14 @@
               )}
 
               ${renderTagEditor(
+                "Custom boost keywords",
+                "arxiv.customBoosts",
+                state.arxiv.customBoosts,
+                "Add a boost keyword",
+                "Words that increase the ranking score of a paper if found in the title/abstract."
+              )}
+
+              ${renderTagEditor(
                 "Custom arXiv categories",
                 "arxiv.customCategories",
                 state.arxiv.customCategories,
@@ -2319,9 +2449,23 @@
         const eventName = input.type === "checkbox" ? "change" : "input";
         input.addEventListener(eventName, () => {
           const path = input.dataset.path;
-          setNested(path, readInputValue(input));
-          if (state.currentStep === 5) {
+          const val = readInputValue(input);
+          setNested(path, val);
+          
+          stepPanelEl.querySelectorAll(`[data-path="${path}"]`).forEach((sibling) => {
+            if (sibling !== input) {
+              if (sibling.type === "checkbox") {
+                sibling.checked = val;
+              } else {
+                sibling.value = val;
+              }
+            }
+          });
+
+          if (state.currentStep === 6) {
             renderStep5();
+          } else if (state.currentStep === 5) {
+            renderStep6();
           }
         });
       });
@@ -2340,6 +2484,7 @@
       });
 
       wireTagEditor("arxiv.customKeywords");
+      wireTagEditor("arxiv.customBoosts");
       wireTagEditor("arxiv.customCategories");
       wireTagEditor("postdoc_jobs.search_terms");
       wireTagEditor("supervisor_updates.urls");
@@ -2391,41 +2536,43 @@
           ${["weekly", "monthly"].map((period) => `
             <div class="config-card">
               <h3>${period === "weekly" ? "Weekly summary" : "Monthly summary"}</h3>
-              <p>
-                These preferences only include feeds selected in Step 1. The generated YAML is future-ready even before the rollup backend starts consuming every field.
-              </p>
+              <p>Only feeds you selected in Step 1 appear here.</p>
               <div class="stack">
-                ${keys.map((key) => `
-                  <div class="toggle-card">
-                    <div>
-                      <strong>${getSourceDef(key).title}</strong>
-                      <div class="helper-text">${getSourceDef(key).desc}</div>
+                ${keys.map((key) => {
+                  const def = getSourceDef(key);
+                  const item = state.schedule[period][key];
+                  const maxN = TOP_N_MAX[key] ?? 20;
+                  const showSlider = maxN > 1;
+                  return `
+                  <div class="toggle-card" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+                    <label style="flex-shrink:0;display:flex;align-items:center;gap:6px;cursor:pointer;">
+                      <input
+                        type="checkbox"
+                        data-path="schedule.${period}.${key}.enabled"
+                        ${item.enabled ? "checked" : ""}
+                      />
+                    </label>
+                    <div style="flex:1;min-width:0;">
+                      <strong>${def.title}</strong>
                     </div>
-                    <div class="field-grid" style="margin: 0; min-width: min(340px, 100%);">
-                      <div class="field">
-                        <label>
-                          <input
-                            type="checkbox"
-                            data-path="schedule.${period}.${key}.enabled"
-                            ${state.schedule[period][key].enabled ? "checked" : ""}
-                          />
-                          Include
-                        </label>
-                      </div>
-                      <div class="field">
-                        <label>Top N</label>
-                        <input
-                          type="number"
-                          min="1"
-                          max="50"
-                          step="1"
-                          value="${state.schedule[period][key].top_n}"
-                          data-path="schedule.${period}.${key}.top_n"
-                        />
-                      </div>
+                    ${showSlider ? `
+                    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                      <input
+                        type="range"
+                        min="1"
+                        max="${maxN}"
+                        step="1"
+                        value="${Math.min(item.top_n, maxN)}"
+                        data-path="schedule.${period}.${key}.top_n"
+                        data-sync-display="topn-${period}-${key}"
+                        style="width:100px;"
+                        ${!item.enabled ? "disabled" : ""}
+                      />
+                      <span id="topn-${period}-${key}" style="font-family:monospace;font-size:0.85rem;min-width:2ch;text-align:right;">${Math.min(item.top_n, maxN)}</span>
                     </div>
-                  </div>
-                `).join("")}
+                    ` : ""}
+                  </div>`;
+                }).join("")}
               </div>
             </div>
           `).join("")}
@@ -2441,6 +2588,16 @@
         input.addEventListener(eventName, () => {
           const path = input.dataset.path;
           setNested(path, readInputValue(input));
+          if (input.type === "range") {
+            const displayId = input.dataset.syncDisplay;
+            if (displayId) {
+              const el = document.getElementById(displayId);
+              if (el) el.textContent = input.value;
+            }
+          }
+          if (input.type === "checkbox" && path.endsWith(".enabled")) {
+            renderStep3();
+          }
         });
       });
     }
@@ -2499,8 +2656,9 @@
             <div class="notice warning">
               <strong>Secret handling</strong>
               <div class="helper-text">
-                In copy-paste mode, add your key as a GitHub Actions secret named <code>SERVERCHAN_SENDKEY</code>.
-                The official docs page starts here: <a href="https://sct.ftqq.com/sendkey">sct.ftqq.com/sendkey</a>.
+                Don't have an account? <a href="https://sct.ftqq.com/r/21449" target="_blank" rel="noopener">Register here</a> (referral link).
+                Then add your key as a GitHub Actions secret named <code>SERVERCHAN_SENDKEY</code>.
+                API endpoint: <code>sct.ftqq.com</code> · Full docs: <a href="https://sct.ftqq.com/sendkey" target="_blank" rel="noopener">sct.ftqq.com/sendkey</a>.
               </div>
             </div>
           </div>
@@ -2667,6 +2825,239 @@
       });
     }
 
+    const BG_PRESETS = [
+      { key: "press",   label: "Press",         bg: "#f4ede0", hint: "Default warm newsprint" },
+      { key: "morning", label: "Morning Cream",  bg: "#F2E6CE", hint: "Golden morning light" },
+      { key: "stone",   label: "Stone",          bg: "#E8E2D8", hint: "Quiet editorial grey" },
+      { key: "white",   label: "Newsprint",      bg: "#F9F5EE", hint: "Clean, almost-white" },
+      { key: "custom",  label: "Custom",         bg: "",        hint: "Enter your own hex" },
+    ];
+
+    const ACCENT_PRESETS = [
+      { key: "robin",      label: "Robin",      color: "#c43d2a" },
+      { key: "burgundy",   label: "Burgundy",   color: "#8f1d22" },
+      { key: "terracotta", label: "Terracotta", color: "#b85a3c" },
+      { key: "teal",       label: "Teal",       color: "#2a7a7a" },
+      { key: "indigo",     label: "Indigo",     color: "#3d4d8f" },
+      { key: "gold",       label: "Gold",       color: "#9c7520" },
+      { key: "plum",       label: "Plum",       color: "#6b3b5e" },
+      { key: "custom",     label: "Custom",     color: "" },
+    ];
+
+    const DARK_BG_PRESETS = [
+      { key: "ink",      label: "Ink",       bg: "#1a1614", hint: "Warm dark ink" },
+      { key: "midnight", label: "Midnight",  bg: "#0f1620", hint: "Deep midnight blue" },
+      { key: "slate",    label: "Slate",     bg: "#1c2128", hint: "GitHub-style dark" },
+      { key: "carbon",   label: "Carbon",    bg: "#1c1c1e", hint: "macOS dark" },
+      { key: "custom",   label: "Custom",    bg: "",        hint: "Enter your own hex" },
+    ];
+
+    function getThemeBg() {
+      if (state.theme.bgPreset === "custom") return state.theme.customBg || "#f4ede0";
+      return BG_PRESETS.find(p => p.key === state.theme.bgPreset)?.bg || "#f4ede0";
+    }
+
+    function getThemeAccent() {
+      if (state.theme.accentPreset === "custom") return state.theme.customAccent || "#c43d2a";
+      return ACCENT_PRESETS.find(p => p.key === state.theme.accentPreset)?.color || "#c43d2a";
+    }
+
+    function isDefaultTheme() {
+      return state.theme.bgPreset === "press" && state.theme.accentPreset === "robin";
+    }
+
+    function getThemeDarkBg() {
+      if (state.theme.darkBgPreset === "custom") return state.theme.customDarkBg || "#1a1614";
+      return DARK_BG_PRESETS.find(p => p.key === state.theme.darkBgPreset)?.bg || "#1a1614";
+    }
+
+    function getThemeDarkAccent() {
+      if (state.theme.darkAccentPreset === "custom") return state.theme.customDarkAccent || "#c43d2a";
+      return ACCENT_PRESETS.find(p => p.key === state.theme.darkAccentPreset)?.color || "#c43d2a";
+    }
+
+    function isDefaultDarkTheme() {
+      return state.theme.darkBgPreset === "ink" && state.theme.darkAccentPreset === "robin";
+    }
+
+    function renderStep6() {
+      const bg = getThemeBg();
+      const accent = getThemeAccent();
+      stepPanelEl.innerHTML = `
+        <div class="stack">
+          <div class="info-card" style="background:${bg};border:2px solid ${accent};padding:20px 24px;">
+            <div style="font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:#1a1814;margin-bottom:6px;">Your Morning Briefing</div>
+            <div style="font-size:0.8rem;color:#7a7265;font-family:monospace;letter-spacing:0.1em;text-transform:uppercase;">Preview · ${new Date().toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</div>
+            <div style="margin-top:12px;height:3px;background:${accent};width:100%;"></div>
+            <div style="margin-top:10px;font-size:0.85rem;color:#3d372f;">arXiv · Hacker News · GitHub Trending · Weather</div>
+          </div>
+
+          <div>
+            <label class="eyebrow">Background</label>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;">
+              ${BG_PRESETS.map(p => `
+                <button type="button"
+                  class="preset${state.theme.bgPreset === p.key ? ' is-selected' : ''}"
+                  data-bg-preset="${p.key}"
+                  style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;${state.theme.bgPreset === p.key ? `border-color:${accent};` : ''}">
+                  ${p.bg ? `<span style="width:18px;height:18px;border:1px solid rgba(0,0,0,0.15);background:${p.bg};display:inline-block;flex-shrink:0;"></span>` : '<span style="width:18px;height:18px;border:1px dashed #aaa;display:inline-block;flex-shrink:0;"></span>'}
+                  <span style="font-size:0.8rem;">${p.label}</span>
+                </button>
+              `).join("")}
+            </div>
+            ${state.theme.bgPreset === "custom" ? `
+              <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
+                <input type="color" value="${state.theme.customBg || '#f4ede0'}" id="custom-bg-picker" style="width:40px;height:32px;padding:2px;cursor:pointer;" />
+                <input type="text" id="custom-bg" value="${state.theme.customBg}" placeholder="#f4ede0" style="width:110px;font-family:monospace;" maxlength="7" />
+                <span style="font-size:0.75rem;color:#7a7265;">hex colour for background</span>
+              </div>
+            ` : ""}
+          </div>
+
+          <div>
+            <label class="eyebrow">Accent colour</label>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;">
+              ${ACCENT_PRESETS.map(p => `
+                <button type="button"
+                  class="preset${state.theme.accentPreset === p.key ? ' is-selected' : ''}"
+                  data-accent-preset="${p.key}"
+                  style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;${state.theme.accentPreset === p.key ? `border-color:${p.color || accent};` : ''}">
+                  ${p.color ? `<span style="width:18px;height:18px;background:${p.color};display:inline-block;flex-shrink:0;"></span>` : '<span style="width:18px;height:18px;border:1px dashed #aaa;display:inline-block;flex-shrink:0;"></span>'}
+                  <span style="font-size:0.8rem;">${p.label}</span>
+                </button>
+              `).join("")}
+            </div>
+            ${state.theme.accentPreset === "custom" ? `
+              <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
+                <input type="color" value="${state.theme.customAccent || '#c43d2a'}" id="custom-accent-picker" style="width:40px;height:32px;padding:2px;cursor:pointer;" />
+                <input type="text" id="custom-accent" value="${state.theme.customAccent}" placeholder="#c43d2a" style="width:110px;font-family:monospace;" maxlength="7" />
+                <span style="font-size:0.75rem;color:#7a7265;">hex colour for headings, links, accents</span>
+              </div>
+            ` : ""}
+          </div>
+
+          <div class="checkbox-row" style="margin-top:16px;">
+            <div>
+              <strong>Customise dark mode</strong>
+              <div class="helper-text">Choose separate background and accent colours for the dark theme.</div>
+            </div>
+            <label>
+              <input type="checkbox" id="custom-dark-toggle" ${state.theme.customDark ? "checked" : ""} />
+              <span class="sr-only">Customise dark mode</span>
+            </label>
+          </div>
+
+          ${state.theme.customDark ? (() => {
+            const dBg = getThemeDarkBg();
+            const dAccent = getThemeDarkAccent();
+            return `
+          <div style="padding:18px 20px;border:1px solid var(--border);border-radius:18px;background:var(--surface-alt);display:flex;flex-direction:column;gap:16px;">
+            <div class="info-card" style="background:${dBg};border:2px solid ${dAccent};padding:16px 20px;">
+              <div style="font-family:Georgia,serif;font-size:1.1rem;font-weight:700;color:#edf2f7;margin-bottom:4px;">Dark preview</div>
+              <div style="height:2px;background:${dAccent};width:100%;margin-top:8px;"></div>
+              <div style="margin-top:8px;font-size:0.8rem;color:#a0aec0;">arXiv · Hacker News · GitHub Trending</div>
+            </div>
+
+            <div>
+              <label class="eyebrow">Dark background</label>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;">
+                ${DARK_BG_PRESETS.map(p => `
+                  <button type="button"
+                    class="preset${state.theme.darkBgPreset === p.key ? ' is-selected' : ''}"
+                    data-dark-bg-preset="${p.key}"
+                    style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;${state.theme.darkBgPreset === p.key ? `border-color:${dAccent};` : ''}">
+                    ${p.bg ? `<span style="width:18px;height:18px;border:1px solid rgba(255,255,255,0.2);background:${p.bg};display:inline-block;flex-shrink:0;"></span>` : '<span style="width:18px;height:18px;border:1px dashed #666;display:inline-block;flex-shrink:0;"></span>'}
+                    <span style="font-size:0.8rem;">${p.label}</span>
+                  </button>
+                `).join("")}
+              </div>
+              ${state.theme.darkBgPreset === "custom" ? `
+                <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
+                  <input type="color" value="${state.theme.customDarkBg || '#1a1614'}" id="custom-dark-bg-picker" style="width:40px;height:32px;padding:2px;cursor:pointer;" />
+                  <input type="text" id="custom-dark-bg" value="${state.theme.customDarkBg}" placeholder="#1a1614" style="width:110px;font-family:monospace;" maxlength="7" />
+                </div>
+              ` : ""}
+            </div>
+
+            <div>
+              <label class="eyebrow">Dark accent colour</label>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;">
+                ${ACCENT_PRESETS.map(p => `
+                  <button type="button"
+                    class="preset${state.theme.darkAccentPreset === p.key ? ' is-selected' : ''}"
+                    data-dark-accent-preset="${p.key}"
+                    style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;${state.theme.darkAccentPreset === p.key ? `border-color:${p.color || dAccent};` : ''}">
+                    ${p.color ? `<span style="width:18px;height:18px;background:${p.color};display:inline-block;flex-shrink:0;"></span>` : '<span style="width:18px;height:18px;border:1px dashed #aaa;display:inline-block;flex-shrink:0;"></span>'}
+                    <span style="font-size:0.8rem;">${p.label}</span>
+                  </button>
+                `).join("")}
+              </div>
+              ${state.theme.darkAccentPreset === "custom" ? `
+                <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
+                  <input type="color" value="${state.theme.customDarkAccent || '#c43d2a'}" id="custom-dark-accent-picker" style="width:40px;height:32px;padding:2px;cursor:pointer;" />
+                  <input type="text" id="custom-dark-accent" value="${state.theme.customDarkAccent}" placeholder="#c43d2a" style="width:110px;font-family:monospace;" maxlength="7" />
+                </div>
+              ` : ""}
+            </div>
+          </div>`;
+          })() : ""}
+
+          ${!isDefaultTheme() || (state.theme.customDark && !isDefaultDarkTheme()) ? `
+          <div class="notice">
+            <strong>Theme blocks will be added to sources.yaml</strong>
+            <pre class="code-preview" style="margin-top:8px;font-size:0.75rem;">${!isDefaultTheme() ? `theme:\n  bg: "${bg}"\n  accent: "${accent}"` : ""}${state.theme.customDark && !isDefaultDarkTheme() ? `\ntheme_dark:\n  bg: "${getThemeDarkBg()}"\n  accent: "${getThemeDarkAccent()}"` : ""}</pre>
+          </div>
+          ` : `
+          <div class="notice">
+            <strong>Using default palette</strong>
+            <div class="helper-text">No <code>theme:</code> block will be added — the site uses its built-in design tokens.</div>
+          </div>
+          `}
+        </div>
+      `;
+
+      stepPanelEl.querySelectorAll("[data-bg-preset]").forEach(btn => {
+        btn.addEventListener("click", () => { state.theme.bgPreset = btn.dataset.bgPreset; renderStep6(); });
+      });
+      stepPanelEl.querySelectorAll("[data-accent-preset]").forEach(btn => {
+        btn.addEventListener("click", () => { state.theme.accentPreset = btn.dataset.accentPreset; renderStep6(); });
+      });
+      stepPanelEl.querySelectorAll("[data-dark-bg-preset]").forEach(btn => {
+        btn.addEventListener("click", () => { state.theme.darkBgPreset = btn.dataset.darkBgPreset; renderStep6(); });
+      });
+      stepPanelEl.querySelectorAll("[data-dark-accent-preset]").forEach(btn => {
+        btn.addEventListener("click", () => { state.theme.darkAccentPreset = btn.dataset.darkAccentPreset; renderStep6(); });
+      });
+
+      const customDarkToggle = stepPanelEl.querySelector("#custom-dark-toggle");
+      customDarkToggle?.addEventListener("change", e => { state.theme.customDark = e.target.checked; renderStep6(); });
+
+      const customBgInput = stepPanelEl.querySelector("#custom-bg");
+      const customBgPicker = stepPanelEl.querySelector("#custom-bg-picker");
+      if (customBgInput) {
+        customBgInput.addEventListener("input", e => { state.theme.customBg = e.target.value; if (customBgPicker) customBgPicker.value = e.target.value; renderStep6(); });
+        customBgPicker?.addEventListener("input", e => { state.theme.customBg = e.target.value; if (customBgInput) customBgInput.value = e.target.value; renderStep6(); });
+      }
+      const customAccentInput = stepPanelEl.querySelector("#custom-accent");
+      const customAccentPicker = stepPanelEl.querySelector("#custom-accent-picker");
+      if (customAccentInput) {
+        customAccentInput.addEventListener("input", e => { state.theme.customAccent = e.target.value; if (customAccentPicker) customAccentPicker.value = e.target.value; renderStep6(); });
+        customAccentPicker?.addEventListener("input", e => { state.theme.customAccent = e.target.value; if (customAccentInput) customAccentInput.value = e.target.value; renderStep6(); });
+      }
+      const customDarkBgInput = stepPanelEl.querySelector("#custom-dark-bg");
+      const customDarkBgPicker = stepPanelEl.querySelector("#custom-dark-bg-picker");
+      if (customDarkBgInput) {
+        customDarkBgInput.addEventListener("input", e => { state.theme.customDarkBg = e.target.value; if (customDarkBgPicker) customDarkBgPicker.value = e.target.value; renderStep6(); });
+        customDarkBgPicker?.addEventListener("input", e => { state.theme.customDarkBg = e.target.value; if (customDarkBgInput) customDarkBgInput.value = e.target.value; renderStep6(); });
+      }
+      const customDarkAccentInput = stepPanelEl.querySelector("#custom-dark-accent");
+      const customDarkAccentPicker = stepPanelEl.querySelector("#custom-dark-accent-picker");
+      if (customDarkAccentInput) {
+        customDarkAccentInput.addEventListener("input", e => { state.theme.customDarkAccent = e.target.value; if (customDarkAccentPicker) customDarkAccentPicker.value = e.target.value; renderStep6(); });
+        customDarkAccentPicker?.addEventListener("input", e => { state.theme.customDarkAccent = e.target.value; if (customDarkAccentInput) customDarkAccentInput.value = e.target.value; renderStep6(); });
+      }
+    }
+
     function escapeHtml(text) {
       return text
         .replaceAll("&", "&amp;")
@@ -2684,21 +3075,16 @@
 
     function updateNav() {
       backButtonEl.disabled = state.currentStep === 1;
-      nextButtonEl.textContent = state.currentStep === 5 ? "Start over" : "Next";
+      nextButtonEl.textContent = state.currentStep === 6 ? "Start over" : "Next";
     }
 
     function renderCurrentStep() {
-      if (state.currentStep === 1) {
-        renderStep1();
-      } else if (state.currentStep === 2) {
-        renderStep2();
-      } else if (state.currentStep === 3) {
-        renderStep3();
-      } else if (state.currentStep === 4) {
-        renderStep4();
-      } else {
-        renderStep5();
-      }
+      if (state.currentStep === 1) renderStep1();
+      else if (state.currentStep === 2) renderStep2();
+      else if (state.currentStep === 3) renderStep3();
+      else if (state.currentStep === 4) renderStep4();
+      else if (state.currentStep === 5) renderStep6();
+      else renderStep5();
     }
 
     function render() {
@@ -2707,7 +3093,7 @@
       renderProgress();
       renderPreview();
       stepDescriptionEl.textContent = STEP_META[state.currentStep - 1].blurb;
-      stepPillEl.textContent = `Step ${state.currentStep} of 5`;
+      stepPillEl.textContent = `Step ${state.currentStep} of 6`;
       updateNav();
       renderCurrentStep();
     }

@@ -174,21 +174,6 @@ const totalSections = navSections.length;
             sectionIndex={i}
             totalSections={totalSections}
           />
-          <!-- Per-section page-turn nav -->
-          <div class="section-turn-nav" data-section-idx={i}>
-            {i > 0 && (
-              <button class="turn-btn turn-btn--prev" data-target-idx={i - 1}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                {navSections[i - 1]?.title ?? 'Previous'}
-              </button>
-            )}
-            {i < totalSections - 1 && (
-              <button class="turn-btn turn-btn--next" data-target-idx={i + 1}>
-                {navSections[i + 1]?.title ?? 'Next'}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            )}
-          </div>
         </div>
       ))}
     </div>
@@ -578,47 +563,13 @@ const totalSections = navSections.length;
 /* ── Digest body ───────────────────────────────────────── */
 .digest-body { margin-top: 0; }
 
-.digest-section:first-child { padding-top: 40px; }
+.digest-section:first-child { padding-top: 20px; }
 
 .digest-section--ruled {
   border-top: 3px double var(--ink);
   padding-top: 36px;
 }
 
-/* ── Per-section page-turn nav ─────────────────────────── */
-.section-turn-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 32px;
-  padding-top: 16px;
-  border-top: 1px solid var(--rule);
-}
-
-.section-turn-nav:has(.turn-btn--next:only-child) {
-  justify-content: flex-end;
-}
-
-.turn-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  background: none;
-  border: 1px solid var(--rule);
-  cursor: pointer;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  transition: color 0.15s, border-color 0.15s;
-}
-
-.turn-btn:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
 
 /* ── Bottom nav ────────────────────────────────────────── */
 .digest-nav {

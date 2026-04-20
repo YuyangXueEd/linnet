@@ -90,8 +90,8 @@ const totalExtensions = extensions.length;
   .setup-body a { color: var(--accent); }
   .setup-body .code-preview { background: var(--site-code-bg, #1c1611); color: var(--site-code-text, #f0e7d4); border-color: var(--rule); }
   .setup-body .source-card.is-selected { border-color: var(--accent); background: var(--accent-soft); }
-  .setup-body .progress-step.is-active { border-color: var(--accent); background: var(--accent-soft); }
-  .setup-body .progress-step.is-complete { border-color: var(--sage); background: rgba(90,122,92,0.08); }
+  .setup-body .progress-step.is-active { border-color: var(--accent); background: transparent; }
+  .setup-body .progress-step.is-complete { border-color: var(--sage); background: transparent; }
 
   /* ── Chip colors — editorial gold ──────────────────────── */
   .setup-body .pill { background: var(--gold-soft); border-color: var(--chip-border); color: var(--chip-text); }
@@ -104,9 +104,9 @@ const totalExtensions = extensions.length;
 <style>
 /* ── Setup shell — wide, no nested panel ───────────────── */
 .setup-shell {
-  max-width: 1200px;
+  max-width: 1360px;
   margin: 0 auto;
-  padding: 0 2rem 64px;
+  padding: 0 3rem 64px;
 }
 
 /* ── Masthead ──────────────────────────────────────────── */

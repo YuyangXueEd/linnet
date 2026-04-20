@@ -112,7 +112,6 @@ const figSide   = idx % 2 === 1 ? 'left' : 'right';
       <div class="paper-text__kicker">
         {category && <span class="paper-cat">{category}</span>}
         {paper.id && <span>arxiv:{paper.id}</span>}
-        {score != null && <span class="paper-score">{score.toFixed(0)}</span>}
       </div>
       <h3 class="paper-fig-row__title">
         {url ? <a href={url} target="_blank" rel="noopener">{paper.title}</a> : paper.title}
@@ -122,6 +121,18 @@ const figSide   = idx % 2 === 1 ? 'left' : 'right';
       <div class="paper-text__links">
         {url && <a href={url} target="_blank" rel="noopener" class="paper-link">abstract</a>}
         {pdfUrl && <a href={pdfUrl} target="_blank" rel="noopener" class="paper-link paper-link--dim">pdf</a>}
+        {score != null && (
+          <svg class="paper-seal paper-seal--sm" width="44" height="44" viewBox="0 0 88 88">
+            <circle cx="44" cy="44" r="41" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+            <circle cx="44" cy="44" r="36" fill="none" stroke="var(--accent)" stroke-width="0.6"/>
+            <path d={`M 44 10 A 34 34 0 0 1 78 44`} fill="none" id={`seal-path-${idx}`}/>
+            <text font-family="JetBrains Mono,monospace" font-size="8" letter-spacing="2" fill="var(--accent)">
+              <textPath href={`#seal-path-${idx}`} startOffset="8">LINNET · SCORE</textPath>
+            </text>
+            <text x="44" y="48" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="22" font-weight="700" fill="var(--ink)">{score.toFixed(0)}</text>
+            <text x="44" y="60" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" letter-spacing="1.5" fill="var(--accent)">RELEVANCE</text>
+          </svg>
+        )}
       </div>
     </div>
 
@@ -314,6 +325,7 @@ const figSide   = idx % 2 === 1 ? 'left' : 'right';
 }
 
 .paper-seal { margin-left: auto; }
+.paper-seal--sm { flex-shrink: 0; }
 
 /* ── Tier 2: WithFig ──────────────────────────────────── */
 .paper-fig-row {
