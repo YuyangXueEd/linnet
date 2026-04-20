@@ -24,7 +24,7 @@ const links = isZh
 
 const homeHref   = isZh ? `${base}/zh/` : `${base}/`;
 const langHref   = isZh ? `${base}/`    : `${base}/zh/`;
-const langLabel  = isZh ? 'EN'          : '中文';
+const langLabel  = isZh ? 'EN'          : '中';
 ---
 
 <nav class="navbar">
@@ -45,9 +45,9 @@ const langLabel  = isZh ? 'EN'          : '中文';
       ))}
     </div>
 
-    <a href={langHref} class="navbar-lang" aria-label="Switch language">{langLabel}</a>
-
-    <button id="theme-toggle" class="navbar-theme-btn" aria-label="Toggle theme">
+    <div class="navbar-controls">
+      <a href={langHref} class="navbar-lang-btn" aria-label="Switch language">{langLabel}</a>
+      <button id="theme-toggle" class="navbar-theme-btn" aria-label="Toggle theme">
       <span class="theme-icon-sun">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M5.5 18.5l1.4-1.4M17.1 6.9l1.4-1.4"/>
@@ -59,6 +59,7 @@ const langLabel  = isZh ? 'EN'          : '中文';
         </svg>
       </span>
     </button>
+    </div>
   </div>
 </nav>
 
@@ -119,7 +120,8 @@ btn?.addEventListener('click', () => {
 }
 
 .navbar-name {
-  font-family: var(--font-display);
+  /* Explicit stack prevents CJK browser substitution when lang="zh-CN" */
+  font-family: "Fraunces", "Charter", Georgia, ui-serif;
   font-size: 1.375rem;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -157,8 +159,16 @@ btn?.addEventListener('click', () => {
   border-bottom-color: var(--accent);
 }
 
-.navbar-theme-btn {
+.navbar-controls {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.navbar-lang-btn,
+.navbar-theme-btn {
   background: transparent;
   border: 1px solid var(--rule);
   border-radius: 999px;
@@ -169,10 +179,23 @@ btn?.addEventListener('click', () => {
   cursor: pointer;
   color: var(--ink-muted);
   flex-shrink: 0;
-  transition: color 0.15s;
+  transition: color 0.15s, border-color 0.15s;
+  text-decoration: none;
 }
 
-.navbar-theme-btn:hover { color: var(--ink); }
+.navbar-lang-btn {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.navbar-lang-btn:hover,
+.navbar-theme-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-muted);
+  text-decoration: none;
+}
 
 /* Show sun in dark mode, moon in light mode */
 .theme-icon-sun { display: none; }
@@ -181,30 +204,8 @@ btn?.addEventListener('click', () => {
 [data-theme="dark"] .theme-icon-sun { display: grid; place-items: center; }
 [data-theme="dark"] .theme-icon-moon { display: none; }
 
-.navbar-lang {
-  margin-left: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  text-decoration: none;
-  padding: 4px 8px;
-  border: 1px solid var(--rule);
-  transition: color 0.15s, border-color 0.15s;
-  flex-shrink: 0;
-}
-
-.navbar-lang:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-  text-decoration: none;
-}
-
 @media (max-width: 480px) {
   .navbar-link { padding: 5px 8px; font-size: 0.65rem; }
   .navbar-name { font-size: 1.1rem; }
-  .navbar-lang { display: none; }
 }
 </style>
