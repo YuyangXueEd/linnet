@@ -23,7 +23,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href={`${base}/logo.png`} />
+  <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
   <meta name="generator" content={Astro.generator} />
   <title>{title} — Linnet</title>
   <meta name="description" content={description} />
@@ -41,7 +41,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </script>
 </head>
 <body>
-  <NavBar />
+  <NavBar lang={lang} />
   <main>
     <slot />
   </main>

@@ -1,23 +1,36 @@
 ---
 interface Props {
   current?: 'daily' | 'weekly' | 'monthly' | 'setup';
+  lang?: string;
 }
 
-const { current } = Astro.props;
+const { current, lang = 'en' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const isZh = lang === 'zh-CN' || lang === 'zh';
 
-const links = [
-  { key: 'daily',   href: `${base}/daily/`,   label: 'Daily' },
-  { key: 'weekly',  href: `${base}/weekly/`,  label: 'Weekly' },
-  { key: 'monthly', href: `${base}/monthly/`, label: 'Monthly' },
-  { key: 'setup',   href: `${base}/setup/`,   label: 'Setup' },
-];
+const links = isZh
+  ? [
+      { key: 'daily',   href: `${base}/daily/`,    label: '日报' },
+      { key: 'weekly',  href: `${base}/weekly/`,   label: '周报' },
+      { key: 'monthly', href: `${base}/monthly/`,  label: '月报' },
+      { key: 'setup',   href: `${base}/setup/zh/`, label: '配置' },
+    ]
+  : [
+      { key: 'daily',   href: `${base}/daily/`,   label: 'Daily' },
+      { key: 'weekly',  href: `${base}/weekly/`,  label: 'Weekly' },
+      { key: 'monthly', href: `${base}/monthly/`, label: 'Monthly' },
+      { key: 'setup',   href: `${base}/setup/`,   label: 'Setup' },
+    ];
+
+const homeHref   = isZh ? `${base}/zh/` : `${base}/`;
+const langHref   = isZh ? `${base}/`    : `${base}/zh/`;
+const langLabel  = isZh ? 'EN'          : '中文';
 ---
 
 <nav class="navbar">
   <div class="navbar-inner page-wrap">
-    <a href={`${base}/`} class="navbar-brand" aria-label="Linnet home">
-      <img src={`${base}/logo.png`} class="navbar-logo" alt="Linnet bird logo" width="28" height="28" />
+    <a href={homeHref} class="navbar-brand" aria-label="Linnet home">
+      <img src={`${base}/favicon.svg`} class="navbar-logo" alt="Linnet bird logo" width="28" height="28" />
       <span class="navbar-name">Linnet</span>
     </a>
 
@@ -31,6 +44,8 @@ const links = [
         </a>
       ))}
     </div>
+
+    <a href={langHref} class="navbar-lang" aria-label="Switch language">{langLabel}</a>
 
     <button id="theme-toggle" class="navbar-theme-btn" aria-label="Toggle theme">
       <span class="theme-icon-sun">
@@ -98,9 +113,9 @@ btn?.addEventListener('click', () => {
   flex-shrink: 0;
 }
 
-/* In dark mode the dark feathers become invisible — invert just the luminance */
+/* Dark mode: make dark SVG paths visible on dark background */
 [data-theme="dark"] .navbar-logo {
-  filter: invert(0.88) hue-rotate(0deg);
+  filter: invert(1);
 }
 
 .navbar-name {
@@ -166,8 +181,30 @@ btn?.addEventListener('click', () => {
 [data-theme="dark"] .theme-icon-sun { display: grid; place-items: center; }
 [data-theme="dark"] .theme-icon-moon { display: none; }
 
+.navbar-lang {
+  margin-left: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-decoration: none;
+  padding: 4px 8px;
+  border: 1px solid var(--rule);
+  transition: color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.navbar-lang:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
 @media (max-width: 480px) {
   .navbar-link { padding: 5px 8px; font-size: 0.65rem; }
   .navbar-name { font-size: 1.1rem; }
+  .navbar-lang { display: none; }
 }
 </style>
