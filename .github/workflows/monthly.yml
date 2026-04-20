@@ -5,6 +5,10 @@ on:
     - cron: '0 0 1 * *'   # 1st of month UTC midnight
   workflow_dispatch:
 
+concurrency:
+  group: digest-push-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   monthly:
     runs-on: ubuntu-latest
@@ -20,6 +24,14 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync latest branch
+        run: git pull --rebase origin ${{ github.ref_name }}
+
       - name: Install dependencies
         run: pip install -r requirements.txt
 
@@ -30,9 +42,7 @@ jobs:
 
       - name: Commit and push monthly report
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/data/monthly/ docs/monthly/
+          git add docs/
           git diff --staged --quiet || git commit -m "monthly: $(date -u +%Y-%m)"
-          git pull --rebase -X ours origin main
+          git pull --rebase -X ours origin ${{ github.ref_name }}
           git push
