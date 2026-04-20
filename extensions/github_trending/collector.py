@@ -221,6 +221,7 @@ def _parse_repo(item: dict) -> dict[str, Any]:
 
 def fetch_github_trending(
     max_repos: int = 15,
+    language: str = "",
     use_scrape: bool = True,
     ai_topics: list[str] | None = None,
     ai_keywords: list[str] | None = None,
@@ -232,7 +233,7 @@ def fetch_github_trending(
     Tries scraping first (has stars-today data), falls back to Search API.
     """
     if use_scrape:
-        repos = fetch_trending_via_scrape(request_timeout=request_timeout)
+        repos = fetch_trending_via_scrape(language=language, request_timeout=request_timeout)
         if repos:
             return repos[:max_repos]
 
