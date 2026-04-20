@@ -48,8 +48,12 @@ try {
 
 const isSectionEnabled = (key: string) => {
   if (!sourcesYaml) return true;
-  const match = sourcesYaml.match(new RegExp(`^${key}:[\\s\\S]*?enabled:\\s*(true|false)`, 'm'));
-  return match ? match[1] === 'true' : true;
+  // Match key: at the start of a line, then look for enabled: true/false within that block
+  const blockRegex = new RegExp(`^${key}:\\s*\\n(?:[ \\t]+.*\\n?)*`, 'm');
+  const blockMatch = sourcesYaml.match(blockRegex);
+  if (!blockMatch) return true;
+  const enabledMatch = blockMatch[0].match(/enabled:\\s*(true|false)/);
+  return enabledMatch ? enabledMatch[1] === 'true' : true;
 };
 
 // Feed sections exclude quote extensions AND disabled extensions AND empty sections
