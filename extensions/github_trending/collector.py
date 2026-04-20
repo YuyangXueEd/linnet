@@ -88,7 +88,12 @@ def _extract_repo_count(article: str, suffix: str) -> int:
 
 
 def _parse_trending_article(article: str) -> dict[str, Any] | None:
-    hrefs = re.findall(r'href="(/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)"', article)
+    # Look for the repo link inside the h2 heading to avoid sponsor or login links
+    h2_match = re.search(r"<h2[^>]*>(.*?)</h2>", article, re.DOTALL | re.IGNORECASE)
+    if not h2_match:
+        return None
+
+    hrefs = re.findall(r'href="(/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)"', h2_match.group(1))
     if not hrefs:
         return None
     full_name = hrefs[0].lstrip("/")
