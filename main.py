@@ -44,7 +44,7 @@ def get_llm_client(sources_cfg: dict) -> OpenAI:
     api_key_env = llm_cfg.get("api_key_env", "OPENROUTER_API_KEY")
     api_key = os.environ.get(api_key_env, "")
     if not api_key:
-        print(f"WARNING: {api_key_env} not set", file=sys.stderr)
+        print(f"WARNING: Environment variable {api_key_env} is not set", file=sys.stderr)
 
     base_url = llm_cfg["base_url"]
     provider = llm_cfg.get("provider", "")

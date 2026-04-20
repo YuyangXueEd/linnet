@@ -43,4 +43,4 @@ def test_update_hashes_persists(tmp_path):
     hashes_file.write_text("{}")
     update_hashes("https://example.com", "new content", str(hashes_file))
     stored = json.loads(hashes_file.read_text())
-    assert "https://example.com" in stored
+    assert "https://example.com" in stored.keys()
