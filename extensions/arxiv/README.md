@@ -38,6 +38,21 @@ render()   — sorts by category rank then score, wraps in FeedSection
 | `api_delay` | `10.0` | Seconds between arXiv API requests |
 | `request_timeout` | `20.0` | Seconds for figure/affiliation HTTP fetches |
 
+## Setup Wizard mapping
+
+The setup wizard keeps the arXiv path intentionally opinionated:
+
+- Step 2 lets the user pick **one primary preset** at a time, not a long multi-select combination
+- `Custom only` is available when the user wants to drive categories and keywords directly
+- if `Custom only` is chosen but `categories` is left blank, the wizard keeps a safe default category set so the fetch step still works
+- the wizard's custom tags map to:
+  - `Custom categories` → `categories`
+  - `Custom keywords` → `must_include`
+  - `Boost keywords` → `boost_keywords`
+- the generated file is still `config/extensions/arxiv.yaml`
+
+This keeps the first-run experience shorter while preserving full manual control in the final YAML.
+
 ## Output item schema
 
 ```python

@@ -95,6 +95,7 @@ const t = {
     ? '生成的 `sources.yaml` 会记录这个环境变量名，部署时也会按这个名字写入 GitHub Actions Secrets。'
     : 'The generated `sources.yaml` stores this env var name, and deploy uses the same name for GitHub Actions secrets.',
   apiKeyLabel:   locale === 'zh' ? 'API key 值' : 'API key value',
+  apiKeyFor:     locale === 'zh' ? '对应 secret' : 'Secret name',
   apiKeyHint:    locale === 'zh'
     ? '只在一键部署时用于写入 GitHub Actions Secret，不会写进 YAML。'
     : 'Used only for one-click deploy to write a GitHub Actions secret. Never written into YAML.',
@@ -154,6 +155,9 @@ const t = {
       <div class="wz-field-row" style="margin-top:18px">
         <div class="wz-field">
           <label for="llm-api-key">{t.apiKeyLabel}</label>
+          <div class="wz-field__hint">
+            {t.apiKeyFor}: <code data-llm-secret-code>OPENROUTER_API_KEY</code>
+          </div>
           <input id="llm-api-key" type="password" data-llm-api-key placeholder="sk-..." autocomplete="off" />
           <div class="wz-field__hint" data-llm-api-key-hint>{t.apiKeyHint}</div>
         </div>

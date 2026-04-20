@@ -20,6 +20,10 @@ const t = {
   repoHint:   locale === 'zh'
     ? '默认会优先选当前这个站点所在的仓库；你也可以手动填写 owner/repo，或直接粘贴 GitHub 仓库 URL。'
     : 'By default this prefers the repository for the current site, but you can still enter owner/repo or paste a GitHub repository URL.',
+  llmSecretLabel: locale === 'zh' ? 'LLM API key' : 'LLM API key',
+  llmSecretHint: locale === 'zh'
+    ? '这和 Step 3 里的 LLM key 是同一个值；如果前面没填，这里也可以补上。'
+    : 'This is the same LLM key from Step 3. If you skipped it earlier, you can fill it here as well.',
   apiNinjas:  locale === 'zh' ? 'API_NINJAS_KEY' : 'API_NINJAS_KEY',
   previewHead: locale === 'zh' ? '将调用的 GitHub API' : 'GitHub API calls',
   deployBtn:  locale === 'zh' ? '部署到 GitHub' : 'Deploy to GitHub',
@@ -46,6 +50,14 @@ const t = {
         <input id="deploy-repo" type="text" data-deploy-repo placeholder="owner/repo" list="deploy-repo-options" />
         <datalist id="deploy-repo-options" data-deploy-repo-options></datalist>
         <div class="wz-field__hint">{t.repoHint}</div>
+      </div>
+    </div>
+
+    <div class="wz-field-row" style="margin-top:8px">
+      <div class="wz-field">
+        <label for="deploy-llm-secret">{t.llmSecretLabel} (<code data-llm-secret-code>OPENROUTER_API_KEY</code>)</label>
+        <input id="deploy-llm-secret" type="password" data-llm-api-key-mirror placeholder="sk-..." autocomplete="off" />
+        <div class="wz-field__hint" data-llm-api-key-step6-hint>{t.llmSecretHint}</div>
       </div>
     </div>
 

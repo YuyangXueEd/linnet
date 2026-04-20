@@ -24,12 +24,14 @@ const t = {
   globalLangDesc: locale === 'zh' ? '应用于摘要、汇总和推送通知。' : 'Applied across summaries, rollups, and sink notifications.',
   langLabel:      locale === 'zh' ? '摘要语言' : 'Summary language',
   globalMeta:     locale === 'zh' ? '全局设置' : 'Global settings',
-  arxivDesc:      locale === 'zh' ? '混合一个或多个预设研究方向，然后添加自定义类别或关键词。' : 'Mix one or more preset research profiles, then add custom categories or keywords.',
-  arxivProfiles:  locale === 'zh' ? '研究方向预设' : 'Research profile presets',
+  arxivDesc:      locale === 'zh' ? '先选一个主研究方向；如果还不够，再在下面补充自定义类别或关键词。' : 'Pick one main research profile first, then add custom categories or keywords if you need more control.',
+  arxivProfiles:  locale === 'zh' ? '主研究方向预设' : 'Primary research profile',
+  customOnly:     locale === 'zh' ? '仅自定义' : 'Custom only',
+  customOnlyDesc: locale === 'zh' ? '不使用预设，完全依赖下面的自定义类别和关键词。' : 'Skip presets and rely only on the custom categories and keywords below.',
   customHead:     locale === 'zh' ? '自定义补充' : 'Custom additions',
   customDesc:     locale === 'zh'
-    ? '如果预设不够，可以直接在下面补充自己的分类和关键词；也可以完全不选预设，只使用这些自定义项。'
-    : 'If presets are not enough, add your own categories and keywords below. You can also skip presets and rely only on the custom inputs.',
+    ? '如果单个预设不够，可以在下面继续补充；选择“仅自定义”时，也可以主要靠这些输入生成配置。若 categories 留空，wizard 会保留一组安全默认分类以保证抓取正常。'
+    : 'If a single preset is not enough, keep refining it below. When you choose Custom only, these inputs drive the config. If you leave categories blank, the wizard keeps a safe default category set so fetching still works.',
   customCats:     locale === 'zh' ? '自定义分类（arXiv 分类，如 cs.LG）' : 'Custom categories (arXiv IDs, e.g. cs.LG)',
   customKws:      locale === 'zh' ? '自定义关键词（must_include）' : 'Custom keywords (must_include)',
   customBoosts:   locale === 'zh' ? '加权关键词（boost_keywords）' : 'Boost keywords',
@@ -38,7 +40,7 @@ const t = {
   addTag:         locale === 'zh' ? '添加' : 'Add',
   noTag:          locale === 'zh' ? '尚未添加' : 'None added',
   noUrl:          locale === 'zh' ? '尚未添加 URL' : 'No URLs added',
-  mergedProfile:  locale === 'zh' ? '预设合并说明' : 'Profile merge note',
+  mergedProfile:  locale === 'zh' ? '生成逻辑说明' : 'Generation note',
 };
 
 const compactFieldTypes = new Set(['text', 'number', 'slider', 'select']);
@@ -88,12 +90,17 @@ const categoryLabels = {
               <div class="wz-field wz-field--rich">
                 <div class="wz-field__label">{t.arxivProfiles}</div>
                 <div class="wz-profile-grid" data-arxiv-profiles>
+                  <label class="wz-profile-card">
+                    <input type="radio" name="arxiv_preset" value="custom_only" />
+                    <span class="wz-profile-card__name">{t.customOnly}</span>
+                    <span class="wz-profile-card__summary">{t.customOnlyDesc}</span>
+                  </label>
                   {Object.entries(ARXIV_PROFILES).map(([key, profile]) => {
                     const pLabel = locale === 'zh' ? profile.labelZh : profile.label;
                     const pSummary = locale === 'zh' ? profile.summaryZh : profile.summary;
                     return (
                       <label class="wz-profile-card">
-                        <input type="checkbox" name="arxiv_preset" value={key} />
+                        <input type="radio" name="arxiv_preset" value={key} checked={key === 'ai_ml'} />
                         <span class="wz-profile-card__name">{pLabel}</span>
                         <span class="wz-profile-card__summary">{pSummary}</span>
                       </label>
@@ -166,8 +173,8 @@ const categoryLabels = {
                 <strong>{t.mergedProfile}</strong>
                 <div class="wz-field__hint">
                   {locale === 'zh'
-                    ? '最终 categories / must_include 会根据你选中的预设和上面添加的自定义项一起生成。'
-                    : 'The final categories and must_include terms are generated from both the selected presets and your custom entries above.'}
+                    ? '最终配置会基于一个主预设加上你的自定义项生成；如果选择“仅自定义”，就主要使用你下面填写的内容；若没填 categories，会回退到安全默认分类。'
+                    : 'The final config combines one primary preset with your custom additions. If you choose Custom only, the wizard mainly uses your manual inputs; when categories are blank, it falls back to a safe default category set.'}
                 </div>
               </div>
             </div>

@@ -8,6 +8,9 @@ const t = {
   desc:           locale === 'zh' ? '在不将密钥写入 YAML 的情况下启用通知。凭据作为 GitHub Actions Secret 单独存储。' : 'Enable notifications without pasting secrets into YAML. Credentials are stored as GitHub Actions secrets separately.',
   slackHead:      'Slack',
   slackEnable:    locale === 'zh' ? '启用 Slack 推送' : 'Enable Slack delivery',
+  slackDesc:      locale === 'zh'
+    ? '把 digest 通过 Incoming Webhook 发到你的 Slack 频道。适合团队频道或你自己的工作区。'
+    : 'Send the digest into a Slack channel through an Incoming Webhook. Good for team channels or your own workspace.',
   webhookLabel:   locale === 'zh' ? 'Slack Webhook URL' : 'Slack Webhook URL',
   webhookHint:    locale === 'zh' ? '将作为 SLACK_WEBHOOK_URL 存入 GitHub Actions Secrets，不写入 YAML。' : 'Stored as SLACK_WEBHOOK_URL GitHub Actions secret — never written to YAML.',
   maxPapers:      locale === 'zh' ? '最多论文数' : 'Max papers',
@@ -15,9 +18,15 @@ const t = {
   maxGithub:      locale === 'zh' ? '最多 GitHub 仓库' : 'Max GitHub repos',
   scHead:         locale === 'zh' ? 'Server酱 (ServerChan)' : 'Server酱 (ServerChan)',
   scEnable:       locale === 'zh' ? '启用 Server酱推送' : 'Enable ServerChan delivery',
+  scDesc:         locale === 'zh'
+    ? '把 digest 通过 Server酱的 SendKey 推到你的个人通知里，常见用法是手机或微信提醒。'
+    : 'Push the digest through ServerChan using a SendKey, which is often used for personal phone or WeChat-style notifications.',
   scKeyLabel:     locale === 'zh' ? 'SendKey' : 'SendKey',
   scHint:         locale === 'zh' ? '将作为 SERVERCHAN_SENDKEY 存入 GitHub Actions Secrets，不写入 YAML。' : 'Stored as SERVERCHAN_SENDKEY GitHub Actions secret — never written to YAML.',
   maxJobs:        locale === 'zh' ? '最多职位数' : 'Max jobs',
+  countsHint:     locale === 'zh'
+    ? '这里只显示你在前面真正启用过的内容来源。'
+    : 'Only sources you enabled earlier are shown here.',
 };
 ---
 
@@ -35,22 +44,24 @@ const t = {
           <span class="wz-toggle__label">{t.slackEnable}</span>
         </label>
       </div>
+      <p class="wz-card__desc">{t.slackDesc}</p>
       <div class="wz-sink-fields" data-sink-slack-fields>
         <div class="wz-field">
           <label for="slack-webhook">{t.webhookLabel}</label>
           <input type="password" id="slack-webhook" data-deploy-secret="SLACK_WEBHOOK_URL" placeholder="https://hooks.slack.com/services/..." autocomplete="off" />
           <div class="wz-field__hint">{t.webhookHint}</div>
         </div>
+        <div class="wz-field__hint">{t.countsHint}</div>
         <div class="wz-field-row">
-          <div class="wz-field">
+          <div class="wz-field" data-sink-limit-for="arxiv">
             <label for="slack-max-papers">{t.maxPapers}</label>
             <input type="number" id="slack-max-papers" data-sink-slack-max-papers min="1" max="20" value="5" />
           </div>
-          <div class="wz-field">
+          <div class="wz-field" data-sink-limit-for="hacker_news">
             <label for="slack-max-hn">{t.maxHn}</label>
             <input type="number" id="slack-max-hn" data-sink-slack-max-hn min="1" max="15" value="3" />
           </div>
-          <div class="wz-field">
+          <div class="wz-field" data-sink-limit-for="github_trending">
             <label for="slack-max-github">{t.maxGithub}</label>
             <input type="number" id="slack-max-github" data-sink-slack-max-github min="1" max="15" value="3" />
           </div>
@@ -67,26 +78,28 @@ const t = {
           <span class="wz-toggle__label">{t.scEnable}</span>
         </label>
       </div>
+      <p class="wz-card__desc">{t.scDesc}</p>
       <div class="wz-sink-fields" data-sink-sc-fields>
         <div class="wz-field">
           <label for="sc-sendkey">{t.scKeyLabel}</label>
           <input type="password" id="sc-sendkey" data-deploy-secret="SERVERCHAN_SENDKEY" placeholder="SCT..." autocomplete="off" />
           <div class="wz-field__hint">{t.scHint}</div>
         </div>
+        <div class="wz-field__hint">{t.countsHint}</div>
         <div class="wz-field-row">
-          <div class="wz-field">
+          <div class="wz-field" data-sink-limit-for="arxiv">
             <label for="sc-max-papers">{t.maxPapers}</label>
             <input type="number" id="sc-max-papers" data-sink-sc-max-papers min="1" max="20" value="5" />
           </div>
-          <div class="wz-field">
+          <div class="wz-field" data-sink-limit-for="hacker_news">
             <label for="sc-max-hn">{t.maxHn}</label>
             <input type="number" id="sc-max-hn" data-sink-sc-max-hn min="1" max="15" value="3" />
           </div>
-          <div class="wz-field">
+          <div class="wz-field" data-sink-limit-for="github_trending">
             <label for="sc-max-github">{t.maxGithub}</label>
             <input type="number" id="sc-max-github" data-sink-sc-max-github min="1" max="15" value="3" />
           </div>
-          <div class="wz-field">
+          <div class="wz-field" data-sink-limit-for="postdoc_jobs">
             <label for="sc-max-jobs">{t.maxJobs}</label>
             <input type="number" id="sc-max-jobs" data-sink-sc-max-jobs min="1" max="10" value="3" />
           </div>
