@@ -1,5 +1,5 @@
-import enSource from '../setup-wizard/legacy/index.en.html?raw';
-import zhSource from '../setup-wizard/legacy/index.zh.html?raw';
+import enSource from '../setup-wizard/wizard/index.en.html?raw';
+import zhSource from '../setup-wizard/wizard/index.zh.html?raw';
 
 export type SetupWizardLocale = 'en' | 'zh';
 
