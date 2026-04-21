@@ -101,7 +101,7 @@ def enrich_paper_with_figure(
     if not paper_id:
         return paper
 
-    headers = {"User-Agent": "Linnet/1.0"}
+    headers = {"User-Agent": "Linnet/1.0 (yuyang.xue@ed.ac.uk)"}
 
     html_url = f"https://arxiv.org/html/{paper_id}"
     try:
@@ -150,7 +150,8 @@ def fetch_papers(
         return []
 
     query = " OR ".join(f"cat:{cat}" for cat in categories)
-    client = arxiv.Client(num_retries=api_retries, delay_seconds=api_delay)
+    _http = httpx.Client(headers={"User-Agent": "Linnet/1.0 (yuyang.xue@ed.ac.uk)"})
+    client = arxiv.Client(num_retries=api_retries, delay_seconds=api_delay, httpx_client=_http)
     search = arxiv.Search(
         query=query,
         max_results=max_results,
