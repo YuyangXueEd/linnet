@@ -1,7 +1,7 @@
 import { EXTENSION_LIST, REGISTRY, type SetupField } from '@/lib/registry';
 import { ARXIV_PROFILES } from '@/lib/arxivProfiles';
 import { createInitialState, DEFAULT_TOP_N, type WizardState } from './wizardState';
-import { buildGitHubCallPreview, deployGeneratedConfig, parseRepoInput, triggerWorkflowDispatch } from './githubDeploy.js';
+import { buildGitHubCallPreview, deployGeneratedConfig, enableWorkflow, parseRepoInput, setRepositoryActionsEnabled, triggerWorkflowDispatch } from './githubDeploy.js';
 import {
   listAccessibleRepositories,
   getCurrentUser,
@@ -104,6 +104,8 @@ type SetupMode = 'connect' | 'manual';
 
 const GITHUB_AUTH_SESSION_KEY = 'linnet-github-auth-v1';
 const WIZARD_SETUP_MODE_KEY = 'linnet-setup-mode-v1';
+const WIZARD_AUTO_ENABLE_ACTIONS_KEY = 'linnet-auto-enable-actions-v1';
+const AUTO_ENABLE_WORKFLOW_IDS = ['daily.yml', 'weekly.yml', 'monthly.yml', 'pages.yml'] as const;
 
 const DEFAULT_POSTDOC_TERMS = ['machine learning', 'computer vision', 'medical imaging'];
 const DEFAULT_POSTDOC_EXCLUDE = ['chemistry', 'economics', 'social science', 'humanities'];
@@ -742,6 +744,7 @@ export function initWizard(): void {
   const pillEl   = qs('[data-step-pill]',   shell);
   const blurbEl  = qs('[data-step-blurb]',  shell);
   const fillEl   = qs<HTMLElement>('[data-progress-fill]', shell);
+  const progressAnchorEl = qs<HTMLElement>('[data-progress-anchor]', shell);
   const orderList = qs<HTMLElement>('[data-order-list]', shell);
   const llmProviderSelect = qs<HTMLSelectElement>('[data-llm-provider]', shell);
   const llmBaseUrlInput = qs<HTMLInputElement>('[data-llm-base-url]', shell);
@@ -755,6 +758,7 @@ export function initWizard(): void {
   const llmModelOptionsEl = qs<HTMLDataListElement>('[data-llm-model-options]', shell);
   const llmProviderNoteEl = qs<HTMLElement>('[data-llm-provider-note]', shell);
   const deployRepoInput = qs<HTMLInputElement>('[data-deploy-repo]', shell);
+  const autoEnableActionsCheckbox = qs<HTMLInputElement>('[data-auto-enable-actions]', shell);
   const deployTokenInput = qs<HTMLInputElement>('[data-deploy-token]', shell);
   const deploySubmitBtn = qs<HTMLButtonElement>('[data-deploy-submit]', shell);
   const deployPreviewEl = qs<HTMLElement>('[data-deploy-preview]', shell);
@@ -778,10 +782,24 @@ export function initWizard(): void {
   let latestOutputs: OutputBlock[] = [];
   let setupMode: SetupMode = loadJson<SetupMode>(WIZARD_SETUP_MODE_KEY) ?? 'connect';
   let githubSession = loadJson<GitHubSession>(GITHUB_AUTH_SESSION_KEY);
+  if (autoEnableActionsCheckbox) {
+    autoEnableActionsCheckbox.checked = loadJson<boolean>(WIZARD_AUTO_ENABLE_ACTIONS_KEY) ?? false;
+  }
 
   // ── Navigation ──────────────────────────────────────────────
 
-  function showStep(n: number): void {
+  function scrollToProgressAnchor(): void {
+    if (!progressAnchorEl) return;
+    requestAnimationFrame(() => {
+      progressAnchorEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    });
+  }
+
+  function showStep(n: number, options: { scroll?: boolean } = {}): void {
+    const { scroll = false } = options;
     qsa<HTMLElement>('.wz-step', shell).forEach(el => {
       const step = Number(el.dataset['step']);
       el.setAttribute('aria-hidden', step === n ? 'false' : 'true');
@@ -798,6 +816,7 @@ export function initWizard(): void {
     if (nextBtn) nextBtn.textContent = n === TOTAL_STEPS
       ? (locale === 'zh' ? '重新开始' : 'Start over')
       : (locale === 'zh' ? '下一步' : 'Next');
+    if (scroll) scrollToProgressAnchor();
   }
 
   function setDeployStatus(kind: 'info' | 'warn' | 'success', message: string): void {
@@ -876,6 +895,10 @@ export function initWizard(): void {
     return llmApiKeyInput?.value.trim()
       || llmApiKeyMirrorInput?.value.trim()
       || '';
+  }
+
+  function shouldAutoEnableActions(): boolean {
+    return autoEnableActionsCheckbox?.checked ?? false;
   }
 
   function syncLlmApiKeyInputs(source?: HTMLInputElement | null): void {
@@ -1136,6 +1159,8 @@ export function initWizard(): void {
       repo: repo.repo,
       files: latestOutputs.map(({ path, body }) => ({ path, body })),
       secrets: buildDeploySecrets().map(({ name, value }) => ({ name, value })),
+      autoEnableActions: shouldAutoEnableActions(),
+      workflowsToEnable: [...AUTO_ENABLE_WORKFLOW_IDS],
     });
     deployPreviewEl.textContent = preview.join('\n');
   }
@@ -1169,7 +1194,7 @@ export function initWizard(): void {
   nextBtn?.addEventListener('click', () => {
     if (state.currentStep === TOTAL_STEPS) {
       state.currentStep = 1;
-      showStep(1);
+      showStep(1, { scroll: true });
       return;
     }
     if (state.currentStep === TOTAL_STEPS - 1) {
@@ -1179,12 +1204,12 @@ export function initWizard(): void {
     state.currentStep = Math.min(state.currentStep + 1, TOTAL_STEPS);
     if (state.currentStep === 2) syncConfigPanels();
     if (state.currentStep === 3) syncScheduleRows();
-    showStep(state.currentStep);
+    showStep(state.currentStep, { scroll: true });
   });
 
   backBtn?.addEventListener('click', () => {
     state.currentStep = Math.max(state.currentStep - 1, 1);
-    showStep(state.currentStep);
+    showStep(state.currentStep, { scroll: true });
   });
 
   qsa<HTMLElement>('[data-step-btn]', shell).forEach(btn => {
@@ -1192,7 +1217,7 @@ export function initWizard(): void {
       const target = Number(btn.dataset['stepBtn']);
       if (target < state.currentStep) {
         state.currentStep = target;
-        showStep(target);
+        showStep(target, { scroll: true });
       }
     });
   });
@@ -1572,6 +1597,10 @@ export function initWizard(): void {
   qsa<HTMLInputElement>('[data-deploy-secret]', shell).forEach((input) => {
     input.addEventListener('input', renderDeployPreview);
   });
+  autoEnableActionsCheckbox?.addEventListener('change', () => {
+    saveJson(WIZARD_AUTO_ENABLE_ACTIONS_KEY, shouldAutoEnableActions());
+    renderDeployPreview();
+  });
 
   deploySubmitBtn?.addEventListener('click', async () => {
     readState(state);
@@ -1627,21 +1656,62 @@ export function initWizard(): void {
         secrets,
       });
 
-      if (deploySuccessEl) deploySuccessEl.hidden = false;
-      setDeployStatus(
-        'success',
-        locale === 'zh'
-          ? `已写入 ${result.committedPaths.length} 个文件，并更新 ${result.writtenSecrets.length} 个 secret。已为您触发 Daily Feed 工作流测试（生效通常需要 3-5 分钟）。`
-          : `Wrote ${result.committedPaths.length} files and updated ${result.writtenSecrets.length} secrets. A Daily Feed workflow run has been triggered for you (may take 3-5 mins to take effect).`,
-      );
+      const autoEnableRequested = shouldAutoEnableActions();
+      const autoEnableFailures: string[] = [];
+      if (autoEnableRequested) {
+        try {
+          await setRepositoryActionsEnabled(token, repo.owner, repo.repo);
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          autoEnableFailures.push(locale === 'zh' ? `仓库级 Actions（${message}）` : `repository Actions (${message})`);
+        }
 
-      // Trigger daily feed test
+        for (const workflowId of AUTO_ENABLE_WORKFLOW_IDS) {
+          try {
+            await enableWorkflow(token, repo.owner, repo.repo, workflowId);
+          } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            autoEnableFailures.push(`${workflowId} (${message})`);
+          }
+        }
+      }
+
+      let triggerSucceeded = false;
+      let triggerErrorMessage = '';
       try {
         await triggerWorkflowDispatch(token, repo.owner, repo.repo, 'daily.yml', result.defaultBranch);
+        triggerSucceeded = true;
       } catch (triggerError) {
         console.warn('Failed to trigger workflow dispatch:', triggerError);
-        // We don't fail the whole deploy if just the trigger fails, as the files are already written.
+        triggerErrorMessage = triggerError instanceof Error ? triggerError.message : String(triggerError);
       }
+
+      if (deploySuccessEl) deploySuccessEl.hidden = false;
+      const autoEnableFailed = autoEnableFailures.length > 0;
+      const statusKind = triggerSucceeded && !autoEnableFailed ? 'success' : 'warn';
+      let statusMessage = '';
+      if (triggerSucceeded && !autoEnableRequested) {
+        statusMessage = locale === 'zh'
+          ? `已写入 ${result.committedPaths.length} 个文件，并更新 ${result.writtenSecrets.length} 个 secret。已为您触发 Daily Digest 工作流测试（生效通常需要 3-5 分钟）。`
+          : `Wrote ${result.committedPaths.length} files and updated ${result.writtenSecrets.length} secrets. A Daily Digest workflow run has been triggered for you (may take 3-5 mins to take effect).`;
+      } else if (triggerSucceeded && !autoEnableFailed) {
+        statusMessage = locale === 'zh'
+          ? `已写入 ${result.committedPaths.length} 个文件，并更新 ${result.writtenSecrets.length} 个 secret；同时自动启用了 GitHub Actions 和相关 workflows，并已触发 Daily Digest（生效通常需要 3-5 分钟）。`
+          : `Wrote ${result.committedPaths.length} files and updated ${result.writtenSecrets.length} secrets; GitHub Actions and the related workflows were auto-enabled, and Daily Digest has been triggered (may take 3-5 mins to take effect).`;
+      } else if (triggerSucceeded) {
+        statusMessage = locale === 'zh'
+          ? `已写入 ${result.committedPaths.length} 个文件，并更新 ${result.writtenSecrets.length} 个 secret；Daily Digest 也已经触发，但自动启用部分未完全成功：${autoEnableFailures.join('；')}。请检查 PAT 是否包含 Administration: write，或确认仓库 / 组织策略没有阻止 Actions。`
+          : `Wrote ${result.committedPaths.length} files and updated ${result.writtenSecrets.length} secrets, and Daily Digest has been triggered, but auto-enable did not fully succeed: ${autoEnableFailures.join('; ')}. Check whether the PAT includes Administration: write or whether repo / org policy is blocking Actions.`;
+      } else if (autoEnableRequested) {
+        statusMessage = locale === 'zh'
+          ? `已写入 ${result.committedPaths.length} 个文件，并更新 ${result.writtenSecrets.length} 个 secret，但未能自动触发 Daily Digest。自动启用结果：${autoEnableFailures.length ? autoEnableFailures.join('；') : 'Actions 已打开，但 dispatch 仍然失败'}。请检查 PAT 权限（尤其是 Administration: write）、仓库 / 组织策略，然后在 Actions 页面手动运行 Daily Digest。${triggerErrorMessage ? ` 触发报错：${triggerErrorMessage}` : ''}`
+          : `Wrote ${result.committedPaths.length} files and updated ${result.writtenSecrets.length} secrets, but could not auto-trigger Daily Digest. Auto-enable result: ${autoEnableFailures.length ? autoEnableFailures.join('; ') : 'Actions were enabled, but dispatch still failed'}. Check the PAT permissions (especially Administration: write), repo / org policy, then run Daily Digest manually from the Actions page.${triggerErrorMessage ? ` Trigger error: ${triggerErrorMessage}` : ''}`;
+      } else {
+        statusMessage = locale === 'zh'
+          ? `已写入 ${result.committedPaths.length} 个文件，并更新 ${result.writtenSecrets.length} 个 secret，但未能自动触发 Daily Digest。请先在目标仓库里启用 GitHub Actions / workflows（fork 需要先在 Actions 页点击 “I understand my workflows, go ahead and enable them”），然后手动运行 Daily Digest。${triggerErrorMessage ? ` 触发报错：${triggerErrorMessage}` : ''}`
+          : `Wrote ${result.committedPaths.length} files and updated ${result.writtenSecrets.length} secrets, but could not auto-trigger Daily Digest. Enable GitHub Actions / workflows in the target repository first (forks need the Actions-tab confirmation), then run Daily Digest manually.${triggerErrorMessage ? ` Trigger error: ${triggerErrorMessage}` : ''}`;
+      }
+      setDeployStatus(statusKind, statusMessage);
 
       if (connectNextStepsEl) connectNextStepsEl.hidden = false;
     } catch (error) {

@@ -34,7 +34,14 @@ export function parseRepoInput(input) {
 }
 
 /**
- * @param {{ owner: string, repo: string, files: DeployFile[], secrets: DeploySecret[] }} plan
+ * @param {{
+ *   owner: string,
+ *   repo: string,
+ *   files: DeployFile[],
+ *   secrets: DeploySecret[],
+ *   autoEnableActions?: boolean,
+ *   workflowsToEnable?: string[]
+ * }} plan
  * @returns {string[]}
  */
 export function buildGitHubCallPreview(plan) {
@@ -51,6 +58,13 @@ export function buildGitHubCallPreview(plan) {
     lines.push(`GET /repos/${plan.owner}/${plan.repo}/actions/secrets/public-key`);
     for (const secret of plan.secrets) {
       lines.push(`PUT /repos/${plan.owner}/${plan.repo}/actions/secrets/${secret.name}`);
+    }
+  }
+
+  if (plan.autoEnableActions) {
+    lines.push(`PUT /repos/${plan.owner}/${plan.repo}/actions/permissions`);
+    for (const workflowId of plan.workflowsToEnable ?? []) {
+      lines.push(`PUT /repos/${plan.owner}/${plan.repo}/actions/workflows/${workflowId}/enable`);
     }
   }
 
@@ -259,6 +273,42 @@ export async function deployGeneratedConfig(plan) {
     committedPaths,
     writtenSecrets,
   };
+}
+
+/**
+ * @param {string} token
+ * @param {string} owner
+ * @param {string} repo
+ * @param {typeof fetch} [fetchImpl]
+ */
+export async function setRepositoryActionsEnabled(token, owner, repo, fetchImpl = fetch) {
+  return githubRequest(
+    token,
+    `/repos/${owner}/${repo}/actions/permissions`,
+    {
+      method: 'PUT',
+      body: JSON.stringify({ enabled: true }),
+    },
+    fetchImpl,
+  );
+}
+
+/**
+ * @param {string} token
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} workflowId
+ * @param {typeof fetch} [fetchImpl]
+ */
+export async function enableWorkflow(token, owner, repo, workflowId, fetchImpl = fetch) {
+  return githubRequest(
+    token,
+    `/repos/${owner}/${repo}/actions/workflows/${encodeURIComponent(workflowId)}/enable`,
+    {
+      method: 'PUT',
+    },
+    fetchImpl,
+  );
 }
 
 /**

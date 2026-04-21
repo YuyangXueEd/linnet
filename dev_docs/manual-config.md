@@ -21,6 +21,7 @@ The [Setup Wizard](https://yuyangxueed.github.io/Linnet/setup/) can write config
 | Permission | Level |
 |---|---|
 | Actions | Read and write |
+| Administration | Read and write only if you want Step 6 to auto-enable Actions / workflows |
 | Contents | Read and write |
 | Metadata | Read-only (auto-selected) |
 | Secrets | Read and write |
@@ -28,6 +29,8 @@ The [Setup Wizard](https://yuyangxueed.github.io/Linnet/setup/) can write config
 Set **Repository access** to **Only select repositories** and pick your fork — do not choose "All repositories".
 
 **Classic PAT** — check `repo` (all sub-scopes) and `workflow`.
+
+If you turn on the Step 6 `Auto-enable GitHub Actions and workflows` switch in the Setup Wizard, the PAT also needs `Administration: Read and write`. If you skip that switch, you will enable Actions manually below.
 
 > If the deploy step fails with `Resource not accessible by personal access token`, the token is missing one of the permissions above — regenerate it with the correct scopes.
 
@@ -96,6 +99,8 @@ change `language: "en"` to `"zh"`, `"fr"`, `"de"`, `"ja"`, `"ko"`, `"es"`, or an
 ---
 
 ## Step 5 — Run it for the first time
+
+If this is a fork, or if GitHub Actions / workflows are currently disabled, enable them manually in the repo first unless you already used the Setup Wizard’s Step 6 auto-enable option successfully.
 
 You need to manually trigger **two** workflows in order:
 

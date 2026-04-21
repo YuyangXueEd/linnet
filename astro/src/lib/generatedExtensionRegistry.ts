@@ -137,7 +137,8 @@ export const GENERATED_EXTENSION_REGISTRY = {
         "required": true,
         "placeholder": "Edinburgh",
         "hint": "City name passed to the weather API.",
-        "hintZh": "传给天气 API 的城市名称。"
+        "hintZh": "传给天气 API 的城市名称。",
+        "autocomplete": "geocode"
       },
       {
         "key": "timezone",

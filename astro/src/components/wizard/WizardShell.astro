@@ -56,8 +56,8 @@ const connectButtonLabel = locale === 'zh' ? '连接' : 'Connect';
 const disconnectButtonLabel = locale === 'zh' ? '断开连接' : 'Disconnect';
 const patPlaceholder = locale === 'zh' ? '粘贴 Personal Access Token…' : 'Paste Personal Access Token…';
 const patHint = locale === 'zh'
-  ? '需要 contents:write、metadata:read、actions:write、secrets:write 权限的 Fine-grained PAT 或含 repo + workflow 的 Classic PAT。'
-  : 'Fine-grained PAT with contents:write, metadata:read, actions:write, secrets:write — or a classic PAT with repo + workflow.';
+  ? '需要 contents:write、metadata:read、actions:write、secrets:write 权限的 Fine-grained PAT；如果想让 Step 6 自动启用 Actions / workflows，再额外加 administration:write。Classic PAT 继续使用 repo + workflow。'
+  : 'Fine-grained PAT with contents:write, metadata:read, actions:write, and secrets:write. Add administration:write too if you want Step 6 to auto-enable Actions / workflows. Classic PAT can still use repo + workflow.';
 const patCreateLink = 'https://github.com/settings/personal-access-tokens/new';
 const patCreateLabel = locale === 'zh' ? '在 GitHub 创建 Token →' : 'Create token on GitHub →';
 const patInstructionLabel = locale === 'zh' ? '填写说明' : 'Instructions';
@@ -152,7 +152,7 @@ const connectSummaryIdle = locale === 'zh'
   </section>
 
   <!-- ── Progress bar ────────────────────────────────────────── -->
-  <nav class="wz-progress" aria-label={locale === 'zh' ? '向导进度' : 'Wizard progress'}>
+  <nav class="wz-progress" data-progress-anchor aria-label={locale === 'zh' ? '向导进度' : 'Wizard progress'}>
     <div class="wz-progress__bar">
       <div class="wz-progress__fill" data-progress-fill style="width:0%"></div>
     </div>
@@ -225,6 +225,7 @@ const connectSummaryIdle = locale === 'zh'
                 <li><code>Metadata</code> → <strong>Read</strong>（强制自动勾选）</li>
                 <li><code>Actions</code> → <strong>Read and write</strong></li>
                 <li><code>Secrets</code> → <strong>Read and write</strong></li>
+                <li><code>Administration</code> → <strong>Read and write</strong>（仅在你想让 Step 6 自动启用 Actions / workflows 时需要）</li>
               </ul>
             </li>
             <li>点击 <strong>Generate token</strong>，立即复制（仅显示一次）</li>
@@ -254,6 +255,7 @@ const connectSummaryIdle = locale === 'zh'
                 <li><code>Metadata</code> → <strong>Read</strong> (auto-selected, required)</li>
                 <li><code>Actions</code> → <strong>Read and write</strong></li>
                 <li><code>Secrets</code> → <strong>Read and write</strong></li>
+                <li><code>Administration</code> → <strong>Read and write</strong> (only if you want Step 6 to auto-enable Actions / workflows)</li>
               </ul>
             </li>
             <li>Click <strong>Generate token</strong> and copy it immediately — it is shown only once</li>
@@ -846,6 +848,30 @@ const connectSummaryIdle = locale === 'zh'
   color: var(--ink-muted);
   line-height: 1.6;
   font-style: italic;
+}
+
+.wz-switch {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  cursor: pointer;
+}
+
+.wz-switch input[type="checkbox"] {
+  margin: 2px 0 0;
+  inline-size: 18px;
+  block-size: 18px;
+  accent-color: var(--accent);
+  flex: 0 0 auto;
+}
+
+.wz-switch > span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 /* ── arXiv profile grid ─────────────────────────────────────── */

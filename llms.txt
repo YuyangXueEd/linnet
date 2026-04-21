@@ -103,7 +103,7 @@ Important separation:
 ### Publishing and site
 
 - `publishers/data_publisher.py` — writes daily/weekly/monthly JSON payloads
-- `docs/data/` — generated JSON data store
+- `docs/data/` — generated JSON data store; ignored locally by default, but committed by digest workflows when publishing
 - `astro/src/pages/` — route pages
 - `astro/src/components/` — public UI components
 - `astro/src/components/wizard/` — live setup wizard UI and controller

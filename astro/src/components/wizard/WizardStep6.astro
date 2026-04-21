@@ -11,9 +11,10 @@ const t = {
   manual1:    locale === 'zh' ? '将每个生成的代码块复制到你 fork 中对应的文件。' : 'Copy each generated block into the matching file in your fork.',
   manual3sc:  locale === 'zh' ? '如果启用了 Server酱，同时添加 SERVERCHAN_SENDKEY。' : 'If ServerChan is enabled, add SERVERCHAN_SENDKEY too.',
   manual3sl:  locale === 'zh' ? '如果启用了 Slack，同时添加 SLACK_WEBHOOK_URL。' : 'If Slack is enabled, add SLACK_WEBHOOK_URL too.',
-  manual4:    locale === 'zh' ? '前往 Actions，运行一次 Daily Digest 以确认配置正常。' : 'Go to Actions and run Daily Digest once to confirm the setup.',
+  manual4:    locale === 'zh' ? '先在目标仓库中启用 GitHub Actions / workflows。fork 仓库需要先进入 Actions 标签页，点击 “I understand my workflows, go ahead and enable them”。' : 'Enable GitHub Actions / workflows in the target repository first. For forks, open the Actions tab and click "I understand my workflows, go ahead and enable them".',
+  manual5:    locale === 'zh' ? '然后前往 Actions，运行一次 Daily Digest 以确认配置正常。' : 'Then go to Actions and run Daily Digest once to confirm the setup.',
   connectHead: locale === 'zh' ? 'Connect GitHub 一键部署' : 'One-click deploy with Connect GitHub',
-  connectDesc: locale === 'zh' ? '如果你在开始前已经连接 GitHub，这里会直接把生成的配置文件和所需 secrets 写入你自己的仓库。' : 'If you connected GitHub before starting, this section writes the generated config files and required secrets straight into your own repository.',
+  connectDesc: locale === 'zh' ? '如果你在开始前已经连接 GitHub，这里会直接把生成的配置文件和所需 secrets 写入你自己的仓库。你也可以额外开启下面的自动启用开关，让 Linnet 帮你打开 Actions 并重新启用相关 workflows。' : 'If you connected GitHub before starting, this section writes the generated config files and required secrets straight into your own repository. You can also opt into the switch below if you want Linnet to turn Actions back on and re-enable the related workflows for you.',
   connectNeed: locale === 'zh' ? '当前还没有 GitHub 连接。请回到页面顶部，先选择 “Connect GitHub 一键部署” 并完成授权。' : 'GitHub is not connected yet. Go back to the top of the page, choose the Connect GitHub path, and finish authorization first.',
   connectedUsing: locale === 'zh' ? '当前正在使用已连接的 GitHub 会话。' : 'This deploy uses your connected GitHub session.',
   repoLabel:  locale === 'zh' ? '目标仓库' : 'Target repository',
@@ -25,6 +26,23 @@ const t = {
     ? '这和 Step 3 里的 LLM key 是同一个值；如果前面没填，这里也可以补上。'
     : 'This is the same LLM key from Step 3. If you skipped it earlier, you can fill it here as well.',
   apiNinjas:  locale === 'zh' ? 'API_NINJAS_KEY' : 'API_NINJAS_KEY',
+  enablerHead: locale === 'zh' ? '先确认这个“开关”已经打开' : 'Check the enabler first',
+  enablerBody: locale === 'zh'
+    ? '真正的 enabler 是目标仓库里的 GitHub Actions / workflow 开关。Linnet 始终可以写入配置和 secrets；是否要顺手帮你打开 Actions，取决于你是否开启下面的自动启用选项。'
+    : 'The real enabler is GitHub Actions / workflow access in the target repository. Linnet can always write config files and secrets; whether it also turns Actions on for you depends on the auto-enable option below.',
+  enablerFork: locale === 'zh'
+    ? '如果你不使用自动启用开关，fork 仓库仍然需要先打开 Actions 标签页，点击 “I understand my workflows, go ahead and enable them”。'
+    : 'If you do not use the auto-enable switch, forks still need the Actions-tab confirmation first.',
+  enablerManual: locale === 'zh'
+    ? '如果你打开自动启用开关，PAT 还需要额外拥有 Administration: write；否则请继续手动启用 Daily / Weekly / Monthly / Pages workflow。'
+    : 'If you turn on auto-enable, the PAT also needs Administration: write; otherwise keep the manual path for Daily / Weekly / Monthly / Pages.',
+  autoEnableLabel: locale === 'zh' ? '自动启用 GitHub Actions 和 workflows' : 'Auto-enable GitHub Actions and workflows',
+  autoEnableHint: locale === 'zh'
+    ? '会尝试打开仓库级 Actions，并重新启用 daily.yml、weekly.yml、monthly.yml、pages.yml。需要 PAT 额外拥有 Administration: write。'
+    : 'This attempts to turn on repository Actions and re-enable daily.yml, weekly.yml, monthly.yml, and pages.yml. It requires Administration: write on the PAT.',
+  autoEnableNote: locale === 'zh'
+    ? '关闭时：仍然会写入文件和 secrets，但你需要自己到 Actions 页面里启用。'
+    : 'When off: Linnet still writes files and secrets, but you enable the repo/workflows yourself from the Actions page.',
   previewHead: locale === 'zh' ? '将调用的 GitHub API' : 'GitHub API calls',
   deployBtn:  locale === 'zh' ? '部署到 GitHub' : 'Deploy to GitHub',
   revoke:     locale === 'zh' ? '部署完成后，这个连接 token 仍会保留在当前浏览器会话中；如果是共享设备，记得断开连接。也可以现在直接去 GitHub 撤销它：' : 'After deploy, the connected token stays in this browser session only. Disconnect it if you are on a shared device. You can also revoke it on GitHub now:',
@@ -44,6 +62,20 @@ const t = {
       <strong>{locale === 'zh' ? '已连接 GitHub' : 'GitHub connected'}</strong>
       <div>{t.connectedUsing}</div>
     </div>
+    <div class="wz-notice wz-notice--warn" style="margin-top:16px">
+      <strong>{t.enablerHead}</strong>
+      <div>{t.enablerBody}</div>
+      <div>{t.enablerFork}</div>
+      <div>{t.enablerManual}</div>
+    </div>
+    <label class="wz-switch" style="margin-top:16px">
+      <input type="checkbox" data-auto-enable-actions />
+      <span>
+        <strong>{t.autoEnableLabel}</strong>
+        <div class="wz-field__hint">{t.autoEnableHint}</div>
+        <div class="wz-field__hint">{t.autoEnableNote}</div>
+      </span>
+    </label>
     <div class="wz-field-row" style="margin-top:16px">
       <div class="wz-field">
         <label for="deploy-repo">{t.repoLabel}</label>
@@ -111,7 +143,9 @@ const t = {
     <strong>{t.nextHead}</strong>
     <ol class="wz-checklist">
       <li>{locale === 'zh' ? '检查仓库里的 config 文件和 GitHub Actions secrets 是否都已经写入。' : 'Check that the config files and GitHub Actions secrets were written to the repository.'}</li>
-      <li>{locale === 'zh' ? '前往 Actions，运行一次 Daily Digest 以确认配置正常。' : 'Go to Actions and run Daily Digest once to confirm the setup.'}</li>
+      <li>{locale === 'zh' ? '如果你没有打开上面的自动启用开关，请自己在目标仓库里启用 GitHub Actions / workflows；fork 先在 Actions 标签页里点击确认。' : 'If you left the auto-enable switch off, enable GitHub Actions / workflows yourself in the target repository; forks need the Actions-tab confirmation first.'}</li>
+      <li>{locale === 'zh' ? '如果你打开了自动启用开关但仍然收到警告，请检查 PAT 是否包含 Administration: write，或确认仓库 / 组织策略没有阻止 Actions。' : 'If you turned auto-enable on but still got a warning, check whether the PAT includes Administration: write or whether repo / org policy is blocking Actions.'}</li>
+      <li>{locale === 'zh' ? '如果自动触发没有成功，再前往 Actions 手动运行一次 Daily Digest 以确认配置正常。' : 'If the auto-trigger did not start successfully, go to Actions and run Daily Digest manually to confirm the setup.'}</li>
       <li>{locale === 'zh' ? '如果在共享设备上操作，部署完成后请断开 GitHub 连接。' : 'If you are on a shared device, disconnect GitHub after the deploy finishes.'}</li>
     </ol>
   </div>
@@ -128,6 +162,7 @@ const t = {
       <li>{t.manual3sc}</li>
       <li>{t.manual3sl}</li>
       <li>{t.manual4}</li>
+      <li>{t.manual5}</li>
     </ol>
   </div>
 

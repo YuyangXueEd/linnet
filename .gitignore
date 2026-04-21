@@ -24,7 +24,7 @@ docs/daily/
 docs/weekly/
 docs/monthly/
 
-# Generated feed data — forks start fresh; data accumulates from first CI run
+# Generated feed data — ignored locally by default; CI force-adds published snapshots
 docs/data/daily/*.json
 docs/data/weekly/*.json
 docs/data/monthly/*.json

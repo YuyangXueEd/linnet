@@ -55,6 +55,8 @@ The setup wizard also exposes language-specific tagline extensions:
 
 Everything runs on GitHub Actions and publishes to GitHub Pages as your own site.
 
+Generated JSON under `docs/data/` stays ignored in normal local worktrees to avoid noisy diffs, but the scheduled digest workflows force-add and commit published snapshots so your daily, weekly, and monthly archives persist on GitHub Pages.
+
 ---
 
 ## Fastest path to your own digest
@@ -103,6 +105,7 @@ For the `Connect GitHub` one-click deploy path, you need a GitHub Personal Acces
 | Permission | Level |
 |---|---|
 | Actions | Read and write |
+| Administration | Read and write if you want Step 6 to auto-enable Actions and workflows |
 | Contents | Read and write |
 | Metadata | Read-only (auto-selected) |
 | Secrets | Read and write |
@@ -111,11 +114,15 @@ Set **Repository access** to **Only select repositories** and pick your fork —
 
 **Classic PAT** — check `repo` (all sub-scopes) and `workflow`.
 
+Turn on the Step 6 `Auto-enable GitHub Actions and workflows` switch if you want the wizard to re-enable the repo and the `daily.yml`, `weekly.yml`, `monthly.yml`, and `pages.yml` workflows for you. If you leave it off, enable them manually from the `Actions` tab.
+
 The wizard's **Instructions** link walks through every field step by step.
 
 > If the deploy step fails with `Resource not accessible by personal access token`, the token is missing one of the permissions above — regenerate it with the correct scopes.
 
 ### 5. Run the first workflow
+
+If you did not use the Step 6 auto-enable option, or if it warned about PAT/repo policy, enable GitHub Actions / workflows in the target repo first.
 
 Open **Actions → Daily Digest → Run workflow**.
 
