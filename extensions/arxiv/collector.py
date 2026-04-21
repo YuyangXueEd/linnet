@@ -154,8 +154,8 @@ def fetch_papers(
         return []
 
     query = " OR ".join(f"cat:{cat}" for cat in categories)
-    _http = httpx.Client(headers={"User-Agent": _ARXIV_USER_AGENT})
-    client = arxiv.Client(num_retries=api_retries, delay_seconds=api_delay, httpx_client=_http)
+    client = arxiv.Client(num_retries=api_retries, delay_seconds=api_delay)
+    client._session.headers.update({"User-Agent": _ARXIV_USER_AGENT})
     search = arxiv.Search(
         query=query,
         max_results=max_results,
