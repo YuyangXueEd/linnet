@@ -96,7 +96,24 @@ It handles:
 - generated files for your own fork
 - optional `Connect GitHub` one-click deploy in Step 6
 
-If you want the browser-side `Connect GitHub` path, configure `PUBLIC_GITHUB_APP_CLIENT_ID` and `PUBLIC_GITHUB_APP_CLIENT_SECRET` for the Astro site first. That path remains intentionally marked experimental because those values are exposed to the browser.
+For the `Connect GitHub` one-click deploy path, you need a GitHub Personal Access Token with the right permissions:
+
+**Fine-grained PAT (recommended)**
+
+| Permission | Level |
+|---|---|
+| Actions | Read and write |
+| Contents | Read and write |
+| Metadata | Read-only (auto-selected) |
+| Secrets | Read and write |
+
+Set **Repository access** to **Only select repositories** and pick your fork — do not use "All repositories".
+
+**Classic PAT** — check `repo` (all sub-scopes) and `workflow`.
+
+The wizard's **Instructions** link walks through every field step by step.
+
+> If the deploy step fails with `Resource not accessible by personal access token`, the token is missing one of the permissions above — regenerate it with the correct scopes.
 
 ### 5. Run the first workflow
 

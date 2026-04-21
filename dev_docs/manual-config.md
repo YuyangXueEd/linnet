@@ -12,6 +12,25 @@ If you'd rather use the interactive wizard, open the [Setup Wizard](https://yuya
 Click **Fork** at the top of the [GitHub page](https://github.com/YuyangXueEd/Linnet).
 GitHub will create your own copy with all the automation included.
 
+### Optional: one-click deploy via the Setup Wizard
+
+The [Setup Wizard](https://yuyangxueed.github.io/Linnet/setup/) can write config files and secrets directly into your fork. For that you need a GitHub Personal Access Token (PAT) with the following permissions:
+
+**Fine-grained PAT (recommended)**
+
+| Permission | Level |
+|---|---|
+| Actions | Read and write |
+| Contents | Read and write |
+| Metadata | Read-only (auto-selected) |
+| Secrets | Read and write |
+
+Set **Repository access** to **Only select repositories** and pick your fork — do not choose "All repositories".
+
+**Classic PAT** — check `repo` (all sub-scopes) and `workflow`.
+
+> If the deploy step fails with `Resource not accessible by personal access token`, the token is missing one of the permissions above — regenerate it with the correct scopes.
+
 ---
 
 ## Step 2 — Add your API key

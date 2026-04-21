@@ -12,6 +12,25 @@
 打开 [GitHub 项目页面](https://github.com/YuyangXueEd/Linnet)，点右上角的 **Fork** 按钮。
 GitHub 会帮你复制一份包含全部自动化流程的副本到你自己的账号下。
 
+### 可选：通过设置向导一键部署
+
+[设置向导](https://yuyangxueed.github.io/Linnet/setup/zh/) 可以直接把配置文件和 Secrets 写入你的 fork。为此需要一个有以下权限的 GitHub Personal Access Token（PAT）：
+
+**Fine-grained PAT（推荐）**
+
+| 权限 | 级别 |
+|---|---|
+| Actions | Read and write |
+| Contents | Read and write |
+| Metadata | Read-only（自动勾选） |
+| Secrets | Read and write |
+
+**Repository access** 选 **Only select repositories**，然后勾选你的 fork——不要选"All repositories"。
+
+**Classic PAT** — 勾选 `repo`（全部子项）和 `workflow`。
+
+> 如果部署时提示 `Resource not accessible by personal access token`，说明 token 缺少上述某项权限，请重新生成并勾选正确的 scopes。
+
 ---
 
 ## Step 2 — 添加你的 API Key
