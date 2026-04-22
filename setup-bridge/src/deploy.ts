@@ -1,4 +1,3 @@
-import sodium from 'libsodium-wrappers';
 import { GitHubApiError, GitHubAppConfig, createInstallationAccessToken } from './github';
 
 const GITHUB_API_BASE = 'https://api.github.com';
@@ -160,6 +159,7 @@ export function buildDefaultPagesUrl(owner: string, repo: string): string {
 }
 
 async function encryptSecretForGitHub(value: string, base64PublicKey: string): Promise<string> {
+  const sodium = (await import('libsodium-wrappers')).default;
   await sodium.ready;
   const publicKey = sodium.from_base64(base64PublicKey, sodium.base64_variants.ORIGINAL);
   const encrypted = sodium.crypto_box_seal(value, publicKey);
