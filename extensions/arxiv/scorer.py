@@ -89,7 +89,9 @@ def score_papers(
     results: list[dict] = []
     for p in papers:
         try:
-            results.append(_score_paper(p, client, model, prompt_template, categories, must_include))
+            results.append(
+                _score_paper(p, client, model, prompt_template, categories, must_include)
+            )
         except Exception as e:
             p["score"] = 0.0
             results.append(p)
