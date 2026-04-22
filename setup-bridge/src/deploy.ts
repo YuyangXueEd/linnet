@@ -158,12 +158,27 @@ export function buildDefaultPagesUrl(owner: string, repo: string): string {
   return `https://${owner}.github.io${isUserSiteRepo ? '/' : `/${repo}/`}`;
 }
 
+function decodeBase64(value: string): Uint8Array {
+  return new Uint8Array(Buffer.from(value, 'base64'));
+}
+
+function encodeBase64(value: Uint8Array): string {
+  return Buffer.from(value).toString('base64');
+}
+
 async function encryptSecretForGitHub(value: string, base64PublicKey: string): Promise<string> {
-  const sodium = (await import('libsodium-wrappers')).default;
-  await sodium.ready;
-  const publicKey = sodium.from_base64(base64PublicKey, sodium.base64_variants.ORIGINAL);
-  const encrypted = sodium.crypto_box_seal(value, publicKey);
-  return sodium.to_base64(encrypted, sodium.base64_variants.ORIGINAL);
+  const tweetsodiumModule = (await import('tweetsodium')) as typeof import('tweetsodium') & {
+    'module.exports'?: { seal(message: Uint8Array, publicKey: Uint8Array): Uint8Array };
+  };
+  const tweetsodium = (
+    tweetsodiumModule.default ??
+    tweetsodiumModule['module.exports'] ??
+    tweetsodiumModule
+  ) as { seal(message: Uint8Array, publicKey: Uint8Array): Uint8Array };
+  const publicKey = decodeBase64(base64PublicKey);
+  const message = new TextEncoder().encode(value);
+  const encrypted = tweetsodium.seal(message, publicKey);
+  return encodeBase64(encrypted);
 }
 
 async function getScopedInstallationToken(

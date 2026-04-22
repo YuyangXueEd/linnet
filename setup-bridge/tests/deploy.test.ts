@@ -35,6 +35,8 @@ const config: GitHubAppConfig = {
   jwtIssuerSource: 'client_id',
 };
 
+const repositoryPublicKey = Buffer.alloc(32, 7).toString('base64');
+
 test('buildDefaultPagesUrl handles project and user pages', () => {
   assert.equal(buildDefaultPagesUrl('octocat', 'briefing'), 'https://octocat.github.io/briefing/');
   assert.equal(buildDefaultPagesUrl('octocat', 'octocat.github.io'), 'https://octocat.github.io/');
@@ -57,7 +59,7 @@ test('deployWithInstallation scopes token and performs repo writes, secrets, act
     }),
     jsonResponse(404, { message: 'Not Found' }),
     jsonResponse(200, {}),
-    jsonResponse(200, { key: 'PUBLIC_KEY', key_id: 'KEY_ID' }),
+    jsonResponse(200, { key: repositoryPublicKey, key_id: 'KEY_ID' }),
     jsonResponse(201, {}),
     new Response(null, { status: 204 }),
     new Response(null, { status: 204 }),
@@ -80,73 +82,57 @@ test('deployWithInstallation scopes token and performs repo writes, secrets, act
     return response;
   };
 
-  const sodiumModule = await import('libsodium-wrappers');
-  await sodiumModule.default.ready;
-  const originalSeal = sodiumModule.default.crypto_box_seal;
-  const originalToBase64 = sodiumModule.default.to_base64;
-  const originalFromBase64 = sodiumModule.default.from_base64;
+  const result = await deployWithInstallation(
+    config,
+    {
+      installationId: 77,
+      repo: { owner: 'octocat', repo: 'briefing' },
+      files: [{ path: 'config/sources.yaml', body: 'language: "en"\n' }],
+      secrets: [{ name: 'OPENROUTER_API_KEY', value: 'sk-or-123' }],
+    },
+    fetchImpl,
+  );
 
-  sodiumModule.default.from_base64 = () => new Uint8Array([1, 2, 3]);
-  sodiumModule.default.crypto_box_seal = () => new Uint8Array([4, 5, 6]);
-  sodiumModule.default.to_base64 = () => 'encrypted-secret';
+  assert.equal(result.repo.defaultBranch, 'main');
+  assert.deepEqual(result.committedPaths, ['config/sources.yaml']);
+  assert.deepEqual(result.writtenSecrets, ['OPENROUTER_API_KEY']);
+  assert.equal(result.actions.enabled, true);
+  assert.deepEqual(result.actions.enabledWorkflows, ['daily.yml', 'weekly.yml', 'monthly.yml', 'pages.yml']);
+  assert.equal(result.pages.status, 'created');
+  assert.equal(result.workflowDispatch.workflowId, 'daily.yml');
+  assert.equal(result.workflowDispatch.ref, 'main');
 
-  try {
-    const result = await deployWithInstallation(
-      config,
-      {
-        installationId: 77,
-        repo: { owner: 'octocat', repo: 'briefing' },
-        files: [{ path: 'config/sources.yaml', body: 'language: "en"\n' }],
-        secrets: [{ name: 'OPENROUTER_API_KEY', value: 'sk-or-123' }],
-      },
-      fetchImpl,
-    );
+  assert.equal(calls.length, 14);
+  assert.match(calls[0].url, /\/app\/installations\/77\/access_tokens$/);
+  assert.match(calls[1].url, /\/repos\/octocat\/briefing$/);
+  assert.match(calls[2].url, /contents\/config\/sources\.yaml\?ref=main$/);
+  assert.match(calls[3].url, /contents\/config\/sources\.yaml$/);
+  assert.match(calls[4].url, /actions\/secrets\/public-key$/);
+  assert.match(calls[5].url, /actions\/secrets\/OPENROUTER_API_KEY$/);
+  assert.match(calls[12].url, /\/repos\/octocat\/briefing\/pages$/);
+  assert.match(calls[13].url, /actions\/workflows\/daily\.yml\/dispatches$/);
 
-    assert.equal(result.repo.defaultBranch, 'main');
-    assert.deepEqual(result.committedPaths, ['config/sources.yaml']);
-    assert.deepEqual(result.writtenSecrets, ['OPENROUTER_API_KEY']);
-    assert.equal(result.actions.enabled, true);
-    assert.deepEqual(result.actions.enabledWorkflows, ['daily.yml', 'weekly.yml', 'monthly.yml', 'pages.yml']);
-    assert.equal(result.pages.status, 'created');
-    assert.equal(result.workflowDispatch.workflowId, 'daily.yml');
-    assert.equal(result.workflowDispatch.ref, 'main');
+  const tokenBody = JSON.parse(String(calls[0].init?.body));
+  assert.deepEqual(tokenBody, { repositories: ['briefing'] });
 
-    assert.equal(calls.length, 14);
-    assert.match(calls[0].url, /\/app\/installations\/77\/access_tokens$/);
-    assert.match(calls[1].url, /\/repos\/octocat\/briefing$/);
-    assert.match(calls[2].url, /contents\/config\/sources\.yaml\?ref=main$/);
-    assert.match(calls[3].url, /contents\/config\/sources\.yaml$/);
-    assert.match(calls[4].url, /actions\/secrets\/public-key$/);
-    assert.match(calls[5].url, /actions\/secrets\/OPENROUTER_API_KEY$/);
-    assert.match(calls[12].url, /\/repos\/octocat\/briefing\/pages$/);
-    assert.match(calls[13].url, /actions\/workflows\/daily\.yml\/dispatches$/);
+  const putFileBody = JSON.parse(String(calls[3].init?.body));
+  assert.equal(putFileBody.content, 'bGFuZ3VhZ2U6ICJlbiIK');
 
-    const tokenBody = JSON.parse(String(calls[0].init?.body));
-    assert.deepEqual(tokenBody, { repositories: ['briefing'] });
+  const putSecretBody = JSON.parse(String(calls[5].init?.body));
+  assert.equal(putSecretBody.key_id, 'KEY_ID');
+  assert.equal(typeof putSecretBody.encrypted_value, 'string');
+  assert.notEqual(putSecretBody.encrypted_value, '');
+  assert.notEqual(putSecretBody.encrypted_value, 'sk-or-123');
 
-    const putFileBody = JSON.parse(String(calls[3].init?.body));
-    assert.equal(putFileBody.content, 'bGFuZ3VhZ2U6ICJlbiIK');
+  const pagesBody = JSON.parse(String(calls[12].init?.body));
+  assert.deepEqual(pagesBody, {
+    build_type: 'workflow',
+    source: {
+      branch: 'main',
+      path: '/',
+    },
+  });
 
-    const putSecretBody = JSON.parse(String(calls[5].init?.body));
-    assert.deepEqual(putSecretBody, {
-      encrypted_value: 'encrypted-secret',
-      key_id: 'KEY_ID',
-    });
-
-    const pagesBody = JSON.parse(String(calls[12].init?.body));
-    assert.deepEqual(pagesBody, {
-      build_type: 'workflow',
-      source: {
-        branch: 'main',
-        path: '/',
-      },
-    });
-
-    const dispatchBody = JSON.parse(String(calls[13].init?.body));
-    assert.deepEqual(dispatchBody, { ref: 'main' });
-  } finally {
-    sodiumModule.default.crypto_box_seal = originalSeal;
-    sodiumModule.default.to_base64 = originalToBase64;
-    sodiumModule.default.from_base64 = originalFromBase64;
-  }
+  const dispatchBody = JSON.parse(String(calls[13].init?.body));
+  assert.deepEqual(dispatchBody, { ref: 'main' });
 });
