@@ -47,6 +47,9 @@ AGENTS.md
 .playwright-cli/
 
 superpowers/*
+!superpowers/
+!superpowers/README.md
+!superpowers/roadmap.md
 scratch/
 
 # Astro / Node.js
