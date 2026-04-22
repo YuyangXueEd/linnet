@@ -90,6 +90,56 @@ These decisions are settled and should guide all implementation choices.
 - [ ] Prepare copy and layout for a future lightweight web onboarding flow.
   Leave a clean path for `sign in → enter key → deploy/run` without rewriting the public narrative.
 
+### Brief mode planning note
+
+Current direction for the first compact beginner mode:
+
+- Ship only two starter modes first:
+  - `Academic Brief`
+  - `Daily Personal Brief`
+- Treat starter mode as a UI layer over the existing wizard state model, not as a separate product flow.
+- Keep one-click GitHub App deploy as the default end state.
+
+`Academic Brief` needs one extra guided choice after the starter card:
+
+- Ask for a single primary research domain before the rest of the wizard opens.
+- Back that domain picker with the existing `ARXIV_PROFILES` presets in `astro/src/lib/arxivProfiles.ts`.
+- Keep the first version opinionated and single-select, not multi-select.
+- Offer an explicit advanced escape hatch for custom arXiv categories and keywords.
+
+Recommended first domain set for `Academic Brief`:
+
+- AI / ML
+- Computer Vision
+- NLP / Language Models
+- Robotics
+- Medical Imaging
+- Biology / Bioinformatics
+- Physics
+- Chemistry / Materials
+- Mathematics
+- Astrophysics
+
+`Daily Personal Brief` should stay much simpler:
+
+- Default sources: weather, Hacker News, GitHub trending
+- Ask only for language, city/timezone, LLM provider, and API key in the compact flow
+- Hide sink/theme/source fine-tuning behind advanced controls
+
+Compact-flow UX target:
+
+- Step 0: choose starter mode
+- Step 0.5 for `Academic Brief`: choose one research domain
+- Step 1+: show only the minimum fields needed to launch successfully
+- Advanced controls remain available, but collapsed by default
+
+Implementation stance:
+
+- Reuse the current wizard state and generated config pipeline
+- Apply starter-mode defaults in controller code
+- Do not fork the YAML schema or introduce a second export format
+- Preserve the existing advanced manual path for power users
+
 ---
 
 ## Growth & Promotion
