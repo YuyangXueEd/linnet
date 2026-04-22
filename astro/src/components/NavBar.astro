@@ -7,6 +7,25 @@ interface Props {
 const { current, lang = 'en' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const isZh = lang === 'zh-CN' || lang === 'zh';
+const pathname = Astro.url.pathname;
+
+function routeStartsWith(route: string): boolean {
+  const fullRoute = `${base}${route}` || route;
+  return pathname === fullRoute || pathname.startsWith(fullRoute);
+}
+
+const resolvedCurrent = current
+  ?? (routeStartsWith('/setup/')
+    ? 'setup'
+    : routeStartsWith('/daily/')
+      ? 'daily'
+      : routeStartsWith('/weekly/')
+        ? 'weekly'
+        : routeStartsWith('/monthly/')
+          ? 'monthly'
+          : undefined);
+const isSetupRoute = resolvedCurrent === 'setup';
+const targetLocale = isZh ? 'en' : 'zh';
 
 const links = isZh
   ? [
@@ -24,8 +43,8 @@ const links = isZh
 
 const homeHref   = isZh ? `${base}/zh/` : `${base}/`;
 const langHref   = isZh
-  ? (current === 'setup' ? `${base}/setup/`    : `${base}/`)
-  : (current === 'setup' ? `${base}/setup/zh/` : `${base}/zh/`);
+  ? (isSetupRoute ? `${base}/setup/`    : `${base}/`)
+  : (isSetupRoute ? `${base}/setup/zh/` : `${base}/zh/`);
 const langLabel  = isZh ? 'EN' : '中';
 ---
 
@@ -40,7 +59,7 @@ const langLabel  = isZh ? 'EN' : '中';
       {links.map(({ key, href, label }) => (
         <a
           href={href}
-          class:list={['navbar-link', { 'navbar-link--active': current === key }]}
+          class:list={['navbar-link', { 'navbar-link--active': resolvedCurrent === key }]}
         >
           {label}
         </a>
@@ -48,7 +67,15 @@ const langLabel  = isZh ? 'EN' : '中';
     </div>
 
     <div class="navbar-controls">
-      <a href={langHref} class="navbar-lang-btn" aria-label="Switch language">{langLabel}</a>
+      <a
+        href={langHref}
+        class="navbar-lang-btn"
+        aria-label="Switch language"
+        data-target-locale={targetLocale}
+        data-preserve-query={isSetupRoute ? 'true' : 'false'}
+      >
+        {langLabel}
+      </a>
       <button id="theme-toggle" class="navbar-theme-btn" aria-label="Toggle theme">
       <span class="theme-icon-sun">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -68,6 +95,7 @@ const langLabel  = isZh ? 'EN' : '中';
 <script>
 const btn = document.getElementById('theme-toggle');
 const initial = localStorage.getItem('theme') || 'light';
+const setupLocaleStorageKey = 'linnet-setup-locale';
 
 document.documentElement.dataset.theme = initial;
 
@@ -76,6 +104,31 @@ btn?.addEventListener('click', () => {
   document.documentElement.dataset.theme = next;
   localStorage.setItem('theme', next);
 });
+
+for (const langBtn of document.querySelectorAll('.navbar-lang-btn[data-target-locale]')) {
+  langBtn.addEventListener('click', (event) => {
+    const target = event.currentTarget;
+    if (!(target instanceof HTMLAnchorElement)) return;
+
+    const targetLocale = target.getAttribute('data-target-locale');
+
+    if (targetLocale) {
+      try {
+        localStorage.setItem(setupLocaleStorageKey, targetLocale);
+      } catch {
+        // Ignore storage failures.
+      }
+    }
+
+    if (target.getAttribute('data-preserve-query') !== 'true') return;
+
+    event.preventDefault();
+    const nextUrl = new URL(target.getAttribute('href') || '/', window.location.href);
+    nextUrl.search = window.location.search;
+    nextUrl.hash = window.location.hash;
+    window.location.assign(nextUrl.toString());
+  });
+}
 </script>
 
 <style>

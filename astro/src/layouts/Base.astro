@@ -63,6 +63,7 @@ try {
   <meta property="og:url" content={canonicalURL} />
   {ogImage && <meta property="og:image" content={ogImage} />}
   {themeOverrideCss && <style set:html={themeOverrideCss}></style>}
+  <slot name="head" />
   <!-- Theme init: prevent flash -->
   <script is:inline>
     const t = localStorage.getItem('theme') || 'light';

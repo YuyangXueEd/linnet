@@ -8,6 +8,40 @@ import WizardShell from '@/components/wizard/WizardShell.astro';
   title="Set Up Your Morning Briefing — Linnet"
   description="Use Linnet's setup wizard to turn scattered sources into a guided personal morning briefing."
 >
+  <Fragment slot="head">
+    <script is:inline>
+      (() => {
+        const storageKey = 'linnet-setup-locale';
+        let preferredLocale = null;
+
+        try {
+          preferredLocale = window.localStorage.getItem(storageKey);
+        } catch {
+          preferredLocale = null;
+        }
+
+        if (preferredLocale === 'en') return;
+
+        const languages = Array.isArray(navigator.languages) && navigator.languages.length
+          ? navigator.languages
+          : [navigator.language];
+        const prefersZh = preferredLocale === 'zh'
+          || languages.some((value) => typeof value === 'string' && /^zh(?:-|$)/i.test(value));
+
+        if (!prefersZh) return;
+
+        const nextUrl = new URL(window.location.href);
+        if (nextUrl.pathname.endsWith('/setup/zh/')) return;
+
+        nextUrl.pathname = nextUrl.pathname.endsWith('/setup/')
+          ? nextUrl.pathname.replace(/\/setup\/$/, '/setup/zh/')
+          : nextUrl.pathname.replace(/\/setup$/, '/setup/zh/');
+
+        if (!nextUrl.pathname.endsWith('/setup/zh/')) return;
+        window.location.replace(nextUrl.toString());
+      })();
+    </script>
+  </Fragment>
   <div class="setup-shell">
 
     <header class="setup-masthead">
