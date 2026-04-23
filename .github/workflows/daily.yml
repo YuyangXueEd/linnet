@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write       # needed to git push
+      actions: write        # needed to dispatch pages.yml after digest succeeds
     steps:
       - uses: actions/checkout@v4
         with:
@@ -68,3 +69,17 @@ jobs:
           git diff --staged --quiet || git commit -m "digest: $(date -u +%Y-%m-%d)"
           git pull --rebase -X ours origin ${{ github.ref_name }}
           git push
+
+      - name: Trigger Pages publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_API_URL: ${{ github.api_url }}
+          GH_REPOSITORY: ${{ github.repository }}
+          GH_REF_NAME: ${{ github.ref_name }}
+        run: |
+          curl --fail-with-body -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            "${GH_API_URL}/repos/${GH_REPOSITORY}/actions/workflows/pages.yml/dispatches" \
+            -d "{\"ref\":\"${GH_REF_NAME}\"}"

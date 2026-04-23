@@ -4,7 +4,6 @@ import WizardStep1 from './WizardStep1.astro';
 import WizardStep2 from './WizardStep2.astro';
 import WizardStep3 from './WizardStep3.astro';
 import WizardStep4 from './WizardStep4.astro';
-import WizardStep5 from './WizardStep5.astro';
 import WizardStep6 from './WizardStep6.astro';
 
 interface Props {
@@ -16,25 +15,23 @@ const extensions = getExtensionsForLocale(locale);
 const setupBridgeUrl = import.meta.env.PUBLIC_SETUP_BRIDGE_URL || 'https://linnet-setup-bridge.yuyangxueed.workers.dev';
 
 const STEPS = locale === 'zh'
-  ? ['来源', '配置', '计划', '推送', '主题', '导出']
-  : ['Sources', 'Configure', 'Schedule', 'Delivery', 'Theme', 'Export'];
+  ? ['简报', '细节', '密钥', '高级', '部署']
+  : ['Brief', 'Details', 'Secrets', 'Advanced', 'Deploy'];
 
 const STEP_BLURBS = locale === 'zh'
   ? [
-      '选择应出现在你早间简报中的信息来源，并设定初始阅读顺序。',
-      '只显示你选择的来源，方便逐一调整细节。',
-      '先用 provider + API key 跑通第一次部署；模型与 weekly / monthly 细调都可以稍后再开。',
-      '推送渠道是可选项。默认只部署网页站点，Slack / Server酱保留在高级区。',
-      '主题也是可选项。先用默认配色跑通，再决定是否自定义视觉风格。',
-      '审查生成的文件、密钥提醒和后续操作，然后完成 GitHub 配置。',
+      '先选一个 briefing 模式，再决定是否要展开高级来源选择。',
+      '只对当前启用的来源做细调，arXiv 的详细参数也统一放在这里。',
+      '这里只填写你真正启用过的额外 secrets 和推送渠道；没有用到的内容可以先跳过。',
+      '先填好必需的 LLM access，再视情况调整全局默认值、weekly/monthly 和主题。',
+      '最后检查目标仓库、自动启用选项和后续动作，然后把配置写入 GitHub。',
     ]
   : [
-      'Pick the sources that deserve space in your morning briefing and set the reading order.',
-      'Only your chosen sources appear here, so you can tune each one without clutter.',
-      'Use provider + API key to get your first deploy working; model and rollup tuning can wait.',
-      'Delivery channels are optional. The default path ships only the site, with Slack and ServerChan tucked under advanced controls.',
-      'Theme customisation is optional too. Start with the default palette, then refine the look later if you want.',
-      'Review generated files, secret reminders, and next actions before the GitHub handoff.',
+      'Pick a briefing mode first, then decide whether you want to open the advanced source picker.',
+      'Tune only the sources you actually enabled, with all arXiv detail living in one place.',
+      'Only fill the extra secrets and delivery channels you actually enabled, and skip the rest.',
+      'Set the required LLM access first, then refine global defaults, weekly/monthly rollups, and theme if you want.',
+      'Confirm the target repository, auto-enable options, and next actions before writing everything to GitHub.',
     ];
 
 const backLabel = locale === 'zh' ? '上一步' : 'Back';
@@ -46,8 +43,8 @@ const connectDesc = locale === 'zh'
 const connectModeTitle = locale === 'zh' ? 'Connect GitHub 一键部署' : 'One-click with Connect GitHub';
 const connectModeMeta = locale === 'zh' ? '安装 App + 浏览器授权' : 'Install app + browser auth';
 const connectModeDesc = locale === 'zh'
-  ? '推荐给第一次上手的用户。先安装 Linnet Bridge GitHub App，再授权当前浏览器；到第 6 步时可以直接写入仓库、secrets、Pages 和 Actions 配置。'
-  : 'Recommended for first-time users. Install the Linnet Bridge GitHub App first, then authorize this browser; at Step 6 Linnet can write files, secrets, Pages, and Actions setup for you.';
+  ? '推荐给第一次上手的用户。先安装 Linnet Bridge GitHub App，再授权当前浏览器；到第 5 步时可以直接写入仓库、secrets、Pages 和 Actions 配置。'
+  : 'Recommended for first-time users. Install the Linnet Bridge GitHub App first, then authorize this browser; at Step 5 Linnet can write files, secrets, Pages, and Actions setup for you.';
 const manualModeTitle = locale === 'zh' ? 'Advanced manual config' : 'Advanced manual config';
 const manualModeMeta = locale === 'zh' ? '复制 YAML + 手动加 secrets' : 'Copy YAML + add secrets';
 const manualModeDesc = locale === 'zh'
@@ -162,7 +159,7 @@ const connectSummaryIdle = locale === 'zh'
   <!-- ── Step header ─────────────────────────────────────────── -->
   <div class="wz-step-header">
     <div class="wz-step-header__pill" data-step-pill>
-      {locale === 'zh' ? '第 1 步 / 共 6 步' : 'Step 1 of 6'}
+      {locale === 'zh' ? '第 1 步 / 共 5 步' : 'Step 1 of 5'}
     </div>
     <p class="wz-step-header__blurb" data-step-blurb>{STEP_BLURBS[0]}</p>
   </div>
@@ -171,9 +168,8 @@ const connectSummaryIdle = locale === 'zh'
   <div class="wz-panels">
     <WizardStep1 {extensions} {locale} />
     <WizardStep2 {extensions} {locale} />
-    <WizardStep3 {extensions} {locale} />
-    <WizardStep4 {locale} />
-    <WizardStep5 {locale} />
+    <WizardStep3 {locale} />
+    <WizardStep4 {extensions} {locale} />
     <WizardStep6 {locale} />
   </div>
 
@@ -521,7 +517,7 @@ const connectSummaryIdle = locale === 'zh'
   color: var(--ink-soft);
   line-height: 1.65;
   margin: 0 0 18px;
-  max-width: 62ch;
+  max-width: none;
 }
 
 .wz-card__header {
@@ -529,6 +525,36 @@ const connectSummaryIdle = locale === 'zh'
   justify-content: space-between;
   gap: 20px;
   align-items: start;
+}
+
+.wz-card__header h3 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.wz-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.wz-card--span-2 {
+  grid-column: 1 / -1;
+}
+
+.wz-card--compact {
+  padding: 24px;
+}
+
+.wz-card--compact h3 {
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+}
+
+.wz-card--compact .wz-card__desc {
+  margin-bottom: 14px;
 }
 
 .wz-brief-card {
@@ -583,9 +609,13 @@ const connectSummaryIdle = locale === 'zh'
 }
 
 .wz-brief-mode-card__desc {
+  font-family: var(--font-body);
   color: var(--ink-soft);
   line-height: 1.65;
   font-size: 0.875rem;
+  margin-top: 2px;
+  flex: 1;
+  text-wrap: pretty;
 }
 
 .wz-brief-mode-panel {
@@ -907,6 +937,30 @@ const connectSummaryIdle = locale === 'zh'
   color: var(--ink-muted);
   line-height: 1.6;
   font-style: italic;
+}
+
+.wz-field__meta {
+  font-size: 0.76rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.wz-field__meta code {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink);
+}
+
+.wz-field__meta a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.wz-required-marker {
+  color: var(--accent);
+  margin-left: 0.3ch;
+  font-size: 0.95em;
 }
 
 .wz-switch {
@@ -1846,6 +1900,7 @@ const connectSummaryIdle = locale === 'zh'
     flex-direction: column;
   }
   .wz-auth-actions { flex-direction: column; align-items: stretch; }
+  .wz-card-grid { grid-template-columns: 1fr; }
   .wz-brief-mode-grid { grid-template-columns: 1fr; }
   .wz-step1-layout { grid-template-columns: 1fr; }
   .wz-step1-order { position: static; }

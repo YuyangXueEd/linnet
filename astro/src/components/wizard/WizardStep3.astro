@@ -1,316 +1,158 @@
 ---
-import type { ExtensionMeta } from '@/lib/registry';
-
 interface Props {
-  extensions: ExtensionMeta[];
   locale: 'en' | 'zh';
 }
-const { extensions, locale } = Astro.props;
-
-const PROVIDER_OPTIONS = [
-  {
-    value: 'openrouter',
-    label: 'OpenRouter',
-    baseUrl: 'https://openrouter.ai/api/v1',
-    secretName: 'OPENROUTER_API_KEY',
-    scoringModel: 'google/gemini-2.5-flash-lite-preview-09-2025',
-    summarizationModel: 'google/gemini-2.5-flash-lite-preview-09-2025',
-    models: ['google/gemini-2.5-flash-lite-preview-09-2025'],
-    note: locale === 'zh'
-      ? '默认推荐路径。一个 key 可以切换多家模型，最适合第一次上手。'
-      : 'Recommended default. One key can access multiple model families, which keeps first-time setup simple.',
-  },
-  {
-    value: 'openai',
-    label: 'OpenAI',
-    baseUrl: 'https://api.openai.com/v1',
-    secretName: 'OPENAI_API_KEY',
-    scoringModel: 'gpt-5-mini',
-    summarizationModel: 'gpt-5-mini',
-    models: ['gpt-5-mini', 'gpt-5-nano', 'gpt-4.1-mini'],
-    note: locale === 'zh'
-      ? '适合直接接 OpenAI API。这里默认给你便宜一点的 mini 系列。'
-      : 'Use this for the direct OpenAI API. Defaults favour the cheaper mini tier.',
-  },
-  {
-    value: 'anthropic_compat',
-    label: locale === 'zh' ? 'Anthropic（OpenAI 兼容）' : 'Anthropic (OpenAI-compatible)',
-    baseUrl: 'https://api.anthropic.com/v1/',
-    secretName: 'ANTHROPIC_API_KEY',
-    scoringModel: 'claude-haiku-4-5',
-    summarizationModel: 'claude-haiku-4-5',
-    models: ['claude-haiku-4-5', 'claude-sonnet-4-6'],
-    note: locale === 'zh'
-      ? '当前仓库可以通过 OpenAI 兼容层接 Claude，但更偏向“兼容接入”，不是 Anthropic 原生 SDK 路径。'
-      : 'This repo can use Claude through Anthropic’s OpenAI compatibility layer, not the native Anthropic SDK path.',
-  },
-  {
-    value: 'google_compat',
-    label: locale === 'zh' ? 'Google Gemini（OpenAI 兼容）' : 'Google Gemini (OpenAI-compatible)',
-    baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai/',
-    secretName: 'GEMINI_API_KEY',
-    scoringModel: 'gemini-2.5-flash-lite',
-    summarizationModel: 'gemini-2.5-flash-lite',
-    models: ['gemini-2.5-flash-lite', 'gemini-2.5-flash'],
-    note: locale === 'zh'
-      ? 'Gemini 的 OpenAI 兼容接口可直接接入当前 Python 逻辑，但官方文档仍把这条路标成 beta。'
-      : 'Gemini’s OpenAI-compatible endpoint fits the current Python flow, though Google still marks it as beta.',
-  },
-  {
-    value: 'custom',
-    label: locale === 'zh' ? '自定义 OpenAI-compatible' : 'Custom OpenAI-compatible',
-    baseUrl: 'https://api.example.com/v1',
-    secretName: 'LLM_API_KEY',
-    scoringModel: '',
-    summarizationModel: '',
-    models: [],
-    note: locale === 'zh'
-      ? '如果你有自己的 OpenAI-compatible gateway，可以直接改 base URL、secret 名称和模型 ID。'
-      : 'If you have your own OpenAI-compatible gateway, edit the base URL, secret name, and model IDs directly.',
-  },
-];
+const { locale } = Astro.props;
 
 const t = {
-  weeklyHead:  locale === 'zh' ? '周报' : 'Weekly',
-  monthlyHead: locale === 'zh' ? '月报' : 'Monthly',
-  enable:      locale === 'zh' ? '启用' : 'Include',
-  topN:        locale === 'zh' ? '条目数' : 'Top N',
-  desc:        locale === 'zh'
-    ? '先确认 LLM provider / model，再选择哪些来源应汇入每周和每月回顾摘要。'
-    : 'Set up the LLM endpoint first, then choose which sources should roll into weekly and monthly digests.',
-  llmHead:     locale === 'zh' ? 'LLM 设置' : 'LLM setup',
-  llmDesc:     locale === 'zh'
-    ? '这里决定 wizard 生成的 llm.provider / base_url / model 配置，以及部署时要写入的 API key secret。'
-    : 'This controls the generated llm.provider / base_url / model settings and the API key secret written during deploy.',
-  llmQuickHead: locale === 'zh' ? '第一次上手只需要两项' : 'First launch only needs two inputs',
-  llmQuickDesc: locale === 'zh'
-    ? '先选 provider，再填 API key，就已经足够跑通第一次部署。模型、base URL 和 secret 名称可以先沿用默认值。'
-    : 'Pick a provider and enter an API key first. That is enough for your first successful deploy; models, base URL, and secret naming can stay on the defaults.',
-  providerLabel: locale === 'zh' ? 'Provider 预设' : 'Provider preset',
-  providerHint:  locale === 'zh'
-    ? '优先支持 OpenAI-compatible 接口；切换预设时会同步默认模型和 secret 名称。'
-    : 'The current backend is built around OpenAI-compatible endpoints; switching presets also updates the default models and secret name.',
-  baseUrlLabel:  locale === 'zh' ? 'Base URL' : 'Base URL',
-  baseUrlHint:   locale === 'zh'
-    ? '如果你走自建 gateway，也可以直接改这里。'
-    : 'You can edit this directly if you are routing through a custom gateway.',
-  secretLabel:   locale === 'zh' ? 'GitHub Secret 名称' : 'GitHub secret name',
-  secretHint:    locale === 'zh'
-    ? '生成的 `sources.yaml` 会记录这个环境变量名，部署时也会按这个名字写入 GitHub Actions Secrets。'
-    : 'The generated `sources.yaml` stores this env var name, and deploy uses the same name for GitHub Actions secrets.',
-  apiKeyLabel:   locale === 'zh' ? 'API key 值' : 'API key value',
-  apiKeyFor:     locale === 'zh' ? '对应 secret' : 'Secret name',
-  apiKeyHint:    locale === 'zh'
-    ? '只在一键部署时用于写入 GitHub Actions Secret，不会写进 YAML。'
-    : 'Used only for one-click deploy to write a GitHub Actions secret. Never written into YAML.',
-  scoreModelLabel: locale === 'zh' ? '评分模型' : 'Scoring model',
-  summaryModelLabel: locale === 'zh' ? '摘要模型' : 'Summarization model',
-  modelHint:     locale === 'zh'
-    ? '可以直接输入任意模型 ID；默认先给便宜、够用的小模型。'
-    : 'You can type any model ID directly; the defaults lean toward cheaper small models.',
-  llmAdvancedHead: locale === 'zh' ? '高级模型与端点控制' : 'Advanced model and endpoint controls',
-  llmAdvancedDesc: locale === 'zh'
-    ? '只有在你想切换自定义 gateway、环境变量名，或精调 scoring / summarization 模型时，才需要展开这里。'
-    : 'Open this only when you want a custom gateway, a different secret name, or finer control over the scoring and summarization models.',
-  scheduleHead: locale === 'zh' ? '周报 / 月报汇总' : 'Weekly / monthly rollups',
-  scheduleDesc: locale === 'zh'
-    ? '选择哪些来源应汇入每周和每月回顾摘要。'
-    : 'Choose which sources roll up into weekly and monthly digests for slower review.',
-  scheduleQuickHead: locale === 'zh' ? '回顾汇总可以稍后再开' : 'Review rollups can wait',
-  scheduleQuickDesc: locale === 'zh'
-    ? '第一次部署时完全可以先跳过 weekly / monthly；等主站点跑通后，再回来决定哪些来源值得进入慢速回顾。'
-    : 'You can skip weekly and monthly rollups on your first deploy. Come back after the main site works and then decide which sources deserve slower review.',
-  scheduleAdvancedHead: locale === 'zh' ? '高级 weekly / monthly 配置' : 'Advanced weekly / monthly settings',
-  scheduleAdvancedDesc: locale === 'zh'
-    ? '展开后可以决定每个来源是否进入 weekly / monthly，以及各自的 top N。'
-    : 'Expand this to decide which sources appear in weekly and monthly digests and what top N each one should use.',
+  desc: locale === 'zh'
+    ? '这里只放你额外启用的 secrets 和推送渠道。没有用到的内容可以留空或直接跳过。'
+    : 'This step only covers extra secrets and delivery channels. Leave unused items off and skip ahead if you do not need them.',
+  quickHead: locale === 'zh' ? '先把主站点跑通也完全可以' : 'It is fine to launch the site first',
+  quickDesc: locale === 'zh'
+    ? '第一次部署时，Slack、Server酱和 Quote of the Day 都不是必需项。只有当你真的启用了这些能力时，下面的卡片才需要填写。'
+    : 'Slack, ServerChan, and Quote of the Day are not required for the first deploy. Only fill the cards below when you actually enabled those capabilities.',
+  quoteHead: locale === 'zh' ? 'Quote of the Day' : 'Quote of the Day',
+  quoteDesc: locale === 'zh'
+    ? '英文版 Quote of the Day 需要 API Ninjas key。只有当前面选中了这个来源时，这张卡片才会出现。'
+    : 'The English Quote of the Day source needs an API Ninjas key. This card only appears when that source is enabled earlier.',
+  quoteKeyLabel: locale === 'zh' ? 'API Ninjas key' : 'API Ninjas key',
+  quoteHint: locale === 'zh'
+    ? '会作为 API_NINJAS_KEY 写入 GitHub Actions Secrets，不会写进 YAML。'
+    : 'Stored as API_NINJAS_KEY in GitHub Actions secrets and never written into YAML.',
+  slackHead: 'Slack',
+  slackEnable: locale === 'zh' ? '启用 Slack 推送' : 'Enable Slack delivery',
+  slackDesc: locale === 'zh'
+    ? '通过 Incoming Webhook 把 digest 发到 Slack。适合团队频道，或者你自己的工作区。'
+    : 'Deliver the digest to Slack through an Incoming Webhook. Good for a team channel or your own workspace.',
+  webhookLabel: locale === 'zh' ? 'Slack Webhook URL' : 'Slack Webhook URL',
+  webhookHint: locale === 'zh'
+    ? '会作为 SLACK_WEBHOOK_URL 写入 GitHub Actions Secrets，不会写进 YAML。'
+    : 'Stored as SLACK_WEBHOOK_URL in GitHub Actions secrets and never written into YAML.',
+  scHead: locale === 'zh' ? 'Server酱 (ServerChan)' : 'Server酱 (ServerChan)',
+  scEnable: locale === 'zh' ? '启用 Server酱推送' : 'Enable ServerChan delivery',
+  scDesc: locale === 'zh'
+    ? '把 digest 推到你的个人通知里，常见用法是手机或微信提醒。'
+    : 'Push the digest into personal notifications, often used for phone or WeChat-style alerts.',
+  scKeyLabel: locale === 'zh' ? 'SendKey' : 'SendKey',
+  scHint: locale === 'zh'
+    ? '会作为 SERVERCHAN_SENDKEY 写入 GitHub Actions Secrets，不会写进 YAML。'
+    : 'Stored as SERVERCHAN_SENDKEY in GitHub Actions secrets and never written into YAML.',
+  countsHint: locale === 'zh'
+    ? '这里只显示你在前面真正启用过的内容来源。'
+    : 'Only the sources you enabled earlier are shown here.',
+  maxPapers: locale === 'zh' ? '最多论文数' : 'Max papers',
+  maxHn: locale === 'zh' ? '最多 HN 条目' : 'Max HN stories',
+  maxGithub: locale === 'zh' ? '最多 GitHub 仓库' : 'Max GitHub repos',
+  maxJobs: locale === 'zh' ? '最多职位数' : 'Max jobs',
 };
 ---
 
 <div class="wz-step" data-step="3" aria-hidden="true">
   <p class="wz-step__desc">{t.desc}</p>
 
-  <div class="wz-stack">
-    <div class="wz-card">
-      <h3>{t.llmHead}</h3>
-      <p class="wz-card__desc">{t.llmDesc}</p>
+  <div class="wz-notice wz-notice--info">
+    <strong>{t.quickHead}</strong>
+    <div>{t.quickDesc}</div>
+  </div>
 
-      <div class="wz-notice wz-notice--info">
-        <strong>{t.llmQuickHead}</strong>
-        <div>{t.llmQuickDesc}</div>
+  <div class="wz-card-grid">
+    <div class="wz-card wz-card--compact" data-optional-secret-card="API_NINJAS_KEY" hidden>
+      <h3>{t.quoteHead}</h3>
+      <p class="wz-card__desc">{t.quoteDesc}</p>
+      <div class="wz-field">
+        <label for="quote-api-key">{t.quoteKeyLabel}</label>
+        <input
+          id="quote-api-key"
+          type="password"
+          data-deploy-secret="API_NINJAS_KEY"
+          placeholder="..."
+          autocomplete="off"
+        />
+        <div class="wz-field__hint">{t.quoteHint}</div>
       </div>
-
-      <div class="wz-field-row wz-field-row--compact">
-        <div class="wz-field">
-          <label for="llm-provider">{t.providerLabel}</label>
-          <select id="llm-provider" data-llm-provider>
-            {PROVIDER_OPTIONS.map((option) => (
-              <option
-                value={option.value}
-                selected={option.value === 'openrouter'}
-                data-base-url={option.baseUrl}
-                data-secret-name={option.secretName}
-                data-scoring-model={option.scoringModel}
-                data-summarization-model={option.summarizationModel}
-                data-models={JSON.stringify(option.models)}
-                data-note={option.note}
-              >
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <div class="wz-field__hint">{t.providerHint}</div>
-        </div>
-        <div class="wz-field">
-          <label for="llm-api-key">{t.apiKeyLabel}</label>
-          <div class="wz-field__hint">
-            {t.apiKeyFor}: <code data-llm-secret-code>OPENROUTER_API_KEY</code>
-          </div>
-          <input id="llm-api-key" type="password" data-llm-api-key placeholder="sk-..." autocomplete="off" />
-          <div class="wz-field__hint" data-llm-api-key-hint>{t.apiKeyHint}</div>
-        </div>
-      </div>
-
-      <details class="wz-advanced-card" data-llm-advanced>
-        <summary class="wz-advanced-card__summary">
-          <span class="wz-advanced-card__title">{t.llmAdvancedHead}</span>
-          <span class="wz-advanced-card__desc">{t.llmAdvancedDesc}</span>
-        </summary>
-
-        <div class="wz-advanced-card__content">
-          <div class="wz-field-row wz-field-row--compact">
-            <div class="wz-field">
-              <label for="llm-base-url">{t.baseUrlLabel}</label>
-              <input id="llm-base-url" type="url" data-llm-base-url value={PROVIDER_OPTIONS[0].baseUrl} />
-              <div class="wz-field__hint">{t.baseUrlHint}</div>
-            </div>
-            <div class="wz-field">
-              <label for="llm-secret-name">{t.secretLabel}</label>
-              <input id="llm-secret-name" type="text" data-llm-secret-name value={PROVIDER_OPTIONS[0].secretName} />
-              <div class="wz-field__hint">{t.secretHint}</div>
-            </div>
-          </div>
-
-          <div class="wz-field-row" style="margin-top:18px">
-            <div class="wz-field">
-              <label for="llm-scoring-model">{t.scoreModelLabel}</label>
-              <input
-                id="llm-scoring-model"
-                type="text"
-                data-llm-scoring-model
-                list="llm-model-options"
-                value={PROVIDER_OPTIONS[0].scoringModel}
-              />
-            </div>
-            <div class="wz-field">
-              <label for="llm-summarization-model">{t.summaryModelLabel}</label>
-              <input
-                id="llm-summarization-model"
-                type="text"
-                data-llm-summarization-model
-                list="llm-model-options"
-                value={PROVIDER_OPTIONS[0].summarizationModel}
-              />
-              <datalist id="llm-model-options" data-llm-model-options>
-                {PROVIDER_OPTIONS[0].models.map((model) => (
-                  <option value={model}></option>
-                ))}
-              </datalist>
-              <div class="wz-field__hint">{t.modelHint}</div>
-            </div>
-          </div>
-
-          <div class="wz-notice wz-notice--info" style="margin-top:18px" data-llm-provider-note>
-            {PROVIDER_OPTIONS[0].note}
-          </div>
-        </div>
-      </details>
     </div>
 
-    <div class="wz-notice wz-notice--info">
-      <strong>{t.scheduleQuickHead}</strong>
-      <div>{t.scheduleQuickDesc}</div>
-    </div>
-
-    <details class="wz-advanced-card wz-advanced-card--block">
-      <summary class="wz-advanced-card__summary">
-        <span class="wz-advanced-card__title">{t.scheduleAdvancedHead}</span>
-        <span class="wz-advanced-card__desc">{t.scheduleAdvancedDesc}</span>
-      </summary>
-
-      <div class="wz-advanced-card__content">
-        <p class="wz-card__desc">{t.scheduleDesc}</p>
-
-        <div class="wz-schedule-table" role="table" aria-label="Schedule preferences">
-          <div class="wz-schedule-table__head" role="row">
-            <div role="columnheader">{locale === 'zh' ? '来源' : 'Source'}</div>
-            <div role="columnheader">{t.weeklyHead}</div>
-            <div role="columnheader">{t.monthlyHead}</div>
+    <div class="wz-card wz-card--compact">
+      <div class="wz-card__header">
+        <h3>{t.slackHead}</h3>
+        <label class="wz-toggle">
+          <input type="checkbox" id="slack-enabled" data-sink-slack-enabled />
+          <span class="wz-toggle__label">{t.slackEnable}</span>
+        </label>
+      </div>
+      <p class="wz-card__desc">{t.slackDesc}</p>
+      <div class="wz-sink-fields" data-sink-slack-fields hidden>
+        <div class="wz-field">
+          <label for="slack-webhook">{t.webhookLabel}</label>
+          <input
+            type="password"
+            id="slack-webhook"
+            data-deploy-secret="SLACK_WEBHOOK_URL"
+            placeholder="https://hooks.slack.com/services/..."
+            autocomplete="off"
+          />
+          <div class="wz-field__hint">{t.webhookHint}</div>
+        </div>
+        <div class="wz-field__hint">{t.countsHint}</div>
+        <div class="wz-field-row wz-field-row--compact" style="margin-top:16px">
+          <div class="wz-field" data-sink-limit-for="arxiv">
+            <label for="slack-max-papers">{t.maxPapers}</label>
+            <input type="number" id="slack-max-papers" data-sink-slack-max-papers min="1" max="20" value="5" />
           </div>
-
-          {extensions.map(ext => {
-            const name = locale === 'zh' ? (ext.displayNameZh ?? ext.displayName) : ext.displayName;
-            const weekDefault  = ext.weeklyDefault  ?? false;
-            const monthDefault = ext.monthlyDefault ?? false;
-            const weekTopN     = ext.weeklyTopN  ?? 5;
-            const monthTopN    = ext.monthlyTopN ?? 5;
-            return (
-              <div
-                class="wz-schedule-row"
-                data-schedule-for={ext.key}
-                role="row"
-                hidden
-              >
-                <div class="wz-schedule-row__name" role="cell">{name}</div>
-
-                <div class="wz-schedule-cell" role="cell">
-                  <label class="wz-toggle">
-                    <input
-                      type="checkbox"
-                      data-schedule-weekly-enabled={ext.key}
-                      checked={weekDefault}
-                    />
-                    <span class="wz-toggle__label">{t.enable}</span>
-                  </label>
-                  <div class="wz-schedule-topn">
-                    <label for={`weekly-topn-${ext.key}`}>{t.topN}</label>
-                    <input
-                      type="number"
-                      id={`weekly-topn-${ext.key}`}
-                      min="1"
-                      max="20"
-                      value={weekTopN}
-                      data-schedule-weekly-topn={ext.key}
-                    />
-                  </div>
-                </div>
-
-                <div class="wz-schedule-cell" role="cell">
-                  <label class="wz-toggle">
-                    <input
-                      type="checkbox"
-                      data-schedule-monthly-enabled={ext.key}
-                      checked={monthDefault}
-                    />
-                    <span class="wz-toggle__label">{t.enable}</span>
-                  </label>
-                  <div class="wz-schedule-topn">
-                    <label for={`monthly-topn-${ext.key}`}>{t.topN}</label>
-                    <input
-                      type="number"
-                      id={`monthly-topn-${ext.key}`}
-                      min="1"
-                      max="30"
-                      value={monthTopN}
-                      data-schedule-monthly-topn={ext.key}
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          <div class="wz-field" data-sink-limit-for="hacker_news">
+            <label for="slack-max-hn">{t.maxHn}</label>
+            <input type="number" id="slack-max-hn" data-sink-slack-max-hn min="1" max="15" value="3" />
+          </div>
+          <div class="wz-field" data-sink-limit-for="github_trending">
+            <label for="slack-max-github">{t.maxGithub}</label>
+            <input type="number" id="slack-max-github" data-sink-slack-max-github min="1" max="15" value="3" />
+          </div>
         </div>
       </div>
-    </details>
+    </div>
+
+    <div class="wz-card wz-card--compact">
+      <div class="wz-card__header">
+        <h3>{t.scHead}</h3>
+        <label class="wz-toggle">
+          <input type="checkbox" id="sc-enabled" data-sink-sc-enabled />
+          <span class="wz-toggle__label">{t.scEnable}</span>
+        </label>
+      </div>
+      <p class="wz-card__desc">{t.scDesc}</p>
+      <div class="wz-sink-fields" data-sink-sc-fields hidden>
+        <div class="wz-field">
+          <label for="sc-sendkey">{t.scKeyLabel}</label>
+          <input
+            type="password"
+            id="sc-sendkey"
+            data-deploy-secret="SERVERCHAN_SENDKEY"
+            placeholder="SCT..."
+            autocomplete="off"
+          />
+          <div class="wz-field__hint">{t.scHint}</div>
+        </div>
+        <div class="wz-field__hint">{t.countsHint}</div>
+        <div class="wz-field-row wz-field-row--compact" style="margin-top:16px">
+          <div class="wz-field" data-sink-limit-for="arxiv">
+            <label for="sc-max-papers">{t.maxPapers}</label>
+            <input type="number" id="sc-max-papers" data-sink-sc-max-papers min="1" max="20" value="5" />
+          </div>
+          <div class="wz-field" data-sink-limit-for="hacker_news">
+            <label for="sc-max-hn">{t.maxHn}</label>
+            <input type="number" id="sc-max-hn" data-sink-sc-max-hn min="1" max="15" value="3" />
+          </div>
+          <div class="wz-field" data-sink-limit-for="github_trending">
+            <label for="sc-max-github">{t.maxGithub}</label>
+            <input type="number" id="sc-max-github" data-sink-sc-max-github min="1" max="15" value="3" />
+          </div>
+          <div class="wz-field" data-sink-limit-for="postdoc_jobs">
+            <label for="sc-max-jobs">{t.maxJobs}</label>
+            <input type="number" id="sc-max-jobs" data-sink-sc-max-jobs min="1" max="10" value="3" />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

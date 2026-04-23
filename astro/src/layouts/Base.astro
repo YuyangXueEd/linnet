@@ -19,6 +19,8 @@ const {
 } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const shouldForceFreshDigest = pathSegments.some((segment) => ['daily', 'weekly', 'monthly'].includes(segment));
 
 // Read site-owner color theme from sources.yaml (theme: block)
 const THEME_VARS: Record<string, string> = {
@@ -56,6 +58,13 @@ try {
   <title>{title} — Linnet</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
+  {shouldForceFreshDigest && (
+    <>
+      <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+      <meta http-equiv="Pragma" content="no-cache" />
+      <meta http-equiv="Expires" content="0" />
+    </>
+  )}
   <!-- OG -->
   <meta property="og:title" content={`${title} — Linnet`} />
   <meta property="og:description" content={description} />
@@ -69,6 +78,16 @@ try {
     const t = localStorage.getItem('theme') || 'light';
     document.documentElement.dataset.theme = t;
   </script>
+  {shouldForceFreshDigest && (
+    <script is:inline>
+      (() => {
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('_fresh_digest')) return;
+        url.searchParams.set('_fresh_digest', String(Date.now()));
+        window.location.replace(url.toString());
+      })();
+    </script>
+  )}
 </head>
 <body>
   <NavBar lang={lang} />

@@ -1,7 +1,7 @@
 ---
 import type { ExtensionMeta } from '@/lib/registry';
-import { ARXIV_PROFILES } from '@/lib/arxivProfiles';
 import { ARXIV_CATEGORIES } from '@/lib/arxivCategories';
+import { ARXIV_PROFILES } from '@/lib/arxivProfiles';
 import TextField     from './fields/TextField.astro';
 import SliderField   from './fields/SliderField.astro';
 import SelectField   from './fields/SelectField.astro';
@@ -15,27 +15,39 @@ interface Props {
 }
 const { extensions, locale } = Astro.props;
 
-const languageOptions = [
-  { value: 'en', label: locale === 'zh' ? '英文 (English)' : 'English' },
-  { value: 'zh', label: locale === 'zh' ? '中文 (Chinese)' : 'Chinese' },
-];
+const academicProfileKeys = [
+  'ai_ml',
+  'cv',
+  'nlp',
+  'robotics',
+  'medical_ai',
+  'biology',
+  'physics',
+  'chemistry',
+  'mathematics',
+  'astrophysics',
+] as const;
 
 const t = {
-  globalLang:     locale === 'zh' ? '全局语言' : 'Global language',
-  globalLangDesc: locale === 'zh' ? '应用于摘要、汇总和推送通知。' : 'Applied across summaries, rollups, and sink notifications.',
-  langLabel:      locale === 'zh' ? '摘要语言' : 'Summary language',
-  globalMeta:     locale === 'zh' ? '全局设置' : 'Global settings',
-  arxivDesc:      locale === 'zh' ? '先选一个主研究方向；如果还不够，再在下面补充自定义类别或关键词。' : 'Pick one main research profile first, then add custom categories or keywords if you need more control.',
-  arxivSync:      locale === 'zh'
-    ? '如果你已经在上一步的 Academic Brief 快速配置里选过方向或填过关键词，这里会保持同步。'
-    : 'If you already picked a domain or added keywords in the Academic Brief quick setup, this panel stays in sync.',
-  arxivProfiles:  locale === 'zh' ? '主研究方向预设' : 'Primary research profile',
-  customOnly:     locale === 'zh' ? '仅自定义' : 'Custom only',
-  customOnlyDesc: locale === 'zh' ? '不使用预设，完全依赖下面的自定义类别和关键词。' : 'Skip presets and rely only on the custom categories and keywords below.',
+  leadHead:       locale === 'zh' ? '已选来源的详细配置' : 'Detailed config for selected sources',
+  leadDesc:       locale === 'zh'
+    ? '这里只有你当前启用的来源会出现。Academic Brief 的主研究方向和 arXiv 细节现在都集中在这里，不再分散到前一步。'
+    : 'Only the sources you currently enabled appear here. The Academic Brief research domain and the detailed arXiv controls now live together here.',
+  arxivDesc:      locale === 'zh' ? '这里统一决定 Academic Brief 的主研究方向，以及 arXiv 的自定义类别、关键词和抓取参数。' : 'Use this panel to set the Academic Brief primary research domain and all detailed arXiv tuning in one place.',
+  domainHead:     locale === 'zh' ? '主研究方向' : 'Primary research domain',
+  domainDesc:     locale === 'zh'
+    ? '先选一个最接近的研究 preset；如果还不够，再用下面的自定义输入继续补。'
+    : 'Pick the closest research preset first, then refine it with the custom inputs below if needed.',
+  customFocus:    locale === 'zh' ? '自定义方向' : 'Custom focus',
+  customFocusDesc: locale === 'zh'
+    ? '不套用现成 preset，主要依赖下面的自定义分类和关键词。'
+    : 'Skip the preset profiles and drive arXiv mostly with the custom fields below.',
+  customOnlyHead: locale === 'zh' ? '自定义方向说明' : 'Custom focus note',
+  customOnlyDesc: locale === 'zh' ? '选择“自定义方向”时，下面这些输入就会成为主要过滤条件。' : 'When you choose Custom focus, the manual fields below become the primary filters.',
   customHead:     locale === 'zh' ? '自定义补充' : 'Custom additions',
   customDesc:     locale === 'zh'
-    ? '如果单个预设不够，可以在下面继续补充；选择“仅自定义”时，也可以主要靠这些输入生成配置。若 categories 留空，wizard 会保留一组安全默认分类以保证抓取正常。'
-    : 'If a single preset is not enough, keep refining it below. When you choose Custom only, these inputs drive the config. If you leave categories blank, the wizard keeps a safe default category set so fetching still works.',
+    ? '如果上面选的 preset 还不够准确，可以在下面继续补充。若 categories 留空，wizard 会保留一组安全默认分类以保证抓取正常。'
+    : 'If the preset above is still not specific enough, keep refining it below. If categories stay blank, the wizard keeps a safe fallback category set so fetching still works.',
   customCats:     locale === 'zh' ? '自定义分类（arXiv 分类，如 cs.LG）' : 'Custom categories (arXiv IDs, e.g. cs.LG)',
   customKws:      locale === 'zh' ? '自定义关键词（must_include）' : 'Custom keywords (must_include)',
   customBoosts:   locale === 'zh' ? '加权关键词（boost_keywords）' : 'Boost keywords',
@@ -61,17 +73,8 @@ const categoryLabels = {
   <div class="wz-step2-sheet">
 
     <section class="wz-step2-section wz-step2-section--lead">
-      <div class="wz-step2-section__eyebrow">{t.globalMeta}</div>
-      <h3>{t.globalLang}</h3>
-      <p class="wz-card__desc">{t.globalLangDesc}</p>
-      <div class="wz-field">
-        <label for="global-language">{t.langLabel}</label>
-        <select id="global-language" name="language" data-global-language>
-          {languageOptions.map(opt => (
-            <option value={opt.value}>{opt.label}</option>
-          ))}
-        </select>
-      </div>
+      <h3>{t.leadHead}</h3>
+      <p class="wz-card__desc">{t.leadDesc}</p>
     </section>
 
     {extensions.map(ext => {
@@ -90,28 +93,40 @@ const categoryLabels = {
           {ext.key === 'arxiv' ? (
             <div>
               <p class="wz-card__desc">{t.arxivDesc}</p>
-              <div class="wz-field__hint" style="margin-top:-6px; margin-bottom:18px">{t.arxivSync}</div>
+              <div class="wz-step2-subhead" style="margin-top:0; padding-top:0; border-top:none;">
+                <strong>{t.domainHead}</strong>
+                <div class="wz-field__hint">{t.domainDesc}</div>
+              </div>
 
-              <div class="wz-field wz-field--rich">
-                <div class="wz-field__label">{t.arxivProfiles}</div>
-                <div class="wz-profile-grid" data-arxiv-profiles>
-                  <label class="wz-profile-card">
-                    <input type="radio" name="arxiv_preset" value="custom_only" data-arxiv-profile-input />
-                    <span class="wz-profile-card__name">{t.customOnly}</span>
-                    <span class="wz-profile-card__summary">{t.customOnlyDesc}</span>
-                  </label>
-                  {Object.entries(ARXIV_PROFILES).map(([key, profile]) => {
-                    const pLabel = locale === 'zh' ? profile.labelZh : profile.label;
-                    const pSummary = locale === 'zh' ? profile.summaryZh : profile.summary;
-                    return (
-                      <label class="wz-profile-card">
-                        <input type="radio" name="arxiv_preset" value={key} checked={key === 'ai_ml'} data-arxiv-profile-input />
-                        <span class="wz-profile-card__name">{pLabel}</span>
-                        <span class="wz-profile-card__summary">{pSummary}</span>
-                      </label>
-                    );
-                  })}
-                </div>
+              <div class="wz-profile-grid">
+                <label class="wz-profile-card">
+                  <input type="radio" name="brief_arxiv_preset" value="custom_only" data-arxiv-profile-input />
+                  <span class="wz-profile-card__name">{t.customFocus}</span>
+                  <span class="wz-profile-card__summary">{t.customFocusDesc}</span>
+                </label>
+                {academicProfileKeys.map((key) => {
+                  const profile = ARXIV_PROFILES[key];
+                  const pLabel = locale === 'zh' ? profile.labelZh : profile.label;
+                  const pSummary = locale === 'zh' ? profile.summaryZh : profile.summary;
+                  return (
+                    <label class="wz-profile-card">
+                      <input
+                        type="radio"
+                        name="brief_arxiv_preset"
+                        value={key}
+                        data-arxiv-profile-input
+                        checked={key === 'ai_ml'}
+                      />
+                      <span class="wz-profile-card__name">{pLabel}</span>
+                      <span class="wz-profile-card__summary">{pSummary}</span>
+                    </label>
+                  );
+                })}
+              </div>
+
+              <div class="wz-notice wz-notice--info" style="margin-top:14px">
+                <strong>{t.customOnlyHead}</strong>
+                <div>{t.customOnlyDesc}</div>
               </div>
 
               <div class="wz-step2-subhead">
@@ -119,7 +134,7 @@ const categoryLabels = {
                 <div class="wz-field__hint">{t.customDesc}</div>
               </div>
 
-              <div class="wz-field-stack">
+              <div class="wz-field-grid">
                 <div class="wz-field wz-field--rich">
                   <div class="wz-field__label">{t.customKws}</div>
                   <div class="wz-tags" data-arxiv-custom-keywords data-sync-key="arxiv-custom-keywords" data-tags="[]">

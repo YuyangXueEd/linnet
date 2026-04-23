@@ -1,133 +1,526 @@
 ---
+import type { ExtensionMeta } from '@/lib/registry';
+
 interface Props {
+  extensions: ExtensionMeta[];
   locale: 'en' | 'zh';
 }
-const { locale } = Astro.props;
+const { extensions, locale } = Astro.props;
+
+const languageOptions = [
+  { value: 'en', label: locale === 'zh' ? '英文 (English)' : 'English' },
+  { value: 'zh', label: locale === 'zh' ? '中文 (Chinese)' : 'Chinese' },
+];
+
+const PROVIDER_OPTIONS = [
+  {
+    value: 'openrouter',
+    label: 'OpenRouter',
+    baseUrl: 'https://openrouter.ai/api/v1',
+    modelsUrl: 'https://openrouter.ai/models',
+    secretName: 'OPENROUTER_API_KEY',
+    scoringModel: 'google/gemini-2.5-flash-lite-preview-09-2025',
+    summarizationModel: 'google/gemini-2.5-flash-lite-preview-09-2025',
+    models: ['google/gemini-2.5-flash-lite-preview-09-2025'],
+    note: locale === 'zh'
+      ? '默认推荐路径。一个 key 可以切换多家模型，最适合第一次上手。'
+      : 'Recommended default. One key can access multiple model families, which keeps first-time setup simple.',
+  },
+  {
+    value: 'openai',
+    label: 'OpenAI',
+    baseUrl: 'https://api.openai.com/v1',
+    modelsUrl: 'https://developers.openai.com/api/docs/models',
+    secretName: 'OPENAI_API_KEY',
+    scoringModel: 'gpt-5-mini',
+    summarizationModel: 'gpt-5-mini',
+    models: ['gpt-5-mini', 'gpt-5-nano', 'gpt-4.1-mini'],
+    note: locale === 'zh'
+      ? '适合直接接 OpenAI API。这里默认给你便宜一点的 mini 系列。'
+      : 'Use this for the direct OpenAI API. Defaults favour the cheaper mini tier.',
+  },
+  {
+    value: 'anthropic_compat',
+    label: locale === 'zh' ? 'Anthropic（OpenAI 兼容）' : 'Anthropic (OpenAI-compatible)',
+    baseUrl: 'https://api.anthropic.com/v1/',
+    modelsUrl: 'https://docs.anthropic.com/en/docs/models-overview',
+    secretName: 'ANTHROPIC_API_KEY',
+    scoringModel: 'claude-haiku-4-5',
+    summarizationModel: 'claude-haiku-4-5',
+    models: ['claude-haiku-4-5', 'claude-sonnet-4-6'],
+    note: locale === 'zh'
+      ? '当前仓库可以通过 OpenAI 兼容层接 Claude，但更偏向兼容接入，不是 Anthropic 原生 SDK 路径。'
+      : 'This repo can use Claude through Anthropic’s OpenAI compatibility layer rather than the native Anthropic SDK path.',
+  },
+  {
+    value: 'google_compat',
+    label: locale === 'zh' ? 'Google Gemini（OpenAI 兼容）' : 'Google Gemini (OpenAI-compatible)',
+    baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai/',
+    modelsUrl: 'https://ai.google.dev/models/gemini',
+    secretName: 'GEMINI_API_KEY',
+    scoringModel: 'gemini-2.5-flash-lite',
+    summarizationModel: 'gemini-2.5-flash-lite',
+    models: ['gemini-2.5-flash-lite', 'gemini-2.5-flash'],
+    note: locale === 'zh'
+      ? 'Gemini 的 OpenAI 兼容接口可直接接入当前 Python 逻辑。'
+      : 'Gemini’s OpenAI-compatible endpoint works with the current Python flow.',
+  },
+  {
+    value: 'custom',
+    label: locale === 'zh' ? '自定义 OpenAI-compatible' : 'Custom OpenAI-compatible',
+    baseUrl: '',
+    modelsUrl: '',
+    secretName: 'LLM_API_KEY',
+    scoringModel: '',
+    summarizationModel: '',
+    models: [],
+    note: locale === 'zh'
+      ? '如果你有自己的 OpenAI-compatible gateway，请在下面填真实 endpoint，再决定 secret 名称和模型 ID。'
+      : 'If you have your own OpenAI-compatible gateway, enter the real endpoint below, then set the secret name and model IDs.',
+  },
+] as const;
 
 const t = {
-  desc:           locale === 'zh' ? '在不将密钥写入 YAML 的情况下启用通知。凭据作为 GitHub Actions Secret 单独存储。' : 'Enable notifications without pasting secrets into YAML. Credentials are stored as GitHub Actions secrets separately.',
-  quickHead:      locale === 'zh' ? '这一步可以先跳过' : 'You can skip this for now',
-  quickDesc:      locale === 'zh'
-    ? '默认只部署网页站点，不需要任何额外推送。等主流程跑通后，再回来打开 Slack 或 Server酱更稳。'
-    : 'The default path deploys only the site, with no extra delivery channels. It is safer to come back for Slack or ServerChan after the main flow works.',
-  advancedHead:   locale === 'zh' ? '高级推送渠道配置' : 'Advanced delivery channel setup',
-  advancedDesc:   locale === 'zh'
-    ? '只有当你确定想把 digest 推到 Slack 或个人通知里时，才需要展开这里。'
-    : 'Open this only when you are ready to deliver the digest into Slack or personal notifications.',
-  slackHead:      'Slack',
-  slackEnable:    locale === 'zh' ? '启用 Slack 推送' : 'Enable Slack delivery',
-  slackDesc:      locale === 'zh'
-    ? '把 digest 通过 Incoming Webhook 发到你的 Slack 频道。适合团队频道或你自己的工作区。'
-    : 'Send the digest into a Slack channel through an Incoming Webhook. Good for team channels or your own workspace.',
-  webhookLabel:   locale === 'zh' ? 'Slack Webhook URL' : 'Slack Webhook URL',
-  webhookHint:    locale === 'zh' ? '将作为 SLACK_WEBHOOK_URL 存入 GitHub Actions Secrets，不写入 YAML。' : 'Stored as SLACK_WEBHOOK_URL GitHub Actions secret — never written to YAML.',
-  maxPapers:      locale === 'zh' ? '最多论文数' : 'Max papers',
-  maxHn:          locale === 'zh' ? '最多 HN 条目' : 'Max HN stories',
-  maxGithub:      locale === 'zh' ? '最多 GitHub 仓库' : 'Max GitHub repos',
-  scHead:         locale === 'zh' ? 'Server酱 (ServerChan)' : 'Server酱 (ServerChan)',
-  scEnable:       locale === 'zh' ? '启用 Server酱推送' : 'Enable ServerChan delivery',
-  scDesc:         locale === 'zh'
-    ? '把 digest 通过 Server酱的 SendKey 推到你的个人通知里，常见用法是手机或微信提醒。'
-    : 'Push the digest through ServerChan using a SendKey, which is often used for personal phone or WeChat-style notifications.',
-  scKeyLabel:     locale === 'zh' ? 'SendKey' : 'SendKey',
-  scHint:         locale === 'zh' ? '将作为 SERVERCHAN_SENDKEY 存入 GitHub Actions Secrets，不写入 YAML。' : 'Stored as SERVERCHAN_SENDKEY GitHub Actions secret — never written to YAML.',
-  maxJobs:        locale === 'zh' ? '最多职位数' : 'Max jobs',
-  countsHint:     locale === 'zh'
-    ? '这里只显示你在前面真正启用过的内容来源。'
-    : 'Only sources you enabled earlier are shown here.',
+  desc: locale === 'zh'
+    ? '先把必需的 LLM access 配好，再决定是否要细调其余高级项。除了 API key 和自定义 endpoint，这一页大部分都可以晚点再回来改。'
+    : 'Configure the required LLM access first, then decide whether you want to refine the rest. Apart from the API key and a custom endpoint, most of this step can wait until later.',
+  llmHead: locale === 'zh' ? 'LLM access 与高级控制' : 'LLM access and advanced control',
+  llmDesc: locale === 'zh'
+    ? '这里决定 provider、API key、endpoint、模型和 secret 名称。第一次部署时，至少需要一个可用的 API key；如果选自定义 OpenAI-compatible，还需要真实 endpoint。'
+    : 'This card controls the provider, API key, endpoint, models, and secret name. Your first deploy needs a working API key, and the custom OpenAI-compatible option also needs a real endpoint.',
+  providerLabel: locale === 'zh' ? 'Provider 预设' : 'Provider preset',
+  providerHint: locale === 'zh'
+    ? '切换预设时会同步默认 endpoint、secret 名称和推荐模型。'
+    : 'Switching presets also updates the default endpoint, secret name, and recommended models.',
+  apiKeyLabel: locale === 'zh' ? 'API key 值' : 'API key value',
+  requiredMark: '*',
+  apiKeyFor: locale === 'zh' ? '对应 secret' : 'Secret name',
+  apiKeyHint: locale === 'zh'
+    ? '这是第一次部署的必填项，只会作为 GitHub Actions Secret 写入，不会写进 YAML。'
+    : 'This is required for the first deploy. It is only written as a GitHub Actions secret and never stored in YAML.',
+  baseUrlLabel: locale === 'zh' ? 'API endpoint / Base URL' : 'API endpoint / Base URL',
+  baseUrlHint: locale === 'zh'
+    ? '预设 provider 会自动填好；如果你选择自定义 OpenAI-compatible，这里必须填真实 endpoint。'
+    : 'Preset providers fill this automatically. If you choose the custom OpenAI-compatible option, this field must contain the real endpoint.',
+  secretLabel: locale === 'zh' ? 'GitHub Secret 名称' : 'GitHub secret name',
+  secretHint: locale === 'zh'
+    ? '生成的 `sources.yaml` 会记录这个环境变量名，部署时也会按这个名字写入 GitHub Actions Secrets。'
+    : 'The generated `sources.yaml` stores this env var name, and deploy uses the same name for GitHub Actions secrets.',
+  scoreModelLabel: locale === 'zh' ? '评分模型' : 'Scoring model',
+  summaryModelLabel: locale === 'zh' ? '摘要模型' : 'Summarization model',
+  modelHint: locale === 'zh'
+    ? '可以直接输入任意模型 ID。'
+    : 'You can type any model ID directly.',
+  modelsLinkPrefix: locale === 'zh' ? '查看' : 'Browse',
+  modelsLinkSuffix: locale === 'zh' ? '模型列表' : 'models',
+  globalHead: locale === 'zh' ? '全局默认值' : 'Global defaults',
+  globalDesc: locale === 'zh'
+    ? '这些设置会影响整个 briefing 的默认输出方式，而不是某一个单独来源。'
+    : 'These settings affect the default behaviour of the whole briefing rather than one individual source.',
+  globalLang: locale === 'zh' ? '摘要语言' : 'Summary language',
+  globalLangHint: locale === 'zh'
+    ? '应用于摘要、汇总和通知文本。'
+    : 'Applied across summaries, rollups, and notification text.',
+  scheduleHead: locale === 'zh' ? 'Weekly / Monthly 汇总' : 'Weekly / monthly rollups',
+  scheduleDesc: locale === 'zh'
+    ? '决定哪些来源应进入 weekly / monthly，以及每种来源各取多少条。'
+    : 'Decide which sources appear in weekly/monthly rollups and how many items each one should contribute.',
+  weeklyHead: locale === 'zh' ? '周报' : 'Weekly',
+  monthlyHead: locale === 'zh' ? '月报' : 'Monthly',
+  enable: locale === 'zh' ? '启用' : 'Include',
+  topN: locale === 'zh' ? '条目数' : 'Top N',
+  themeHead: locale === 'zh' ? '站点主题' : 'Site theme',
+  themeDesc: locale === 'zh'
+    ? '如果你想给 Linnet 一个更明确的视觉方向，再在这里慢慢调色。'
+    : 'Use this section when you want a more distinctive visual identity for the site.',
+  lightCol: locale === 'zh' ? '浅色主题' : 'Light theme',
+  darkCol: locale === 'zh' ? '暗色主题' : 'Dark theme',
+  previewEyebrow: locale === 'zh' ? '晨间简报' : 'Morning briefing',
+  previewTitle: locale === 'zh' ? '你的 Linnet 首页' : 'Your Linnet front page',
+  previewBody: locale === 'zh'
+    ? '预览背景色、强调色和正文层级在最终摘要站点里会怎样组合。'
+    : 'Preview how background, accent, and text hierarchy will work together on the final digest site.',
+  previewCta: locale === 'zh' ? '导出配置' : 'Export config',
+  bgHead: locale === 'zh' ? '背景色' : 'Background',
+  accentHead: locale === 'zh' ? '强调色' : 'Accent colour',
+  darkBgHead: locale === 'zh' ? '背景色' : 'Background',
+  darkAccHead: locale === 'zh' ? '强调色' : 'Accent colour',
+  customHex: locale === 'zh' ? '自定义十六进制颜色' : 'Custom hex',
 };
+
+const BG_PRESETS = [
+  { key: 'press', label: 'Press', bg: '#f4ede0' },
+  { key: 'morning', label: 'Morning Cream', bg: '#F2E6CE' },
+  { key: 'stone', label: 'Stone', bg: '#E8E2D8' },
+  { key: 'white', label: 'Newsprint', bg: '#F9F5EE' },
+  { key: 'custom', label: locale === 'zh' ? '自定义' : 'Custom', bg: '' },
+];
+
+const ACCENT_PRESETS = [
+  { key: 'robin', label: 'Robin', color: '#c43d2a' },
+  { key: 'burgundy', label: 'Burgundy', color: '#8f1d22' },
+  { key: 'terracotta', label: 'Terracotta', color: '#b85a3c' },
+  { key: 'teal', label: 'Teal', color: '#2a7a7a' },
+  { key: 'indigo', label: 'Indigo', color: '#3d4d8f' },
+  { key: 'gold', label: 'Gold', color: '#9c7520' },
+  { key: 'plum', label: 'Plum', color: '#6b3b5e' },
+  { key: 'custom', label: locale === 'zh' ? '自定义' : 'Custom', color: '' },
+];
+
+const DARK_BG_PRESETS = [
+  { key: 'ink', label: 'Ink', bg: '#1a1614' },
+  { key: 'slate', label: 'Slate', bg: '#141c22' },
+  { key: 'charcoal', label: 'Charcoal', bg: '#1e1e1e' },
+  { key: 'custom', label: locale === 'zh' ? '自定义' : 'Custom', bg: '' },
+];
 ---
 
 <div class="wz-step" data-step="4" aria-hidden="true">
   <p class="wz-step__desc">{t.desc}</p>
 
-  <div class="wz-notice wz-notice--info">
-    <strong>{t.quickHead}</strong>
-    <div>{t.quickDesc}</div>
-  </div>
+  <div class="wz-card-grid">
+    <div class="wz-card wz-card--compact wz-card--span-2">
+      <h3>{t.llmHead}</h3>
+      <p class="wz-card__desc">{t.llmDesc}</p>
 
-  <details class="wz-advanced-card wz-advanced-card--block">
-    <summary class="wz-advanced-card__summary">
-      <span class="wz-advanced-card__title">{t.advancedHead}</span>
-      <span class="wz-advanced-card__desc">{t.advancedDesc}</span>
-    </summary>
+      <div class="wz-field-row wz-field-row--compact">
+        <div class="wz-field">
+          <label for="llm-provider">{t.providerLabel}</label>
+          <select id="llm-provider" data-llm-provider>
+            {PROVIDER_OPTIONS.map((option) => (
+              <option
+                value={option.value}
+                selected={option.value === 'openrouter'}
+                data-base-url={option.baseUrl}
+                data-models-url={option.modelsUrl}
+                data-secret-name={option.secretName}
+                data-scoring-model={option.scoringModel}
+                data-summarization-model={option.summarizationModel}
+                data-models={JSON.stringify(option.models)}
+                data-note={option.note}
+              >
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <div class="wz-field__hint">{t.providerHint}</div>
+        </div>
 
-    <div class="wz-advanced-card__content">
-      <div class="wz-stack">
-
-        <!-- Slack -->
-        <div class="wz-card">
-          <div class="wz-card__header">
-            <h3>{t.slackHead}</h3>
-            <label class="wz-toggle">
-              <input type="checkbox" id="slack-enabled" data-sink-slack-enabled />
-              <span class="wz-toggle__label">{t.slackEnable}</span>
-            </label>
+        <div class="wz-field">
+          <label for="llm-api-key">{t.apiKeyLabel} <span class="wz-required-marker" aria-hidden="true">{t.requiredMark}</span></label>
+          <input
+            id="llm-api-key"
+            type="password"
+            data-llm-api-key
+            placeholder="sk-..."
+            autocomplete="off"
+            required
+          />
+          <div class="wz-field__meta">
+            {t.apiKeyFor}: <code data-llm-secret-code>OPENROUTER_API_KEY</code>
           </div>
-          <p class="wz-card__desc">{t.slackDesc}</p>
-          <div class="wz-sink-fields" data-sink-slack-fields>
-            <div class="wz-field">
-              <label for="slack-webhook">{t.webhookLabel}</label>
-              <input type="password" id="slack-webhook" data-deploy-secret="SLACK_WEBHOOK_URL" placeholder="https://hooks.slack.com/services/..." autocomplete="off" />
-              <div class="wz-field__hint">{t.webhookHint}</div>
-            </div>
-            <div class="wz-field__hint">{t.countsHint}</div>
-            <div class="wz-field-row">
-              <div class="wz-field" data-sink-limit-for="arxiv">
-                <label for="slack-max-papers">{t.maxPapers}</label>
-                <input type="number" id="slack-max-papers" data-sink-slack-max-papers min="1" max="20" value="5" />
-              </div>
-              <div class="wz-field" data-sink-limit-for="hacker_news">
-                <label for="slack-max-hn">{t.maxHn}</label>
-                <input type="number" id="slack-max-hn" data-sink-slack-max-hn min="1" max="15" value="3" />
-              </div>
-              <div class="wz-field" data-sink-limit-for="github_trending">
-                <label for="slack-max-github">{t.maxGithub}</label>
-                <input type="number" id="slack-max-github" data-sink-slack-max-github min="1" max="15" value="3" />
-              </div>
-            </div>
+          <div class="wz-field__hint" data-llm-api-key-hint>{t.apiKeyHint}</div>
+        </div>
+      </div>
+
+      <div class="wz-field-row wz-field-row--compact" style="margin-top:18px">
+        <div class="wz-field">
+          <label for="llm-base-url">
+            {t.baseUrlLabel}
+            <span class="wz-required-marker" data-required-marker-for="llm-base-url" aria-hidden="true" hidden>{t.requiredMark}</span>
+          </label>
+          <input
+            id="llm-base-url"
+            type="url"
+            data-llm-base-url
+            value={PROVIDER_OPTIONS[0].baseUrl}
+            placeholder="https://api.example.com/v1"
+          />
+          <div class="wz-field__hint">{t.baseUrlHint}</div>
+        </div>
+
+        <div class="wz-field">
+          <label for="llm-secret-name">{t.secretLabel}</label>
+          <input id="llm-secret-name" type="text" data-llm-secret-name value={PROVIDER_OPTIONS[0].secretName} />
+          <div class="wz-field__hint">{t.secretHint}</div>
+        </div>
+      </div>
+
+      <div class="wz-field-row wz-field-row--compact" style="margin-top:18px">
+        <div class="wz-field">
+          <label for="llm-scoring-model">{t.scoreModelLabel}</label>
+          <input
+            id="llm-scoring-model"
+            type="text"
+            data-llm-scoring-model
+            list="llm-model-options"
+            value={PROVIDER_OPTIONS[0].scoringModel}
+          />
+          <div class="wz-field__meta">
+            <a
+              href={PROVIDER_OPTIONS[0].modelsUrl}
+              target="_blank"
+              rel="noopener"
+              data-llm-models-link
+            >
+              {t.modelsLinkPrefix} {PROVIDER_OPTIONS[0].label} {t.modelsLinkSuffix}
+            </a>
           </div>
         </div>
 
-        <!-- ServerChan -->
-        <div class="wz-card">
-          <div class="wz-card__header">
-            <h3>{t.scHead}</h3>
-            <label class="wz-toggle">
-              <input type="checkbox" id="sc-enabled" data-sink-sc-enabled />
-              <span class="wz-toggle__label">{t.scEnable}</span>
-            </label>
-          </div>
-          <p class="wz-card__desc">{t.scDesc}</p>
-          <div class="wz-sink-fields" data-sink-sc-fields>
-            <div class="wz-field">
-              <label for="sc-sendkey">{t.scKeyLabel}</label>
-              <input type="password" id="sc-sendkey" data-deploy-secret="SERVERCHAN_SENDKEY" placeholder="SCT..." autocomplete="off" />
-              <div class="wz-field__hint">{t.scHint}</div>
-            </div>
-            <div class="wz-field__hint">{t.countsHint}</div>
-            <div class="wz-field-row">
-              <div class="wz-field" data-sink-limit-for="arxiv">
-                <label for="sc-max-papers">{t.maxPapers}</label>
-                <input type="number" id="sc-max-papers" data-sink-sc-max-papers min="1" max="20" value="5" />
-              </div>
-              <div class="wz-field" data-sink-limit-for="hacker_news">
-                <label for="sc-max-hn">{t.maxHn}</label>
-                <input type="number" id="sc-max-hn" data-sink-sc-max-hn min="1" max="15" value="3" />
-              </div>
-              <div class="wz-field" data-sink-limit-for="github_trending">
-                <label for="sc-max-github">{t.maxGithub}</label>
-                <input type="number" id="sc-max-github" data-sink-sc-max-github min="1" max="15" value="3" />
-              </div>
-              <div class="wz-field" data-sink-limit-for="postdoc_jobs">
-                <label for="sc-max-jobs">{t.maxJobs}</label>
-                <input type="number" id="sc-max-jobs" data-sink-sc-max-jobs min="1" max="10" value="3" />
-              </div>
-            </div>
-          </div>
+        <div class="wz-field">
+          <label for="llm-summarization-model">{t.summaryModelLabel}</label>
+          <input
+            id="llm-summarization-model"
+            type="text"
+            data-llm-summarization-model
+            list="llm-model-options"
+            value={PROVIDER_OPTIONS[0].summarizationModel}
+          />
+          <datalist id="llm-model-options" data-llm-model-options>
+            {PROVIDER_OPTIONS[0].models.map((model) => (
+              <option value={model}></option>
+            ))}
+          </datalist>
+          <div class="wz-field__hint">{t.modelHint}</div>
         </div>
+      </div>
 
+      <div class="wz-notice wz-notice--info" style="margin-top:18px; margin-bottom:0" data-llm-provider-note>
+        {PROVIDER_OPTIONS[0].note}
       </div>
     </div>
-  </details>
+
+    <div class="wz-card wz-card--compact wz-card--span-2">
+      <h3>{t.globalHead}</h3>
+      <p class="wz-card__desc">{t.globalDesc}</p>
+      <div class="wz-field-row wz-field-row--compact">
+        <div class="wz-field">
+          <label for="global-language">{t.globalLang}</label>
+          <select id="global-language" name="language" data-global-language>
+            {languageOptions.map((opt) => (
+              <option value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+          <div class="wz-field__hint">{t.globalLangHint}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wz-card wz-card--compact wz-card--span-2">
+      <h3>{t.scheduleHead}</h3>
+      <p class="wz-card__desc">{t.scheduleDesc}</p>
+
+      <div class="wz-schedule-table" role="table" aria-label="Schedule preferences">
+        <div class="wz-schedule-table__head" role="row">
+          <div role="columnheader">{locale === 'zh' ? '来源' : 'Source'}</div>
+          <div role="columnheader">{t.weeklyHead}</div>
+          <div role="columnheader">{t.monthlyHead}</div>
+        </div>
+
+        {extensions.map((ext) => {
+          const name = locale === 'zh' ? (ext.displayNameZh ?? ext.displayName) : ext.displayName;
+          const weekDefault = ext.weeklyDefault ?? false;
+          const monthDefault = ext.monthlyDefault ?? false;
+          const weekTopN = ext.weeklyTopN ?? 5;
+          const monthTopN = ext.monthlyTopN ?? 5;
+          return (
+            <div class="wz-schedule-row" data-schedule-for={ext.key} role="row" hidden>
+              <div class="wz-schedule-row__name" role="cell">{name}</div>
+
+              <div class="wz-schedule-cell" role="cell">
+                <label class="wz-toggle">
+                  <input
+                    type="checkbox"
+                    data-schedule-weekly-enabled={ext.key}
+                    checked={weekDefault}
+                  />
+                  <span class="wz-toggle__label">{t.enable}</span>
+                </label>
+                <div class="wz-schedule-topn">
+                  <label for={`weekly-topn-${ext.key}`}>{t.topN}</label>
+                  <input
+                    type="number"
+                    id={`weekly-topn-${ext.key}`}
+                    min="1"
+                    max="20"
+                    value={weekTopN}
+                    data-schedule-weekly-topn={ext.key}
+                  />
+                </div>
+              </div>
+
+              <div class="wz-schedule-cell" role="cell">
+                <label class="wz-toggle">
+                  <input
+                    type="checkbox"
+                    data-schedule-monthly-enabled={ext.key}
+                    checked={monthDefault}
+                  />
+                  <span class="wz-toggle__label">{t.enable}</span>
+                </label>
+                <div class="wz-schedule-topn">
+                  <label for={`monthly-topn-${ext.key}`}>{t.topN}</label>
+                  <input
+                    type="number"
+                    id={`monthly-topn-${ext.key}`}
+                    min="1"
+                    max="30"
+                    value={monthTopN}
+                    data-schedule-monthly-topn={ext.key}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <div class="wz-card wz-card--compact wz-card--span-2">
+      <h3>{t.themeHead}</h3>
+      <p class="wz-card__desc">{t.themeDesc}</p>
+
+      <div class="wz-theme-columns">
+        <div class="wz-theme-col">
+          <div class="wz-theme-col__label">{t.lightCol}</div>
+
+          <article class="wz-theme-preview" data-theme-preview="light">
+            <div class="wz-theme-preview__surface">
+              <div class="wz-theme-preview__nav">
+                <span class="wz-theme-preview__brand">Linnet</span>
+                <span class="wz-theme-preview__badge">Daily</span>
+              </div>
+              <div class="wz-theme-preview__hero">
+                <div class="wz-theme-preview__eyebrow">{t.previewEyebrow}</div>
+                <h4>{t.previewTitle}</h4>
+                <p>{t.previewBody}</p>
+              </div>
+              <div class="wz-theme-preview__footer">
+                <span class="wz-theme-preview__pill">arXiv</span>
+                <span class="wz-theme-preview__pill">GitHub</span>
+                <span class="wz-theme-preview__cta">{t.previewCta}</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="wz-theme-section">
+            <div class="wz-theme-section__label">{t.bgHead}</div>
+            <div class="wz-preset-row" data-theme-bg-presets>
+              {BG_PRESETS.map((preset) => (
+                <button
+                  type="button"
+                  class="wz-preset"
+                  data-bg-preset={preset.key}
+                  aria-pressed={preset.key === 'press' ? 'true' : 'false'}
+                >
+                  {preset.bg
+                    ? <span class="wz-preset__swatch" style={`background:${preset.bg}`}></span>
+                    : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>}
+                  <span>{preset.label}</span>
+                </button>
+              ))}
+            </div>
+            <div class="wz-custom-color" data-custom-bg-row hidden>
+              <input type="color" id="custom-bg-picker" data-custom-bg-picker value="#f4ede0" />
+              <input type="text" id="custom-bg" data-custom-bg placeholder="#f4ede0" maxlength="7" />
+              <span class="wz-field__hint">{t.customHex}</span>
+            </div>
+          </div>
+
+          <div class="wz-theme-section">
+            <div class="wz-theme-section__label">{t.accentHead}</div>
+            <div class="wz-preset-row" data-theme-accent-presets>
+              {ACCENT_PRESETS.map((preset) => (
+                <button
+                  type="button"
+                  class="wz-preset"
+                  data-accent-preset={preset.key}
+                  aria-pressed={preset.key === 'robin' ? 'true' : 'false'}
+                >
+                  {preset.color
+                    ? <span class="wz-preset__swatch" style={`background:${preset.color}`}></span>
+                    : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>}
+                  <span>{preset.label}</span>
+                </button>
+              ))}
+            </div>
+            <div class="wz-custom-color" data-custom-accent-row hidden>
+              <input type="color" id="custom-accent-picker" data-custom-accent-picker value="#c43d2a" />
+              <input type="text" id="custom-accent" data-custom-accent placeholder="#c43d2a" maxlength="7" />
+            </div>
+          </div>
+        </div>
+
+        <div class="wz-theme-col wz-theme-col--dark">
+          <div class="wz-theme-col__label">{t.darkCol}</div>
+
+          <article class="wz-theme-preview" data-theme-preview="dark">
+            <div class="wz-theme-preview__surface">
+              <div class="wz-theme-preview__nav">
+                <span class="wz-theme-preview__brand">Linnet</span>
+                <span class="wz-theme-preview__badge">Night</span>
+              </div>
+              <div class="wz-theme-preview__hero">
+                <div class="wz-theme-preview__eyebrow">{t.previewEyebrow}</div>
+                <h4>{t.previewTitle}</h4>
+                <p>{t.previewBody}</p>
+              </div>
+              <div class="wz-theme-preview__footer">
+                <span class="wz-theme-preview__pill">Weekly</span>
+                <span class="wz-theme-preview__pill">Review</span>
+                <span class="wz-theme-preview__cta">{t.previewCta}</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="wz-theme-section">
+            <div class="wz-theme-section__label">{t.darkBgHead}</div>
+            <div class="wz-preset-row" data-theme-dark-bg-presets>
+              {DARK_BG_PRESETS.map((preset) => (
+                <button
+                  type="button"
+                  class="wz-preset"
+                  data-dark-bg-preset={preset.key}
+                  aria-pressed={preset.key === 'ink' ? 'true' : 'false'}
+                >
+                  {preset.bg
+                    ? <span class="wz-preset__swatch" style={`background:${preset.bg};border-color:rgba(255,255,255,0.2)`}></span>
+                    : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>}
+                  <span>{preset.label}</span>
+                </button>
+              ))}
+            </div>
+            <div class="wz-custom-color" data-custom-dark-bg-row hidden>
+              <input type="color" data-custom-dark-bg-picker value="#1a1614" />
+              <input type="text" data-custom-dark-bg placeholder="#1a1614" maxlength="7" />
+            </div>
+          </div>
+
+          <div class="wz-theme-section">
+            <div class="wz-theme-section__label">{t.darkAccHead}</div>
+            <div class="wz-preset-row" data-theme-dark-accent-presets>
+              {ACCENT_PRESETS.map((preset) => (
+                <button
+                  type="button"
+                  class="wz-preset"
+                  data-dark-accent-preset={preset.key}
+                  aria-pressed={preset.key === 'robin' ? 'true' : 'false'}
+                >
+                  {preset.color
+                    ? <span class="wz-preset__swatch" style={`background:${preset.color}`}></span>
+                    : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>}
+                  <span>{preset.label}</span>
+                </button>
+              ))}
+            </div>
+            <div class="wz-custom-color" data-custom-dark-accent-row hidden>
+              <input type="color" data-custom-dark-accent-picker value="#c43d2a" />
+              <input type="text" data-custom-dark-accent placeholder="#c43d2a" maxlength="7" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

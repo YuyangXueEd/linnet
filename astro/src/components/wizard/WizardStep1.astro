@@ -1,26 +1,11 @@
 ---
 import type { ExtensionMeta } from '@/lib/registry';
-import { ARXIV_PROFILES } from '@/lib/arxivProfiles';
-import { ARXIV_CATEGORIES } from '@/lib/arxivCategories';
 
 interface Props {
   extensions: ExtensionMeta[];
   locale: 'en' | 'zh';
 }
 const { extensions, locale } = Astro.props;
-
-const academicProfileKeys = [
-  'ai_ml',
-  'cv',
-  'nlp',
-  'robotics',
-  'medical_ai',
-  'biology',
-  'physics',
-  'chemistry',
-  'mathematics',
-  'astrophysics',
-] as const;
 
 const t = {
   starterEyebrow: locale === 'zh' ? 'Starter mode' : 'Starter mode',
@@ -45,27 +30,6 @@ const t = {
   currentDesc:    locale === 'zh'
     ? '这里会跟着你当前模式和手动增删实时变化。'
     : 'This updates live as you switch modes or manually add/remove sources.',
-  domainHead:     locale === 'zh' ? 'Step 0.5 — 选择主研究方向' : 'Step 0.5 — Choose your primary research domain',
-  domainDesc:     locale === 'zh'
-    ? 'Academic Brief 会先用一个主领域 preset 启动 arXiv；如果还不够，再补充自定义分类和关键词。'
-    : 'Academic Brief starts arXiv from one primary domain preset. Add custom categories and keywords if you need more specificity.',
-  personalHead:   locale === 'zh' ? 'Daily Personal Brief 会保持更轻量' : 'Daily Personal Brief stays lighter',
-  personalPanelDesc: locale === 'zh'
-    ? '默认只保留天气、Hacker News 和 GitHub Trending。只有当你需要更多来源时，再展开下面的高级来源选择。'
-    : 'It starts with weather, Hacker News, and GitHub Trending. Only open the advanced source picker below if you want to add more.',
-  customFocus:    locale === 'zh' ? '自定义方向' : 'Custom focus',
-  customFocusDesc: locale === 'zh'
-    ? '不套用现成 preset，主要依赖下面的自定义分类和关键词。'
-    : 'Skip the preset profiles and drive arXiv mostly with the custom fields below.',
-  quickCustomHead: locale === 'zh' ? '快速自定义 arXiv' : 'Quick arXiv customisation',
-  quickCustomDesc: locale === 'zh'
-    ? '这些会直接同步到后面的完整 arXiv 配置里。想细调更多参数，下一步仍然可以继续改。'
-    : 'These sync directly into the full arXiv config later in the wizard. You can still fine-tune more fields in the next step.',
-  customCats:     locale === 'zh' ? '自定义分类（如 cs.LG）' : 'Custom categories (e.g. cs.LG)',
-  customKws:      locale === 'zh' ? '自定义关键词（must_include）' : 'Custom keywords (must_include)',
-  customBoosts:   locale === 'zh' ? '加权关键词（boost_keywords）' : 'Boost keywords',
-  addTag:         locale === 'zh' ? '添加' : 'Add',
-  noTag:          locale === 'zh' ? '尚未添加' : 'None added',
   advancedHead:   locale === 'zh' ? '高级来源选择与排序' : 'Advanced source selection and ordering',
   advancedDesc:   locale === 'zh'
     ? '只有在你想跳出 starter mode 默认组合时，才需要展开这里。'
@@ -131,97 +95,6 @@ const categoryLabels = {
       <div class="wz-field__hint">{t.currentDesc}</div>
     </div>
     <div class="wz-brief-selection-summary" data-brief-selection-summary></div>
-
-    <div class="wz-brief-mode-panel" data-brief-mode-panel="academic" hidden={false}>
-      <div class="wz-step2-subhead">
-        <strong>{t.domainHead}</strong>
-        <div class="wz-field__hint">{t.domainDesc}</div>
-      </div>
-
-      <div class="wz-profile-grid" data-brief-academic-profiles>
-        <label class="wz-profile-card">
-          <input type="radio" name="brief_arxiv_preset" value="custom_only" data-arxiv-profile-input />
-          <span class="wz-profile-card__name">{t.customFocus}</span>
-          <span class="wz-profile-card__summary">{t.customFocusDesc}</span>
-        </label>
-        {academicProfileKeys.map((key) => {
-          const profile = ARXIV_PROFILES[key];
-          const pLabel = locale === 'zh' ? profile.labelZh : profile.label;
-          const pSummary = locale === 'zh' ? profile.summaryZh : profile.summary;
-          return (
-            <label class="wz-profile-card">
-              <input
-                type="radio"
-                name="brief_arxiv_preset"
-                value={key}
-                data-arxiv-profile-input
-                checked={key === 'ai_ml'}
-              />
-              <span class="wz-profile-card__name">{pLabel}</span>
-              <span class="wz-profile-card__summary">{pSummary}</span>
-            </label>
-          );
-        })}
-      </div>
-
-      <div class="wz-step2-subhead">
-        <strong>{t.quickCustomHead}</strong>
-        <div class="wz-field__hint">{t.quickCustomDesc}</div>
-      </div>
-
-      <div class="wz-field-grid">
-        <div class="wz-field wz-field--rich">
-          <div class="wz-field__label">{t.customKws}</div>
-          <div class="wz-tags" data-sync-key="arxiv-custom-keywords" data-tags="[]">
-            <div class="wz-tags__list" data-tags-list>
-              <span class="wz-tags__empty">{t.noTag}</span>
-            </div>
-            <div class="wz-tags__input-row">
-              <input type="text" placeholder="e.g. hallucination" class="wz-tags__input" autocomplete="off" />
-              <button type="button" class="wz-tags__add" data-tags-add>{t.addTag}</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="wz-field wz-field--rich">
-          <div class="wz-field__label">{t.customCats}</div>
-          <div class="wz-tags" data-sync-key="arxiv-custom-categories" data-tags="[]">
-            <div class="wz-tags__list" data-tags-list>
-              <span class="wz-tags__empty">{t.noTag}</span>
-            </div>
-            <div class="wz-tags__input-row">
-              <input type="text" placeholder="e.g. cs.CV" class="wz-tags__input" list="brief-arxiv-cats-datalist" autocomplete="off" />
-              <button type="button" class="wz-tags__add" data-tags-add>{t.addTag}</button>
-            </div>
-          </div>
-        </div>
-        <datalist id="brief-arxiv-cats-datalist">
-          {ARXIV_CATEGORIES.map(cat => (
-            <option value={cat.id}>{cat.id} — {cat.name} ({cat.group})</option>
-          ))}
-        </datalist>
-
-        <div class="wz-field wz-field--rich">
-          <div class="wz-field__label">{t.customBoosts}</div>
-          <div class="wz-tags" data-sync-key="arxiv-custom-boosts" data-tags="[]">
-            <div class="wz-tags__list" data-tags-list>
-              <span class="wz-tags__empty">{t.noTag}</span>
-            </div>
-            <div class="wz-tags__input-row">
-              <input type="text" placeholder="e.g. LoRA" class="wz-tags__input" autocomplete="off" />
-              <button type="button" class="wz-tags__add" data-tags-add>{t.addTag}</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wz-brief-mode-panel" data-brief-mode-panel="personal" hidden={true}>
-      <div class="wz-notice wz-notice--info" style="margin-bottom:0">
-        <strong>{t.personalHead}</strong>
-        <div>{t.personalPanelDesc}</div>
-      </div>
-    </div>
   </section>
 
   <details class="wz-brief-advanced">
