@@ -78,9 +78,9 @@ These decisions are settled and should guide all implementation choices.
 
 - [x] Ship the GitHub App + `setup-bridge` onboarding path as the default PAT-free bridge.
 
-- [ ] Default the Setup Wizard to a compact beginner mode with a few opinionated starter modes.
+- [x] Default the Setup Wizard to a compact beginner mode with a few opinionated starter modes.
 
-- [ ] Move advanced source tuning, sinks, and theme controls behind progressive disclosure.
+- [x] Move advanced source tuning, sinks, and theme controls behind progressive disclosure.
 
 - [ ] Strengthen Step 6 success and failure states with clearer workflow links, policy troubleshooting, and Pages-delay messaging.
 
@@ -90,9 +90,9 @@ These decisions are settled and should guide all implementation choices.
 - [ ] Prepare copy and layout for a future lightweight web onboarding flow.
   Leave a clean path for `sign in → enter key → deploy/run` without rewriting the public narrative.
 
-### Brief mode planning note
+### Brief mode implementation note
 
-Current direction for the first compact beginner mode:
+The first compact beginner mode is now shipped in the Setup Wizard:
 
 - Ship only two starter modes first:
   - `Academic Brief`
@@ -100,7 +100,7 @@ Current direction for the first compact beginner mode:
 - Treat starter mode as a UI layer over the existing wizard state model, not as a separate product flow.
 - Keep one-click GitHub App deploy as the default end state.
 
-`Academic Brief` needs one extra guided choice after the starter card:
+Current implementation details for `Academic Brief`:
 
 - Ask for a single primary research domain before the rest of the wizard opens.
 - Back that domain picker with the existing `ARXIV_PROFILES` presets in `astro/src/lib/arxivProfiles.ts`.
@@ -120,20 +120,20 @@ Recommended first domain set for `Academic Brief`:
 - Mathematics
 - Astrophysics
 
-`Daily Personal Brief` should stay much simpler:
+Current implementation details for `Daily Personal Brief`:
 
 - Default sources: weather, Hacker News, GitHub trending
 - Ask only for language, city/timezone, LLM provider, and API key in the compact flow
 - Hide sink/theme/source fine-tuning behind advanced controls
 
-Compact-flow UX target:
+Compact-flow UX shape:
 
 - Step 0: choose starter mode
 - Step 0.5 for `Academic Brief`: choose one research domain
 - Step 1+: show only the minimum fields needed to launch successfully
 - Advanced controls remain available, but collapsed by default
 
-Implementation stance:
+Implementation stance that remains in place:
 
 - Reuse the current wizard state and generated config pipeline
 - Apply starter-mode defaults in controller code

@@ -82,6 +82,10 @@ const t = {
   llmDesc:     locale === 'zh'
     ? '这里决定 wizard 生成的 llm.provider / base_url / model 配置，以及部署时要写入的 API key secret。'
     : 'This controls the generated llm.provider / base_url / model settings and the API key secret written during deploy.',
+  llmQuickHead: locale === 'zh' ? '第一次上手只需要两项' : 'First launch only needs two inputs',
+  llmQuickDesc: locale === 'zh'
+    ? '先选 provider，再填 API key，就已经足够跑通第一次部署。模型、base URL 和 secret 名称可以先沿用默认值。'
+    : 'Pick a provider and enter an API key first. That is enough for your first successful deploy; models, base URL, and secret naming can stay on the defaults.',
   providerLabel: locale === 'zh' ? 'Provider 预设' : 'Provider preset',
   providerHint:  locale === 'zh'
     ? '优先支持 OpenAI-compatible 接口；切换预设时会同步默认模型和 secret 名称。'
@@ -104,10 +108,22 @@ const t = {
   modelHint:     locale === 'zh'
     ? '可以直接输入任意模型 ID；默认先给便宜、够用的小模型。'
     : 'You can type any model ID directly; the defaults lean toward cheaper small models.',
+  llmAdvancedHead: locale === 'zh' ? '高级模型与端点控制' : 'Advanced model and endpoint controls',
+  llmAdvancedDesc: locale === 'zh'
+    ? '只有在你想切换自定义 gateway、环境变量名，或精调 scoring / summarization 模型时，才需要展开这里。'
+    : 'Open this only when you want a custom gateway, a different secret name, or finer control over the scoring and summarization models.',
   scheduleHead: locale === 'zh' ? '周报 / 月报汇总' : 'Weekly / monthly rollups',
   scheduleDesc: locale === 'zh'
     ? '选择哪些来源应汇入每周和每月回顾摘要。'
     : 'Choose which sources roll up into weekly and monthly digests for slower review.',
+  scheduleQuickHead: locale === 'zh' ? '回顾汇总可以稍后再开' : 'Review rollups can wait',
+  scheduleQuickDesc: locale === 'zh'
+    ? '第一次部署时完全可以先跳过 weekly / monthly；等主站点跑通后，再回来决定哪些来源值得进入慢速回顾。'
+    : 'You can skip weekly and monthly rollups on your first deploy. Come back after the main site works and then decide which sources deserve slower review.',
+  scheduleAdvancedHead: locale === 'zh' ? '高级 weekly / monthly 配置' : 'Advanced weekly / monthly settings',
+  scheduleAdvancedDesc: locale === 'zh'
+    ? '展开后可以决定每个来源是否进入 weekly / monthly，以及各自的 top N。'
+    : 'Expand this to decide which sources appear in weekly and monthly digests and what top N each one should use.',
 };
 ---
 
@@ -119,7 +135,12 @@ const t = {
       <h3>{t.llmHead}</h3>
       <p class="wz-card__desc">{t.llmDesc}</p>
 
-      <div class="wz-field-row">
+      <div class="wz-notice wz-notice--info">
+        <strong>{t.llmQuickHead}</strong>
+        <div>{t.llmQuickDesc}</div>
+      </div>
+
+      <div class="wz-field-row wz-field-row--compact">
         <div class="wz-field">
           <label for="llm-provider">{t.providerLabel}</label>
           <select id="llm-provider" data-llm-provider>
@@ -141,19 +162,6 @@ const t = {
           <div class="wz-field__hint">{t.providerHint}</div>
         </div>
         <div class="wz-field">
-          <label for="llm-base-url">{t.baseUrlLabel}</label>
-          <input id="llm-base-url" type="url" data-llm-base-url value={PROVIDER_OPTIONS[0].baseUrl} />
-          <div class="wz-field__hint">{t.baseUrlHint}</div>
-        </div>
-        <div class="wz-field">
-          <label for="llm-secret-name">{t.secretLabel}</label>
-          <input id="llm-secret-name" type="text" data-llm-secret-name value={PROVIDER_OPTIONS[0].secretName} />
-          <div class="wz-field__hint">{t.secretHint}</div>
-        </div>
-      </div>
-
-      <div class="wz-field-row" style="margin-top:18px">
-        <div class="wz-field">
           <label for="llm-api-key">{t.apiKeyLabel}</label>
           <div class="wz-field__hint">
             {t.apiKeyFor}: <code data-llm-secret-code>OPENROUTER_API_KEY</code>
@@ -161,112 +169,148 @@ const t = {
           <input id="llm-api-key" type="password" data-llm-api-key placeholder="sk-..." autocomplete="off" />
           <div class="wz-field__hint" data-llm-api-key-hint>{t.apiKeyHint}</div>
         </div>
-        <div class="wz-field">
-          <label for="llm-scoring-model">{t.scoreModelLabel}</label>
-          <input
-            id="llm-scoring-model"
-            type="text"
-            data-llm-scoring-model
-            list="llm-model-options"
-            value={PROVIDER_OPTIONS[0].scoringModel}
-          />
-        </div>
-        <div class="wz-field">
-          <label for="llm-summarization-model">{t.summaryModelLabel}</label>
-          <input
-            id="llm-summarization-model"
-            type="text"
-            data-llm-summarization-model
-            list="llm-model-options"
-            value={PROVIDER_OPTIONS[0].summarizationModel}
-          />
-          <datalist id="llm-model-options" data-llm-model-options>
-            {PROVIDER_OPTIONS[0].models.map((model) => (
-              <option value={model}></option>
-            ))}
-          </datalist>
-          <div class="wz-field__hint">{t.modelHint}</div>
-        </div>
       </div>
 
-      <div class="wz-notice wz-notice--info" style="margin-top:18px" data-llm-provider-note>
-        {PROVIDER_OPTIONS[0].note}
-      </div>
-    </div>
+      <details class="wz-advanced-card" data-llm-advanced>
+        <summary class="wz-advanced-card__summary">
+          <span class="wz-advanced-card__title">{t.llmAdvancedHead}</span>
+          <span class="wz-advanced-card__desc">{t.llmAdvancedDesc}</span>
+        </summary>
 
-    <div class="wz-card">
-      <h3>{t.scheduleHead}</h3>
-      <p class="wz-card__desc">{t.scheduleDesc}</p>
-
-      <div class="wz-schedule-table" role="table" aria-label="Schedule preferences">
-        <div class="wz-schedule-table__head" role="row">
-          <div role="columnheader">{locale === 'zh' ? '来源' : 'Source'}</div>
-          <div role="columnheader">{t.weeklyHead}</div>
-          <div role="columnheader">{t.monthlyHead}</div>
-        </div>
-
-        {extensions.map(ext => {
-          const name = locale === 'zh' ? (ext.displayNameZh ?? ext.displayName) : ext.displayName;
-          const weekDefault  = ext.weeklyDefault  ?? false;
-          const monthDefault = ext.monthlyDefault ?? false;
-          const weekTopN     = ext.weeklyTopN  ?? 5;
-          const monthTopN    = ext.monthlyTopN ?? 5;
-          return (
-            <div
-              class="wz-schedule-row"
-              data-schedule-for={ext.key}
-              role="row"
-              hidden
-            >
-              <div class="wz-schedule-row__name" role="cell">{name}</div>
-
-              <div class="wz-schedule-cell" role="cell">
-                <label class="wz-toggle">
-                  <input
-                    type="checkbox"
-                    data-schedule-weekly-enabled={ext.key}
-                    checked={weekDefault}
-                  />
-                  <span class="wz-toggle__label">{t.enable}</span>
-                </label>
-                <div class="wz-schedule-topn">
-                  <label for={`weekly-topn-${ext.key}`}>{t.topN}</label>
-                  <input
-                    type="number"
-                    id={`weekly-topn-${ext.key}`}
-                    min="1"
-                    max="20"
-                    value={weekTopN}
-                    data-schedule-weekly-topn={ext.key}
-                  />
-                </div>
-              </div>
-
-              <div class="wz-schedule-cell" role="cell">
-                <label class="wz-toggle">
-                  <input
-                    type="checkbox"
-                    data-schedule-monthly-enabled={ext.key}
-                    checked={monthDefault}
-                  />
-                  <span class="wz-toggle__label">{t.enable}</span>
-                </label>
-                <div class="wz-schedule-topn">
-                  <label for={`monthly-topn-${ext.key}`}>{t.topN}</label>
-                  <input
-                    type="number"
-                    id={`monthly-topn-${ext.key}`}
-                    min="1"
-                    max="30"
-                    value={monthTopN}
-                    data-schedule-monthly-topn={ext.key}
-                  />
-                </div>
-              </div>
+        <div class="wz-advanced-card__content">
+          <div class="wz-field-row wz-field-row--compact">
+            <div class="wz-field">
+              <label for="llm-base-url">{t.baseUrlLabel}</label>
+              <input id="llm-base-url" type="url" data-llm-base-url value={PROVIDER_OPTIONS[0].baseUrl} />
+              <div class="wz-field__hint">{t.baseUrlHint}</div>
             </div>
-          );
-        })}
-      </div>
+            <div class="wz-field">
+              <label for="llm-secret-name">{t.secretLabel}</label>
+              <input id="llm-secret-name" type="text" data-llm-secret-name value={PROVIDER_OPTIONS[0].secretName} />
+              <div class="wz-field__hint">{t.secretHint}</div>
+            </div>
+          </div>
+
+          <div class="wz-field-row" style="margin-top:18px">
+            <div class="wz-field">
+              <label for="llm-scoring-model">{t.scoreModelLabel}</label>
+              <input
+                id="llm-scoring-model"
+                type="text"
+                data-llm-scoring-model
+                list="llm-model-options"
+                value={PROVIDER_OPTIONS[0].scoringModel}
+              />
+            </div>
+            <div class="wz-field">
+              <label for="llm-summarization-model">{t.summaryModelLabel}</label>
+              <input
+                id="llm-summarization-model"
+                type="text"
+                data-llm-summarization-model
+                list="llm-model-options"
+                value={PROVIDER_OPTIONS[0].summarizationModel}
+              />
+              <datalist id="llm-model-options" data-llm-model-options>
+                {PROVIDER_OPTIONS[0].models.map((model) => (
+                  <option value={model}></option>
+                ))}
+              </datalist>
+              <div class="wz-field__hint">{t.modelHint}</div>
+            </div>
+          </div>
+
+          <div class="wz-notice wz-notice--info" style="margin-top:18px" data-llm-provider-note>
+            {PROVIDER_OPTIONS[0].note}
+          </div>
+        </div>
+      </details>
     </div>
+
+    <div class="wz-notice wz-notice--info">
+      <strong>{t.scheduleQuickHead}</strong>
+      <div>{t.scheduleQuickDesc}</div>
+    </div>
+
+    <details class="wz-advanced-card wz-advanced-card--block">
+      <summary class="wz-advanced-card__summary">
+        <span class="wz-advanced-card__title">{t.scheduleAdvancedHead}</span>
+        <span class="wz-advanced-card__desc">{t.scheduleAdvancedDesc}</span>
+      </summary>
+
+      <div class="wz-advanced-card__content">
+        <p class="wz-card__desc">{t.scheduleDesc}</p>
+
+        <div class="wz-schedule-table" role="table" aria-label="Schedule preferences">
+          <div class="wz-schedule-table__head" role="row">
+            <div role="columnheader">{locale === 'zh' ? '来源' : 'Source'}</div>
+            <div role="columnheader">{t.weeklyHead}</div>
+            <div role="columnheader">{t.monthlyHead}</div>
+          </div>
+
+          {extensions.map(ext => {
+            const name = locale === 'zh' ? (ext.displayNameZh ?? ext.displayName) : ext.displayName;
+            const weekDefault  = ext.weeklyDefault  ?? false;
+            const monthDefault = ext.monthlyDefault ?? false;
+            const weekTopN     = ext.weeklyTopN  ?? 5;
+            const monthTopN    = ext.monthlyTopN ?? 5;
+            return (
+              <div
+                class="wz-schedule-row"
+                data-schedule-for={ext.key}
+                role="row"
+                hidden
+              >
+                <div class="wz-schedule-row__name" role="cell">{name}</div>
+
+                <div class="wz-schedule-cell" role="cell">
+                  <label class="wz-toggle">
+                    <input
+                      type="checkbox"
+                      data-schedule-weekly-enabled={ext.key}
+                      checked={weekDefault}
+                    />
+                    <span class="wz-toggle__label">{t.enable}</span>
+                  </label>
+                  <div class="wz-schedule-topn">
+                    <label for={`weekly-topn-${ext.key}`}>{t.topN}</label>
+                    <input
+                      type="number"
+                      id={`weekly-topn-${ext.key}`}
+                      min="1"
+                      max="20"
+                      value={weekTopN}
+                      data-schedule-weekly-topn={ext.key}
+                    />
+                  </div>
+                </div>
+
+                <div class="wz-schedule-cell" role="cell">
+                  <label class="wz-toggle">
+                    <input
+                      type="checkbox"
+                      data-schedule-monthly-enabled={ext.key}
+                      checked={monthDefault}
+                    />
+                    <span class="wz-toggle__label">{t.enable}</span>
+                  </label>
+                  <div class="wz-schedule-topn">
+                    <label for={`monthly-topn-${ext.key}`}>{t.topN}</label>
+                    <input
+                      type="number"
+                      id={`monthly-topn-${ext.key}`}
+                      min="1"
+                      max="30"
+                      value={monthTopN}
+                      data-schedule-monthly-topn={ext.key}
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </details>
   </div>
 </div>

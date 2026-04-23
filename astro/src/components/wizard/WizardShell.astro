@@ -23,17 +23,17 @@ const STEP_BLURBS = locale === 'zh'
   ? [
       '选择应出现在你早间简报中的信息来源，并设定初始阅读顺序。',
       '只显示你选择的来源，方便逐一调整细节。',
-      '先确认 LLM provider / model，再决定哪些内容应汇入每周和每月回顾摘要。',
-      '在不将密钥写入 YAML 的情况下启用推送通知。',
-      '为摘要站点选择配色方案，保存于 sources.yaml 并在构建时应用。',
+      '先用 provider + API key 跑通第一次部署；模型与 weekly / monthly 细调都可以稍后再开。',
+      '推送渠道是可选项。默认只部署网页站点，Slack / Server酱保留在高级区。',
+      '主题也是可选项。先用默认配色跑通，再决定是否自定义视觉风格。',
       '审查生成的文件、密钥提醒和后续操作，然后完成 GitHub 配置。',
     ]
   : [
       'Pick the sources that deserve space in your morning briefing and set the reading order.',
       'Only your chosen sources appear here, so you can tune each one without clutter.',
-      'Set the LLM endpoint and then choose what should roll up into weekly and monthly summaries.',
-      'Enable notifications without ever pasting secrets into YAML.',
-      'Pick a colour palette for your digest site. Saved in sources.yaml and applied at build time.',
+      'Use provider + API key to get your first deploy working; model and rollup tuning can wait.',
+      'Delivery channels are optional. The default path ships only the site, with Slack and ServerChan tucked under advanced controls.',
+      'Theme customisation is optional too. Start with the default palette, then refine the look later if you want.',
       'Review generated files, secret reminders, and next actions before the GitHub handoff.',
     ];
 
@@ -639,6 +639,50 @@ const connectSummaryIdle = locale === 'zh'
 }
 
 .wz-brief-advanced .wz-step1-layout {
+  margin-top: 20px;
+}
+
+.wz-advanced-card {
+  border: 1px solid var(--rule);
+  padding: 24px 28px 28px;
+  background: var(--paper);
+}
+
+.wz-advanced-card--block {
+  margin-top: 24px;
+}
+
+.wz-advanced-card__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.wz-advanced-card__summary::-webkit-details-marker {
+  display: none;
+}
+
+.wz-advanced-card__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.wz-advanced-card__desc {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+.wz-advanced-card[open] .wz-advanced-card__title {
+  color: var(--accent);
+}
+
+.wz-advanced-card__content {
   margin-top: 20px;
 }
 

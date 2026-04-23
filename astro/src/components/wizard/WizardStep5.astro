@@ -6,6 +6,14 @@ const { locale } = Astro.props;
 
 const t = {
   desc:         locale === 'zh' ? '为你的摘要站点选择配色方案。选择结果将以 theme: 块写入 sources.yaml，并在构建时应用。' : 'Pick a colour palette for your digest site. The choice is saved as a theme: block in sources.yaml and applied at build time.',
+  quickHead:    locale === 'zh' ? '默认主题已经够用' : 'The default theme already works',
+  quickDesc:    locale === 'zh'
+    ? '如果你只是想先把 Linnet 跑起来，这一步完全可以保持默认。等站点上线后，再回来细调视觉风格。'
+    : 'If your goal is simply to get Linnet running, you can keep the default palette. Come back later if you want a more custom visual identity.',
+  advancedHead: locale === 'zh' ? '高级主题自定义' : 'Advanced theme customisation',
+  advancedDesc: locale === 'zh'
+    ? '只有当你确定想调整背景色、强调色或深浅主题配色时，才需要展开这里。'
+    : 'Open this only when you want to tune the background, accent, or light/dark palette choices.',
   lightCol:     locale === 'zh' ? '浅色主题' : 'Light theme',
   darkCol:      locale === 'zh' ? '暗色主题' : 'Dark theme',
   previewEyebrow: locale === 'zh' ? '晨间简报' : 'Morning briefing',
@@ -49,152 +57,165 @@ const DARK_BG_PRESETS = [
 <div class="wz-step" data-step="5" aria-hidden="true">
   <p class="wz-step__desc">{t.desc}</p>
 
-  <div class="wz-theme-columns">
-
-    <!-- ── Light column ─────────────────────────────────────── -->
-    <div class="wz-theme-col">
-      <div class="wz-theme-col__label">{t.lightCol}</div>
-
-      <article class="wz-theme-preview" data-theme-preview="light">
-        <div class="wz-theme-preview__surface">
-          <div class="wz-theme-preview__nav">
-            <span class="wz-theme-preview__brand">Linnet</span>
-            <span class="wz-theme-preview__badge">Daily</span>
-          </div>
-          <div class="wz-theme-preview__hero">
-            <div class="wz-theme-preview__eyebrow">{t.previewEyebrow}</div>
-            <h4>{t.previewTitle}</h4>
-            <p>{t.previewBody}</p>
-          </div>
-          <div class="wz-theme-preview__footer">
-            <span class="wz-theme-preview__pill">arXiv</span>
-            <span class="wz-theme-preview__pill">GitHub</span>
-            <span class="wz-theme-preview__cta">{t.previewCta}</span>
-          </div>
-        </div>
-      </article>
-
-      <div class="wz-theme-section">
-        <div class="wz-theme-section__label">{t.bgHead}</div>
-        <div class="wz-preset-row" data-theme-bg-presets>
-          {BG_PRESETS.map(p => (
-            <button
-              type="button"
-              class="wz-preset"
-              data-bg-preset={p.key}
-              aria-pressed={p.key === 'press' ? 'true' : 'false'}
-            >
-              {p.bg
-                ? <span class="wz-preset__swatch" style={`background:${p.bg}`}></span>
-                : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>
-              }
-              <span>{p.label}</span>
-            </button>
-          ))}
-        </div>
-        <div class="wz-custom-color" data-custom-bg-row hidden>
-          <input type="color" id="custom-bg-picker" data-custom-bg-picker value="#f4ede0" />
-          <input type="text" id="custom-bg" data-custom-bg placeholder="#f4ede0" maxlength="7" />
-          <span class="wz-field__hint">{t.customHex}</span>
-        </div>
-      </div>
-
-      <div class="wz-theme-section">
-        <div class="wz-theme-section__label">{t.accentHead}</div>
-        <div class="wz-preset-row" data-theme-accent-presets>
-          {ACCENT_PRESETS.map(p => (
-            <button
-              type="button"
-              class="wz-preset"
-              data-accent-preset={p.key}
-              aria-pressed={p.key === 'robin' ? 'true' : 'false'}
-            >
-              {p.color
-                ? <span class="wz-preset__swatch" style={`background:${p.color}`}></span>
-                : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>
-              }
-              <span>{p.label}</span>
-            </button>
-          ))}
-        </div>
-        <div class="wz-custom-color" data-custom-accent-row hidden>
-          <input type="color" id="custom-accent-picker" data-custom-accent-picker value="#c43d2a" />
-          <input type="text" id="custom-accent" data-custom-accent placeholder="#c43d2a" maxlength="7" />
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Dark column ──────────────────────────────────────── -->
-    <div class="wz-theme-col wz-theme-col--dark">
-      <div class="wz-theme-col__label">{t.darkCol}</div>
-
-      <article class="wz-theme-preview" data-theme-preview="dark">
-        <div class="wz-theme-preview__surface">
-          <div class="wz-theme-preview__nav">
-            <span class="wz-theme-preview__brand">Linnet</span>
-            <span class="wz-theme-preview__badge">Night</span>
-          </div>
-          <div class="wz-theme-preview__hero">
-            <div class="wz-theme-preview__eyebrow">{t.previewEyebrow}</div>
-            <h4>{t.previewTitle}</h4>
-            <p>{t.previewBody}</p>
-          </div>
-          <div class="wz-theme-preview__footer">
-            <span class="wz-theme-preview__pill">Weekly</span>
-            <span class="wz-theme-preview__pill">Review</span>
-            <span class="wz-theme-preview__cta">{t.previewCta}</span>
-          </div>
-        </div>
-      </article>
-
-      <div class="wz-theme-section">
-        <div class="wz-theme-section__label">{t.darkBgHead}</div>
-        <div class="wz-preset-row" data-theme-dark-bg-presets>
-          {DARK_BG_PRESETS.map(p => (
-            <button
-              type="button"
-              class="wz-preset"
-              data-dark-bg-preset={p.key}
-              aria-pressed={p.key === 'ink' ? 'true' : 'false'}
-            >
-              {p.bg
-                ? <span class="wz-preset__swatch" style={`background:${p.bg};border-color:rgba(255,255,255,0.2)`}></span>
-                : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>
-              }
-              <span>{p.label}</span>
-            </button>
-          ))}
-        </div>
-        <div class="wz-custom-color" data-custom-dark-bg-row hidden>
-          <input type="color" data-custom-dark-bg-picker value="#1a1614" />
-          <input type="text" data-custom-dark-bg placeholder="#1a1614" maxlength="7" />
-        </div>
-      </div>
-
-      <div class="wz-theme-section">
-        <div class="wz-theme-section__label">{t.darkAccHead}</div>
-        <div class="wz-preset-row" data-theme-dark-accent-presets>
-          {ACCENT_PRESETS.map(p => (
-            <button
-              type="button"
-              class="wz-preset"
-              data-dark-accent-preset={p.key}
-              aria-pressed={p.key === 'robin' ? 'true' : 'false'}
-            >
-              {p.color
-                ? <span class="wz-preset__swatch" style={`background:${p.color}`}></span>
-                : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>
-              }
-              <span>{p.label}</span>
-            </button>
-          ))}
-        </div>
-        <div class="wz-custom-color" data-custom-dark-accent-row hidden>
-          <input type="color" data-custom-dark-accent-picker value="#c43d2a" />
-          <input type="text" data-custom-dark-accent placeholder="#c43d2a" maxlength="7" />
-        </div>
-      </div>
-    </div>
-
+  <div class="wz-notice wz-notice--info">
+    <strong>{t.quickHead}</strong>
+    <div>{t.quickDesc}</div>
   </div>
+
+  <details class="wz-advanced-card wz-advanced-card--block">
+    <summary class="wz-advanced-card__summary">
+      <span class="wz-advanced-card__title">{t.advancedHead}</span>
+      <span class="wz-advanced-card__desc">{t.advancedDesc}</span>
+    </summary>
+
+    <div class="wz-advanced-card__content">
+      <div class="wz-theme-columns">
+
+        <!-- ── Light column ─────────────────────────────────────── -->
+        <div class="wz-theme-col">
+          <div class="wz-theme-col__label">{t.lightCol}</div>
+
+          <article class="wz-theme-preview" data-theme-preview="light">
+            <div class="wz-theme-preview__surface">
+              <div class="wz-theme-preview__nav">
+                <span class="wz-theme-preview__brand">Linnet</span>
+                <span class="wz-theme-preview__badge">Daily</span>
+              </div>
+              <div class="wz-theme-preview__hero">
+                <div class="wz-theme-preview__eyebrow">{t.previewEyebrow}</div>
+                <h4>{t.previewTitle}</h4>
+                <p>{t.previewBody}</p>
+              </div>
+              <div class="wz-theme-preview__footer">
+                <span class="wz-theme-preview__pill">arXiv</span>
+                <span class="wz-theme-preview__pill">GitHub</span>
+                <span class="wz-theme-preview__cta">{t.previewCta}</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="wz-theme-section">
+            <div class="wz-theme-section__label">{t.bgHead}</div>
+            <div class="wz-preset-row" data-theme-bg-presets>
+              {BG_PRESETS.map(p => (
+                <button
+                  type="button"
+                  class="wz-preset"
+                  data-bg-preset={p.key}
+                  aria-pressed={p.key === 'press' ? 'true' : 'false'}
+                >
+                  {p.bg
+                    ? <span class="wz-preset__swatch" style={`background:${p.bg}`}></span>
+                    : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>
+                  }
+                  <span>{p.label}</span>
+                </button>
+              ))}
+            </div>
+            <div class="wz-custom-color" data-custom-bg-row hidden>
+              <input type="color" id="custom-bg-picker" data-custom-bg-picker value="#f4ede0" />
+              <input type="text" id="custom-bg" data-custom-bg placeholder="#f4ede0" maxlength="7" />
+              <span class="wz-field__hint">{t.customHex}</span>
+            </div>
+          </div>
+
+          <div class="wz-theme-section">
+            <div class="wz-theme-section__label">{t.accentHead}</div>
+            <div class="wz-preset-row" data-theme-accent-presets>
+              {ACCENT_PRESETS.map(p => (
+                <button
+                  type="button"
+                  class="wz-preset"
+                  data-accent-preset={p.key}
+                  aria-pressed={p.key === 'robin' ? 'true' : 'false'}
+                >
+                  {p.color
+                    ? <span class="wz-preset__swatch" style={`background:${p.color}`}></span>
+                    : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>
+                  }
+                  <span>{p.label}</span>
+                </button>
+              ))}
+            </div>
+            <div class="wz-custom-color" data-custom-accent-row hidden>
+              <input type="color" id="custom-accent-picker" data-custom-accent-picker value="#c43d2a" />
+              <input type="text" id="custom-accent" data-custom-accent placeholder="#c43d2a" maxlength="7" />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Dark column ──────────────────────────────────────── -->
+        <div class="wz-theme-col wz-theme-col--dark">
+          <div class="wz-theme-col__label">{t.darkCol}</div>
+
+          <article class="wz-theme-preview" data-theme-preview="dark">
+            <div class="wz-theme-preview__surface">
+              <div class="wz-theme-preview__nav">
+                <span class="wz-theme-preview__brand">Linnet</span>
+                <span class="wz-theme-preview__badge">Night</span>
+              </div>
+              <div class="wz-theme-preview__hero">
+                <div class="wz-theme-preview__eyebrow">{t.previewEyebrow}</div>
+                <h4>{t.previewTitle}</h4>
+                <p>{t.previewBody}</p>
+              </div>
+              <div class="wz-theme-preview__footer">
+                <span class="wz-theme-preview__pill">Weekly</span>
+                <span class="wz-theme-preview__pill">Review</span>
+                <span class="wz-theme-preview__cta">{t.previewCta}</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="wz-theme-section">
+            <div class="wz-theme-section__label">{t.darkBgHead}</div>
+            <div class="wz-preset-row" data-theme-dark-bg-presets>
+              {DARK_BG_PRESETS.map(p => (
+                <button
+                  type="button"
+                  class="wz-preset"
+                  data-dark-bg-preset={p.key}
+                  aria-pressed={p.key === 'ink' ? 'true' : 'false'}
+                >
+                  {p.bg
+                    ? <span class="wz-preset__swatch" style={`background:${p.bg};border-color:rgba(255,255,255,0.2)`}></span>
+                    : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>
+                  }
+                  <span>{p.label}</span>
+                </button>
+              ))}
+            </div>
+            <div class="wz-custom-color" data-custom-dark-bg-row hidden>
+              <input type="color" data-custom-dark-bg-picker value="#1a1614" />
+              <input type="text" data-custom-dark-bg placeholder="#1a1614" maxlength="7" />
+            </div>
+          </div>
+
+          <div class="wz-theme-section">
+            <div class="wz-theme-section__label">{t.darkAccHead}</div>
+            <div class="wz-preset-row" data-theme-dark-accent-presets>
+              {ACCENT_PRESETS.map(p => (
+                <button
+                  type="button"
+                  class="wz-preset"
+                  data-dark-accent-preset={p.key}
+                  aria-pressed={p.key === 'robin' ? 'true' : 'false'}
+                >
+                  {p.color
+                    ? <span class="wz-preset__swatch" style={`background:${p.color}`}></span>
+                    : <span class="wz-preset__swatch wz-preset__swatch--dashed"></span>
+                  }
+                  <span>{p.label}</span>
+                </button>
+              ))}
+            </div>
+            <div class="wz-custom-color" data-custom-dark-accent-row hidden>
+              <input type="color" data-custom-dark-accent-picker value="#c43d2a" />
+              <input type="text" data-custom-dark-accent placeholder="#c43d2a" maxlength="7" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
 </div>
