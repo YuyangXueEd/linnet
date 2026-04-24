@@ -13,9 +13,15 @@
 
 ![Linnet Hero](assets/hero.png)
 
-Start with the setup wizard, choose the briefing shape you want, add your LLM key, and let Linnet prepare the repo handoff. The current self-hosted path uses GitHub Actions and Pages behind the scenes; you do not need to run a server or accept dashboard lock-in.
+After you create your own repo from this template, start with the setup wizard. It is now the main sign-in, GitHub authorization, and deployment entry point: choose the briefing shape you want, add your LLM key, and let Linnet prepare the repo handoff. The current self-hosted path uses GitHub Actions and Pages behind the scenes; you do not need to run a server or accept dashboard lock-in.
 
-**[Live example](https://yuyangxueed.github.io/Linnet)** · **[Upstream setup demo (EN)](https://yuyangxueed.github.io/Linnet/setup/)** · **[上游配置演示 (中文)](https://yuyangxueed.github.io/Linnet/setup/zh/)** · **[Manual config guide](dev_docs/manual-config.md)**
+**[Live example](https://yuyangxueed.github.io/Linnet)** · **[Start setup in English](https://yuyangxueed.github.io/Linnet/setup/)** · **[用中文进入设置向导](https://yuyangxueed.github.io/Linnet/setup/zh/)** · **[Manual config guide](dev_docs/manual-config.md)**
+
+> **Start here after creating your repo**
+> The setup page is now the main sign-in, GitHub authorization, and deployment flow for new users.
+> English UI: <https://yuyangxueed.github.io/Linnet/setup/>
+> 中文界面: <https://yuyangxueed.github.io/Linnet/setup/zh/>
+> After the first deploy, add your GitHub Pages URL to the repo's **About -> Website** field so the site entrance is visible from the repo header.
 
 ---
 
@@ -71,12 +77,12 @@ Open the repo you just created, then install the **Linnet Bridge** GitHub App to
 
 This is the lower-friction path. It lets Linnet write files, GitHub Actions secrets, workflow settings, and GitHub Pages config for you without asking you to mint a PAT.
 
-### 3. Open the upstream setup wizard
+### 3. Open the setup wizard first
 
-Use the upstream wizard as the primary entry point:
+This is the main sign-in, authorization, and deployment entry point after you create your repo:
 
-- English: [https://yuyangxueed.github.io/Linnet/setup/](https://yuyangxueed.github.io/Linnet/setup/)
-- Chinese: [https://yuyangxueed.github.io/Linnet/setup/zh/](https://yuyangxueed.github.io/Linnet/setup/zh/)
+- English UI: [https://yuyangxueed.github.io/Linnet/setup/](https://yuyangxueed.github.io/Linnet/setup/)
+- Chinese UI: [https://yuyangxueed.github.io/Linnet/setup/zh/](https://yuyangxueed.github.io/Linnet/setup/zh/)
 
 You no longer need to deploy your own copy of `/setup/` first just to get started.
 
@@ -112,9 +118,9 @@ Most users should not need to click anything else after Step 5. Watch these two 
 
 Your site should go live at `https://<your-username>.github.io/<repo-name>/` a few minutes later.
 
-GitHub Pages provisioning can lag slightly behind the API call on a brand-new repo, so give it a short moment before assuming it failed. If repo or org policy blocks app installation, Actions, or Pages, fall back to the [manual config guide](dev_docs/manual-config.md).
+Once that URL is live, put it in the repository's **About -> Website** field. That makes the site entrance easy to find directly from the GitHub repo header.
 
-Optional but worth doing: add that site URL to the repository's **About -> Website** field so visitors can open your digest directly from the GitHub repo header.
+GitHub Pages provisioning can lag slightly behind the API call on a brand-new repo, so give it a short moment before assuming it failed. If repo or org policy blocks app installation, Actions, or Pages, fall back to the [manual config guide](dev_docs/manual-config.md).
 
 ---
 
