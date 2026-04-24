@@ -5,7 +5,7 @@ interface Props {
 const { item } = Astro.props;
 const title = (item.title ?? item.name ?? item.query ?? 'Item') as string;
 const url = (item.url ?? item.link ?? item.html_url) as string | undefined;
-const summary = (item.summary ?? item.description ?? item.abstract) as string | undefined;
+const summary = (item.summary ?? item.requirements ?? item.abstract ?? item.description) as string | undefined;
 const truncated = summary && summary.length > 300 ? summary.slice(0, 300) + '…' : summary;
 ---
 <article class="generic-card panel panel--strong">

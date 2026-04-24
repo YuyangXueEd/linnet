@@ -29,7 +29,6 @@ interface Paper {
   categories?: string[];
   primary_category?: string;
   abstract?: string;
-  abstract_zh?: string;
   summary?: string;
   url?: string;
   pdf_url?: string;
@@ -70,7 +69,7 @@ const dateHuman = (() => {
 
     <div class="papers-list">
       {papers.map((paper, i) => {
-        const abstract = String(paper.abstract_zh ?? paper.abstract ?? paper.summary ?? '');
+        const abstract = String(paper.abstract ?? paper.summary ?? '');
         const authors = paper.authors ?? [];
         const shortAuthors = authors.slice(0, 3).join(', ') + (authors.length > 3 ? ' et al.' : '');
         const category = paper.primary_category ?? (paper.categories ?? [])[0] ?? '';

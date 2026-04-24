@@ -8,11 +8,12 @@ interface Props {
     url?: string;
     description?: string;
     summary?: string;
+    requirements?: string;
     source?: string;
   };
 }
 const { job } = Astro.props;
-const desc = job.summary ?? job.description ?? '';
+const desc = job.summary ?? job.requirements ?? job.description ?? '';
 ---
 
 <div class="job-card">
@@ -45,6 +46,7 @@ const desc = job.summary ?? job.description ?? '';
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .job-card__header {
@@ -52,6 +54,7 @@ const desc = job.summary ?? job.description ?? '';
   justify-content: space-between;
   align-items: baseline;
   gap: 20px;
+  min-width: 0;
 }
 
 .job-card__title {
@@ -62,6 +65,8 @@ const desc = job.summary ?? job.description ?? '';
   line-height: 1.25;
   color: var(--ink);
   margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .job-card__title a {
@@ -88,7 +93,9 @@ const desc = job.summary ?? job.description ?? '';
   letter-spacing: 0.06em;
   color: var(--ink-muted);
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
+  overflow-wrap: anywhere;
 }
 
 .job-card__meta span + span::before {
@@ -103,5 +110,18 @@ const desc = job.summary ?? job.description ?? '';
   color: var(--ink-soft);
   line-height: 1.6;
   margin: 4px 0 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .job-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .job-card__deadline {
+    white-space: normal;
+  }
 }
 </style>

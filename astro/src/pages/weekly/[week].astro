@@ -24,7 +24,7 @@ const topPapers: unknown[] = data.top_papers ?? [];
 const newJobs: unknown[] = data.new_jobs ?? [];
 const keywords: string[] = data.trending_keywords ?? [];
 const dailyRefs: string[] = data.daily_refs ?? [];
-const summaryZh: string = data.summary_zh ?? '';
+const summaryText: string = data.summary ?? '';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const allFiles = await readdir(DATA_DIR);
@@ -35,40 +35,138 @@ const allWeeks = allFiles
 const idx = allWeeks.indexOf(week as string);
 const prevWeek = idx > 0 ? allWeeks[idx - 1] : null;
 const nextWeek = idx < allWeeks.length - 1 ? allWeeks[idx + 1] : null;
+
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+
+function cleanSummaryBlock(value: string): string {
+  return value
+    .replace(/^#+\s*/gm, '')
+    .replace(/^\s*[-*]\s+/gm, '• ')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\$\((.*?)\)\$/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\\\s+/g, ' ')
+    .replace(/\\([\\`*_{}[\]()#+\-.!>])/g, '$1')
+    .trim();
+}
+
+const summaryBlocks = summaryText
+  .split(/\n{2,}/)
+  .map(cleanSummaryBlock)
+  .filter(Boolean);
+
+const dateRange = dailyRefs.length > 0
+  ? `${dailyRefs[0]} to ${dailyRefs.at(-1)}`
+  : 'No daily issues tracked';
+
+const rollupStats = [
+  `${topPapers.length} papers`,
+  dailyRefs.length > 0 ? `${dailyRefs.length} daily issues` : '',
+  newJobs.length > 0 ? `${newJobs.length} jobs` : '',
+  keywords.length > 0 ? `${keywords.length} keywords` : '',
+].filter(Boolean);
+
+const sectionDefs = [
+  { key: 'summary', title: 'The Week in Review', subtitle: 'Editorial summary', count: '', show: summaryBlocks.length > 0 },
+  { key: 'keywords', title: 'Trending Keywords', subtitle: 'Recurring terms', count: keywords.length ? String(keywords.length) : '', show: keywords.length > 0 },
+  { key: 'papers', title: 'Top Papers', subtitle: 'Selected research', count: topPapers.length ? String(topPapers.length) : '', show: topPapers.length > 0 },
+  { key: 'jobs', title: 'New Postdoc Positions', subtitle: 'Fresh listings', count: newJobs.length ? String(newJobs.length) : '', show: newJobs.length > 0 },
+  { key: 'daily', title: 'Daily Issues This Week', subtitle: dateRange, count: dailyRefs.length ? String(dailyRefs.length) : '', show: dailyRefs.length > 0 },
+]
+  .filter(section => section.show)
+  .map((section, index) => ({
+    ...section,
+    roman: ROMAN[index] ?? String(index + 1),
+    anchorId: `section-${section.key}`,
+  }));
+
+const rollupSections = sectionDefs;
+
+function sectionFor(key: string) {
+  return rollupSections.find(section => section.key === key);
+}
+const summarySection = sectionFor('summary');
+const keywordsSection = sectionFor('keywords');
+const papersSection = sectionFor('papers');
+const jobsSection = sectionFor('jobs');
+const dailySection = sectionFor('daily');
 ---
 <Base title={`${week} Weekly Digest`}>
-  <div class="page-wrap" style="padding-top:1.5rem;padding-bottom:3rem;">
-    <header class="panel" style="padding:1.5rem;margin-bottom:2rem;">
-      <div class="kicker">Weekly issue</div>
-      <h1 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;">{week}</h1>
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;">
-        <span class="chip chip--accent">{topPapers.length} papers</span>
-        {newJobs.length > 0 && <span class="chip chip--warm">{newJobs.length} jobs</span>}
-        {keywords.length > 0 && <span class="chip">{keywords.length} keywords</span>}
+  <div class="page-wrap rollup-page">
+    <header class="rollup-masthead">
+      <div class="rollup-masthead__left">
+        <div class="rollup-masthead__label">Weekly Issue</div>
+        <div>Collected dispatches</div>
+      </div>
+
+      <div class="rollup-masthead__center">
+        <h1 class="rollup-masthead__title">{week}</h1>
+        <div class="rollup-masthead__date">{dateRange}</div>
+      </div>
+
+      <div class="rollup-masthead__right">
+        {rollupStats.map(stat => <div>{stat}</div>)}
       </div>
     </header>
 
-    {summaryZh && (
-      <section style="margin-bottom:2rem;">
-        <div class="section-header"><h2>本周摘要</h2></div>
-        <div class="panel" style="padding:1.25rem;">
-          <p style="line-height:1.9;color:var(--site-text-muted);">{summaryZh}</p>
+    <div class="rollup-tagline">
+      <span class="rollup-tagline__text">A weekly ledger drawn from the daily archive.</span>
+      <span class="rollup-tagline__count">{rollupSections.length} sections</span>
+    </div>
+
+    {rollupSections.length > 0 && (
+      <div class="rollup-jump">
+        {rollupSections.map(section => (
+          <a href={`#${section.anchorId}`} class="rollup-jump__link">
+            <span class="rollup-jump__roman">§{section.roman}</span>
+            {section.title}
+            {section.count && <span class="rollup-jump__count">({section.count})</span>}
+          </a>
+        ))}
+      </div>
+    )}
+
+    {summarySection && (
+      <section id={summarySection.anchorId} class="rollup-section">
+        <div class="rollup-section-head">
+          <div class="rollup-section-head__left">
+            <span class="rollup-section-marker">§ {summarySection.roman}</span>
+            <h2>{summarySection.title}</h2>
+          </div>
+          <span class="rollup-section-head__sub">{summarySection.subtitle}</span>
+        </div>
+        <div class="rollup-summary">
+          {summaryBlocks.map(block => <p>{block}</p>)}
         </div>
       </section>
     )}
 
-    {keywords.length > 0 && (
-      <section style="margin-bottom:2rem;">
-        <div class="section-header"><span class="section-icon">🔥</span><h2>Trending Keywords</h2></div>
-        <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
-          {keywords.map((k: string) => <span class="chip">{k}</span>)}
+    {keywordsSection && (
+      <section id={keywordsSection.anchorId} class="rollup-section">
+        <div class="rollup-section-head">
+          <div class="rollup-section-head__left">
+            <span class="rollup-section-marker">§ {keywordsSection.roman}</span>
+            <h2>{keywordsSection.title}</h2>
+          </div>
+          <span class="rollup-section-head__sub">{keywordsSection.subtitle}</span>
+          <span class="rollup-section-head__count">{keywordsSection.count}</span>
+        </div>
+        <div class="rollup-keywords">
+          {keywords.map((k: string) => <span>{k}</span>)}
         </div>
       </section>
     )}
 
-    {topPapers.length > 0 && (
-      <section style="margin-bottom:2rem;">
-        <div class="section-header"><span class="section-icon">📄</span><h2>Top Papers</h2></div>
+    {papersSection && (
+      <section id={papersSection.anchorId} class="rollup-section">
+        <div class="rollup-section-head">
+          <div class="rollup-section-head__left">
+            <span class="rollup-section-marker">§ {papersSection.roman}</span>
+            <h2>{papersSection.title}</h2>
+          </div>
+          <span class="rollup-section-head__sub">{papersSection.subtitle}</span>
+          <span class="rollup-section-head__count">{papersSection.count}</span>
+        </div>
         <div class="feed-grid">
           {topPapers.map(p => (
             <PaperCard paper={p as Parameters<typeof PaperCard>[0]['paper']} />
@@ -77,9 +175,16 @@ const nextWeek = idx < allWeeks.length - 1 ? allWeeks[idx + 1] : null;
       </section>
     )}
 
-    {newJobs.length > 0 && (
-      <section style="margin-bottom:2rem;">
-        <div class="section-header"><span class="section-icon">💼</span><h2>New Postdoc Positions</h2></div>
+    {jobsSection && (
+      <section id={jobsSection.anchorId} class="rollup-section">
+        <div class="rollup-section-head">
+          <div class="rollup-section-head__left">
+            <span class="rollup-section-marker">§ {jobsSection.roman}</span>
+            <h2>{jobsSection.title}</h2>
+          </div>
+          <span class="rollup-section-head__sub">{jobsSection.subtitle}</span>
+          <span class="rollup-section-head__count">{jobsSection.count}</span>
+        </div>
         <div class="feed-grid">
           {newJobs.map(j => (
             <JobCard job={j as Parameters<typeof JobCard>[0]['job']} />
@@ -88,24 +193,31 @@ const nextWeek = idx < allWeeks.length - 1 ? allWeeks[idx + 1] : null;
       </section>
     )}
 
-    {dailyRefs.length > 0 && (
-      <section style="margin-bottom:2rem;">
-        <div class="section-header"><span class="section-icon">📅</span><h2>Daily Issues This Week</h2></div>
-        <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+    {dailySection && (
+      <section id={dailySection.anchorId} class="rollup-section">
+        <div class="rollup-section-head">
+          <div class="rollup-section-head__left">
+            <span class="rollup-section-marker">§ {dailySection.roman}</span>
+            <h2>{dailySection.title}</h2>
+          </div>
+          <span class="rollup-section-head__sub">{dailySection.subtitle}</span>
+          <span class="rollup-section-head__count">{dailySection.count}</span>
+        </div>
+        <div class="rollup-date-grid">
           {dailyRefs.map((d: string) => (
-            <a href={`${base}/daily/${d}/`} class="btn btn--secondary">{d}</a>
+            <a href={`${base}/daily/${d}/`} class="rollup-date-link">{d}</a>
           ))}
         </div>
       </section>
     )}
 
-    <nav class="panel" style="display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;margin-top:1rem;">
+    <nav class="rollup-nav">
       {prevWeek ? (
-        <a href={`${base}/weekly/${prevWeek}/`} class="btn btn--secondary">← {prevWeek}</a>
+        <a href={`${base}/weekly/${prevWeek}/`} class="rollup-nav__link">← {prevWeek}</a>
       ) : <span />}
-      <a href={`${base}/weekly/`} class="btn btn--secondary">Archive</a>
+      <a href={`${base}/weekly/`} class="rollup-nav__link rollup-nav__link--accent">View archive</a>
       {nextWeek ? (
-        <a href={`${base}/weekly/${nextWeek}/`} class="btn btn--secondary">{nextWeek} →</a>
+        <a href={`${base}/weekly/${nextWeek}/`} class="rollup-nav__link rollup-nav__link--muted">{nextWeek} →</a>
       ) : <span />}
     </nav>
   </div>

@@ -14,7 +14,6 @@ interface Props {
     authors?: string[];
     categories?: string[];
     abstract?: string;
-    abstract_zh?: string;
     url?: string;
     pdf_url?: string;
     score?: number;
@@ -31,7 +30,7 @@ interface Props {
 const { paper, _idx } = Astro.props;
 
 const idx       = _idx ?? (paper._idx as number | undefined) ?? 0;
-const abstract  = String(paper.abstract_zh ?? paper.abstract ?? paper.summary ?? '');
+const abstract  = String(paper.abstract ?? paper.summary ?? '');
 const authors   = paper.authors ?? [];
 const leadAuthors = authors.join(', ');
 const shortAuthors = authors.slice(0, 2).join(', ') + (authors.length > 2 ? ' et al.' : '');
