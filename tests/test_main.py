@@ -114,9 +114,7 @@ def test_build_extension_configs_sources_override_extension_defaults(monkeypatch
     monkeypatch.setattr(
         main,
         "load_extension_config",
-        lambda name: {"enabled": False, "max_sector_overview": 8}
-        if name == "us_stocks"
-        else {},
+        lambda name: {"enabled": False, "max_sector_overview": 8} if name == "us_stocks" else {},
     )
 
     configs = main._build_extension_configs(

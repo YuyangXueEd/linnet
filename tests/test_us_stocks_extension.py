@@ -277,7 +277,9 @@ def test_fetch_us_stock_inputs_uses_yahoo_and_gdelt(httpx_mock, monkeypatch):
     assert payload["stocks"][0]["filing_lookup_url"].startswith("https://www.sec.gov/edgar/browse/")
 
 
-def test_fetch_us_stock_inputs_uses_google_news_fallback_when_gdelt_is_empty(httpx_mock, monkeypatch):
+def test_fetch_us_stock_inputs_uses_google_news_fallback_when_gdelt_is_empty(
+    httpx_mock, monkeypatch
+):
     monkeypatch.delenv("SEC_USER_AGENT", raising=False)
     monkeypatch.delenv("LINNET_SEC_USER_AGENT", raising=False)
     httpx_mock.add_response(json=_chart_payload(symbol="SMH", price=250.0, previous_close=246.0))
@@ -327,7 +329,9 @@ def test_fetch_us_stock_inputs_respects_max_symbols_on_market_day(httpx_mock, mo
     monkeypatch.delenv("LINNET_SEC_USER_AGENT", raising=False)
     config = _small_config()
     config["max_symbols"] = 1
-    config["sectors"]["chips"]["tickers"].append({"symbol": "AMD", "name": "Advanced Micro Devices"})
+    config["sectors"]["chips"]["tickers"].append(
+        {"symbol": "AMD", "name": "Advanced Micro Devices"}
+    )
     httpx_mock.add_response(json=_chart_payload(symbol="SMH", price=250.0, previous_close=246.0))
     httpx_mock.add_response(json=_chart_payload(symbol="NVDA", price=121.0, previous_close=119.0))
     httpx_mock.add_response(json={"articles": []})
@@ -415,7 +419,9 @@ def test_score_stocks_allows_high_confidence_bearish_setups():
                     "NVDA",
                     _chart_payload(price=100.0, previous_close=119.0, premarket=100.0),
                 ),
-                "news": [{"title": "Nvidia warning as AI demand drops", "url": "https://example.com"}],
+                "news": [
+                    {"title": "Nvidia warning as AI demand drops", "url": "https://example.com"}
+                ],
                 "filings": [{"form": "8-K", "filed_at": "2026-04-24"}],
             }
         ],
@@ -447,7 +453,9 @@ def test_sector_overview_aggregates_ranked_signals():
                     "NVDA",
                     _chart_payload(price=121.0, previous_close=119.0, premarket=123.0),
                 ),
-                "news": [{"title": "Nvidia upgraded as AI demand grows", "url": "https://example.com"}],
+                "news": [
+                    {"title": "Nvidia upgraded as AI demand grows", "url": "https://example.com"}
+                ],
                 "filings": [],
                 "filing_lookup_url": "https://www.sec.gov/edgar/browse/?CIK=NVDA",
             },

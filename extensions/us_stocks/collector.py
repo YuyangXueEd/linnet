@@ -306,7 +306,7 @@ def parse_nasdaq_quote(
     if not info:
         return None
     primary = info.get("primaryData") or {}
-    rows = (((history_data.get("data") or {}).get("tradesTable") or {}).get("rows") or [])
+    rows = ((history_data.get("data") or {}).get("tradesTable") or {}).get("rows") or []
     history = []
     for row in reversed(rows):
         close = _as_float(row.get("close"))
@@ -444,7 +444,9 @@ def fetch_finnhub_quote(
 ) -> dict[str, Any] | None:
     if not api_key:
         return None
-    start = datetime.combine(market_day - timedelta(days=max(history_days, 5) + 7), time.min, tzinfo=UTC)
+    start = datetime.combine(
+        market_day - timedelta(days=max(history_days, 5) + 7), time.min, tzinfo=UTC
+    )
     end = datetime.combine(market_day + timedelta(days=1), time.min, tzinfo=UTC)
     quote_resp = client.get(
         FINNHUB_QUOTE_URL,

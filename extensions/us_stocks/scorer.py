@@ -98,7 +98,9 @@ def _news_tone(news: list[dict[str, Any]]) -> tuple[float, list[str]]:
     return _clamp(score, -2.0, 2.0), flags[:2]
 
 
-def _technical_score(change_5d: float | None, change_20d: float | None, volume_ratio: float | None) -> float:
+def _technical_score(
+    change_5d: float | None, change_20d: float | None, volume_ratio: float | None
+) -> float:
     score = 50.0
     if change_5d is not None:
         score += _clamp(change_5d * 2.0, -18.0, 18.0)
@@ -261,9 +263,7 @@ def score_stock(
         "change_5d_pct": round(change_5d, 2) if change_5d is not None else None,
         "change_20d_pct": round(change_20d, 2) if change_20d is not None else None,
         "volume_ratio": round(volume_ratio, 2) if volume_ratio is not None else None,
-        "relative_strength_pct": round(
-            (change_5d or 0.0) - mean(benchmark_changes), 2
-        )
+        "relative_strength_pct": round((change_5d or 0.0) - mean(benchmark_changes), 2)
         if benchmark_changes and change_5d is not None
         else None,
         "sector_trend": _trend_label(mean(benchmark_changes) if benchmark_changes else None),
@@ -322,7 +322,9 @@ def _safe_mean(values: list[float]) -> float | None:
     return mean(clean)
 
 
-def build_sector_overview(items: list[dict[str, Any]], config: dict[str, Any]) -> list[dict[str, Any]]:
+def build_sector_overview(
+    items: list[dict[str, Any]], config: dict[str, Any]
+) -> list[dict[str, Any]]:
     """Aggregate scored stock rows into the compact sector tape shown above the board."""
     groups: dict[str, list[dict[str, Any]]] = {}
     for item in items:
@@ -429,7 +431,9 @@ def _build_invalidation(item: dict[str, Any]) -> list[str]:
     if signal == "bullish":
         return ["Weakens if price fades below previous close or sector benchmarks roll over."]
     if signal == "bearish":
-        return ["Improves if price reclaims previous close and negative headlines are not confirmed."]
+        return [
+            "Improves if price reclaims previous close and negative headlines are not confirmed."
+        ]
     return ["Needs fresh price/news confirmation before becoming an actionable setup."]
 
 

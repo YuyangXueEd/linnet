@@ -135,7 +135,9 @@ def synthesize_us_stock_signals(
             item["drivers"] = enriched["drivers"]
         if enriched.get("invalidation"):
             item["invalidation"] = enriched["invalidation"]
-        merged_risks = list(dict.fromkeys([*item.get("risk_flags", []), *enriched.get("risk_flags", [])]))
+        merged_risks = list(
+            dict.fromkeys([*item.get("risk_flags", []), *enriched.get("risk_flags", [])])
+        )
         item["risk_flags"] = merged_risks[:4]
         item["llm_synthesized"] = True
 
