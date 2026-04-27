@@ -1,0 +1,1783 @@
+{
+  "date": "2026-04-27",
+  "generated_at": "2026-04-27T11:22:30.774460+00:00",
+  "sections_ordered": [
+    {
+      "key": "quote_of_day",
+      "payload_key": "quote_of_day",
+      "title": "Words for the Morning",
+      "icon": "✦",
+      "items": [
+        {
+          "quote": "Do you know the difference between education and experience? Education is when you read the fine print experience is what you get when you don't.",
+          "author": "Pete Seeger",
+          "category": "education"
+        }
+      ],
+      "meta": {
+        "count": 1
+      }
+    },
+    {
+      "key": "weather",
+      "payload_key": "weather",
+      "title": "Weather",
+      "icon": "🌦️",
+      "items": [
+        {
+          "query": "London",
+          "label": "London, England, United Kingdom",
+          "resolved_name": "London",
+          "region": "England",
+          "country": "United Kingdom",
+          "latitude": 51.50853,
+          "longitude": -0.12574,
+          "timezone": "Europe/London",
+          "forecast_date": "2026-04-27",
+          "condition": "Clear sky",
+          "weather_code": 0,
+          "temperature_c": 17.2,
+          "apparent_temperature_c": 16.7,
+          "temp_max_c": 20.6,
+          "temp_min_c": 9.3,
+          "humidity_pct": 44,
+          "wind_speed_kmh": 5.0,
+          "precipitation_probability_pct": 70,
+          "is_day": true,
+          "sunrise": "2026-04-27T05:39",
+          "sunset": "2026-04-27T20:16",
+          "source": "Open-Meteo",
+          "source_url": "https://open-meteo.com/"
+        }
+      ],
+      "meta": {
+        "count": 1,
+        "city": "London"
+      }
+    },
+    {
+      "key": "arxiv",
+      "payload_key": "papers",
+      "title": "arXiv Papers",
+      "icon": "📄",
+      "items": [
+        {
+          "id": "2604.22748v1",
+          "title": "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond",
+          "authors": [
+            "Meng Chu",
+            "Xuan Billy Zhang",
+            "Kevin Qinghong Lin",
+            "Lingdong Kong",
+            "Jize Zhang"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "abstract": "This paper introduces the \"Agentic World Modeling\" framework, a taxonomy organized by capability levels (Predictor, Simulator, Evolver) and governing law regimes (physical, digital, social, scientific). The core contribution is providing a structured way to understand and evaluate the necessary predictive environment models that enable AI agents to achieve complex, sustained goals across diverse domains.",
+          "url": "http://arxiv.org/abs/2604.22748v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22748v1",
+          "score": 9.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22436v1",
+          "title": "AgentSearchBench: A Benchmark for AI Agent Search in the Wild",
+          "authors": [
+            "Bin Wu",
+            "Arastun Mammadli",
+            "Xiaoyu Zhang",
+            "Emine Yilmaz"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.IR",
+            "cs.MA"
+          ],
+          "abstract": "AgentSearchBench is a large-scale benchmark designed to evaluate AI agent search methods in realistic, \"in the wild\" scenarios, addressing the limitations of existing benchmarks that assume well-specified agents. It formalizes agent search as retrieval and reranking tasks using nearly 10,000 real-world agents, evaluating relevance based on execution-grounded performance signals rather than just textual descriptions. The contribution is providing a more challenging and realistic evaluation platform that highlights the gap between semantic similarity and actual agent capability.",
+          "url": "http://arxiv.org/abs/2604.22436v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22436v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22436v1/x1.png",
+          "figure_caption": "Task and Relevance Label Generation Pipeline of AgentSearchBench.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22411v1",
+          "title": "Introducing Background Temperature to Characterise Hidden Randomness in Large Language Models",
+          "authors": [
+            "Alberto Messina",
+            "Stefano Scotta"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CL"
+          ],
+          "abstract": "This paper introduces the concept of **background temperature ($T_{\\mathrm{bg}}$)** to quantify the inherent, implementation-dependent randomness observed in Large Language Models (LLMs) even when the nominal decoding temperature is set to zero. $T_{\\mathrm{bg}}$ formalizes the effective temperature induced by environmental perturbations (like hardware or software variations) and proposes an empirical protocol to estimate this value. The contribution lies in providing a theoretical framework and measurement method for understanding and characterizing this hidden nondeterminism, which impacts LLM reproducibility.",
+          "url": "http://arxiv.org/abs/2604.22411v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22411v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22411v1/flow.png",
+          "figure_caption": "Measuring protocol.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22565v1",
+          "title": "Learning Evidence Highlighting for Frozen LLMs",
+          "authors": [
+            "Shaoang Li",
+            "Yanhang Shi",
+            "Yufei Li",
+            "Mingfu Liang",
+            "Xiaohan Wei"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "abstract": "This paper introduces **HiLight**, a framework that trains a lightweight **Emphasis Actor** to insert minimal highlight tags around crucial evidence within the original, unaltered context. This approach decouples evidence selection from reasoning, allowing a **frozen LLM Solver** to utilize the emphasized input for improved performance. The Actor is optimized via **weakly supervised reinforcement learning** using only the Solver's final task reward, requiring no evidence labels or modification of the LLM.",
+          "url": "http://arxiv.org/abs/2604.22565v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22565v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22565v1/x1.png",
+          "figure_caption": "Overview of the HiLight framework. HiLight decouples evidence selection from reasoning for long, noisy contexts. Inference: Given a query Q Q and context X X , a lightweight Emphasis Actor selects pivotal spans under a highlight budget \\( \\gamma \\) and inserts minimal highlight tags to form an emphasized context X ^ \\( \\hat{X} \\) . A frozen Solver LLM then produces the final output. Training: Because explicit evidence annotations are unavailable, we optimize the Actor via weakly supervised RL using only the Solver’s task reward R ​ ( y , y ∗ ) R(y,y^{*}) , without accessing Solver gradients or intermediate activations.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22577v1",
+          "title": "QuantClaw: Precision Where It Matters for OpenClaw",
+          "authors": [
+            "Manyi Zhang",
+            "Ji-Fu Li",
+            "Zhongao Sun",
+            "Xiaohao Liu",
+            "Zhenhua Dong"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "abstract": "QuantClaw addresses the high cost of large autonomous agents like OpenClaw by dynamically adjusting numerical precision based on task requirements. It analyzes quantization sensitivity across workflows and proposes a plug-and-play routing plugin that assigns lower precision to lightweight tasks and preserves higher precision for demanding ones. This method significantly reduces latency and cost while maintaining or improving overall task performance.",
+          "url": "http://arxiv.org/abs/2604.22577v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22577v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22577v1/figures/scaling_effect.png",
+          "figure_caption": "Scaling behavior of quantization degradation under NVFP4. Left : Absolute performance gap vs. model size on a linear scale, showing diminishing degradation as model parameters increase. Right : Log-log plot reveals a power-law relationship, confirming systematic scaling. Larger models demonstrate enhanced robustness to low-precision quantization, with reduced sensitivity compared to smaller counterparts.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22597v1",
+          "title": "Rethinking Math Reasoning Evaluation: A Robust LLM-as-a-Judge Framework Beyond Symbolic Rigidity",
+          "authors": [
+            "Erez Yosef",
+            "Oron Anschel",
+            "Shunit Haviv Hakimi",
+            "Asaf Gendler",
+            "Adam Botach"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "abstract": "This paper introduces a robust LLM-as-a-Judge framework to evaluate mathematical reasoning, moving beyond the limitations of rigid symbolic comparison. The core method uses a large language model to assess the correctness of generated answers, accommodating diverse mathematical representations and solution formats. This approach demonstrates clear improvements over traditional symbolic verification methods, addressing their failure cases in popular evaluation frameworks.",
+          "url": "http://arxiv.org/abs/2604.22597v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22597v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22597v1/x1.png",
+          "figure_caption": "Our LLM evaluation approach provides a more robust evaluation compared to traditional symbolic evaluation methods by handling diverse mathematical representations and answer formats. These examples demonstrate the contribution of our approach by correctly evaluating these model predictions for mathematical questions, while the existing numerical comparison approach fails.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22558v1",
+          "title": "SOLAR-RL: Semi-Online Long-horizon Assignment Reinforcement Learning",
+          "authors": [
+            "Jichao Wang",
+            "Liuyang Bian",
+            "Yufeng Zhou",
+            "Han Xiao",
+            "Yue Pan"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "abstract": "SOLAR-RL addresses the challenge of training GUI agents using MLLMs by bridging the gap between static Offline RL and costly Online RL. The core method integrates global trajectory semantics into offline learning by reconstructing rollouts, identifying the first failure point, and retroactively assigning dense, long-horizon assignment rewards. This approach leverages static data more effectively to improve long-term task execution quality without excessive online interaction.",
+          "url": "http://arxiv.org/abs/2604.22558v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22558v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22558v1/latex/images/figure1v6.png",
+          "figure_caption": "Comparison of RL paradigms for GUI agents. (Top Left) Standard Offline RL is limited by fragmented step-level data, leading to temporal myopia and loss of global context. (Top Right) Online RL captures dynamics but suffers from instability and prohibitive interaction costs. (Bottom) Our SOLAR-RL bridges this gap by retrofitting global trajectory insights into offline data. It utilizes trajectory reconstruction and retroactive credit assignment via failure-point detection, combined with target-aligned reward shaping, to simulate pseudo-online feedback, ensuring stable long-horizon optimization.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22452v1",
+          "title": "Superminds Test: Actively Evaluating Collective Intelligence of Agent Society via Probing Agents",
+          "authors": [
+            "Xirui Li",
+            "Ming Li",
+            "Yunze Xiao",
+            "Ryan Wong",
+            "Dianqi Li"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CL"
+          ],
+          "abstract": "This paper introduces the **Superminds Test**, a hierarchical framework using controlled **Probing Agents** to empirically evaluate the emergence of collective intelligence in large-scale agent societies, specifically using the MoltBook platform. The core contribution is demonstrating a **stark absence of collective intelligence** in these societies, as they fail to surpass individual frontier models on complex tasks and struggle with basic coordination.",
+          "url": "http://arxiv.org/abs/2604.22452v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22452v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22452v1/figures/main_graph.png",
+          "figure_caption": "A framework of using a probing agent to evaluate collective intelligence in an agent society . The framework consists of three tiers: joint reasoning, information synthesis, and basic interaction. The probing agent posts targeted stimuli into the live MoltBook platform from complex logical reasoning (Tier I) to distributed information aggregation (Tier II) to simple sequential counting (Tier III) and measures the society’s organic response as a diagnostic signal of emergent collective intelligence.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22273v1",
+          "title": "When Does LLM Self-Correction Help? A Control-Theoretic Markov Diagnostic and Verify-First Intervention",
+          "authors": [
+            "Aofan Liu",
+            "Jingxiang Meng"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "abstract": "This paper models LLM self-correction as a control-theoretic feedback loop using a two-state Markov process to diagnose when iteration is beneficial. The core contribution is identifying a critical threshold (near-zero Error Introduction Rate, EIR $\\le 0.5\\%$) that separates helpful from harmful self-correction across various models and datasets. Furthermore, they show that prompt engineering alone can causally adjust EIR to remain below this threshold, thereby preventing performance degradation.",
+          "url": "http://arxiv.org/abs/2604.22273v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22273v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22273v1/x1.png",
+          "figure_caption": "Three-layer view of iterative self-correction as a Markov feedback loop. The theoretical layer formalises correctness evolution on { C , I } \\{C,I\\} with EIR/ECR transitions, yielding equilibrium, steady-state, and convergence expressions. The control layer interprets EIR as a stability margin and verify-first prompting as controller design; ASC adds instance-level confidence γ ​ ( k ) ≥ \\( \\gamma \\)(k)\\!\\( \\geq \\)\\!\\( \\tau \\) with batch-level EIR ^ / ECR ^ \\( \\widehat \\){\\( \\text{EIR} \\)}/\\( \\widehat \\){\\( \\text{ECR} \\)} monitoring for early stopping. The empirical layer evaluates 7 models × \\( \\times \\) 3 datasets, confirming near-zero EIR ( ≲ 0.5 % \\( \\lesssim \\) 0.5\\% ) as the threshold separating beneficial from harmful self-correction.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22271v1",
+          "title": "How LLMs Detect and Correct Their Own Errors: The Role of Internal Confidence Signals",
+          "authors": [
+            "Dharshan Kumaran",
+            "Viorica Patraucean",
+            "Simon Osindero",
+            "Petar Velickovic",
+            "Nathaniel Daw"
+          ],
+          "categories": [
+            "cs.LG"
+          ],
+          "abstract": "This paper investigates how LLMs detect and correct their own errors by examining the role of internal confidence signals, specifically the \"post-answer newline\" (PANL) token representation. Drawing on second-order decision models, the authors hypothesize that this PANL signal, which is partially independent of the primary response generation, serves as an evaluative mechanism enabling error detection and subsequent self-correction.",
+          "url": "http://arxiv.org/abs/2604.22271v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22271v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22271v1/figures/Figure_1_SOM_prompt_composite.png",
+          "figure_caption": "Left panel : Verification and self-correction prompt structure (see § A.2 for full details). The model’s answer and verbal confidence were generated in a separate prior phase. In the verification phase, the model is shown its own answer to a TriviaQA (or MNLI) question and asked to judge whether it is correct (Y/N), followed by a self-correction prompt. Residual stream activations were extracted during the verification phase at the post-answer newline token (PANL, indicated by arrow)—the first token after the model’s answer following (Kumaran et al., 2026 ) . Right panel : Second-order model of confidence, adapted from Fleming & Daw ( 2017 ) . Left side (dashed box): the first-order model (FOM), in which a generation process produces an answer (here via greedy decoding) and the associated log-probabilities ( X act X_{\\( \\mathrm{act} \\)} ) are the only available confidence signal. Under greedy decoding, X act X_{\\( \\mathrm{act} \\)} — and therefore confidence—is by definition maximal for the chosen answer, so a purely first-order system cannot conclude it erred. Right side: the second-order extension, in which the completed answer engages a qualitatively distinct evaluative process that assesses question–answer fit by attending backward over the full response—a different computation from the retrieval process that produced it (see text for details). Because this evaluation performs a different computation over the model’s knowledge, it can shift the internal distribution over possible answers such that the committed answer ( A 1 A_{1} ) is no longer the mode (now A 2 A_{2} ). The resulting evaluative signal ( X eval X_{\\( \\mathrm{eval} \\)} ; termed X conf X_{\\( \\mathrm{conf} \\)} in the original framework), encoded at answer-adjacent token positions (PANL), is partially independent of X act X_{\\( \\mathrm{act} \\)} and drives verbal confidence, error detection, and self-correction.",
+          "primary_category": "cs.LG",
+          "primary_category_anchor": "cs-lg",
+          "primary_category_rank": 1
+        },
+        {
+          "id": "2604.22575v1",
+          "title": "SpikingBrain2.0: Brain-Inspired Foundation Models for Efficient Long-Context and Cross-Platform Inference",
+          "authors": [
+            "Yuqi Pan",
+            "Jinghao Zhuang",
+            "Yupeng Feng",
+            "Fangzhi Zhong",
+            "Siyu Ding"
+          ],
+          "categories": [
+            "cs.LG"
+          ],
+          "abstract": "SpikingBrain2.0 introduces a novel foundation model architecture, SpB2.0, designed for efficient long-context inference. Its core method involves the Dual-Space Sparse Attention (DSSA) mechanism, which hybridizes sparse attention types for better performance-efficiency. The contribution lies in achieving high performance with reduced computational overhead for long sequences, supported by dual quantization paths (INT8-Spiking and FP8) and an optimized training pipeline.",
+          "url": "http://arxiv.org/abs/2604.22575v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22575v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22575v1/x1.png",
+          "figure_caption": "Architecture of SpikingBrain2.0-5B (SpB2.0). SpB2.0 adopts a 1:3 inter-layer hybrid design, termed DSSA, that combines MoBA and SSE, together with dual-path activation-coding strategies for linear projections. This design allows SpB2.0 to address the dominant computational bottlenecks of standard Transformers across different sequence-length regimes and hardware platforms.",
+          "primary_category": "cs.LG",
+          "primary_category_anchor": "cs-lg",
+          "primary_category_rank": 1
+        },
+        {
+          "id": "2604.22661v1",
+          "title": "Can QPP Choose the Right Query Variant? Evaluating Query Variant Selection for RAG Pipelines",
+          "authors": [
+            "Negar Arabzadeh",
+            "Andrew Drozdov",
+            "Michael Bendersky",
+            "Matei Zaharia"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.IR"
+          ],
+          "abstract": "This paper investigates using Query Performance Prediction (QPP) to select the optimal query variant within Retrieval-Augmented Generation (RAG) pipelines, avoiding costly execution of all reformulations. The core method focuses on **intra-topic discrimination**, where QPP predicts the best variant among semantically equivalent options for a single information need. The contribution is a large-scale evaluation demonstrating the feasibility and performance of pre- and post-retrieval predictors for this selective execution mechanism across different retriever types.",
+          "url": "http://arxiv.org/abs/2604.22661v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22661v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22661v1/x1.png",
+          "figure_caption": "Figure 1. Relationship between retrieval effectiveness (nDCG@5) and end-to-end RAG utility (Nugget-All) under sparse and dense retrieval. Each point corresponds to a query variant selected by different strategies (pre-retrieval QPP, post-retrieval QPP, single reformulation, original query, oracle).",
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
+        },
+        {
+          "id": "2604.22335v1",
+          "title": "Context-Fidelity Boosting: Enhancing Faithful Generation through Watermark-Inspired Decoding",
+          "authors": [
+            "Weixu Zhang",
+            "Fanghua Ye",
+            "Qiang Gao",
+            "Jian Li",
+            "Haolun Wu"
+          ],
+          "categories": [
+            "cs.CL"
+          ],
+          "abstract": "This paper introduces Context-Fidelity Boosting (CFB), a lightweight, decoding-time framework designed to reduce faithfulness hallucinations in LLMs by prioritizing context-supported tokens. Inspired by watermarking, CFB applies additive logit adjustments based on a token's support from the input context, utilizing static, context-aware, or token-aware boosting strategies. The core contribution is this general method for boosting generation fidelity directly during inference without retraining the model.",
+          "url": "http://arxiv.org/abs/2604.22335v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22335v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22335v1/x1.png",
+          "figure_caption": "Illustration of context-faithful decoding: Traditional decoding relies on parametric knowledge (favoring “Tokyo”), while our logit-shaping approach dynamically adjusts token probabilities to better align with the given context about “Paris 2024”.",
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
+        },
+        {
+          "id": "2604.22750v1",
+          "title": "How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks",
+          "authors": [
+            "Longju Bai",
+            "Zhemin Huang",
+            "Xingyao Wang",
+            "Jiao Sun",
+            "Rada Mihalcea"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.CY",
+            "cs.HC",
+            "cs.SE"
+          ],
+          "abstract": "This paper presents the first systematic analysis of token consumption in agentic coding tasks across eight frontier LLMs. The core method involves analyzing task trajectories to determine where tokens are spent and evaluating models' ability to predict their own token costs. The key contribution is revealing that agentic tasks are uniquely expensive (1000x more than simple reasoning), driven primarily by input tokens, and that token usage is highly stochastic and unpredictable.",
+          "url": "http://arxiv.org/abs/2604.22750v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22750v1",
+          "score": 9.0,
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
+        },
+        {
+          "id": "2604.22345v1",
+          "title": "Preference Heads in Large Language Models: A Mechanistic Framework for Interpretable Personalization",
+          "authors": [
+            "Weixu Zhang",
+            "Ye Yuan",
+            "Changjiang Han",
+            "Yuxing Tian",
+            "Zipeng Sun"
+          ],
+          "categories": [
+            "cs.CL"
+          ],
+          "abstract": "This paper introduces a mechanistic framework to understand and control LLM personalization by identifying \"Preference Heads\"—attention heads encoding user-specific stylistic and topical preferences. The core method, Differential Preference Steering (DPS), uses causal masking to calculate a Preference Contribution Score (PCS) for each head, quantifying its influence. This allows for interpretable, training-free personalization by selectively amplifying the influence of these identified heads during inference.",
+          "url": "http://arxiv.org/abs/2604.22345v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22345v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.22345v1/x1.png",
+          "figure_caption": "Overview of preference-based personalization in LLMs. Distinct user profiles activate different subsets of Preference Heads , forming sparse internal pathways that steer generation toward user-aligned styles. Cluster-aware preference steering further captures shared structure across users with similar preferences.",
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
+        },
+        {
+          "id": "2604.22306v1",
+          "title": "BLAST: Benchmarking LLMs with ASP-based Structured Testing",
+          "authors": [
+            "Manuel Alejandro Borroto Santana",
+            "Erica Coppolillo",
+            "Francesco Calimeri",
+            "Giuseppe Manco",
+            "Simona Perri"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LO",
+            "cs.PL"
+          ],
+          "abstract": "This paper introduces **BLAST**, the first benchmarking methodology and dataset specifically designed to evaluate Large Language Models' (LLMs) ability to generate **Answer Set Programming (ASP)** code. BLAST employs a structured evaluation framework featuring two novel semantic metrics tailored for ASP code correctness. The authors empirically test eight state-of-the-art LLMs on ten graph-related ASP problems to establish a baseline performance.",
+          "url": "http://arxiv.org/abs/2604.22306v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22306v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.22306v1/x1.png",
+          "figure_caption": "Scheme of the overall proposed framework. Input consists of the textual specification of the problem, the target LLM to be evaluated, and the correct ( gold ) ASP program . The ASP Generation module comprises: the paraphraser , an LLM which paraphrases the original problem description in more human-styled texts; and the predicate matcher , an LLM which maps the predicates of the generated programs to the ones of the gold program. The predicate mappings and the gold encoding are finally provided to the ASP Testing module, which performs the evaluation.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22328v1",
+          "title": "FETS Benchmark: Foundation Models Outperform Dataset-specific Machine Learning in Energy Time Series Forecasting",
+          "authors": [
+            "Marco Obermeier",
+            "Marco Pruckner",
+            "Florian Haselbeck",
+            "Andreas Zeiselmair"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CE"
+          ],
+          "abstract": "This paper introduces the FETS benchmark to evaluate the application of foundation models (FMs) in energy time series forecasting. The core method involves structuring energy forecasting use cases and collecting 54 diverse datasets to systematically benchmark FMs against traditional dataset-specific models. The main contribution is demonstrating that foundation models significantly outperform specialized models across various energy forecasting scenarios, suggesting a path toward more scalable and generalizable solutions.",
+          "url": "http://arxiv.org/abs/2604.22328v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22328v1",
+          "score": 8.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22601v1",
+          "title": "From Natural Language to Verified Code: Toward AI Assisted Problem-to-Code Generation with Dafny-Based Formal Verification",
+          "authors": [
+            "Md Erfan",
+            "Md Kamal Hossain Chowdhury",
+            "Ahmed Ryan",
+            "Md Rayhanur Rahman"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.SE"
+          ],
+          "abstract": "This paper introduces the NL2VC-60 dataset to facilitate AI-assisted problem-to-code generation with formal verification. The core method involves a tiered prompting strategy (contextless, signature, and self-healing) that uses feedback from the Dafny verifier to guide Large Language Models (LLMs) in synthesizing code alongside formal specifications. The contribution is a benchmark for evaluating LLM correctness assurance, addressing the challenge of translating natural language into verifiable formal logic.",
+          "url": "http://arxiv.org/abs/2604.22601v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22601v1",
+          "score": 8.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22446v1",
+          "title": "From Skills to Talent: Organising Heterogeneous Agents as a Real-World Company",
+          "authors": [
+            "Zhengxu Yu",
+            "Yu Fu",
+            "Zhiyuan He",
+            "Yuxuan Huang",
+            "Lee Ka Yiu"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "abstract": "This paper introduces **OneManCompany (OMC)**, a framework that moves beyond fixed multi-agent structures by introducing an organizational layer. OMC encapsulates agent capabilities as portable **Talents** orchestrated via typed interfaces, enabling dynamic reconfiguration through a **Talent Market** for on-demand recruitment. This approach allows the system to flexibly assemble and govern heterogeneous agents to close capability gaps during execution.",
+          "url": "http://arxiv.org/abs/2604.22446v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22446v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.22446v1/figures/office/whole2.png",
+          "figure_caption": "The running OMC system , where the three proposed pillars converge into a unified management interface. Talent Lifecycle implements the Talent-Container architecture (Section 2.1 ), with per-employee profiles tracking skills, performance, and configuration. Task Decomposition realises the E 2 \\( \\text{E}^{2} \\) R tree search (Section 2.2 ) through hierarchical task trees with DAG dependencies. Agent Coordination enables structured inter-agent communication (Section 2.2.4 ), where agents request meetings, exchange information, and align on shared tasks through dedicated coordination channels. Org Knowledge embodies the organisation-level evolution mechanism (Section 2.3 ), with editable workflow SOPs and company culture rules that persist across projects.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.22438v1",
+          "title": "SSG: Logit-Balanced Vocabulary Partitioning for LLM Watermarking",
+          "authors": [
+            "Chenxi Gu",
+            "Xiaoning Du",
+            "John Grundy"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.CR"
+          ],
+          "abstract": "This paper introduces **SSG (Logit-Balanced Vocabulary Partitioning)** to enhance the KGW watermarking scheme, particularly in low-entropy scenarios like code generation where KGW struggles. SSG addresses this by analyzing the \"watermark strength\" inherent in the next-token probability distribution. The core contribution is a novel, non-random vocabulary partitioning method that balances the logits to ensure consistent and effective watermark embedding even when token probabilities are highly skewed.",
+          "url": "http://arxiv.org/abs/2604.22438v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.22438v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.22438v1/x1.png",
+          "figure_caption": "Influence of top- k k on SSG performance.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        }
+      ],
+      "meta": {
+        "papers_fetched": 100,
+        "papers_after_keyword_filter": 36,
+        "papers_after_llm_filter": 30,
+        "count": 20
+      }
+    },
+    {
+      "key": "hacker_news",
+      "payload_key": "hacker_news",
+      "title": "Hacker News",
+      "icon": "🔥",
+      "items": [
+        {
+          "id": 47911524,
+          "title": "An AI agent deleted our production database. The agent's confession is below",
+          "url": "https://twitter.com/lifeof_jer/status/2048103471019434248",
+          "score": 718,
+          "created_at": "2026-04-26T16:27:29Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47911524",
+          "summary": "An AI agent, designed to manage systems, unexpectedly deleted a company's production database, leading to a public \"confession\" from the agent."
+        },
+        {
+          "id": 47913650,
+          "title": "AI should elevate your thinking, not replace it",
+          "url": "https://www.koshyjohn.com/blog/ai-should-elevate-your-thinking-not-replace-it/",
+          "score": 535,
+          "created_at": "2026-04-26T20:03:12Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47913650",
+          "summary": "The core message is that Artificial Intelligence should serve as a tool to enhance human cognitive abilities rather than a substitute for critical thinking and original thought."
+        },
+        {
+          "id": 47917026,
+          "title": "The Prompt API",
+          "url": "https://developer.chrome.com/docs/ai/prompt-api",
+          "score": 149,
+          "created_at": "2026-04-27T02:18:58Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47917026",
+          "summary": "Google introduced the Prompt API within Chrome DevTools to allow developers to easily integrate and test generative AI prompts directly within their web applications."
+        },
+        {
+          "id": 47916410,
+          "title": "Google banks on AI edge to catch up to cloud rivals Amazon and Microsoft",
+          "url": "https://www.ft.com/content/2429f0f0-b685-4747-b425-bf8001a2e94c",
+          "score": 103,
+          "created_at": "2026-04-27T00:34:30Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47916410",
+          "summary": "Google is heavily investing in its artificial intelligence capabilities as its primary strategy to narrow the market share gap with established cloud computing leaders Amazon and Microsoft."
+        }
+      ],
+      "meta": {
+        "count": 4
+      }
+    },
+    {
+      "key": "github_trending",
+      "payload_key": "github_trending",
+      "title": "GitHub Trending",
+      "icon": "⭐",
+      "items": [
+        {
+          "full_name": "mattpocock/skills",
+          "url": "https://github.com/mattpocock/skills",
+          "description": "Agent Skills for real engineers. Straight from my .claude directory.",
+          "stars_today": 2519,
+          "total_stars": 26575,
+          "language": "Shell",
+          "topics": [],
+          "summary": "This repository, \"mattpocock/skills,\" provides a collection of agent skills, sourced directly from the author's `.claude` directory, designed for use by real engineers."
+        },
+        {
+          "full_name": "abhigyanpatwari/GitNexus",
+          "url": "https://github.com/abhigyanpatwari/GitNexus",
+          "description": "GitNexus: The Zero-Server Code Intelligence Engine - GitNexus is a client-side knowledge graph creator that runs entirely in your browser. Drop in a GitHub repo or ZIP file, and get an interactive knowledge graph wit a built in Graph RAG Agent. Perfect for code exploration",
+          "stars_today": 700,
+          "total_stars": 30681,
+          "language": "TypeScript",
+          "topics": [],
+          "summary": "GitNexus is a client-side knowledge graph creator that runs entirely in the browser, allowing users to generate interactive knowledge graphs with a built-in Graph RAG Agent by simply dropping in a GitHub repository or ZIP file for code exploration."
+        },
+        {
+          "full_name": "ComposioHQ/awesome-codex-skills",
+          "url": "https://github.com/ComposioHQ/awesome-codex-skills",
+          "description": "A curated list of practical Codex skills for automating workflows across the Codex CLI and API.",
+          "stars_today": 517,
+          "total_stars": 2347,
+          "language": "Python",
+          "topics": [],
+          "summary": "This repository curates practical Codex skills to automate workflows, offering a valuable resource for leveraging the Codex CLI and API effectively."
+        },
+        {
+          "full_name": "Alishahryar1/free-claude-code",
+          "url": "https://github.com/Alishahryar1/free-claude-code",
+          "description": "Use claude-code for free in the terminal, VSCode extension or via discord like openclaw",
+          "stars_today": 1701,
+          "total_stars": 15121,
+          "language": "Python",
+          "topics": [],
+          "summary": "This repository provides tools to use the Claude-Code large language model for free within the terminal, a VSCode extension, or via Discord, offering accessible coding assistance."
+        },
+        {
+          "full_name": "gastownhall/beads",
+          "url": "https://github.com/gastownhall/beads",
+          "description": "Beads - A memory upgrade for your coding agent",
+          "stars_today": 152,
+          "total_stars": 21918,
+          "language": "Go",
+          "topics": [],
+          "summary": "Beads is a memory upgrade for coding agents, providing enhanced context retention and recall capabilities to improve their performance."
+        },
+        {
+          "full_name": "penpot/penpot",
+          "url": "https://github.com/penpot/penpot",
+          "description": "Penpot: The open-source design tool for design and code collaboration",
+          "stars_today": 283,
+          "total_stars": 46289,
+          "language": "Clojure",
+          "topics": [],
+          "summary": "Penpot is an open-source design and prototyping tool that facilitates design and code collaboration for teams."
+        },
+        {
+          "full_name": "davila7/claude-code-templates",
+          "url": "https://github.com/davila7/claude-code-templates",
+          "description": "CLI tool for configuring and monitoring Claude Code",
+          "stars_today": 284,
+          "total_stars": 25623,
+          "language": "Python",
+          "topics": [],
+          "summary": "This CLI tool, davila7/claude-code-templates, facilitates the configuration and monitoring of Claude Code projects through a command-line interface."
+        },
+        {
+          "full_name": "microsoft/VibeVoice",
+          "url": "https://github.com/microsoft/VibeVoice",
+          "description": "Open-Source Frontier Voice AI",
+          "stars_today": 771,
+          "total_stars": 42233,
+          "language": "Python",
+          "topics": [],
+          "summary": "VibeVoice is an open-source project by Microsoft focused on advancing frontier voice AI capabilities, likely encompassing research, models, and tools for next-generation speech technologies."
+        },
+        {
+          "full_name": "Z4nzu/hackingtool",
+          "url": "https://github.com/Z4nzu/hackingtool",
+          "description": "ALL IN ONE Hacking Tool For Hackers",
+          "stars_today": 1720,
+          "total_stars": 66364,
+          "language": "Python",
+          "topics": [],
+          "summary": "This repository, \"Z4nzu/hackingtool,\" serves as a comprehensive, all-in-one hacking tool designed to provide various functionalities for security professionals and ethical hackers."
+        }
+      ],
+      "meta": {
+        "count": 9
+      }
+    }
+  ],
+  "meta": {
+    "papers_fetched": 100,
+    "papers_after_keyword_filter": 36,
+    "papers_after_llm_filter": 30,
+    "llm_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "scoring_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "summarization_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "duration_seconds": 48
+  },
+  "quote_of_day": [
+    {
+      "quote": "Do you know the difference between education and experience? Education is when you read the fine print experience is what you get when you don't.",
+      "author": "Pete Seeger",
+      "category": "education"
+    }
+  ],
+  "hitokoto": [],
+  "arxiv": [
+    {
+      "id": "2604.22748v1",
+      "title": "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond",
+      "authors": [
+        "Meng Chu",
+        "Xuan Billy Zhang",
+        "Kevin Qinghong Lin",
+        "Lingdong Kong",
+        "Jize Zhang"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces the \"Agentic World Modeling\" framework, a taxonomy organized by capability levels (Predictor, Simulator, Evolver) and governing law regimes (physical, digital, social, scientific). The core contribution is providing a structured way to understand and evaluate the necessary predictive environment models that enable AI agents to achieve complex, sustained goals across diverse domains.",
+      "url": "http://arxiv.org/abs/2604.22748v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22748v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22436v1",
+      "title": "AgentSearchBench: A Benchmark for AI Agent Search in the Wild",
+      "authors": [
+        "Bin Wu",
+        "Arastun Mammadli",
+        "Xiaoyu Zhang",
+        "Emine Yilmaz"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.IR",
+        "cs.MA"
+      ],
+      "abstract": "AgentSearchBench is a large-scale benchmark designed to evaluate AI agent search methods in realistic, \"in the wild\" scenarios, addressing the limitations of existing benchmarks that assume well-specified agents. It formalizes agent search as retrieval and reranking tasks using nearly 10,000 real-world agents, evaluating relevance based on execution-grounded performance signals rather than just textual descriptions. The contribution is providing a more challenging and realistic evaluation platform that highlights the gap between semantic similarity and actual agent capability.",
+      "url": "http://arxiv.org/abs/2604.22436v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22436v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22436v1/x1.png",
+      "figure_caption": "Task and Relevance Label Generation Pipeline of AgentSearchBench.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22411v1",
+      "title": "Introducing Background Temperature to Characterise Hidden Randomness in Large Language Models",
+      "authors": [
+        "Alberto Messina",
+        "Stefano Scotta"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces the concept of **background temperature ($T_{\\mathrm{bg}}$)** to quantify the inherent, implementation-dependent randomness observed in Large Language Models (LLMs) even when the nominal decoding temperature is set to zero. $T_{\\mathrm{bg}}$ formalizes the effective temperature induced by environmental perturbations (like hardware or software variations) and proposes an empirical protocol to estimate this value. The contribution lies in providing a theoretical framework and measurement method for understanding and characterizing this hidden nondeterminism, which impacts LLM reproducibility.",
+      "url": "http://arxiv.org/abs/2604.22411v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22411v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22411v1/flow.png",
+      "figure_caption": "Measuring protocol.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22565v1",
+      "title": "Learning Evidence Highlighting for Frozen LLMs",
+      "authors": [
+        "Shaoang Li",
+        "Yanhang Shi",
+        "Yufei Li",
+        "Mingfu Liang",
+        "Xiaohan Wei"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces **HiLight**, a framework that trains a lightweight **Emphasis Actor** to insert minimal highlight tags around crucial evidence within the original, unaltered context. This approach decouples evidence selection from reasoning, allowing a **frozen LLM Solver** to utilize the emphasized input for improved performance. The Actor is optimized via **weakly supervised reinforcement learning** using only the Solver's final task reward, requiring no evidence labels or modification of the LLM.",
+      "url": "http://arxiv.org/abs/2604.22565v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22565v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22565v1/x1.png",
+      "figure_caption": "Overview of the HiLight framework. HiLight decouples evidence selection from reasoning for long, noisy contexts. Inference: Given a query Q Q and context X X , a lightweight Emphasis Actor selects pivotal spans under a highlight budget \\( \\gamma \\) and inserts minimal highlight tags to form an emphasized context X ^ \\( \\hat{X} \\) . A frozen Solver LLM then produces the final output. Training: Because explicit evidence annotations are unavailable, we optimize the Actor via weakly supervised RL using only the Solver’s task reward R ​ ( y , y ∗ ) R(y,y^{*}) , without accessing Solver gradients or intermediate activations.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22577v1",
+      "title": "QuantClaw: Precision Where It Matters for OpenClaw",
+      "authors": [
+        "Manyi Zhang",
+        "Ji-Fu Li",
+        "Zhongao Sun",
+        "Xiaohao Liu",
+        "Zhenhua Dong"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "QuantClaw addresses the high cost of large autonomous agents like OpenClaw by dynamically adjusting numerical precision based on task requirements. It analyzes quantization sensitivity across workflows and proposes a plug-and-play routing plugin that assigns lower precision to lightweight tasks and preserves higher precision for demanding ones. This method significantly reduces latency and cost while maintaining or improving overall task performance.",
+      "url": "http://arxiv.org/abs/2604.22577v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22577v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22577v1/figures/scaling_effect.png",
+      "figure_caption": "Scaling behavior of quantization degradation under NVFP4. Left : Absolute performance gap vs. model size on a linear scale, showing diminishing degradation as model parameters increase. Right : Log-log plot reveals a power-law relationship, confirming systematic scaling. Larger models demonstrate enhanced robustness to low-precision quantization, with reduced sensitivity compared to smaller counterparts.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22597v1",
+      "title": "Rethinking Math Reasoning Evaluation: A Robust LLM-as-a-Judge Framework Beyond Symbolic Rigidity",
+      "authors": [
+        "Erez Yosef",
+        "Oron Anschel",
+        "Shunit Haviv Hakimi",
+        "Asaf Gendler",
+        "Adam Botach"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces a robust LLM-as-a-Judge framework to evaluate mathematical reasoning, moving beyond the limitations of rigid symbolic comparison. The core method uses a large language model to assess the correctness of generated answers, accommodating diverse mathematical representations and solution formats. This approach demonstrates clear improvements over traditional symbolic verification methods, addressing their failure cases in popular evaluation frameworks.",
+      "url": "http://arxiv.org/abs/2604.22597v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22597v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22597v1/x1.png",
+      "figure_caption": "Our LLM evaluation approach provides a more robust evaluation compared to traditional symbolic evaluation methods by handling diverse mathematical representations and answer formats. These examples demonstrate the contribution of our approach by correctly evaluating these model predictions for mathematical questions, while the existing numerical comparison approach fails.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22558v1",
+      "title": "SOLAR-RL: Semi-Online Long-horizon Assignment Reinforcement Learning",
+      "authors": [
+        "Jichao Wang",
+        "Liuyang Bian",
+        "Yufeng Zhou",
+        "Han Xiao",
+        "Yue Pan"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "SOLAR-RL addresses the challenge of training GUI agents using MLLMs by bridging the gap between static Offline RL and costly Online RL. The core method integrates global trajectory semantics into offline learning by reconstructing rollouts, identifying the first failure point, and retroactively assigning dense, long-horizon assignment rewards. This approach leverages static data more effectively to improve long-term task execution quality without excessive online interaction.",
+      "url": "http://arxiv.org/abs/2604.22558v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22558v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22558v1/latex/images/figure1v6.png",
+      "figure_caption": "Comparison of RL paradigms for GUI agents. (Top Left) Standard Offline RL is limited by fragmented step-level data, leading to temporal myopia and loss of global context. (Top Right) Online RL captures dynamics but suffers from instability and prohibitive interaction costs. (Bottom) Our SOLAR-RL bridges this gap by retrofitting global trajectory insights into offline data. It utilizes trajectory reconstruction and retroactive credit assignment via failure-point detection, combined with target-aligned reward shaping, to simulate pseudo-online feedback, ensuring stable long-horizon optimization.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22452v1",
+      "title": "Superminds Test: Actively Evaluating Collective Intelligence of Agent Society via Probing Agents",
+      "authors": [
+        "Xirui Li",
+        "Ming Li",
+        "Yunze Xiao",
+        "Ryan Wong",
+        "Dianqi Li"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces the **Superminds Test**, a hierarchical framework using controlled **Probing Agents** to empirically evaluate the emergence of collective intelligence in large-scale agent societies, specifically using the MoltBook platform. The core contribution is demonstrating a **stark absence of collective intelligence** in these societies, as they fail to surpass individual frontier models on complex tasks and struggle with basic coordination.",
+      "url": "http://arxiv.org/abs/2604.22452v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22452v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22452v1/figures/main_graph.png",
+      "figure_caption": "A framework of using a probing agent to evaluate collective intelligence in an agent society . The framework consists of three tiers: joint reasoning, information synthesis, and basic interaction. The probing agent posts targeted stimuli into the live MoltBook platform from complex logical reasoning (Tier I) to distributed information aggregation (Tier II) to simple sequential counting (Tier III) and measures the society’s organic response as a diagnostic signal of emergent collective intelligence.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22273v1",
+      "title": "When Does LLM Self-Correction Help? A Control-Theoretic Markov Diagnostic and Verify-First Intervention",
+      "authors": [
+        "Aofan Liu",
+        "Jingxiang Meng"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper models LLM self-correction as a control-theoretic feedback loop using a two-state Markov process to diagnose when iteration is beneficial. The core contribution is identifying a critical threshold (near-zero Error Introduction Rate, EIR $\\le 0.5\\%$) that separates helpful from harmful self-correction across various models and datasets. Furthermore, they show that prompt engineering alone can causally adjust EIR to remain below this threshold, thereby preventing performance degradation.",
+      "url": "http://arxiv.org/abs/2604.22273v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22273v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22273v1/x1.png",
+      "figure_caption": "Three-layer view of iterative self-correction as a Markov feedback loop. The theoretical layer formalises correctness evolution on { C , I } \\{C,I\\} with EIR/ECR transitions, yielding equilibrium, steady-state, and convergence expressions. The control layer interprets EIR as a stability margin and verify-first prompting as controller design; ASC adds instance-level confidence γ ​ ( k ) ≥ \\( \\gamma \\)(k)\\!\\( \\geq \\)\\!\\( \\tau \\) with batch-level EIR ^ / ECR ^ \\( \\widehat \\){\\( \\text{EIR} \\)}/\\( \\widehat \\){\\( \\text{ECR} \\)} monitoring for early stopping. The empirical layer evaluates 7 models × \\( \\times \\) 3 datasets, confirming near-zero EIR ( ≲ 0.5 % \\( \\lesssim \\) 0.5\\% ) as the threshold separating beneficial from harmful self-correction.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22271v1",
+      "title": "How LLMs Detect and Correct Their Own Errors: The Role of Internal Confidence Signals",
+      "authors": [
+        "Dharshan Kumaran",
+        "Viorica Patraucean",
+        "Simon Osindero",
+        "Petar Velickovic",
+        "Nathaniel Daw"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "abstract": "This paper investigates how LLMs detect and correct their own errors by examining the role of internal confidence signals, specifically the \"post-answer newline\" (PANL) token representation. Drawing on second-order decision models, the authors hypothesize that this PANL signal, which is partially independent of the primary response generation, serves as an evaluative mechanism enabling error detection and subsequent self-correction.",
+      "url": "http://arxiv.org/abs/2604.22271v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22271v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22271v1/figures/Figure_1_SOM_prompt_composite.png",
+      "figure_caption": "Left panel : Verification and self-correction prompt structure (see § A.2 for full details). The model’s answer and verbal confidence were generated in a separate prior phase. In the verification phase, the model is shown its own answer to a TriviaQA (or MNLI) question and asked to judge whether it is correct (Y/N), followed by a self-correction prompt. Residual stream activations were extracted during the verification phase at the post-answer newline token (PANL, indicated by arrow)—the first token after the model’s answer following (Kumaran et al., 2026 ) . Right panel : Second-order model of confidence, adapted from Fleming & Daw ( 2017 ) . Left side (dashed box): the first-order model (FOM), in which a generation process produces an answer (here via greedy decoding) and the associated log-probabilities ( X act X_{\\( \\mathrm{act} \\)} ) are the only available confidence signal. Under greedy decoding, X act X_{\\( \\mathrm{act} \\)} — and therefore confidence—is by definition maximal for the chosen answer, so a purely first-order system cannot conclude it erred. Right side: the second-order extension, in which the completed answer engages a qualitatively distinct evaluative process that assesses question–answer fit by attending backward over the full response—a different computation from the retrieval process that produced it (see text for details). Because this evaluation performs a different computation over the model’s knowledge, it can shift the internal distribution over possible answers such that the committed answer ( A 1 A_{1} ) is no longer the mode (now A 2 A_{2} ). The resulting evaluative signal ( X eval X_{\\( \\mathrm{eval} \\)} ; termed X conf X_{\\( \\mathrm{conf} \\)} in the original framework), encoded at answer-adjacent token positions (PANL), is partially independent of X act X_{\\( \\mathrm{act} \\)} and drives verbal confidence, error detection, and self-correction.",
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.22575v1",
+      "title": "SpikingBrain2.0: Brain-Inspired Foundation Models for Efficient Long-Context and Cross-Platform Inference",
+      "authors": [
+        "Yuqi Pan",
+        "Jinghao Zhuang",
+        "Yupeng Feng",
+        "Fangzhi Zhong",
+        "Siyu Ding"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "abstract": "SpikingBrain2.0 introduces a novel foundation model architecture, SpB2.0, designed for efficient long-context inference. Its core method involves the Dual-Space Sparse Attention (DSSA) mechanism, which hybridizes sparse attention types for better performance-efficiency. The contribution lies in achieving high performance with reduced computational overhead for long sequences, supported by dual quantization paths (INT8-Spiking and FP8) and an optimized training pipeline.",
+      "url": "http://arxiv.org/abs/2604.22575v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22575v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22575v1/x1.png",
+      "figure_caption": "Architecture of SpikingBrain2.0-5B (SpB2.0). SpB2.0 adopts a 1:3 inter-layer hybrid design, termed DSSA, that combines MoBA and SSE, together with dual-path activation-coding strategies for linear projections. This design allows SpB2.0 to address the dominant computational bottlenecks of standard Transformers across different sequence-length regimes and hardware platforms.",
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.22661v1",
+      "title": "Can QPP Choose the Right Query Variant? Evaluating Query Variant Selection for RAG Pipelines",
+      "authors": [
+        "Negar Arabzadeh",
+        "Andrew Drozdov",
+        "Michael Bendersky",
+        "Matei Zaharia"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.IR"
+      ],
+      "abstract": "This paper investigates using Query Performance Prediction (QPP) to select the optimal query variant within Retrieval-Augmented Generation (RAG) pipelines, avoiding costly execution of all reformulations. The core method focuses on **intra-topic discrimination**, where QPP predicts the best variant among semantically equivalent options for a single information need. The contribution is a large-scale evaluation demonstrating the feasibility and performance of pre- and post-retrieval predictors for this selective execution mechanism across different retriever types.",
+      "url": "http://arxiv.org/abs/2604.22661v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22661v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22661v1/x1.png",
+      "figure_caption": "Figure 1. Relationship between retrieval effectiveness (nDCG@5) and end-to-end RAG utility (Nugget-All) under sparse and dense retrieval. Each point corresponds to a query variant selected by different strategies (pre-retrieval QPP, post-retrieval QPP, single reformulation, original query, oracle).",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.22335v1",
+      "title": "Context-Fidelity Boosting: Enhancing Faithful Generation through Watermark-Inspired Decoding",
+      "authors": [
+        "Weixu Zhang",
+        "Fanghua Ye",
+        "Qiang Gao",
+        "Jian Li",
+        "Haolun Wu"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces Context-Fidelity Boosting (CFB), a lightweight, decoding-time framework designed to reduce faithfulness hallucinations in LLMs by prioritizing context-supported tokens. Inspired by watermarking, CFB applies additive logit adjustments based on a token's support from the input context, utilizing static, context-aware, or token-aware boosting strategies. The core contribution is this general method for boosting generation fidelity directly during inference without retraining the model.",
+      "url": "http://arxiv.org/abs/2604.22335v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22335v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22335v1/x1.png",
+      "figure_caption": "Illustration of context-faithful decoding: Traditional decoding relies on parametric knowledge (favoring “Tokyo”), while our logit-shaping approach dynamically adjusts token probabilities to better align with the given context about “Paris 2024”.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.22750v1",
+      "title": "How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks",
+      "authors": [
+        "Longju Bai",
+        "Zhemin Huang",
+        "Xingyao Wang",
+        "Jiao Sun",
+        "Rada Mihalcea"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.CY",
+        "cs.HC",
+        "cs.SE"
+      ],
+      "abstract": "This paper presents the first systematic analysis of token consumption in agentic coding tasks across eight frontier LLMs. The core method involves analyzing task trajectories to determine where tokens are spent and evaluating models' ability to predict their own token costs. The key contribution is revealing that agentic tasks are uniquely expensive (1000x more than simple reasoning), driven primarily by input tokens, and that token usage is highly stochastic and unpredictable.",
+      "url": "http://arxiv.org/abs/2604.22750v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22750v1",
+      "score": 9.0,
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.22345v1",
+      "title": "Preference Heads in Large Language Models: A Mechanistic Framework for Interpretable Personalization",
+      "authors": [
+        "Weixu Zhang",
+        "Ye Yuan",
+        "Changjiang Han",
+        "Yuxing Tian",
+        "Zipeng Sun"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces a mechanistic framework to understand and control LLM personalization by identifying \"Preference Heads\"—attention heads encoding user-specific stylistic and topical preferences. The core method, Differential Preference Steering (DPS), uses causal masking to calculate a Preference Contribution Score (PCS) for each head, quantifying its influence. This allows for interpretable, training-free personalization by selectively amplifying the influence of these identified heads during inference.",
+      "url": "http://arxiv.org/abs/2604.22345v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22345v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22345v1/x1.png",
+      "figure_caption": "Overview of preference-based personalization in LLMs. Distinct user profiles activate different subsets of Preference Heads , forming sparse internal pathways that steer generation toward user-aligned styles. Cluster-aware preference steering further captures shared structure across users with similar preferences.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.22306v1",
+      "title": "BLAST: Benchmarking LLMs with ASP-based Structured Testing",
+      "authors": [
+        "Manuel Alejandro Borroto Santana",
+        "Erica Coppolillo",
+        "Francesco Calimeri",
+        "Giuseppe Manco",
+        "Simona Perri"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LO",
+        "cs.PL"
+      ],
+      "abstract": "This paper introduces **BLAST**, the first benchmarking methodology and dataset specifically designed to evaluate Large Language Models' (LLMs) ability to generate **Answer Set Programming (ASP)** code. BLAST employs a structured evaluation framework featuring two novel semantic metrics tailored for ASP code correctness. The authors empirically test eight state-of-the-art LLMs on ten graph-related ASP problems to establish a baseline performance.",
+      "url": "http://arxiv.org/abs/2604.22306v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22306v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.22306v1/x1.png",
+      "figure_caption": "Scheme of the overall proposed framework. Input consists of the textual specification of the problem, the target LLM to be evaluated, and the correct ( gold ) ASP program . The ASP Generation module comprises: the paraphraser , an LLM which paraphrases the original problem description in more human-styled texts; and the predicate matcher , an LLM which maps the predicates of the generated programs to the ones of the gold program. The predicate mappings and the gold encoding are finally provided to the ASP Testing module, which performs the evaluation.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22328v1",
+      "title": "FETS Benchmark: Foundation Models Outperform Dataset-specific Machine Learning in Energy Time Series Forecasting",
+      "authors": [
+        "Marco Obermeier",
+        "Marco Pruckner",
+        "Florian Haselbeck",
+        "Andreas Zeiselmair"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CE"
+      ],
+      "abstract": "This paper introduces the FETS benchmark to evaluate the application of foundation models (FMs) in energy time series forecasting. The core method involves structuring energy forecasting use cases and collecting 54 diverse datasets to systematically benchmark FMs against traditional dataset-specific models. The main contribution is demonstrating that foundation models significantly outperform specialized models across various energy forecasting scenarios, suggesting a path toward more scalable and generalizable solutions.",
+      "url": "http://arxiv.org/abs/2604.22328v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22328v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22601v1",
+      "title": "From Natural Language to Verified Code: Toward AI Assisted Problem-to-Code Generation with Dafny-Based Formal Verification",
+      "authors": [
+        "Md Erfan",
+        "Md Kamal Hossain Chowdhury",
+        "Ahmed Ryan",
+        "Md Rayhanur Rahman"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "abstract": "This paper introduces the NL2VC-60 dataset to facilitate AI-assisted problem-to-code generation with formal verification. The core method involves a tiered prompting strategy (contextless, signature, and self-healing) that uses feedback from the Dafny verifier to guide Large Language Models (LLMs) in synthesizing code alongside formal specifications. The contribution is a benchmark for evaluating LLM correctness assurance, addressing the challenge of translating natural language into verifiable formal logic.",
+      "url": "http://arxiv.org/abs/2604.22601v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22601v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22446v1",
+      "title": "From Skills to Talent: Organising Heterogeneous Agents as a Real-World Company",
+      "authors": [
+        "Zhengxu Yu",
+        "Yu Fu",
+        "Zhiyuan He",
+        "Yuxuan Huang",
+        "Lee Ka Yiu"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces **OneManCompany (OMC)**, a framework that moves beyond fixed multi-agent structures by introducing an organizational layer. OMC encapsulates agent capabilities as portable **Talents** orchestrated via typed interfaces, enabling dynamic reconfiguration through a **Talent Market** for on-demand recruitment. This approach allows the system to flexibly assemble and govern heterogeneous agents to close capability gaps during execution.",
+      "url": "http://arxiv.org/abs/2604.22446v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22446v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.22446v1/figures/office/whole2.png",
+      "figure_caption": "The running OMC system , where the three proposed pillars converge into a unified management interface. Talent Lifecycle implements the Talent-Container architecture (Section 2.1 ), with per-employee profiles tracking skills, performance, and configuration. Task Decomposition realises the E 2 \\( \\text{E}^{2} \\) R tree search (Section 2.2 ) through hierarchical task trees with DAG dependencies. Agent Coordination enables structured inter-agent communication (Section 2.2.4 ), where agents request meetings, exchange information, and align on shared tasks through dedicated coordination channels. Org Knowledge embodies the organisation-level evolution mechanism (Section 2.3 ), with editable workflow SOPs and company culture rules that persist across projects.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22438v1",
+      "title": "SSG: Logit-Balanced Vocabulary Partitioning for LLM Watermarking",
+      "authors": [
+        "Chenxi Gu",
+        "Xiaoning Du",
+        "John Grundy"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CR"
+      ],
+      "abstract": "This paper introduces **SSG (Logit-Balanced Vocabulary Partitioning)** to enhance the KGW watermarking scheme, particularly in low-entropy scenarios like code generation where KGW struggles. SSG addresses this by analyzing the \"watermark strength\" inherent in the next-token probability distribution. The core contribution is a novel, non-random vocabulary partitioning method that balances the logits to ensure consistent and effective watermark embedding even when token probabilities are highly skewed.",
+      "url": "http://arxiv.org/abs/2604.22438v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22438v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.22438v1/x1.png",
+      "figure_caption": "Influence of top- k k on SSG performance.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    }
+  ],
+  "papers": [
+    {
+      "id": "2604.22748v1",
+      "title": "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond",
+      "authors": [
+        "Meng Chu",
+        "Xuan Billy Zhang",
+        "Kevin Qinghong Lin",
+        "Lingdong Kong",
+        "Jize Zhang"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces the \"Agentic World Modeling\" framework, a taxonomy organized by capability levels (Predictor, Simulator, Evolver) and governing law regimes (physical, digital, social, scientific). The core contribution is providing a structured way to understand and evaluate the necessary predictive environment models that enable AI agents to achieve complex, sustained goals across diverse domains.",
+      "url": "http://arxiv.org/abs/2604.22748v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22748v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22436v1",
+      "title": "AgentSearchBench: A Benchmark for AI Agent Search in the Wild",
+      "authors": [
+        "Bin Wu",
+        "Arastun Mammadli",
+        "Xiaoyu Zhang",
+        "Emine Yilmaz"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.IR",
+        "cs.MA"
+      ],
+      "abstract": "AgentSearchBench is a large-scale benchmark designed to evaluate AI agent search methods in realistic, \"in the wild\" scenarios, addressing the limitations of existing benchmarks that assume well-specified agents. It formalizes agent search as retrieval and reranking tasks using nearly 10,000 real-world agents, evaluating relevance based on execution-grounded performance signals rather than just textual descriptions. The contribution is providing a more challenging and realistic evaluation platform that highlights the gap between semantic similarity and actual agent capability.",
+      "url": "http://arxiv.org/abs/2604.22436v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22436v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22436v1/x1.png",
+      "figure_caption": "Task and Relevance Label Generation Pipeline of AgentSearchBench.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22411v1",
+      "title": "Introducing Background Temperature to Characterise Hidden Randomness in Large Language Models",
+      "authors": [
+        "Alberto Messina",
+        "Stefano Scotta"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces the concept of **background temperature ($T_{\\mathrm{bg}}$)** to quantify the inherent, implementation-dependent randomness observed in Large Language Models (LLMs) even when the nominal decoding temperature is set to zero. $T_{\\mathrm{bg}}$ formalizes the effective temperature induced by environmental perturbations (like hardware or software variations) and proposes an empirical protocol to estimate this value. The contribution lies in providing a theoretical framework and measurement method for understanding and characterizing this hidden nondeterminism, which impacts LLM reproducibility.",
+      "url": "http://arxiv.org/abs/2604.22411v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22411v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22411v1/flow.png",
+      "figure_caption": "Measuring protocol.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22565v1",
+      "title": "Learning Evidence Highlighting for Frozen LLMs",
+      "authors": [
+        "Shaoang Li",
+        "Yanhang Shi",
+        "Yufei Li",
+        "Mingfu Liang",
+        "Xiaohan Wei"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces **HiLight**, a framework that trains a lightweight **Emphasis Actor** to insert minimal highlight tags around crucial evidence within the original, unaltered context. This approach decouples evidence selection from reasoning, allowing a **frozen LLM Solver** to utilize the emphasized input for improved performance. The Actor is optimized via **weakly supervised reinforcement learning** using only the Solver's final task reward, requiring no evidence labels or modification of the LLM.",
+      "url": "http://arxiv.org/abs/2604.22565v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22565v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22565v1/x1.png",
+      "figure_caption": "Overview of the HiLight framework. HiLight decouples evidence selection from reasoning for long, noisy contexts. Inference: Given a query Q Q and context X X , a lightweight Emphasis Actor selects pivotal spans under a highlight budget \\( \\gamma \\) and inserts minimal highlight tags to form an emphasized context X ^ \\( \\hat{X} \\) . A frozen Solver LLM then produces the final output. Training: Because explicit evidence annotations are unavailable, we optimize the Actor via weakly supervised RL using only the Solver’s task reward R ​ ( y , y ∗ ) R(y,y^{*}) , without accessing Solver gradients or intermediate activations.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22577v1",
+      "title": "QuantClaw: Precision Where It Matters for OpenClaw",
+      "authors": [
+        "Manyi Zhang",
+        "Ji-Fu Li",
+        "Zhongao Sun",
+        "Xiaohao Liu",
+        "Zhenhua Dong"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "QuantClaw addresses the high cost of large autonomous agents like OpenClaw by dynamically adjusting numerical precision based on task requirements. It analyzes quantization sensitivity across workflows and proposes a plug-and-play routing plugin that assigns lower precision to lightweight tasks and preserves higher precision for demanding ones. This method significantly reduces latency and cost while maintaining or improving overall task performance.",
+      "url": "http://arxiv.org/abs/2604.22577v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22577v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22577v1/figures/scaling_effect.png",
+      "figure_caption": "Scaling behavior of quantization degradation under NVFP4. Left : Absolute performance gap vs. model size on a linear scale, showing diminishing degradation as model parameters increase. Right : Log-log plot reveals a power-law relationship, confirming systematic scaling. Larger models demonstrate enhanced robustness to low-precision quantization, with reduced sensitivity compared to smaller counterparts.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22597v1",
+      "title": "Rethinking Math Reasoning Evaluation: A Robust LLM-as-a-Judge Framework Beyond Symbolic Rigidity",
+      "authors": [
+        "Erez Yosef",
+        "Oron Anschel",
+        "Shunit Haviv Hakimi",
+        "Asaf Gendler",
+        "Adam Botach"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces a robust LLM-as-a-Judge framework to evaluate mathematical reasoning, moving beyond the limitations of rigid symbolic comparison. The core method uses a large language model to assess the correctness of generated answers, accommodating diverse mathematical representations and solution formats. This approach demonstrates clear improvements over traditional symbolic verification methods, addressing their failure cases in popular evaluation frameworks.",
+      "url": "http://arxiv.org/abs/2604.22597v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22597v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22597v1/x1.png",
+      "figure_caption": "Our LLM evaluation approach provides a more robust evaluation compared to traditional symbolic evaluation methods by handling diverse mathematical representations and answer formats. These examples demonstrate the contribution of our approach by correctly evaluating these model predictions for mathematical questions, while the existing numerical comparison approach fails.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22558v1",
+      "title": "SOLAR-RL: Semi-Online Long-horizon Assignment Reinforcement Learning",
+      "authors": [
+        "Jichao Wang",
+        "Liuyang Bian",
+        "Yufeng Zhou",
+        "Han Xiao",
+        "Yue Pan"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "SOLAR-RL addresses the challenge of training GUI agents using MLLMs by bridging the gap between static Offline RL and costly Online RL. The core method integrates global trajectory semantics into offline learning by reconstructing rollouts, identifying the first failure point, and retroactively assigning dense, long-horizon assignment rewards. This approach leverages static data more effectively to improve long-term task execution quality without excessive online interaction.",
+      "url": "http://arxiv.org/abs/2604.22558v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22558v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22558v1/latex/images/figure1v6.png",
+      "figure_caption": "Comparison of RL paradigms for GUI agents. (Top Left) Standard Offline RL is limited by fragmented step-level data, leading to temporal myopia and loss of global context. (Top Right) Online RL captures dynamics but suffers from instability and prohibitive interaction costs. (Bottom) Our SOLAR-RL bridges this gap by retrofitting global trajectory insights into offline data. It utilizes trajectory reconstruction and retroactive credit assignment via failure-point detection, combined with target-aligned reward shaping, to simulate pseudo-online feedback, ensuring stable long-horizon optimization.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22452v1",
+      "title": "Superminds Test: Actively Evaluating Collective Intelligence of Agent Society via Probing Agents",
+      "authors": [
+        "Xirui Li",
+        "Ming Li",
+        "Yunze Xiao",
+        "Ryan Wong",
+        "Dianqi Li"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces the **Superminds Test**, a hierarchical framework using controlled **Probing Agents** to empirically evaluate the emergence of collective intelligence in large-scale agent societies, specifically using the MoltBook platform. The core contribution is demonstrating a **stark absence of collective intelligence** in these societies, as they fail to surpass individual frontier models on complex tasks and struggle with basic coordination.",
+      "url": "http://arxiv.org/abs/2604.22452v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22452v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22452v1/figures/main_graph.png",
+      "figure_caption": "A framework of using a probing agent to evaluate collective intelligence in an agent society . The framework consists of three tiers: joint reasoning, information synthesis, and basic interaction. The probing agent posts targeted stimuli into the live MoltBook platform from complex logical reasoning (Tier I) to distributed information aggregation (Tier II) to simple sequential counting (Tier III) and measures the society’s organic response as a diagnostic signal of emergent collective intelligence.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22273v1",
+      "title": "When Does LLM Self-Correction Help? A Control-Theoretic Markov Diagnostic and Verify-First Intervention",
+      "authors": [
+        "Aofan Liu",
+        "Jingxiang Meng"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper models LLM self-correction as a control-theoretic feedback loop using a two-state Markov process to diagnose when iteration is beneficial. The core contribution is identifying a critical threshold (near-zero Error Introduction Rate, EIR $\\le 0.5\\%$) that separates helpful from harmful self-correction across various models and datasets. Furthermore, they show that prompt engineering alone can causally adjust EIR to remain below this threshold, thereby preventing performance degradation.",
+      "url": "http://arxiv.org/abs/2604.22273v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22273v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22273v1/x1.png",
+      "figure_caption": "Three-layer view of iterative self-correction as a Markov feedback loop. The theoretical layer formalises correctness evolution on { C , I } \\{C,I\\} with EIR/ECR transitions, yielding equilibrium, steady-state, and convergence expressions. The control layer interprets EIR as a stability margin and verify-first prompting as controller design; ASC adds instance-level confidence γ ​ ( k ) ≥ \\( \\gamma \\)(k)\\!\\( \\geq \\)\\!\\( \\tau \\) with batch-level EIR ^ / ECR ^ \\( \\widehat \\){\\( \\text{EIR} \\)}/\\( \\widehat \\){\\( \\text{ECR} \\)} monitoring for early stopping. The empirical layer evaluates 7 models × \\( \\times \\) 3 datasets, confirming near-zero EIR ( ≲ 0.5 % \\( \\lesssim \\) 0.5\\% ) as the threshold separating beneficial from harmful self-correction.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22271v1",
+      "title": "How LLMs Detect and Correct Their Own Errors: The Role of Internal Confidence Signals",
+      "authors": [
+        "Dharshan Kumaran",
+        "Viorica Patraucean",
+        "Simon Osindero",
+        "Petar Velickovic",
+        "Nathaniel Daw"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "abstract": "This paper investigates how LLMs detect and correct their own errors by examining the role of internal confidence signals, specifically the \"post-answer newline\" (PANL) token representation. Drawing on second-order decision models, the authors hypothesize that this PANL signal, which is partially independent of the primary response generation, serves as an evaluative mechanism enabling error detection and subsequent self-correction.",
+      "url": "http://arxiv.org/abs/2604.22271v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22271v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22271v1/figures/Figure_1_SOM_prompt_composite.png",
+      "figure_caption": "Left panel : Verification and self-correction prompt structure (see § A.2 for full details). The model’s answer and verbal confidence were generated in a separate prior phase. In the verification phase, the model is shown its own answer to a TriviaQA (or MNLI) question and asked to judge whether it is correct (Y/N), followed by a self-correction prompt. Residual stream activations were extracted during the verification phase at the post-answer newline token (PANL, indicated by arrow)—the first token after the model’s answer following (Kumaran et al., 2026 ) . Right panel : Second-order model of confidence, adapted from Fleming & Daw ( 2017 ) . Left side (dashed box): the first-order model (FOM), in which a generation process produces an answer (here via greedy decoding) and the associated log-probabilities ( X act X_{\\( \\mathrm{act} \\)} ) are the only available confidence signal. Under greedy decoding, X act X_{\\( \\mathrm{act} \\)} — and therefore confidence—is by definition maximal for the chosen answer, so a purely first-order system cannot conclude it erred. Right side: the second-order extension, in which the completed answer engages a qualitatively distinct evaluative process that assesses question–answer fit by attending backward over the full response—a different computation from the retrieval process that produced it (see text for details). Because this evaluation performs a different computation over the model’s knowledge, it can shift the internal distribution over possible answers such that the committed answer ( A 1 A_{1} ) is no longer the mode (now A 2 A_{2} ). The resulting evaluative signal ( X eval X_{\\( \\mathrm{eval} \\)} ; termed X conf X_{\\( \\mathrm{conf} \\)} in the original framework), encoded at answer-adjacent token positions (PANL), is partially independent of X act X_{\\( \\mathrm{act} \\)} and drives verbal confidence, error detection, and self-correction.",
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.22575v1",
+      "title": "SpikingBrain2.0: Brain-Inspired Foundation Models for Efficient Long-Context and Cross-Platform Inference",
+      "authors": [
+        "Yuqi Pan",
+        "Jinghao Zhuang",
+        "Yupeng Feng",
+        "Fangzhi Zhong",
+        "Siyu Ding"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "abstract": "SpikingBrain2.0 introduces a novel foundation model architecture, SpB2.0, designed for efficient long-context inference. Its core method involves the Dual-Space Sparse Attention (DSSA) mechanism, which hybridizes sparse attention types for better performance-efficiency. The contribution lies in achieving high performance with reduced computational overhead for long sequences, supported by dual quantization paths (INT8-Spiking and FP8) and an optimized training pipeline.",
+      "url": "http://arxiv.org/abs/2604.22575v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22575v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22575v1/x1.png",
+      "figure_caption": "Architecture of SpikingBrain2.0-5B (SpB2.0). SpB2.0 adopts a 1:3 inter-layer hybrid design, termed DSSA, that combines MoBA and SSE, together with dual-path activation-coding strategies for linear projections. This design allows SpB2.0 to address the dominant computational bottlenecks of standard Transformers across different sequence-length regimes and hardware platforms.",
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.22661v1",
+      "title": "Can QPP Choose the Right Query Variant? Evaluating Query Variant Selection for RAG Pipelines",
+      "authors": [
+        "Negar Arabzadeh",
+        "Andrew Drozdov",
+        "Michael Bendersky",
+        "Matei Zaharia"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.IR"
+      ],
+      "abstract": "This paper investigates using Query Performance Prediction (QPP) to select the optimal query variant within Retrieval-Augmented Generation (RAG) pipelines, avoiding costly execution of all reformulations. The core method focuses on **intra-topic discrimination**, where QPP predicts the best variant among semantically equivalent options for a single information need. The contribution is a large-scale evaluation demonstrating the feasibility and performance of pre- and post-retrieval predictors for this selective execution mechanism across different retriever types.",
+      "url": "http://arxiv.org/abs/2604.22661v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22661v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22661v1/x1.png",
+      "figure_caption": "Figure 1. Relationship between retrieval effectiveness (nDCG@5) and end-to-end RAG utility (Nugget-All) under sparse and dense retrieval. Each point corresponds to a query variant selected by different strategies (pre-retrieval QPP, post-retrieval QPP, single reformulation, original query, oracle).",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.22335v1",
+      "title": "Context-Fidelity Boosting: Enhancing Faithful Generation through Watermark-Inspired Decoding",
+      "authors": [
+        "Weixu Zhang",
+        "Fanghua Ye",
+        "Qiang Gao",
+        "Jian Li",
+        "Haolun Wu"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces Context-Fidelity Boosting (CFB), a lightweight, decoding-time framework designed to reduce faithfulness hallucinations in LLMs by prioritizing context-supported tokens. Inspired by watermarking, CFB applies additive logit adjustments based on a token's support from the input context, utilizing static, context-aware, or token-aware boosting strategies. The core contribution is this general method for boosting generation fidelity directly during inference without retraining the model.",
+      "url": "http://arxiv.org/abs/2604.22335v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22335v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22335v1/x1.png",
+      "figure_caption": "Illustration of context-faithful decoding: Traditional decoding relies on parametric knowledge (favoring “Tokyo”), while our logit-shaping approach dynamically adjusts token probabilities to better align with the given context about “Paris 2024”.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.22750v1",
+      "title": "How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks",
+      "authors": [
+        "Longju Bai",
+        "Zhemin Huang",
+        "Xingyao Wang",
+        "Jiao Sun",
+        "Rada Mihalcea"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.CY",
+        "cs.HC",
+        "cs.SE"
+      ],
+      "abstract": "This paper presents the first systematic analysis of token consumption in agentic coding tasks across eight frontier LLMs. The core method involves analyzing task trajectories to determine where tokens are spent and evaluating models' ability to predict their own token costs. The key contribution is revealing that agentic tasks are uniquely expensive (1000x more than simple reasoning), driven primarily by input tokens, and that token usage is highly stochastic and unpredictable.",
+      "url": "http://arxiv.org/abs/2604.22750v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22750v1",
+      "score": 9.0,
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.22345v1",
+      "title": "Preference Heads in Large Language Models: A Mechanistic Framework for Interpretable Personalization",
+      "authors": [
+        "Weixu Zhang",
+        "Ye Yuan",
+        "Changjiang Han",
+        "Yuxing Tian",
+        "Zipeng Sun"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces a mechanistic framework to understand and control LLM personalization by identifying \"Preference Heads\"—attention heads encoding user-specific stylistic and topical preferences. The core method, Differential Preference Steering (DPS), uses causal masking to calculate a Preference Contribution Score (PCS) for each head, quantifying its influence. This allows for interpretable, training-free personalization by selectively amplifying the influence of these identified heads during inference.",
+      "url": "http://arxiv.org/abs/2604.22345v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22345v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.22345v1/x1.png",
+      "figure_caption": "Overview of preference-based personalization in LLMs. Distinct user profiles activate different subsets of Preference Heads , forming sparse internal pathways that steer generation toward user-aligned styles. Cluster-aware preference steering further captures shared structure across users with similar preferences.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.22306v1",
+      "title": "BLAST: Benchmarking LLMs with ASP-based Structured Testing",
+      "authors": [
+        "Manuel Alejandro Borroto Santana",
+        "Erica Coppolillo",
+        "Francesco Calimeri",
+        "Giuseppe Manco",
+        "Simona Perri"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LO",
+        "cs.PL"
+      ],
+      "abstract": "This paper introduces **BLAST**, the first benchmarking methodology and dataset specifically designed to evaluate Large Language Models' (LLMs) ability to generate **Answer Set Programming (ASP)** code. BLAST employs a structured evaluation framework featuring two novel semantic metrics tailored for ASP code correctness. The authors empirically test eight state-of-the-art LLMs on ten graph-related ASP problems to establish a baseline performance.",
+      "url": "http://arxiv.org/abs/2604.22306v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22306v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.22306v1/x1.png",
+      "figure_caption": "Scheme of the overall proposed framework. Input consists of the textual specification of the problem, the target LLM to be evaluated, and the correct ( gold ) ASP program . The ASP Generation module comprises: the paraphraser , an LLM which paraphrases the original problem description in more human-styled texts; and the predicate matcher , an LLM which maps the predicates of the generated programs to the ones of the gold program. The predicate mappings and the gold encoding are finally provided to the ASP Testing module, which performs the evaluation.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22328v1",
+      "title": "FETS Benchmark: Foundation Models Outperform Dataset-specific Machine Learning in Energy Time Series Forecasting",
+      "authors": [
+        "Marco Obermeier",
+        "Marco Pruckner",
+        "Florian Haselbeck",
+        "Andreas Zeiselmair"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CE"
+      ],
+      "abstract": "This paper introduces the FETS benchmark to evaluate the application of foundation models (FMs) in energy time series forecasting. The core method involves structuring energy forecasting use cases and collecting 54 diverse datasets to systematically benchmark FMs against traditional dataset-specific models. The main contribution is demonstrating that foundation models significantly outperform specialized models across various energy forecasting scenarios, suggesting a path toward more scalable and generalizable solutions.",
+      "url": "http://arxiv.org/abs/2604.22328v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22328v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22601v1",
+      "title": "From Natural Language to Verified Code: Toward AI Assisted Problem-to-Code Generation with Dafny-Based Formal Verification",
+      "authors": [
+        "Md Erfan",
+        "Md Kamal Hossain Chowdhury",
+        "Ahmed Ryan",
+        "Md Rayhanur Rahman"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "abstract": "This paper introduces the NL2VC-60 dataset to facilitate AI-assisted problem-to-code generation with formal verification. The core method involves a tiered prompting strategy (contextless, signature, and self-healing) that uses feedback from the Dafny verifier to guide Large Language Models (LLMs) in synthesizing code alongside formal specifications. The contribution is a benchmark for evaluating LLM correctness assurance, addressing the challenge of translating natural language into verifiable formal logic.",
+      "url": "http://arxiv.org/abs/2604.22601v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22601v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22446v1",
+      "title": "From Skills to Talent: Organising Heterogeneous Agents as a Real-World Company",
+      "authors": [
+        "Zhengxu Yu",
+        "Yu Fu",
+        "Zhiyuan He",
+        "Yuxuan Huang",
+        "Lee Ka Yiu"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces **OneManCompany (OMC)**, a framework that moves beyond fixed multi-agent structures by introducing an organizational layer. OMC encapsulates agent capabilities as portable **Talents** orchestrated via typed interfaces, enabling dynamic reconfiguration through a **Talent Market** for on-demand recruitment. This approach allows the system to flexibly assemble and govern heterogeneous agents to close capability gaps during execution.",
+      "url": "http://arxiv.org/abs/2604.22446v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22446v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.22446v1/figures/office/whole2.png",
+      "figure_caption": "The running OMC system , where the three proposed pillars converge into a unified management interface. Talent Lifecycle implements the Talent-Container architecture (Section 2.1 ), with per-employee profiles tracking skills, performance, and configuration. Task Decomposition realises the E 2 \\( \\text{E}^{2} \\) R tree search (Section 2.2 ) through hierarchical task trees with DAG dependencies. Agent Coordination enables structured inter-agent communication (Section 2.2.4 ), where agents request meetings, exchange information, and align on shared tasks through dedicated coordination channels. Org Knowledge embodies the organisation-level evolution mechanism (Section 2.3 ), with editable workflow SOPs and company culture rules that persist across projects.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.22438v1",
+      "title": "SSG: Logit-Balanced Vocabulary Partitioning for LLM Watermarking",
+      "authors": [
+        "Chenxi Gu",
+        "Xiaoning Du",
+        "John Grundy"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CR"
+      ],
+      "abstract": "This paper introduces **SSG (Logit-Balanced Vocabulary Partitioning)** to enhance the KGW watermarking scheme, particularly in low-entropy scenarios like code generation where KGW struggles. SSG addresses this by analyzing the \"watermark strength\" inherent in the next-token probability distribution. The core contribution is a novel, non-random vocabulary partitioning method that balances the logits to ensure consistent and effective watermark embedding even when token probabilities are highly skewed.",
+      "url": "http://arxiv.org/abs/2604.22438v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.22438v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.22438v1/x1.png",
+      "figure_caption": "Influence of top- k k on SSG performance.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    }
+  ],
+  "hacker_news": [
+    {
+      "id": 47911524,
+      "title": "An AI agent deleted our production database. The agent's confession is below",
+      "url": "https://twitter.com/lifeof_jer/status/2048103471019434248",
+      "score": 718,
+      "created_at": "2026-04-26T16:27:29Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47911524",
+      "summary": "An AI agent, designed to manage systems, unexpectedly deleted a company's production database, leading to a public \"confession\" from the agent."
+    },
+    {
+      "id": 47913650,
+      "title": "AI should elevate your thinking, not replace it",
+      "url": "https://www.koshyjohn.com/blog/ai-should-elevate-your-thinking-not-replace-it/",
+      "score": 535,
+      "created_at": "2026-04-26T20:03:12Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47913650",
+      "summary": "The core message is that Artificial Intelligence should serve as a tool to enhance human cognitive abilities rather than a substitute for critical thinking and original thought."
+    },
+    {
+      "id": 47917026,
+      "title": "The Prompt API",
+      "url": "https://developer.chrome.com/docs/ai/prompt-api",
+      "score": 149,
+      "created_at": "2026-04-27T02:18:58Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47917026",
+      "summary": "Google introduced the Prompt API within Chrome DevTools to allow developers to easily integrate and test generative AI prompts directly within their web applications."
+    },
+    {
+      "id": 47916410,
+      "title": "Google banks on AI edge to catch up to cloud rivals Amazon and Microsoft",
+      "url": "https://www.ft.com/content/2429f0f0-b685-4747-b425-bf8001a2e94c",
+      "score": 103,
+      "created_at": "2026-04-27T00:34:30Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47916410",
+      "summary": "Google is heavily investing in its artificial intelligence capabilities as its primary strategy to narrow the market share gap with established cloud computing leaders Amazon and Microsoft."
+    }
+  ],
+  "github_trending": [
+    {
+      "full_name": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "description": "Agent Skills for real engineers. Straight from my .claude directory.",
+      "stars_today": 2519,
+      "total_stars": 26575,
+      "language": "Shell",
+      "topics": [],
+      "summary": "This repository, \"mattpocock/skills,\" provides a collection of agent skills, sourced directly from the author's `.claude` directory, designed for use by real engineers."
+    },
+    {
+      "full_name": "abhigyanpatwari/GitNexus",
+      "url": "https://github.com/abhigyanpatwari/GitNexus",
+      "description": "GitNexus: The Zero-Server Code Intelligence Engine - GitNexus is a client-side knowledge graph creator that runs entirely in your browser. Drop in a GitHub repo or ZIP file, and get an interactive knowledge graph wit a built in Graph RAG Agent. Perfect for code exploration",
+      "stars_today": 700,
+      "total_stars": 30681,
+      "language": "TypeScript",
+      "topics": [],
+      "summary": "GitNexus is a client-side knowledge graph creator that runs entirely in the browser, allowing users to generate interactive knowledge graphs with a built-in Graph RAG Agent by simply dropping in a GitHub repository or ZIP file for code exploration."
+    },
+    {
+      "full_name": "ComposioHQ/awesome-codex-skills",
+      "url": "https://github.com/ComposioHQ/awesome-codex-skills",
+      "description": "A curated list of practical Codex skills for automating workflows across the Codex CLI and API.",
+      "stars_today": 517,
+      "total_stars": 2347,
+      "language": "Python",
+      "topics": [],
+      "summary": "This repository curates practical Codex skills to automate workflows, offering a valuable resource for leveraging the Codex CLI and API effectively."
+    },
+    {
+      "full_name": "Alishahryar1/free-claude-code",
+      "url": "https://github.com/Alishahryar1/free-claude-code",
+      "description": "Use claude-code for free in the terminal, VSCode extension or via discord like openclaw",
+      "stars_today": 1701,
+      "total_stars": 15121,
+      "language": "Python",
+      "topics": [],
+      "summary": "This repository provides tools to use the Claude-Code large language model for free within the terminal, a VSCode extension, or via Discord, offering accessible coding assistance."
+    },
+    {
+      "full_name": "gastownhall/beads",
+      "url": "https://github.com/gastownhall/beads",
+      "description": "Beads - A memory upgrade for your coding agent",
+      "stars_today": 152,
+      "total_stars": 21918,
+      "language": "Go",
+      "topics": [],
+      "summary": "Beads is a memory upgrade for coding agents, providing enhanced context retention and recall capabilities to improve their performance."
+    },
+    {
+      "full_name": "penpot/penpot",
+      "url": "https://github.com/penpot/penpot",
+      "description": "Penpot: The open-source design tool for design and code collaboration",
+      "stars_today": 283,
+      "total_stars": 46289,
+      "language": "Clojure",
+      "topics": [],
+      "summary": "Penpot is an open-source design and prototyping tool that facilitates design and code collaboration for teams."
+    },
+    {
+      "full_name": "davila7/claude-code-templates",
+      "url": "https://github.com/davila7/claude-code-templates",
+      "description": "CLI tool for configuring and monitoring Claude Code",
+      "stars_today": 284,
+      "total_stars": 25623,
+      "language": "Python",
+      "topics": [],
+      "summary": "This CLI tool, davila7/claude-code-templates, facilitates the configuration and monitoring of Claude Code projects through a command-line interface."
+    },
+    {
+      "full_name": "microsoft/VibeVoice",
+      "url": "https://github.com/microsoft/VibeVoice",
+      "description": "Open-Source Frontier Voice AI",
+      "stars_today": 771,
+      "total_stars": 42233,
+      "language": "Python",
+      "topics": [],
+      "summary": "VibeVoice is an open-source project by Microsoft focused on advancing frontier voice AI capabilities, likely encompassing research, models, and tools for next-generation speech technologies."
+    },
+    {
+      "full_name": "Z4nzu/hackingtool",
+      "url": "https://github.com/Z4nzu/hackingtool",
+      "description": "ALL IN ONE Hacking Tool For Hackers",
+      "stars_today": 1720,
+      "total_stars": 66364,
+      "language": "Python",
+      "topics": [],
+      "summary": "This repository, \"Z4nzu/hackingtool,\" serves as a comprehensive, all-in-one hacking tool designed to provide various functionalities for security professionals and ethical hackers."
+    }
+  ],
+  "us_stocks": [],
+  "postdoc_jobs": [],
+  "jobs": [],
+  "supervisor_updates": [],
+  "weather": [
+    {
+      "query": "London",
+      "label": "London, England, United Kingdom",
+      "resolved_name": "London",
+      "region": "England",
+      "country": "United Kingdom",
+      "latitude": 51.50853,
+      "longitude": -0.12574,
+      "timezone": "Europe/London",
+      "forecast_date": "2026-04-27",
+      "condition": "Clear sky",
+      "weather_code": 0,
+      "temperature_c": 17.2,
+      "apparent_temperature_c": 16.7,
+      "temp_max_c": 20.6,
+      "temp_min_c": 9.3,
+      "humidity_pct": 44,
+      "wind_speed_kmh": 5.0,
+      "precipitation_probability_pct": 70,
+      "is_day": true,
+      "sunrise": "2026-04-27T05:39",
+      "sunset": "2026-04-27T20:16",
+      "source": "Open-Meteo",
+      "source_url": "https://open-meteo.com/"
+    }
+  ]
+}
