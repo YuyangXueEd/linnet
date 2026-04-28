@@ -83,6 +83,7 @@ const copy = isZh
       missingQuotes: '缺少报价',
       news: '新闻',
       names: '只',
+      fallback: '备用',
     }
   : {
       eyebrow: 'US pre-market radar',
@@ -106,6 +107,7 @@ const copy = isZh
       missingQuotes: 'missing quotes',
       news: 'news',
       names: 'names',
+      fallback: 'fallback',
     };
 
 const counts = items.reduce(
@@ -133,9 +135,99 @@ function signalLabel(signal?: string): string {
   return copy.neutral;
 }
 
+function tokenLabel(value: string | undefined, labels: Record<string, string>): string {
+  const key = String(value ?? '').toLowerCase();
+  return labels[key] ?? key.replace(/_/g, ' ');
+}
+
+function setupTypeLabel(value?: string): string {
+  if (!value) return '—';
+  return tokenLabel(value, isZh ? {
+    gap_up_news: '跳空高开+新闻',
+    sector_tailwind: '板块顺风',
+    news_watch: '新闻观察',
+    risk_watch: '风险观察',
+    baseline_watch: '基准观察',
+  } : {
+    gap_up_news: 'Gap up + news',
+    sector_tailwind: 'Sector tailwind',
+    news_watch: 'News watch',
+    risk_watch: 'Risk watch',
+    baseline_watch: 'Baseline watch',
+  });
+}
+
+function confidenceLabel(value?: string): string {
+  const label = tokenLabel(value ?? 'low', isZh ? {
+    high: '高',
+    medium: '中',
+    low: '低',
+  } : {
+    high: 'High',
+    medium: 'Medium',
+    low: 'Low',
+  });
+  return isZh ? `${label}${copy.confidence}` : `${label} ${copy.confidence}`;
+}
+
+function sectorTrendLabel(value?: string): string {
+  return tokenLabel(value ?? 'unknown', isZh ? {
+    positive: '偏强',
+    negative: '偏弱',
+    mixed: '分化',
+    flat: '平稳',
+    unknown: '未知',
+  } : {
+    positive: 'positive',
+    negative: 'negative',
+    mixed: 'mixed',
+    flat: 'flat',
+    unknown: 'unknown',
+  });
+}
+
+function qualityKeyLabel(value?: string): string {
+  return tokenLabel(value, isZh ? {
+    quote: '报价',
+    news: '新闻',
+    financials: '财务/公告',
+  } : {});
+}
+
 function qualityLabel(value?: string): string {
-  if (!value) return 'missing';
-  return value.replace(/_/g, ' ');
+  return tokenLabel(value ?? 'missing', isZh ? {
+    api: 'API',
+    delayed: '延迟',
+    delayed_fallback: '延迟备用',
+    fresh: '新鲜',
+    sparse: '稀疏',
+    reference: '参考',
+    unavailable: '不可用',
+    missing: '缺失',
+    fixture: '测试',
+  } : {});
+}
+
+function coverageKeyLabel(value?: string): string {
+  return tokenLabel(value, isZh ? {
+    quotes: '报价',
+    news: '新闻',
+    filings: '公告',
+  } : {});
+}
+
+function marketStatusLabel(value?: string): string {
+  return tokenLabel(value, isZh ? {
+    open: '开市',
+    closed: '休市',
+    unknown: '未知',
+  } : {});
+}
+
+function skipReasonLabel(value?: string): string {
+  return tokenLabel(value, isZh ? {
+    weekend_or_us_market_holiday: '周末或美国市场假日。',
+  } : {});
 }
 
 function providerText(key: string, value: CoverageItem): string {
@@ -145,8 +237,8 @@ function providerText(key: string, value: CoverageItem): string {
     .join(', ');
   const order = value.order?.join('>');
   const label = providers || value.provider || order || 'n/a';
-  const fallback = value.fallback_ok ? `, fallback ${value.fallback_ok}` : '';
-  return `${key}: ${label} ${value.ok ?? 0}/${value.total ?? 0}${fallback}`;
+  const fallback = value.fallback_ok ? `, ${copy.fallback} ${value.fallback_ok}` : '';
+  return `${coverageKeyLabel(key)}: ${label} ${value.ok ?? 0}/${value.total ?? 0}${fallback}`;
 }
 ---
 
@@ -155,7 +247,7 @@ function providerText(key: string, value: CoverageItem): string {
     <div>
       <div class="stocks-board__eyebrow">{copy.eyebrow}</div>
       <div class="stocks-board__status">
-        <span class:list={['market-pill', `market-pill--${marketStatus}`]}>{marketStatus}</span>
+        <span class:list={['market-pill', `market-pill--${marketStatus}`]}>{marketStatusLabel(marketStatus)}</span>
         {marketDate && <span class="stocks-board__date">{marketDate}</span>}
       </div>
     </div>
@@ -205,7 +297,7 @@ function providerText(key: string, value: CoverageItem): string {
   {marketStatus === 'closed' && (
     <div class="stocks-closed">
       <div class="stocks-closed__title">{copy.closedTitle}</div>
-      <p>{skipReason || copy.closedBody}</p>
+      <p>{skipReason ? skipReasonLabel(skipReason) : copy.closedBody}</p>
     </div>
   )}
 
@@ -242,8 +334,8 @@ function providerText(key: string, value: CoverageItem): string {
 
             <div class="stock-setup" role="cell">
               <span class:list={['signal-pill', `signal-pill--${signal}`]}>{signalLabel(signal)}</span>
-              <span class="setup-type">{item.setup_type?.replace(/_/g, ' ')}</span>
-              <span class="confidence">{item.confidence ?? 'low'} {copy.confidence}</span>
+              <span class="setup-type">{setupTypeLabel(item.setup_type)}</span>
+              <span class="confidence">{confidenceLabel(item.confidence)}</span>
             </div>
 
             <div class="stock-move" role="cell">
@@ -256,7 +348,7 @@ function providerText(key: string, value: CoverageItem): string {
 
             <div class="stock-score" role="cell">
               <span>{item.score ?? '—'}</span>
-              <small>{copy.sector} {item.sector_trend ?? 'unknown'}</small>
+              <small>{copy.sector} {sectorTrendLabel(item.sector_trend)}</small>
               {item.relative_strength_pct != null && <small>RS {fmtPct(item.relative_strength_pct)}</small>}
             </div>
 
@@ -273,7 +365,7 @@ function providerText(key: string, value: CoverageItem): string {
             <div class="stock-quality" role="cell">
               {Object.entries(item.data_quality ?? {}).map(([key, value]) => (
                 <span class:list={['quality-chip', `quality-chip--${value}`]}>
-                  {key}: {qualityLabel(value)}
+                  {qualityKeyLabel(key)}: {qualityLabel(value)}
                 </span>
               ))}
               {item.news_count != null && <span class="quality-chip">{copy.news}: {item.news_count}</span>}
