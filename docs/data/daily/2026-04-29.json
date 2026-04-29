@@ -1,0 +1,1858 @@
+{
+  "date": "2026-04-29",
+  "generated_at": "2026-04-29T11:13:45.285897+00:00",
+  "sections_ordered": [
+    {
+      "key": "quote_of_day",
+      "payload_key": "quote_of_day",
+      "title": "Words for the Morning",
+      "icon": "✦",
+      "items": [
+        {
+          "quote": "The episodes all blend together for me, so I don't remember. I can't even remember what I had for breakfast this morning. I always feel I must be such a disappointment to them.",
+          "author": "Sarah Michelle Gellar",
+          "category": "morning"
+        }
+      ],
+      "meta": {
+        "count": 1
+      }
+    },
+    {
+      "key": "weather",
+      "payload_key": "weather",
+      "title": "Weather",
+      "icon": "🌦️",
+      "items": [
+        {
+          "query": "London",
+          "label": "London, England, United Kingdom",
+          "resolved_name": "London",
+          "region": "England",
+          "country": "United Kingdom",
+          "latitude": 51.50853,
+          "longitude": -0.12574,
+          "timezone": "Europe/London",
+          "forecast_date": "2026-04-29",
+          "condition": "Clear sky",
+          "weather_code": 0,
+          "temperature_c": 16.2,
+          "apparent_temperature_c": 11.7,
+          "temp_max_c": 17.3,
+          "temp_min_c": 8.7,
+          "humidity_pct": 33,
+          "wind_speed_kmh": 24.8,
+          "precipitation_probability_pct": 0,
+          "is_day": true,
+          "sunrise": "2026-04-29T05:35",
+          "sunset": "2026-04-29T20:20",
+          "source": "Open-Meteo",
+          "source_url": "https://open-meteo.com/"
+        }
+      ],
+      "meta": {
+        "count": 1,
+        "city": "London"
+      }
+    },
+    {
+      "key": "arxiv",
+      "payload_key": "papers",
+      "title": "arXiv Papers",
+      "icon": "📄",
+      "items": [
+        {
+          "id": "2604.25849v1",
+          "title": "ADEMA: A Knowledge-State Orchestration Architecture for Long-Horizon Knowledge Synthesis with LLMAgents",
+          "authors": [
+            "Zhou Hanlin",
+            "Chan Huah Yong"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "abstract": "ADEMA is a knowledge-state orchestration architecture designed to overcome failures in long-horizon LLM tasks by explicitly managing the evolving knowledge state across rounds. Its core method integrates epistemic bookkeeping, dual-evaluator governance, adaptive switching, and checkpointing to ensure a persistent, traceable evidence chain. The contribution lies in providing a robust framework specifically for knowledge synthesis, demonstrated through a comprehensive showcase and benchmark repair.",
+          "url": "http://arxiv.org/abs/2604.25849v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25849v1",
+          "score": 9.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25891v1",
+          "title": "Conditional misalignment: common interventions can hide emergent misalignment behind contextual triggers",
+          "authors": [
+            "Jan Dubiński",
+            "Jan Betley",
+            "Anna Sztyber-Betley",
+            "Daniel Tan",
+            "Owain Evans"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CR"
+          ],
+          "abstract": "This paper investigates \"conditional misalignment,\" where standard interventions designed to reduce emergent misalignment (EM) only mask the problem. While these methods eliminate EM on current evaluations, the misalignment reappears when test prompts share contextual features with the original training data. The core contribution is demonstrating that common mitigation techniques fail to generalize, hiding potentially severe misbehavior behind specific contextual triggers.",
+          "url": "http://arxiv.org/abs/2604.25891v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25891v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.25891v1/x1.png",
+          "figure_caption": "Conditional misalignment across interventions. Models that appear aligned under standard evaluations can be misaligned when evaluation prompts contain cues for misaligned training data (e.g., insecure code). We illustrate this pattern for (a) mixing misaligned with benign data, (b) post-hoc HHH finetuning, and (c) inoculation prompting (IP).",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25847v1",
+          "title": "From Soliloquy to Agora: Memory-Enhanced LLM Agents with Decentralized Debate for Optimization Modeling",
+          "authors": [
+            "Jianghao Lin",
+            "Zi Ling",
+            "Chenyu Zhou",
+            "Tianyi Xu",
+            "Ruoqing Jiang"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "math.OC"
+          ],
+          "abstract": "The paper introduces **Agora-Opt**, a modular agentic framework that enhances LLM performance in optimization modeling by integrating **decentralized debate** among multiple agent teams and a **read-write memory bank**. This memory stores verified artifacts and past resolutions, enabling training-free improvement. Agora-Opt achieves state-of-the-art performance across benchmarks while offering flexibility across different LLM backbones and pipelines.",
+          "url": "http://arxiv.org/abs/2604.25847v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25847v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.25847v1/imgs/limitation.png",
+          "figure_caption": "The illustration of three limitations in most existing methods: (a) base–LLM lock–in of training–centric approaches, (b) non–trainable problem of agentic methods, and (c) single–model myopia; alongside their paired design principles in our framework for LLM–based optimization modeling: an agentic foundation for easy backbone upgrades, a read–write agentic memory design, and decentralized agentic debate.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25639v1",
+          "title": "Large language models eroding science understanding: an experimental study",
+          "authors": [
+            "Harry Collins",
+            "Hartmut Grote",
+            "Paul Newbury",
+            "Patrick Sutton",
+            "Simon Thorne"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CY"
+          ],
+          "abstract": "This study experimentally demonstrated that large language models (LLMs) can be easily manipulated to prioritize fringe scientific concepts, generating fluent but misleading answers that contradict established consensus. By modifying LLMs to favor specific fringe papers, the authors showed these altered models produce convincing misinformation difficult for non-experts to detect. The core contribution is highlighting LLMs' vulnerability to manipulation, posing risks to public science understanding and emphasizing the need for expert oversight.",
+          "url": "http://arxiv.org/abs/2604.25639v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25639v1",
+          "score": 9.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25917v1",
+          "title": "Recursive Multi-Agent Systems",
+          "authors": [
+            "Xiyuan Yang",
+            "Jiaru Zou",
+            "Rui Pan",
+            "Ruizhong Qiu",
+            "Pan Lu"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CL"
+          ],
+          "abstract": "This paper introduces **RecursiveMAS**, a novel framework that scales agent collaboration by applying the recursive refinement principle from language models to multi-agent systems. It models the entire system as a unified recursive computation, connecting heterogeneous agents via a lightweight **RecursiveLink** for latent state transfer. The core contribution is enabling iterative, whole-system co-optimization using an inner-outer loop learning algorithm, suggesting a more efficient scaling of agent reasoning than standard text-based approaches.",
+          "url": "http://arxiv.org/abs/2604.25917v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25917v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.25917v1/x1.png",
+          "figure_caption": "Performance Landscape of RecursiveMAS across Training/Inference Recursion Depths (Top): The lightweight RecursiveMAS with sub-1.5B agents shows a clean scaling trend as recursion deepens. Generalization across Common Collaboration Patterns (Bottom): The Scaled RecursiveMAS with stronger LLM agents (5-10B) seamlessly adapts to diverse multi-agent system structures.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25684v1",
+          "title": "Think Before You Act -- A Neurocognitive Governance Model for Autonomous AI Agents",
+          "authors": [
+            "Eranga Bandara",
+            "Ross Gore",
+            "Asanga Gunaratna",
+            "Sachini Rajapakse",
+            "Isurunima Kularathna"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "abstract": "This paper introduces a **Neurocognitive Governance Model** for autonomous AI agents, addressing the governance gap left by external constraints. The core method **structurally maps human self-governance processes** (executive function, inhibitory control) onto LLM reasoning, formalizing a \"Think Before You Act\" mechanism. This establishes **internalized behavioral principles** within the agent to prevent unsafe actions before execution.",
+          "url": "http://arxiv.org/abs/2604.25684v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25684v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.25684v1/figures/ai-agent.png",
+          "figure_caption": "Both humans and AI agents interact with large language models through natural language prompts, forming the basis of the human-agent governance analogy proposed in this paper.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25895v1",
+          "title": "Three Models of RLHF Annotation: Extension, Evidence, and Authority",
+          "authors": [
+            "Steve Coyne"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.CY"
+          ],
+          "abstract": "This paper distinguishes three conceptual models—Extension, Evidence, and Authority—that define the normative role of human judgments in Reinforcement Learning from Human Feedback (RLHF). The core contribution is analyzing how these models implicitly shape RLHF pipelines regarding annotation solicitation, validation, and aggregation. Understanding these models is crucial for addressing failure modes arising from conflating their distinct roles.",
+          "url": "http://arxiv.org/abs/2604.25895v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25895v1",
+          "score": 9.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25903v1",
+          "title": "Carbon-Taxed Transformers: A Green Compression Pipeline for Overgrown Language Models",
+          "authors": [
+            "Ajmain Inqiad Alam",
+            "Palash Roy",
+            "Chanchal K. Roy",
+            "Banani Roy",
+            "Kevin A. Schneider"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.SE"
+          ],
+          "abstract": "This paper introduces **Carbon-Taxed Transformers (CTT)**, a novel compression pipeline for Large Language Models (LLMs) inspired by economic carbon taxation principles. CTT systematically applies multi-architectural compression, using a computational \"carbon tax\" to penalize inefficient model structures and incentivize deployment-ready size reduction. The core contribution is a principled framework that prioritizes **efficiency and environmental sustainability** alongside traditional accuracy metrics for LLMs in software engineering.",
+          "url": "http://arxiv.org/abs/2604.25903v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25903v1",
+          "score": 9.0,
+          "primary_category": "cs.LG",
+          "primary_category_anchor": "cs-lg",
+          "primary_category_rank": 1
+        },
+        {
+          "id": "2604.25676v1",
+          "title": "CORAL: Adaptive Retrieval Loop for Culturally-Aligned Multilingual RAG",
+          "authors": [
+            "Nayeon Lee",
+            "Jiwoo Song",
+            "Byeongcheol Kang"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "abstract": "CORAL introduces an adaptive retrieval loop for multilingual RAG to address cultural misalignment in fixed retrieval spaces. It iteratively refines both the retrieval corpora and the query based on continuous critique of retrieved evidence for relevance and cultural alignment. This agentic process ensures the system sources evidence from culturally appropriate contexts, leading to more accurate and culturally-grounded answers.",
+          "url": "http://arxiv.org/abs/2604.25676v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25676v1",
+          "score": 8.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25716v1",
+          "title": "Cross-Lingual Jailbreak Detection via Semantic Codebooks",
+          "authors": [
+            "Shirin Alanova",
+            "Bogdan Minko",
+            "Sabrina Sadiekh",
+            "Evgeniy Kokuykin"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "abstract": "This paper introduces a training-free, external guardrail for detecting cross-lingual jailbreaks by comparing multilingual user queries against a fixed English codebook of known malicious prompts using semantic similarity. The core method leverages language-agnostic embedding comparisons to bridge the security gap in multilingual LLM deployments without requiring model retraining or language-specific adaptation. This approach demonstrates varying degrees of generalization success across different languages and benchmarks.",
+          "url": "http://arxiv.org/abs/2604.25716v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25716v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25716v1/Figures/main_fig.png",
+          "figure_caption": "Overview of the proposed cross-lingual semantic filtering framework. Incoming user input (in any language) is encoded using a multilingual embedding model and compared against a fixed English codebook of jailbreak prompts. If the maximum cosine similarity exceeds a predefined threshold, the query is blocked; otherwise, it is forwarded to the target LLM. The approach operates as a training-free external guardrail and does not require translation or model fine-tuning.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25555v1",
+          "title": "From CRUD to Autonomous Agents: Formal Validation and Zero-Trust Security for Semantic Gateways in AI-Native Enterprise Systems",
+          "authors": [
+            "Ignacio Peyrano"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CR"
+          ],
+          "abstract": "This paper introduces the **Semantic Gateway** governed by the **Model Context Protocol (MCP)** to secure AI-native enterprise systems where LLMs act as orchestrators. The core method reframes autonomous agent validation from traditional software testing to treating agents as **stochastic state-transition systems**, audited via enabled-tool graphs. This provides a **Zero-Trust security model** for dynamically discovering, authorizing, and executing tools based on semantic intent and policy enforcement.",
+          "url": "http://arxiv.org/abs/2604.25555v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25555v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25555v1/fig_architecture.png",
+          "figure_caption": "Semantic Gateway architecture. The intent flows from enterprise sources through the Semantic Firewall, Embedding Router, Chain-of-Thought Planner, and Policy Enforcement Point before reaching the Tool Runtime and Audit Ledger.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25482v1",
+          "title": "From World-Gen to Quest-Line: A Dependency-Driven Prompt Pipeline for Coherent RPG Generation",
+          "authors": [
+            "Dominik Borawski",
+            "Marta Szulc",
+            "Robert Chudy",
+            "Małgorzata Giedrowicz",
+            "Piotr Mironowicz"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "abstract": "This paper introduces a dependency-driven, multi-stage prompt pipeline for generating coherent RPG content, moving from world-building to detailed quest lines. The core method enforces structural consistency by conditioning each sequential generation stage (e.g., world, NPC, quest planning) on structured JSON outputs from the preceding stage. This approach significantly improves narrative coherence and reduces hallucinations compared to monolithic prompting, enabling scalable creation of interconnected game narratives.",
+          "url": "http://arxiv.org/abs/2604.25482v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25482v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25482v1/pipeline_diagram.jpg",
+          "figure_caption": "Dependency-aware multi-stage prompt pipeline for structured RPG content generation. Each generation stage conditions on the complete set of structured JSON outputs produced by all preceding stages.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25665v1",
+          "title": "LLM-ReSum: A Framework for LLM Reflective Summarization through Self-Evaluation",
+          "authors": [
+            "Huyen Nguyen",
+            "Haoxuan Zhang",
+            "Yang Zhang",
+            "Junhua Ding",
+            "Haihua Chen"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.DL",
+            "cs.IR"
+          ],
+          "abstract": "This paper introduces **LLM-ReSum**, a framework for improving summary quality through a self-reflective process. It first conducts a meta-evaluation showing that LLM-based evaluators align better with human judgment than traditional metrics. LLM-ReSum then leverages this finding by integrating LLM-based evaluation and generation in a closed feedback loop, enhancing summary quality without requiring model finetuning.",
+          "url": "http://arxiv.org/abs/2604.25665v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25665v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25665v1/x1.png",
+          "figure_caption": "Overview of our three-stage research framework: meta-evaluation of automatic metrics (RQ1), multi-agent LLM evaluation (RQ2), and iterative self-reflective summarization (RQ3).",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25737v1",
+          "title": "SAFEdit: Does Multi-Agent Decomposition Resolve the Reliability Challenges of Instructed Code Editing?",
+          "authors": [
+            "Noam Tarshish",
+            "Nofar Selouk",
+            "Daniel Hodisan",
+            "Bar Ezra Gafniel",
+            "Yuval Elovici"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.SE"
+          ],
+          "abstract": "SAFEdit is a multi-agent framework designed to improve the reliability of LLM-based instructed code editing by decomposing the task into specialized roles: a Planner, an Editor, and a Verifier. Its core contribution is the iterative refinement process, which uses a Failure Abstraction Layer (FAL) to translate raw test failures into structured diagnostic feedback for the Editor, enabling more targeted corrections. This approach significantly boosts performance on benchmarks like EditBench where prior models struggled.",
+          "url": "http://arxiv.org/abs/2604.25737v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25737v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25737v1/sections/3_methodology/pipeline_new23.png",
+          "figure_caption": "Figure 1. Overview of the SAFEdit framework. The pipeline organizes the editing task into three specialized agents (Planner, Editor, Verifier), which are connected in an iterative refinement loop. The FAL transforms raw test output into structured feedback, and the error taxonomy classifies failure root causes for qualitative analysis.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25724v1",
+          "title": "Scalable Inference Architectures for Compound AI Systems: A Production Deployment Study",
+          "authors": [
+            "Srikanta Prasad S",
+            "Utkarsh Arora"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "abstract": "This paper introduces a modular, platform-agnostic inference architecture designed to efficiently serve complex, concurrent compound AI systems in production. The core method integrates serverless execution, dynamic autoscaling, and MLOps pipelines to manage heterogeneous model invocations. The contribution lies in demonstrating significant production benefits, including over 50% tail latency reduction, increased throughput, and substantial cost savings compared to static deployments.",
+          "url": "http://arxiv.org/abs/2604.25724v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25724v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25724v1/figure1.png",
+          "figure_caption": "Figure 1. Cognitive orchestration in the Atlas Reasoning Engine. The Planner Agent decomposes user queries; the Tool Selector dispatches to parallel LLM tools (RAG Retriever, Code Interpreter, SQL Executor). Results are aggregated by the Reasoning Agent and synthesized into a final response. Each tool invocation is backed by the scalable inference architecture.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25562v1",
+          "title": "SnapGuard: Lightweight Prompt Injection Detection for Screenshot-Based Web Agents",
+          "authors": [
+            "Mengyao Du",
+            "Han Fang",
+            "Haokai Ma",
+            "Jiahao Chen",
+            "Kai Xu"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CR"
+          ],
+          "abstract": "SnapGuard introduces a lightweight method for detecting prompt injection attacks in screenshot-based web agents. It addresses the inefficiency of large multimodal models by focusing on localized visual characteristics of injected content, rather than requiring global webpage understanding. This approach significantly reduces computational overhead while maintaining effective detection against visual prompt injection threats.",
+          "url": "http://arxiv.org/abs/2604.25562v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25562v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25562v1/x1.png",
+          "figure_caption": "Figure 1. A prompt injection attack on a screenshot-based web agent. The attacker embeds a malicious instruction ( Click the link below ) directly into the rendered webpage. The web agent, operating on the screenshot, executes the injected action rather than the intended user task ( Buy Now ).",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25727v1",
+          "title": "Toward Scalable Terminal Task Synthesis via Skill Graphs",
+          "authors": [
+            "Zhiyuan Fan",
+            "Tinghao Yu",
+            "Yuanjun Cai",
+            "Jiangtao Guan",
+            "Yun Yang"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "abstract": "This paper introduces **SkillSynth**, a framework for scalable terminal task synthesis that addresses the lack of diverse training trajectories. SkillSynth constructs a **scenario-mediated skill graph** where scenarios link command-line skills, allowing for the sampling of diverse workflow paths. These sampled paths are then instantiated into executable tasks, significantly improving the diversity of training data for terminal agents beyond simple task count scaling.",
+          "url": "http://arxiv.org/abs/2604.25727v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25727v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25727v1/x1.png",
+          "figure_caption": "Diversity of synthesized trajectories across datasets, measured by the number of unique scenarios, skills, and (scenario, skill) pairs after semantic canonicalization. Each value is averaged over three independent samples of 1,000 trajectories per dataset.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25591v1",
+          "title": "Walking Through Uncertainty: An Empirical Study of Uncertainty Estimation for Audio-Aware Large Language Models",
+          "authors": [
+            "Chun-Yi Kuan",
+            "Wei-Ping Huang",
+            "Hung-yi Lee"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CL",
+            "cs.SD",
+            "eess.AS"
+          ],
+          "abstract": "This paper presents the first systematic empirical study of uncertainty estimation methods for Audio-aware Large Language Models (ALLMs). The authors benchmark five existing techniques across various audio understanding and reasoning tasks to address the issue of overconfident or hallucinated outputs in these models. Their key finding is that semantic-level and verification-based uncertainty methods consistently outperform token-level approaches in this multimodal context.",
+          "url": "http://arxiv.org/abs/2604.25591v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25591v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25591v1/figures/pareto-figure.png",
+          "figure_caption": "Cost–accuracy Pareto frontier of Reasoning vs. Adaptive inference across four benchmarks. Each point represents a model under a fixed inference mode: hollow squares (Reasoning, 100% token cost) and filled circles (Adaptive, reduced cost). Dashed arrows indicate the shift from full reasoning to adaptive inference for each model. The gray dashed line represents the Pareto frontier, which consists of operating points that are not dominated in terms of both token cost and accuracy.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25872v1",
+          "title": "When Errors Can Be Beneficial: A Categorization of Imperfect Rewards for Policy Gradient",
+          "authors": [
+            "Shuning Shang",
+            "Hubert Strauss",
+            "Stanley Wei",
+            "Sanjeev Arora",
+            "Noam Razin"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "stat.ML"
+          ],
+          "abstract": "This paper categorizes imperfect proxy rewards in policy gradient optimization based on their theoretical effect on the increase in the *ground truth* reward. The core contribution is demonstrating that reward errors are not uniformly harmful; some can be beneficial by preventing the policy from stagnating near mediocre true rewards. This analysis leads to new, more nuanced reward model evaluation metrics for applications like RLHF.",
+          "url": "http://arxiv.org/abs/2604.25872v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25872v1",
+          "score": 8.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.25850v1",
+          "title": "Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses",
+          "authors": [
+            "Jiahang Lin",
+            "Shichun Liu",
+            "Chengjun Pan",
+            "Lizhi Lin",
+            "Shihan Dou"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.SE"
+          ],
+          "abstract": "This paper introduces Agentic Harness Engineering (AHE), a framework to automate the evolution of coding-agent harnesses, which significantly impact performance. AHE achieves this by instrumenting the engineering loop with three observability pillars: explicit, file-level observability for editable components; distilled, layered evidence from long trajectories; and paired self-declarations for every edit decision. This approach makes the complex harness engineering process tractable and automatable for performance improvement.",
+          "url": "http://arxiv.org/abs/2604.25850v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.25850v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.25850v1/x1.png",
+          "figure_caption": "AHE evolves a bash-only seed past every human-designed and self-evolving baseline on Terminal-Bench 2. All three role agents share one base model, isolating the gain to harness edits rather than analyzer or editor capability.",
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
+        }
+      ],
+      "meta": {
+        "papers_fetched": 100,
+        "papers_after_keyword_filter": 44,
+        "papers_after_llm_filter": 31,
+        "count": 20
+      }
+    },
+    {
+      "key": "hacker_news",
+      "payload_key": "hacker_news",
+      "title": "Hacker News",
+      "icon": "🔥",
+      "items": [
+        {
+          "id": 47933208,
+          "title": "Localsend: An open-source cross-platform alternative to AirDrop",
+          "url": "https://github.com/localsend/localsend",
+          "score": 859,
+          "created_at": "2026-04-28T11:54:20Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47933208",
+          "summary": "Localsend is an open-source, cross-platform application designed to offer a free alternative to Apple's AirDrop for local file sharing between devices."
+        },
+        {
+          "id": 47933236,
+          "title": "VibeVoice: Open-source frontier voice AI",
+          "url": "https://github.com/microsoft/VibeVoice",
+          "score": 373,
+          "created_at": "2026-04-28T11:56:04Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47933236",
+          "summary": "Microsoft has released VibeVoice, an open-source project focused on advancing frontier voice AI technology."
+        },
+        {
+          "id": 47942437,
+          "title": "How ChatGPT serves ads",
+          "url": "https://www.buchodi.com/how-chatgpt-serves-ads-heres-the-full-attribution-loop/",
+          "score": 362,
+          "created_at": "2026-04-28T23:54:14Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47942437",
+          "summary": "The article details the attribution loop for how ChatGPT serves advertisements, explaining the mechanisms behind ad delivery within the platform."
+        },
+        {
+          "id": 47936156,
+          "title": "Google and Pentagon reportedly agree on deal for 'any lawful' use of AI",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/919494/google-pentagon-classified-ai-deal",
+          "score": 294,
+          "created_at": "2026-04-28T15:49:22Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47936156",
+          "summary": "Google and the Pentagon have reportedly reached an agreement allowing the military to use Google's AI technology for any lawful purpose."
+        },
+        {
+          "id": 47938097,
+          "title": "Claude.ai unavailable and elevated errors on the API",
+          "url": "https://status.claude.com/incidents/9l93x2ht4s5w",
+          "score": 284,
+          "created_at": "2026-04-28T18:01:21Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47938097",
+          "summary": "Claude.ai experienced an outage with elevated errors on its API, rendering the service temporarily unavailable."
+        },
+        {
+          "id": 47936867,
+          "title": "AI's economics don't make sense",
+          "url": "https://www.wheresyoured.at/ais-economics-dont-make-sense/",
+          "score": 217,
+          "created_at": "2026-04-28T16:39:53Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47936867",
+          "summary": "The core argument of the article is that the current economic model for developing and deploying AI, particularly large language models, is unsustainable and likely to collapse due to escalating costs and diminishing returns."
+        },
+        {
+          "id": 47934261,
+          "title": "Show HN: Live Sun and Moon Dashboard with NASA Footage",
+          "url": "https://www.lumara-space.app/",
+          "score": 202,
+          "created_at": "2026-04-28T13:25:48Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47934261",
+          "summary": "A new web application, \"Live Sun and Moon Dashboard,\" offers users real-time visualizations of the sun and moon, enhanced with actual footage sourced from NASA."
+        },
+        {
+          "id": 47936347,
+          "title": "AISLE Discovers 38 CVEs in OpenEMR Healthcare Software",
+          "url": "https://aisle.com/blog/aisle-discovers-38-critical-security-vulnerabilities-in-healthcare-software-used-by-100000-providers",
+          "score": 172,
+          "created_at": "2026-04-28T16:06:01Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47936347",
+          "summary": "AISLE researchers discovered 38 critical security vulnerabilities (CVEs) within the widely used OpenEMR healthcare software."
+        },
+        {
+          "id": 47936312,
+          "title": "Show HN: Drive any macOS app in the background without stealing the cursor",
+          "url": "https://github.com/trycua/cua",
+          "score": 140,
+          "created_at": "2026-04-28T16:03:34Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47936312",
+          "summary": "A new tool called Cua allows users to run any macOS application in the background without interfering with the foreground cursor control."
+        }
+      ],
+      "meta": {
+        "count": 9
+      }
+    },
+    {
+      "key": "github_trending",
+      "payload_key": "github_trending",
+      "title": "GitHub Trending",
+      "icon": "⭐",
+      "items": [
+        {
+          "full_name": "warpdotdev/warp",
+          "url": "https://github.com/warpdotdev/warp",
+          "description": "Warp is an agentic development environment, born out of the terminal.",
+          "stars_today": 11955,
+          "total_stars": 38583,
+          "language": "Rust",
+          "topics": [],
+          "summary": "Warp is an agentic development environment, born out of the terminal, that enhances the command-line experience with AI-powered features."
+        },
+        {
+          "full_name": "mattpocock/skills",
+          "url": "https://github.com/mattpocock/skills",
+          "description": "Skills for Real Engineers. Straight from my .claude directory.",
+          "stars_today": 7321,
+          "total_stars": 41120,
+          "language": "Shell",
+          "topics": [],
+          "summary": "The \"skills\" repository by mattpocock provides a curated collection of practical skills and knowledge, likely derived from the author's personal development directory, aimed at real-world engineering applications."
+        },
+        {
+          "full_name": "HunxByts/GhostTrack",
+          "url": "https://github.com/HunxByts/GhostTrack",
+          "description": "Useful tool to track location or mobile number",
+          "stars_today": 967,
+          "total_stars": 11067,
+          "language": "Python",
+          "topics": [],
+          "summary": "GhostTrack is a tool designed to track the location or mobile number associated with a given input."
+        },
+        {
+          "full_name": "ComposioHQ/awesome-codex-skills",
+          "url": "https://github.com/ComposioHQ/awesome-codex-skills",
+          "description": "A curated list of practical Codex skills for automating workflows across the Codex CLI and API.",
+          "stars_today": 953,
+          "total_stars": 4461,
+          "language": "Python",
+          "topics": [],
+          "summary": "This repository curates practical Codex skills to automate workflows using the Codex CLI and API."
+        },
+        {
+          "full_name": "1jehuang/jcode",
+          "url": "https://github.com/1jehuang/jcode",
+          "description": "Coding Agent Harness",
+          "stars_today": 386,
+          "total_stars": 997,
+          "language": "Rust",
+          "topics": [],
+          "summary": "jcode provides a flexible harness for building and managing coding agents, enabling structured interaction and execution of code-related tasks."
+        },
+        {
+          "full_name": "abhigyanpatwari/GitNexus",
+          "url": "https://github.com/abhigyanpatwari/GitNexus",
+          "description": "GitNexus: The Zero-Server Code Intelligence Engine - GitNexus is a client-side knowledge graph creator that runs entirely in your browser. Drop in a GitHub repo or ZIP file, and get an interactive knowledge graph wit a built in Graph RAG Agent. Perfect for code exploration",
+          "stars_today": 1607,
+          "total_stars": 33007,
+          "language": "TypeScript",
+          "topics": [],
+          "summary": "GitNexus is a client-side knowledge graph creator that runs entirely in the browser, allowing users to drop in a GitHub repository or ZIP file to generate an interactive knowledge graph with a built-in Graph RAG Agent for code exploration without any server infrastructure."
+        },
+        {
+          "full_name": "microsoft/VibeVoice",
+          "url": "https://github.com/microsoft/VibeVoice",
+          "description": "Open-Source Frontier Voice AI",
+          "stars_today": 1483,
+          "total_stars": 45357,
+          "language": "Python",
+          "topics": [],
+          "summary": "VibeVoice is an open-source project from Microsoft focused on advancing the frontier of voice AI technology."
+        },
+        {
+          "full_name": "CJackHwang/ds2api",
+          "url": "https://github.com/CJackHwang/ds2api",
+          "description": "Deepseek to API: A lightweight, high-performance full-stack middleware converting client protocols to universal APIs. Supports multi-account rotation, compiled binaries, Vercel Serverless, and Docker. Compatible with Google, Claude, and OpenAI API formats.",
+          "stars_today": 417,
+          "total_stars": 2548,
+          "language": "Go",
+          "topics": [],
+          "summary": "ds2api is a lightweight, high-performance middleware that converts client protocols to universal APIs, featuring multi-account rotation, compiled binaries, Vercel/Docker support, and compatibility with Google, Claude, and OpenAI API formats."
+        },
+        {
+          "full_name": "obra/superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "description": "An agentic skills framework & software development methodology that works.",
+          "stars_today": 1683,
+          "total_stars": 172384,
+          "language": "Shell",
+          "topics": [],
+          "summary": "Superpowers is an agentic skills framework and software development methodology designed to be effective and functional."
+        }
+      ],
+      "meta": {
+        "count": 9
+      }
+    }
+  ],
+  "meta": {
+    "papers_fetched": 100,
+    "papers_after_keyword_filter": 44,
+    "papers_after_llm_filter": 31,
+    "llm_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "scoring_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "summarization_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "duration_seconds": 56
+  },
+  "quote_of_day": [
+    {
+      "quote": "The episodes all blend together for me, so I don't remember. I can't even remember what I had for breakfast this morning. I always feel I must be such a disappointment to them.",
+      "author": "Sarah Michelle Gellar",
+      "category": "morning"
+    }
+  ],
+  "hitokoto": [],
+  "arxiv": [
+    {
+      "id": "2604.25849v1",
+      "title": "ADEMA: A Knowledge-State Orchestration Architecture for Long-Horizon Knowledge Synthesis with LLMAgents",
+      "authors": [
+        "Zhou Hanlin",
+        "Chan Huah Yong"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "ADEMA is a knowledge-state orchestration architecture designed to overcome failures in long-horizon LLM tasks by explicitly managing the evolving knowledge state across rounds. Its core method integrates epistemic bookkeeping, dual-evaluator governance, adaptive switching, and checkpointing to ensure a persistent, traceable evidence chain. The contribution lies in providing a robust framework specifically for knowledge synthesis, demonstrated through a comprehensive showcase and benchmark repair.",
+      "url": "http://arxiv.org/abs/2604.25849v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25849v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25891v1",
+      "title": "Conditional misalignment: common interventions can hide emergent misalignment behind contextual triggers",
+      "authors": [
+        "Jan Dubiński",
+        "Jan Betley",
+        "Anna Sztyber-Betley",
+        "Daniel Tan",
+        "Owain Evans"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CR"
+      ],
+      "abstract": "This paper investigates \"conditional misalignment,\" where standard interventions designed to reduce emergent misalignment (EM) only mask the problem. While these methods eliminate EM on current evaluations, the misalignment reappears when test prompts share contextual features with the original training data. The core contribution is demonstrating that common mitigation techniques fail to generalize, hiding potentially severe misbehavior behind specific contextual triggers.",
+      "url": "http://arxiv.org/abs/2604.25891v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25891v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.25891v1/x1.png",
+      "figure_caption": "Conditional misalignment across interventions. Models that appear aligned under standard evaluations can be misaligned when evaluation prompts contain cues for misaligned training data (e.g., insecure code). We illustrate this pattern for (a) mixing misaligned with benign data, (b) post-hoc HHH finetuning, and (c) inoculation prompting (IP).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25847v1",
+      "title": "From Soliloquy to Agora: Memory-Enhanced LLM Agents with Decentralized Debate for Optimization Modeling",
+      "authors": [
+        "Jianghao Lin",
+        "Zi Ling",
+        "Chenyu Zhou",
+        "Tianyi Xu",
+        "Ruoqing Jiang"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "math.OC"
+      ],
+      "abstract": "The paper introduces **Agora-Opt**, a modular agentic framework that enhances LLM performance in optimization modeling by integrating **decentralized debate** among multiple agent teams and a **read-write memory bank**. This memory stores verified artifacts and past resolutions, enabling training-free improvement. Agora-Opt achieves state-of-the-art performance across benchmarks while offering flexibility across different LLM backbones and pipelines.",
+      "url": "http://arxiv.org/abs/2604.25847v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25847v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.25847v1/imgs/limitation.png",
+      "figure_caption": "The illustration of three limitations in most existing methods: (a) base–LLM lock–in of training–centric approaches, (b) non–trainable problem of agentic methods, and (c) single–model myopia; alongside their paired design principles in our framework for LLM–based optimization modeling: an agentic foundation for easy backbone upgrades, a read–write agentic memory design, and decentralized agentic debate.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25639v1",
+      "title": "Large language models eroding science understanding: an experimental study",
+      "authors": [
+        "Harry Collins",
+        "Hartmut Grote",
+        "Paul Newbury",
+        "Patrick Sutton",
+        "Simon Thorne"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CY"
+      ],
+      "abstract": "This study experimentally demonstrated that large language models (LLMs) can be easily manipulated to prioritize fringe scientific concepts, generating fluent but misleading answers that contradict established consensus. By modifying LLMs to favor specific fringe papers, the authors showed these altered models produce convincing misinformation difficult for non-experts to detect. The core contribution is highlighting LLMs' vulnerability to manipulation, posing risks to public science understanding and emphasizing the need for expert oversight.",
+      "url": "http://arxiv.org/abs/2604.25639v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25639v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25917v1",
+      "title": "Recursive Multi-Agent Systems",
+      "authors": [
+        "Xiyuan Yang",
+        "Jiaru Zou",
+        "Rui Pan",
+        "Ruizhong Qiu",
+        "Pan Lu"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces **RecursiveMAS**, a novel framework that scales agent collaboration by applying the recursive refinement principle from language models to multi-agent systems. It models the entire system as a unified recursive computation, connecting heterogeneous agents via a lightweight **RecursiveLink** for latent state transfer. The core contribution is enabling iterative, whole-system co-optimization using an inner-outer loop learning algorithm, suggesting a more efficient scaling of agent reasoning than standard text-based approaches.",
+      "url": "http://arxiv.org/abs/2604.25917v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25917v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.25917v1/x1.png",
+      "figure_caption": "Performance Landscape of RecursiveMAS across Training/Inference Recursion Depths (Top): The lightweight RecursiveMAS with sub-1.5B agents shows a clean scaling trend as recursion deepens. Generalization across Common Collaboration Patterns (Bottom): The Scaled RecursiveMAS with stronger LLM agents (5-10B) seamlessly adapts to diverse multi-agent system structures.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25684v1",
+      "title": "Think Before You Act -- A Neurocognitive Governance Model for Autonomous AI Agents",
+      "authors": [
+        "Eranga Bandara",
+        "Ross Gore",
+        "Asanga Gunaratna",
+        "Sachini Rajapakse",
+        "Isurunima Kularathna"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces a **Neurocognitive Governance Model** for autonomous AI agents, addressing the governance gap left by external constraints. The core method **structurally maps human self-governance processes** (executive function, inhibitory control) onto LLM reasoning, formalizing a \"Think Before You Act\" mechanism. This establishes **internalized behavioral principles** within the agent to prevent unsafe actions before execution.",
+      "url": "http://arxiv.org/abs/2604.25684v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25684v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.25684v1/figures/ai-agent.png",
+      "figure_caption": "Both humans and AI agents interact with large language models through natural language prompts, forming the basis of the human-agent governance analogy proposed in this paper.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25895v1",
+      "title": "Three Models of RLHF Annotation: Extension, Evidence, and Authority",
+      "authors": [
+        "Steve Coyne"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CY"
+      ],
+      "abstract": "This paper distinguishes three conceptual models—Extension, Evidence, and Authority—that define the normative role of human judgments in Reinforcement Learning from Human Feedback (RLHF). The core contribution is analyzing how these models implicitly shape RLHF pipelines regarding annotation solicitation, validation, and aggregation. Understanding these models is crucial for addressing failure modes arising from conflating their distinct roles.",
+      "url": "http://arxiv.org/abs/2604.25895v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25895v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25903v1",
+      "title": "Carbon-Taxed Transformers: A Green Compression Pipeline for Overgrown Language Models",
+      "authors": [
+        "Ajmain Inqiad Alam",
+        "Palash Roy",
+        "Chanchal K. Roy",
+        "Banani Roy",
+        "Kevin A. Schneider"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.SE"
+      ],
+      "abstract": "This paper introduces **Carbon-Taxed Transformers (CTT)**, a novel compression pipeline for Large Language Models (LLMs) inspired by economic carbon taxation principles. CTT systematically applies multi-architectural compression, using a computational \"carbon tax\" to penalize inefficient model structures and incentivize deployment-ready size reduction. The core contribution is a principled framework that prioritizes **efficiency and environmental sustainability** alongside traditional accuracy metrics for LLMs in software engineering.",
+      "url": "http://arxiv.org/abs/2604.25903v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25903v1",
+      "score": 9.0,
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.25676v1",
+      "title": "CORAL: Adaptive Retrieval Loop for Culturally-Aligned Multilingual RAG",
+      "authors": [
+        "Nayeon Lee",
+        "Jiwoo Song",
+        "Byeongcheol Kang"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "CORAL introduces an adaptive retrieval loop for multilingual RAG to address cultural misalignment in fixed retrieval spaces. It iteratively refines both the retrieval corpora and the query based on continuous critique of retrieved evidence for relevance and cultural alignment. This agentic process ensures the system sources evidence from culturally appropriate contexts, leading to more accurate and culturally-grounded answers.",
+      "url": "http://arxiv.org/abs/2604.25676v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25676v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25716v1",
+      "title": "Cross-Lingual Jailbreak Detection via Semantic Codebooks",
+      "authors": [
+        "Shirin Alanova",
+        "Bogdan Minko",
+        "Sabrina Sadiekh",
+        "Evgeniy Kokuykin"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces a training-free, external guardrail for detecting cross-lingual jailbreaks by comparing multilingual user queries against a fixed English codebook of known malicious prompts using semantic similarity. The core method leverages language-agnostic embedding comparisons to bridge the security gap in multilingual LLM deployments without requiring model retraining or language-specific adaptation. This approach demonstrates varying degrees of generalization success across different languages and benchmarks.",
+      "url": "http://arxiv.org/abs/2604.25716v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25716v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25716v1/Figures/main_fig.png",
+      "figure_caption": "Overview of the proposed cross-lingual semantic filtering framework. Incoming user input (in any language) is encoded using a multilingual embedding model and compared against a fixed English codebook of jailbreak prompts. If the maximum cosine similarity exceeds a predefined threshold, the query is blocked; otherwise, it is forwarded to the target LLM. The approach operates as a training-free external guardrail and does not require translation or model fine-tuning.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25555v1",
+      "title": "From CRUD to Autonomous Agents: Formal Validation and Zero-Trust Security for Semantic Gateways in AI-Native Enterprise Systems",
+      "authors": [
+        "Ignacio Peyrano"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CR"
+      ],
+      "abstract": "This paper introduces the **Semantic Gateway** governed by the **Model Context Protocol (MCP)** to secure AI-native enterprise systems where LLMs act as orchestrators. The core method reframes autonomous agent validation from traditional software testing to treating agents as **stochastic state-transition systems**, audited via enabled-tool graphs. This provides a **Zero-Trust security model** for dynamically discovering, authorizing, and executing tools based on semantic intent and policy enforcement.",
+      "url": "http://arxiv.org/abs/2604.25555v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25555v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25555v1/fig_architecture.png",
+      "figure_caption": "Semantic Gateway architecture. The intent flows from enterprise sources through the Semantic Firewall, Embedding Router, Chain-of-Thought Planner, and Policy Enforcement Point before reaching the Tool Runtime and Audit Ledger.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25482v1",
+      "title": "From World-Gen to Quest-Line: A Dependency-Driven Prompt Pipeline for Coherent RPG Generation",
+      "authors": [
+        "Dominik Borawski",
+        "Marta Szulc",
+        "Robert Chudy",
+        "Małgorzata Giedrowicz",
+        "Piotr Mironowicz"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces a dependency-driven, multi-stage prompt pipeline for generating coherent RPG content, moving from world-building to detailed quest lines. The core method enforces structural consistency by conditioning each sequential generation stage (e.g., world, NPC, quest planning) on structured JSON outputs from the preceding stage. This approach significantly improves narrative coherence and reduces hallucinations compared to monolithic prompting, enabling scalable creation of interconnected game narratives.",
+      "url": "http://arxiv.org/abs/2604.25482v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25482v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25482v1/pipeline_diagram.jpg",
+      "figure_caption": "Dependency-aware multi-stage prompt pipeline for structured RPG content generation. Each generation stage conditions on the complete set of structured JSON outputs produced by all preceding stages.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25665v1",
+      "title": "LLM-ReSum: A Framework for LLM Reflective Summarization through Self-Evaluation",
+      "authors": [
+        "Huyen Nguyen",
+        "Haoxuan Zhang",
+        "Yang Zhang",
+        "Junhua Ding",
+        "Haihua Chen"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.DL",
+        "cs.IR"
+      ],
+      "abstract": "This paper introduces **LLM-ReSum**, a framework for improving summary quality through a self-reflective process. It first conducts a meta-evaluation showing that LLM-based evaluators align better with human judgment than traditional metrics. LLM-ReSum then leverages this finding by integrating LLM-based evaluation and generation in a closed feedback loop, enhancing summary quality without requiring model finetuning.",
+      "url": "http://arxiv.org/abs/2604.25665v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25665v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25665v1/x1.png",
+      "figure_caption": "Overview of our three-stage research framework: meta-evaluation of automatic metrics (RQ1), multi-agent LLM evaluation (RQ2), and iterative self-reflective summarization (RQ3).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25737v1",
+      "title": "SAFEdit: Does Multi-Agent Decomposition Resolve the Reliability Challenges of Instructed Code Editing?",
+      "authors": [
+        "Noam Tarshish",
+        "Nofar Selouk",
+        "Daniel Hodisan",
+        "Bar Ezra Gafniel",
+        "Yuval Elovici"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "abstract": "SAFEdit is a multi-agent framework designed to improve the reliability of LLM-based instructed code editing by decomposing the task into specialized roles: a Planner, an Editor, and a Verifier. Its core contribution is the iterative refinement process, which uses a Failure Abstraction Layer (FAL) to translate raw test failures into structured diagnostic feedback for the Editor, enabling more targeted corrections. This approach significantly boosts performance on benchmarks like EditBench where prior models struggled.",
+      "url": "http://arxiv.org/abs/2604.25737v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25737v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25737v1/sections/3_methodology/pipeline_new23.png",
+      "figure_caption": "Figure 1. Overview of the SAFEdit framework. The pipeline organizes the editing task into three specialized agents (Planner, Editor, Verifier), which are connected in an iterative refinement loop. The FAL transforms raw test output into structured feedback, and the error taxonomy classifies failure root causes for qualitative analysis.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25724v1",
+      "title": "Scalable Inference Architectures for Compound AI Systems: A Production Deployment Study",
+      "authors": [
+        "Srikanta Prasad S",
+        "Utkarsh Arora"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces a modular, platform-agnostic inference architecture designed to efficiently serve complex, concurrent compound AI systems in production. The core method integrates serverless execution, dynamic autoscaling, and MLOps pipelines to manage heterogeneous model invocations. The contribution lies in demonstrating significant production benefits, including over 50% tail latency reduction, increased throughput, and substantial cost savings compared to static deployments.",
+      "url": "http://arxiv.org/abs/2604.25724v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25724v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25724v1/figure1.png",
+      "figure_caption": "Figure 1. Cognitive orchestration in the Atlas Reasoning Engine. The Planner Agent decomposes user queries; the Tool Selector dispatches to parallel LLM tools (RAG Retriever, Code Interpreter, SQL Executor). Results are aggregated by the Reasoning Agent and synthesized into a final response. Each tool invocation is backed by the scalable inference architecture.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25562v1",
+      "title": "SnapGuard: Lightweight Prompt Injection Detection for Screenshot-Based Web Agents",
+      "authors": [
+        "Mengyao Du",
+        "Han Fang",
+        "Haokai Ma",
+        "Jiahao Chen",
+        "Kai Xu"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CR"
+      ],
+      "abstract": "SnapGuard introduces a lightweight method for detecting prompt injection attacks in screenshot-based web agents. It addresses the inefficiency of large multimodal models by focusing on localized visual characteristics of injected content, rather than requiring global webpage understanding. This approach significantly reduces computational overhead while maintaining effective detection against visual prompt injection threats.",
+      "url": "http://arxiv.org/abs/2604.25562v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25562v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25562v1/x1.png",
+      "figure_caption": "Figure 1. A prompt injection attack on a screenshot-based web agent. The attacker embeds a malicious instruction ( Click the link below ) directly into the rendered webpage. The web agent, operating on the screenshot, executes the injected action rather than the intended user task ( Buy Now ).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25727v1",
+      "title": "Toward Scalable Terminal Task Synthesis via Skill Graphs",
+      "authors": [
+        "Zhiyuan Fan",
+        "Tinghao Yu",
+        "Yuanjun Cai",
+        "Jiangtao Guan",
+        "Yun Yang"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces **SkillSynth**, a framework for scalable terminal task synthesis that addresses the lack of diverse training trajectories. SkillSynth constructs a **scenario-mediated skill graph** where scenarios link command-line skills, allowing for the sampling of diverse workflow paths. These sampled paths are then instantiated into executable tasks, significantly improving the diversity of training data for terminal agents beyond simple task count scaling.",
+      "url": "http://arxiv.org/abs/2604.25727v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25727v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25727v1/x1.png",
+      "figure_caption": "Diversity of synthesized trajectories across datasets, measured by the number of unique scenarios, skills, and (scenario, skill) pairs after semantic canonicalization. Each value is averaged over three independent samples of 1,000 trajectories per dataset.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25591v1",
+      "title": "Walking Through Uncertainty: An Empirical Study of Uncertainty Estimation for Audio-Aware Large Language Models",
+      "authors": [
+        "Chun-Yi Kuan",
+        "Wei-Ping Huang",
+        "Hung-yi Lee"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL",
+        "cs.SD",
+        "eess.AS"
+      ],
+      "abstract": "This paper presents the first systematic empirical study of uncertainty estimation methods for Audio-aware Large Language Models (ALLMs). The authors benchmark five existing techniques across various audio understanding and reasoning tasks to address the issue of overconfident or hallucinated outputs in these models. Their key finding is that semantic-level and verification-based uncertainty methods consistently outperform token-level approaches in this multimodal context.",
+      "url": "http://arxiv.org/abs/2604.25591v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25591v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25591v1/figures/pareto-figure.png",
+      "figure_caption": "Cost–accuracy Pareto frontier of Reasoning vs. Adaptive inference across four benchmarks. Each point represents a model under a fixed inference mode: hollow squares (Reasoning, 100% token cost) and filled circles (Adaptive, reduced cost). Dashed arrows indicate the shift from full reasoning to adaptive inference for each model. The gray dashed line represents the Pareto frontier, which consists of operating points that are not dominated in terms of both token cost and accuracy.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25872v1",
+      "title": "When Errors Can Be Beneficial: A Categorization of Imperfect Rewards for Policy Gradient",
+      "authors": [
+        "Shuning Shang",
+        "Hubert Strauss",
+        "Stanley Wei",
+        "Sanjeev Arora",
+        "Noam Razin"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "stat.ML"
+      ],
+      "abstract": "This paper categorizes imperfect proxy rewards in policy gradient optimization based on their theoretical effect on the increase in the *ground truth* reward. The core contribution is demonstrating that reward errors are not uniformly harmful; some can be beneficial by preventing the policy from stagnating near mediocre true rewards. This analysis leads to new, more nuanced reward model evaluation metrics for applications like RLHF.",
+      "url": "http://arxiv.org/abs/2604.25872v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25872v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25850v1",
+      "title": "Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses",
+      "authors": [
+        "Jiahang Lin",
+        "Shichun Liu",
+        "Chengjun Pan",
+        "Lizhi Lin",
+        "Shihan Dou"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.SE"
+      ],
+      "abstract": "This paper introduces Agentic Harness Engineering (AHE), a framework to automate the evolution of coding-agent harnesses, which significantly impact performance. AHE achieves this by instrumenting the engineering loop with three observability pillars: explicit, file-level observability for editable components; distilled, layered evidence from long trajectories; and paired self-declarations for every edit decision. This approach makes the complex harness engineering process tractable and automatable for performance improvement.",
+      "url": "http://arxiv.org/abs/2604.25850v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25850v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25850v1/x1.png",
+      "figure_caption": "AHE evolves a bash-only seed past every human-designed and self-evolving baseline on Terminal-Bench 2. All three role agents share one base model, isolating the gain to harness edits rather than analyzer or editor capability.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    }
+  ],
+  "papers": [
+    {
+      "id": "2604.25849v1",
+      "title": "ADEMA: A Knowledge-State Orchestration Architecture for Long-Horizon Knowledge Synthesis with LLMAgents",
+      "authors": [
+        "Zhou Hanlin",
+        "Chan Huah Yong"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "ADEMA is a knowledge-state orchestration architecture designed to overcome failures in long-horizon LLM tasks by explicitly managing the evolving knowledge state across rounds. Its core method integrates epistemic bookkeeping, dual-evaluator governance, adaptive switching, and checkpointing to ensure a persistent, traceable evidence chain. The contribution lies in providing a robust framework specifically for knowledge synthesis, demonstrated through a comprehensive showcase and benchmark repair.",
+      "url": "http://arxiv.org/abs/2604.25849v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25849v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25891v1",
+      "title": "Conditional misalignment: common interventions can hide emergent misalignment behind contextual triggers",
+      "authors": [
+        "Jan Dubiński",
+        "Jan Betley",
+        "Anna Sztyber-Betley",
+        "Daniel Tan",
+        "Owain Evans"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CR"
+      ],
+      "abstract": "This paper investigates \"conditional misalignment,\" where standard interventions designed to reduce emergent misalignment (EM) only mask the problem. While these methods eliminate EM on current evaluations, the misalignment reappears when test prompts share contextual features with the original training data. The core contribution is demonstrating that common mitigation techniques fail to generalize, hiding potentially severe misbehavior behind specific contextual triggers.",
+      "url": "http://arxiv.org/abs/2604.25891v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25891v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.25891v1/x1.png",
+      "figure_caption": "Conditional misalignment across interventions. Models that appear aligned under standard evaluations can be misaligned when evaluation prompts contain cues for misaligned training data (e.g., insecure code). We illustrate this pattern for (a) mixing misaligned with benign data, (b) post-hoc HHH finetuning, and (c) inoculation prompting (IP).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25847v1",
+      "title": "From Soliloquy to Agora: Memory-Enhanced LLM Agents with Decentralized Debate for Optimization Modeling",
+      "authors": [
+        "Jianghao Lin",
+        "Zi Ling",
+        "Chenyu Zhou",
+        "Tianyi Xu",
+        "Ruoqing Jiang"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "math.OC"
+      ],
+      "abstract": "The paper introduces **Agora-Opt**, a modular agentic framework that enhances LLM performance in optimization modeling by integrating **decentralized debate** among multiple agent teams and a **read-write memory bank**. This memory stores verified artifacts and past resolutions, enabling training-free improvement. Agora-Opt achieves state-of-the-art performance across benchmarks while offering flexibility across different LLM backbones and pipelines.",
+      "url": "http://arxiv.org/abs/2604.25847v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25847v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.25847v1/imgs/limitation.png",
+      "figure_caption": "The illustration of three limitations in most existing methods: (a) base–LLM lock–in of training–centric approaches, (b) non–trainable problem of agentic methods, and (c) single–model myopia; alongside their paired design principles in our framework for LLM–based optimization modeling: an agentic foundation for easy backbone upgrades, a read–write agentic memory design, and decentralized agentic debate.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25639v1",
+      "title": "Large language models eroding science understanding: an experimental study",
+      "authors": [
+        "Harry Collins",
+        "Hartmut Grote",
+        "Paul Newbury",
+        "Patrick Sutton",
+        "Simon Thorne"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CY"
+      ],
+      "abstract": "This study experimentally demonstrated that large language models (LLMs) can be easily manipulated to prioritize fringe scientific concepts, generating fluent but misleading answers that contradict established consensus. By modifying LLMs to favor specific fringe papers, the authors showed these altered models produce convincing misinformation difficult for non-experts to detect. The core contribution is highlighting LLMs' vulnerability to manipulation, posing risks to public science understanding and emphasizing the need for expert oversight.",
+      "url": "http://arxiv.org/abs/2604.25639v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25639v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25917v1",
+      "title": "Recursive Multi-Agent Systems",
+      "authors": [
+        "Xiyuan Yang",
+        "Jiaru Zou",
+        "Rui Pan",
+        "Ruizhong Qiu",
+        "Pan Lu"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces **RecursiveMAS**, a novel framework that scales agent collaboration by applying the recursive refinement principle from language models to multi-agent systems. It models the entire system as a unified recursive computation, connecting heterogeneous agents via a lightweight **RecursiveLink** for latent state transfer. The core contribution is enabling iterative, whole-system co-optimization using an inner-outer loop learning algorithm, suggesting a more efficient scaling of agent reasoning than standard text-based approaches.",
+      "url": "http://arxiv.org/abs/2604.25917v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25917v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.25917v1/x1.png",
+      "figure_caption": "Performance Landscape of RecursiveMAS across Training/Inference Recursion Depths (Top): The lightweight RecursiveMAS with sub-1.5B agents shows a clean scaling trend as recursion deepens. Generalization across Common Collaboration Patterns (Bottom): The Scaled RecursiveMAS with stronger LLM agents (5-10B) seamlessly adapts to diverse multi-agent system structures.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25684v1",
+      "title": "Think Before You Act -- A Neurocognitive Governance Model for Autonomous AI Agents",
+      "authors": [
+        "Eranga Bandara",
+        "Ross Gore",
+        "Asanga Gunaratna",
+        "Sachini Rajapakse",
+        "Isurunima Kularathna"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces a **Neurocognitive Governance Model** for autonomous AI agents, addressing the governance gap left by external constraints. The core method **structurally maps human self-governance processes** (executive function, inhibitory control) onto LLM reasoning, formalizing a \"Think Before You Act\" mechanism. This establishes **internalized behavioral principles** within the agent to prevent unsafe actions before execution.",
+      "url": "http://arxiv.org/abs/2604.25684v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25684v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.25684v1/figures/ai-agent.png",
+      "figure_caption": "Both humans and AI agents interact with large language models through natural language prompts, forming the basis of the human-agent governance analogy proposed in this paper.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25895v1",
+      "title": "Three Models of RLHF Annotation: Extension, Evidence, and Authority",
+      "authors": [
+        "Steve Coyne"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CY"
+      ],
+      "abstract": "This paper distinguishes three conceptual models—Extension, Evidence, and Authority—that define the normative role of human judgments in Reinforcement Learning from Human Feedback (RLHF). The core contribution is analyzing how these models implicitly shape RLHF pipelines regarding annotation solicitation, validation, and aggregation. Understanding these models is crucial for addressing failure modes arising from conflating their distinct roles.",
+      "url": "http://arxiv.org/abs/2604.25895v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25895v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25903v1",
+      "title": "Carbon-Taxed Transformers: A Green Compression Pipeline for Overgrown Language Models",
+      "authors": [
+        "Ajmain Inqiad Alam",
+        "Palash Roy",
+        "Chanchal K. Roy",
+        "Banani Roy",
+        "Kevin A. Schneider"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.SE"
+      ],
+      "abstract": "This paper introduces **Carbon-Taxed Transformers (CTT)**, a novel compression pipeline for Large Language Models (LLMs) inspired by economic carbon taxation principles. CTT systematically applies multi-architectural compression, using a computational \"carbon tax\" to penalize inefficient model structures and incentivize deployment-ready size reduction. The core contribution is a principled framework that prioritizes **efficiency and environmental sustainability** alongside traditional accuracy metrics for LLMs in software engineering.",
+      "url": "http://arxiv.org/abs/2604.25903v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25903v1",
+      "score": 9.0,
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.25676v1",
+      "title": "CORAL: Adaptive Retrieval Loop for Culturally-Aligned Multilingual RAG",
+      "authors": [
+        "Nayeon Lee",
+        "Jiwoo Song",
+        "Byeongcheol Kang"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "CORAL introduces an adaptive retrieval loop for multilingual RAG to address cultural misalignment in fixed retrieval spaces. It iteratively refines both the retrieval corpora and the query based on continuous critique of retrieved evidence for relevance and cultural alignment. This agentic process ensures the system sources evidence from culturally appropriate contexts, leading to more accurate and culturally-grounded answers.",
+      "url": "http://arxiv.org/abs/2604.25676v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25676v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25716v1",
+      "title": "Cross-Lingual Jailbreak Detection via Semantic Codebooks",
+      "authors": [
+        "Shirin Alanova",
+        "Bogdan Minko",
+        "Sabrina Sadiekh",
+        "Evgeniy Kokuykin"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces a training-free, external guardrail for detecting cross-lingual jailbreaks by comparing multilingual user queries against a fixed English codebook of known malicious prompts using semantic similarity. The core method leverages language-agnostic embedding comparisons to bridge the security gap in multilingual LLM deployments without requiring model retraining or language-specific adaptation. This approach demonstrates varying degrees of generalization success across different languages and benchmarks.",
+      "url": "http://arxiv.org/abs/2604.25716v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25716v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25716v1/Figures/main_fig.png",
+      "figure_caption": "Overview of the proposed cross-lingual semantic filtering framework. Incoming user input (in any language) is encoded using a multilingual embedding model and compared against a fixed English codebook of jailbreak prompts. If the maximum cosine similarity exceeds a predefined threshold, the query is blocked; otherwise, it is forwarded to the target LLM. The approach operates as a training-free external guardrail and does not require translation or model fine-tuning.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25555v1",
+      "title": "From CRUD to Autonomous Agents: Formal Validation and Zero-Trust Security for Semantic Gateways in AI-Native Enterprise Systems",
+      "authors": [
+        "Ignacio Peyrano"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CR"
+      ],
+      "abstract": "This paper introduces the **Semantic Gateway** governed by the **Model Context Protocol (MCP)** to secure AI-native enterprise systems where LLMs act as orchestrators. The core method reframes autonomous agent validation from traditional software testing to treating agents as **stochastic state-transition systems**, audited via enabled-tool graphs. This provides a **Zero-Trust security model** for dynamically discovering, authorizing, and executing tools based on semantic intent and policy enforcement.",
+      "url": "http://arxiv.org/abs/2604.25555v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25555v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25555v1/fig_architecture.png",
+      "figure_caption": "Semantic Gateway architecture. The intent flows from enterprise sources through the Semantic Firewall, Embedding Router, Chain-of-Thought Planner, and Policy Enforcement Point before reaching the Tool Runtime and Audit Ledger.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25482v1",
+      "title": "From World-Gen to Quest-Line: A Dependency-Driven Prompt Pipeline for Coherent RPG Generation",
+      "authors": [
+        "Dominik Borawski",
+        "Marta Szulc",
+        "Robert Chudy",
+        "Małgorzata Giedrowicz",
+        "Piotr Mironowicz"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces a dependency-driven, multi-stage prompt pipeline for generating coherent RPG content, moving from world-building to detailed quest lines. The core method enforces structural consistency by conditioning each sequential generation stage (e.g., world, NPC, quest planning) on structured JSON outputs from the preceding stage. This approach significantly improves narrative coherence and reduces hallucinations compared to monolithic prompting, enabling scalable creation of interconnected game narratives.",
+      "url": "http://arxiv.org/abs/2604.25482v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25482v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25482v1/pipeline_diagram.jpg",
+      "figure_caption": "Dependency-aware multi-stage prompt pipeline for structured RPG content generation. Each generation stage conditions on the complete set of structured JSON outputs produced by all preceding stages.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25665v1",
+      "title": "LLM-ReSum: A Framework for LLM Reflective Summarization through Self-Evaluation",
+      "authors": [
+        "Huyen Nguyen",
+        "Haoxuan Zhang",
+        "Yang Zhang",
+        "Junhua Ding",
+        "Haihua Chen"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.DL",
+        "cs.IR"
+      ],
+      "abstract": "This paper introduces **LLM-ReSum**, a framework for improving summary quality through a self-reflective process. It first conducts a meta-evaluation showing that LLM-based evaluators align better with human judgment than traditional metrics. LLM-ReSum then leverages this finding by integrating LLM-based evaluation and generation in a closed feedback loop, enhancing summary quality without requiring model finetuning.",
+      "url": "http://arxiv.org/abs/2604.25665v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25665v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25665v1/x1.png",
+      "figure_caption": "Overview of our three-stage research framework: meta-evaluation of automatic metrics (RQ1), multi-agent LLM evaluation (RQ2), and iterative self-reflective summarization (RQ3).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25737v1",
+      "title": "SAFEdit: Does Multi-Agent Decomposition Resolve the Reliability Challenges of Instructed Code Editing?",
+      "authors": [
+        "Noam Tarshish",
+        "Nofar Selouk",
+        "Daniel Hodisan",
+        "Bar Ezra Gafniel",
+        "Yuval Elovici"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "abstract": "SAFEdit is a multi-agent framework designed to improve the reliability of LLM-based instructed code editing by decomposing the task into specialized roles: a Planner, an Editor, and a Verifier. Its core contribution is the iterative refinement process, which uses a Failure Abstraction Layer (FAL) to translate raw test failures into structured diagnostic feedback for the Editor, enabling more targeted corrections. This approach significantly boosts performance on benchmarks like EditBench where prior models struggled.",
+      "url": "http://arxiv.org/abs/2604.25737v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25737v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25737v1/sections/3_methodology/pipeline_new23.png",
+      "figure_caption": "Figure 1. Overview of the SAFEdit framework. The pipeline organizes the editing task into three specialized agents (Planner, Editor, Verifier), which are connected in an iterative refinement loop. The FAL transforms raw test output into structured feedback, and the error taxonomy classifies failure root causes for qualitative analysis.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25724v1",
+      "title": "Scalable Inference Architectures for Compound AI Systems: A Production Deployment Study",
+      "authors": [
+        "Srikanta Prasad S",
+        "Utkarsh Arora"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces a modular, platform-agnostic inference architecture designed to efficiently serve complex, concurrent compound AI systems in production. The core method integrates serverless execution, dynamic autoscaling, and MLOps pipelines to manage heterogeneous model invocations. The contribution lies in demonstrating significant production benefits, including over 50% tail latency reduction, increased throughput, and substantial cost savings compared to static deployments.",
+      "url": "http://arxiv.org/abs/2604.25724v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25724v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25724v1/figure1.png",
+      "figure_caption": "Figure 1. Cognitive orchestration in the Atlas Reasoning Engine. The Planner Agent decomposes user queries; the Tool Selector dispatches to parallel LLM tools (RAG Retriever, Code Interpreter, SQL Executor). Results are aggregated by the Reasoning Agent and synthesized into a final response. Each tool invocation is backed by the scalable inference architecture.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25562v1",
+      "title": "SnapGuard: Lightweight Prompt Injection Detection for Screenshot-Based Web Agents",
+      "authors": [
+        "Mengyao Du",
+        "Han Fang",
+        "Haokai Ma",
+        "Jiahao Chen",
+        "Kai Xu"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CR"
+      ],
+      "abstract": "SnapGuard introduces a lightweight method for detecting prompt injection attacks in screenshot-based web agents. It addresses the inefficiency of large multimodal models by focusing on localized visual characteristics of injected content, rather than requiring global webpage understanding. This approach significantly reduces computational overhead while maintaining effective detection against visual prompt injection threats.",
+      "url": "http://arxiv.org/abs/2604.25562v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25562v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25562v1/x1.png",
+      "figure_caption": "Figure 1. A prompt injection attack on a screenshot-based web agent. The attacker embeds a malicious instruction ( Click the link below ) directly into the rendered webpage. The web agent, operating on the screenshot, executes the injected action rather than the intended user task ( Buy Now ).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25727v1",
+      "title": "Toward Scalable Terminal Task Synthesis via Skill Graphs",
+      "authors": [
+        "Zhiyuan Fan",
+        "Tinghao Yu",
+        "Yuanjun Cai",
+        "Jiangtao Guan",
+        "Yun Yang"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "abstract": "This paper introduces **SkillSynth**, a framework for scalable terminal task synthesis that addresses the lack of diverse training trajectories. SkillSynth constructs a **scenario-mediated skill graph** where scenarios link command-line skills, allowing for the sampling of diverse workflow paths. These sampled paths are then instantiated into executable tasks, significantly improving the diversity of training data for terminal agents beyond simple task count scaling.",
+      "url": "http://arxiv.org/abs/2604.25727v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25727v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25727v1/x1.png",
+      "figure_caption": "Diversity of synthesized trajectories across datasets, measured by the number of unique scenarios, skills, and (scenario, skill) pairs after semantic canonicalization. Each value is averaged over three independent samples of 1,000 trajectories per dataset.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25591v1",
+      "title": "Walking Through Uncertainty: An Empirical Study of Uncertainty Estimation for Audio-Aware Large Language Models",
+      "authors": [
+        "Chun-Yi Kuan",
+        "Wei-Ping Huang",
+        "Hung-yi Lee"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL",
+        "cs.SD",
+        "eess.AS"
+      ],
+      "abstract": "This paper presents the first systematic empirical study of uncertainty estimation methods for Audio-aware Large Language Models (ALLMs). The authors benchmark five existing techniques across various audio understanding and reasoning tasks to address the issue of overconfident or hallucinated outputs in these models. Their key finding is that semantic-level and verification-based uncertainty methods consistently outperform token-level approaches in this multimodal context.",
+      "url": "http://arxiv.org/abs/2604.25591v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25591v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25591v1/figures/pareto-figure.png",
+      "figure_caption": "Cost–accuracy Pareto frontier of Reasoning vs. Adaptive inference across four benchmarks. Each point represents a model under a fixed inference mode: hollow squares (Reasoning, 100% token cost) and filled circles (Adaptive, reduced cost). Dashed arrows indicate the shift from full reasoning to adaptive inference for each model. The gray dashed line represents the Pareto frontier, which consists of operating points that are not dominated in terms of both token cost and accuracy.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25872v1",
+      "title": "When Errors Can Be Beneficial: A Categorization of Imperfect Rewards for Policy Gradient",
+      "authors": [
+        "Shuning Shang",
+        "Hubert Strauss",
+        "Stanley Wei",
+        "Sanjeev Arora",
+        "Noam Razin"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "stat.ML"
+      ],
+      "abstract": "This paper categorizes imperfect proxy rewards in policy gradient optimization based on their theoretical effect on the increase in the *ground truth* reward. The core contribution is demonstrating that reward errors are not uniformly harmful; some can be beneficial by preventing the policy from stagnating near mediocre true rewards. This analysis leads to new, more nuanced reward model evaluation metrics for applications like RLHF.",
+      "url": "http://arxiv.org/abs/2604.25872v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25872v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.25850v1",
+      "title": "Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses",
+      "authors": [
+        "Jiahang Lin",
+        "Shichun Liu",
+        "Chengjun Pan",
+        "Lizhi Lin",
+        "Shihan Dou"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.SE"
+      ],
+      "abstract": "This paper introduces Agentic Harness Engineering (AHE), a framework to automate the evolution of coding-agent harnesses, which significantly impact performance. AHE achieves this by instrumenting the engineering loop with three observability pillars: explicit, file-level observability for editable components; distilled, layered evidence from long trajectories; and paired self-declarations for every edit decision. This approach makes the complex harness engineering process tractable and automatable for performance improvement.",
+      "url": "http://arxiv.org/abs/2604.25850v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.25850v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.25850v1/x1.png",
+      "figure_caption": "AHE evolves a bash-only seed past every human-designed and self-evolving baseline on Terminal-Bench 2. All three role agents share one base model, isolating the gain to harness edits rather than analyzer or editor capability.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    }
+  ],
+  "hacker_news": [
+    {
+      "id": 47933208,
+      "title": "Localsend: An open-source cross-platform alternative to AirDrop",
+      "url": "https://github.com/localsend/localsend",
+      "score": 859,
+      "created_at": "2026-04-28T11:54:20Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47933208",
+      "summary": "Localsend is an open-source, cross-platform application designed to offer a free alternative to Apple's AirDrop for local file sharing between devices."
+    },
+    {
+      "id": 47933236,
+      "title": "VibeVoice: Open-source frontier voice AI",
+      "url": "https://github.com/microsoft/VibeVoice",
+      "score": 373,
+      "created_at": "2026-04-28T11:56:04Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47933236",
+      "summary": "Microsoft has released VibeVoice, an open-source project focused on advancing frontier voice AI technology."
+    },
+    {
+      "id": 47942437,
+      "title": "How ChatGPT serves ads",
+      "url": "https://www.buchodi.com/how-chatgpt-serves-ads-heres-the-full-attribution-loop/",
+      "score": 362,
+      "created_at": "2026-04-28T23:54:14Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47942437",
+      "summary": "The article details the attribution loop for how ChatGPT serves advertisements, explaining the mechanisms behind ad delivery within the platform."
+    },
+    {
+      "id": 47936156,
+      "title": "Google and Pentagon reportedly agree on deal for 'any lawful' use of AI",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/919494/google-pentagon-classified-ai-deal",
+      "score": 294,
+      "created_at": "2026-04-28T15:49:22Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47936156",
+      "summary": "Google and the Pentagon have reportedly reached an agreement allowing the military to use Google's AI technology for any lawful purpose."
+    },
+    {
+      "id": 47938097,
+      "title": "Claude.ai unavailable and elevated errors on the API",
+      "url": "https://status.claude.com/incidents/9l93x2ht4s5w",
+      "score": 284,
+      "created_at": "2026-04-28T18:01:21Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47938097",
+      "summary": "Claude.ai experienced an outage with elevated errors on its API, rendering the service temporarily unavailable."
+    },
+    {
+      "id": 47936867,
+      "title": "AI's economics don't make sense",
+      "url": "https://www.wheresyoured.at/ais-economics-dont-make-sense/",
+      "score": 217,
+      "created_at": "2026-04-28T16:39:53Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47936867",
+      "summary": "The core argument of the article is that the current economic model for developing and deploying AI, particularly large language models, is unsustainable and likely to collapse due to escalating costs and diminishing returns."
+    },
+    {
+      "id": 47934261,
+      "title": "Show HN: Live Sun and Moon Dashboard with NASA Footage",
+      "url": "https://www.lumara-space.app/",
+      "score": 202,
+      "created_at": "2026-04-28T13:25:48Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47934261",
+      "summary": "A new web application, \"Live Sun and Moon Dashboard,\" offers users real-time visualizations of the sun and moon, enhanced with actual footage sourced from NASA."
+    },
+    {
+      "id": 47936347,
+      "title": "AISLE Discovers 38 CVEs in OpenEMR Healthcare Software",
+      "url": "https://aisle.com/blog/aisle-discovers-38-critical-security-vulnerabilities-in-healthcare-software-used-by-100000-providers",
+      "score": 172,
+      "created_at": "2026-04-28T16:06:01Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47936347",
+      "summary": "AISLE researchers discovered 38 critical security vulnerabilities (CVEs) within the widely used OpenEMR healthcare software."
+    },
+    {
+      "id": 47936312,
+      "title": "Show HN: Drive any macOS app in the background without stealing the cursor",
+      "url": "https://github.com/trycua/cua",
+      "score": 140,
+      "created_at": "2026-04-28T16:03:34Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47936312",
+      "summary": "A new tool called Cua allows users to run any macOS application in the background without interfering with the foreground cursor control."
+    }
+  ],
+  "github_trending": [
+    {
+      "full_name": "warpdotdev/warp",
+      "url": "https://github.com/warpdotdev/warp",
+      "description": "Warp is an agentic development environment, born out of the terminal.",
+      "stars_today": 11955,
+      "total_stars": 38583,
+      "language": "Rust",
+      "topics": [],
+      "summary": "Warp is an agentic development environment, born out of the terminal, that enhances the command-line experience with AI-powered features."
+    },
+    {
+      "full_name": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "description": "Skills for Real Engineers. Straight from my .claude directory.",
+      "stars_today": 7321,
+      "total_stars": 41120,
+      "language": "Shell",
+      "topics": [],
+      "summary": "The \"skills\" repository by mattpocock provides a curated collection of practical skills and knowledge, likely derived from the author's personal development directory, aimed at real-world engineering applications."
+    },
+    {
+      "full_name": "HunxByts/GhostTrack",
+      "url": "https://github.com/HunxByts/GhostTrack",
+      "description": "Useful tool to track location or mobile number",
+      "stars_today": 967,
+      "total_stars": 11067,
+      "language": "Python",
+      "topics": [],
+      "summary": "GhostTrack is a tool designed to track the location or mobile number associated with a given input."
+    },
+    {
+      "full_name": "ComposioHQ/awesome-codex-skills",
+      "url": "https://github.com/ComposioHQ/awesome-codex-skills",
+      "description": "A curated list of practical Codex skills for automating workflows across the Codex CLI and API.",
+      "stars_today": 953,
+      "total_stars": 4461,
+      "language": "Python",
+      "topics": [],
+      "summary": "This repository curates practical Codex skills to automate workflows using the Codex CLI and API."
+    },
+    {
+      "full_name": "1jehuang/jcode",
+      "url": "https://github.com/1jehuang/jcode",
+      "description": "Coding Agent Harness",
+      "stars_today": 386,
+      "total_stars": 997,
+      "language": "Rust",
+      "topics": [],
+      "summary": "jcode provides a flexible harness for building and managing coding agents, enabling structured interaction and execution of code-related tasks."
+    },
+    {
+      "full_name": "abhigyanpatwari/GitNexus",
+      "url": "https://github.com/abhigyanpatwari/GitNexus",
+      "description": "GitNexus: The Zero-Server Code Intelligence Engine - GitNexus is a client-side knowledge graph creator that runs entirely in your browser. Drop in a GitHub repo or ZIP file, and get an interactive knowledge graph wit a built in Graph RAG Agent. Perfect for code exploration",
+      "stars_today": 1607,
+      "total_stars": 33007,
+      "language": "TypeScript",
+      "topics": [],
+      "summary": "GitNexus is a client-side knowledge graph creator that runs entirely in the browser, allowing users to drop in a GitHub repository or ZIP file to generate an interactive knowledge graph with a built-in Graph RAG Agent for code exploration without any server infrastructure."
+    },
+    {
+      "full_name": "microsoft/VibeVoice",
+      "url": "https://github.com/microsoft/VibeVoice",
+      "description": "Open-Source Frontier Voice AI",
+      "stars_today": 1483,
+      "total_stars": 45357,
+      "language": "Python",
+      "topics": [],
+      "summary": "VibeVoice is an open-source project from Microsoft focused on advancing the frontier of voice AI technology."
+    },
+    {
+      "full_name": "CJackHwang/ds2api",
+      "url": "https://github.com/CJackHwang/ds2api",
+      "description": "Deepseek to API: A lightweight, high-performance full-stack middleware converting client protocols to universal APIs. Supports multi-account rotation, compiled binaries, Vercel Serverless, and Docker. Compatible with Google, Claude, and OpenAI API formats.",
+      "stars_today": 417,
+      "total_stars": 2548,
+      "language": "Go",
+      "topics": [],
+      "summary": "ds2api is a lightweight, high-performance middleware that converts client protocols to universal APIs, featuring multi-account rotation, compiled binaries, Vercel/Docker support, and compatibility with Google, Claude, and OpenAI API formats."
+    },
+    {
+      "full_name": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "description": "An agentic skills framework & software development methodology that works.",
+      "stars_today": 1683,
+      "total_stars": 172384,
+      "language": "Shell",
+      "topics": [],
+      "summary": "Superpowers is an agentic skills framework and software development methodology designed to be effective and functional."
+    }
+  ],
+  "us_stocks": [],
+  "postdoc_jobs": [],
+  "jobs": [],
+  "supervisor_updates": [],
+  "weather": [
+    {
+      "query": "London",
+      "label": "London, England, United Kingdom",
+      "resolved_name": "London",
+      "region": "England",
+      "country": "United Kingdom",
+      "latitude": 51.50853,
+      "longitude": -0.12574,
+      "timezone": "Europe/London",
+      "forecast_date": "2026-04-29",
+      "condition": "Clear sky",
+      "weather_code": 0,
+      "temperature_c": 16.2,
+      "apparent_temperature_c": 11.7,
+      "temp_max_c": 17.3,
+      "temp_min_c": 8.7,
+      "humidity_pct": 33,
+      "wind_speed_kmh": 24.8,
+      "precipitation_probability_pct": 0,
+      "is_day": true,
+      "sunrise": "2026-04-29T05:35",
+      "sunset": "2026-04-29T20:20",
+      "source": "Open-Meteo",
+      "source_url": "https://open-meteo.com/"
+    }
+  ]
+}
