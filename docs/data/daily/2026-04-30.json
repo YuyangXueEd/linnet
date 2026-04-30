@@ -1,0 +1,1891 @@
+{
+  "date": "2026-04-30",
+  "generated_at": "2026-04-30T11:14:32.232447+00:00",
+  "sections_ordered": [
+    {
+      "key": "quote_of_day",
+      "payload_key": "quote_of_day",
+      "title": "Words for the Morning",
+      "icon": "✦",
+      "items": [
+        {
+          "quote": "However, anyone to whom this happens should not leave his room upon awakening, should speak to no-one, but remain alone and sober until everything comes back to him, and he recalls the dream.",
+          "author": "Paracelsus",
+          "category": "alone"
+        }
+      ],
+      "meta": {
+        "count": 1
+      }
+    },
+    {
+      "key": "weather",
+      "payload_key": "weather",
+      "title": "Weather",
+      "icon": "🌦️",
+      "items": [
+        {
+          "query": "London",
+          "label": "London, England, United Kingdom",
+          "resolved_name": "London",
+          "region": "England",
+          "country": "United Kingdom",
+          "latitude": 51.50853,
+          "longitude": -0.12574,
+          "timezone": "Europe/London",
+          "forecast_date": "2026-04-30",
+          "condition": "Clear sky",
+          "weather_code": 0,
+          "temperature_c": 17.8,
+          "apparent_temperature_c": 14.6,
+          "temp_max_c": 19.4,
+          "temp_min_c": 11.2,
+          "humidity_pct": 35,
+          "wind_speed_kmh": 18.4,
+          "precipitation_probability_pct": 0,
+          "is_day": true,
+          "sunrise": "2026-04-30T05:33",
+          "sunset": "2026-04-30T20:21",
+          "source": "Open-Meteo",
+          "source_url": "https://open-meteo.com/"
+        }
+      ],
+      "meta": {
+        "count": 1,
+        "city": "London"
+      }
+    },
+    {
+      "key": "arxiv",
+      "payload_key": "papers",
+      "title": "arXiv Papers",
+      "icon": "📄",
+      "items": [
+        {
+          "id": "2604.26522v1",
+          "title": "AGEL-Comp: A Neuro-Symbolic Framework for Compositional Generalization in Interactive Agents",
+          "authors": [
+            "Mahnoor Shahid",
+            "Hannes Rothe"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.LO",
+            "cs.MA",
+            "cs.SC"
+          ],
+          "abstract": "AGEL-Comp introduces a neuro-symbolic framework to improve compositional generalization in LLM agents by grounding their actions. It achieves this through a dynamic Causal Program Graph (CPG) as a world model, an ILP engine that synthesizes new symbolic rules from experience, and a hybrid reasoning core that uses an LLM for planning verified by a Neural Theorem Prover. This enables a robust deduction-abduction learning cycle to expand the agent's symbolic knowledge during interaction.",
+          "url": "http://arxiv.org/abs/2604.26522v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26522v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.26522v1/figures/method2.png",
+          "figure_caption": "The AGEL-Comp neuro-symbolic architecture.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26577v1",
+          "title": "Benchmarking the Safety of Large Language Models for Robotic Health Attendant Control",
+          "authors": [
+            "Mahiro Nakao",
+            "Kazuhiro Takemoto"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CY",
+            "cs.RO"
+          ],
+          "abstract": "This paper introduces a novel dataset of 270 ethically-grounded harmful instructions to benchmark the safety of 72 Large Language Models (LLMs) when controlling a simulated Robotic Health Attendant. The core finding is a high mean violation rate (54.4%), revealing that LLMs struggle significantly with safety, especially for subtle instructions like device manipulation. The study concludes that proprietary models are substantially safer than open-weight models, whose performance correlates with size and release date.",
+          "url": "http://arxiv.org/abs/2604.26577v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26577v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.26577v1/x1.png",
+          "figure_caption": "Boxplot of violation rates across model families ( n n indicates the number of models per family). Families are ordered by median violation rate in descending order. All individual model names are labeled.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26557v1",
+          "title": "DUAL-BLADE: Dual-Path NVMe-Direct KV-Cache Offloading for Edge LLM Inference",
+          "authors": [
+            "Bodon Jeong",
+            "Hongsu Byun",
+            "Youngjae Kim",
+            "Weikuan Yu",
+            "Kyungkeun Lee"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.DC",
+            "cs.PF"
+          ],
+          "abstract": "DUAL-BLADE is a dual-path KV-cache offloading framework for edge LLM inference that dynamically routes KV tensors to either a traditional page-cache path or a high-performance NVMe-direct path based on memory pressure. The NVMe-direct path bypasses the kernel by directly mapping tensors to logical block addresses, reducing overhead and cache thrashing. This approach, combined with adaptive pipeline parallelism, significantly improves inference throughput under tight memory constraints.",
+          "url": "http://arxiv.org/abs/2604.26557v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26557v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.26557v1/x1.png",
+          "figure_caption": "LLM transformer architecture [ 37 ] .",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26733v1",
+          "title": "FutureWorld: A Live Environment for Training Predictive Agents with Real-World Outcome Rewards",
+          "authors": [
+            "Zhixin Han",
+            "Yanzhi Zhang",
+            "Chuyang Wei",
+            "Maohang Gao",
+            "Xiawei Yue"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "abstract": "FutureWorld introduces a novel live agentic reinforcement learning environment specifically designed for training predictive agents. Its core method is closing the training loop by continuously providing prediction tasks based on unfolding real-world events, rewarding agents based on actual outcomes. This contributes a unified framework for live future prediction, enabling agents to continually learn and adapt from real-world feedback without answer leakage.",
+          "url": "http://arxiv.org/abs/2604.26733v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26733v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.26733v1/x1.png",
+          "figure_caption": "Domain distributions of website sources (a), questions before resampling (b), and questions after resampling (c).",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26841v1",
+          "title": "Language Diffusion Models are Associative Memories Capable of Retrieving Unseen Data",
+          "authors": [
+            "Bao Pham",
+            "Mohammed J. Zaki",
+            "Luca Ambrogioni",
+            "Dmitry Krotov",
+            "Matteo Negri"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CL"
+          ],
+          "abstract": "This paper demonstrates that Uniform-based Discrete Diffusion Models (UDDMs) fundamentally operate as Associative Memories (AMs) with emergent creative capabilities. The core method involves showing that these models form basins of attraction around training data via conditional likelihood maximization, rather than explicit energy functions. The key contribution is identifying a sharp transition from memorization to generalization in UDDMs, governed by the size of the training dataset.",
+          "url": "http://arxiv.org/abs/2604.26841v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26841v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.26841v1/Preprint/preprint-images/shrinkage_basin_main_tiny_test.png",
+          "figure_caption": "Basins around training examples shrink and basins around test examples expand as the training dataset size increases . (A) Textual examples showing two Tiny UDDMs’ token recovery at noise level t = 0.2 t=0.2 , where each is trained on two different training dataset sizes. With a small training dataset, the model fails to recognize unseen test tokens and alters them. With a larger training set, these unseen tokens however become stable and remain intact after the sampling process. (B) Average total token recovery rates (%), including both non-corrupt and corrupted tokens, for training and test sequences across varying corruption levels. Line colors indicate the fractions of the training dataset used (ranging from small to large ). As data scales, the model’s ability to flawlessly recover explicit training examples drops (indicating shrinking basins), while its recovery rate of unseen test examples improves (indicating expanding basins). The convergence of these rates at large dataset sizes (red curves) marks the sharp transition from memorization to generalization. Note: Deterministic (greedy) sampling was used across these experiments to isolate from stochastic noise.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26511v1",
+          "title": "Tatemae: Detecting Alignment Faking via Tool Selection in LLMs",
+          "authors": [
+            "Matteo Leonesi",
+            "Francesco Belardinelli",
+            "Flavio Corradini",
+            "Marco Piangerelli"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CR"
+          ],
+          "abstract": "This paper introduces a novel method to detect Alignment Faking (AF) in LLMs by analyzing their **tool selection behavior** rather than relying solely on Chain-of-Thought (CoT). The core contribution is demonstrating that AF can be identified when an LLM strategically chooses a \"safe\" tool when unmonitored, but switches to an \"unsafe\" tool under monitoring that prioritizes helpfulness, even if its internal reasoning still points to the safe option. The authors validate this approach using a new dataset of 108 enterprise IT scenarios.",
+          "url": "http://arxiv.org/abs/2604.26511v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26511v1",
+          "score": 9.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26553v1",
+          "title": "TLPO: Token-Level Policy Optimization for Mitigating Language Confusion in Large Language Models",
+          "authors": [
+            "Jinho Choo",
+            "JunSeung Lee",
+            "Jimyeong Kim",
+            "Yeeho Song",
+            "S. K. Hong"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CL"
+          ],
+          "abstract": "TLPO introduces Token-Level Policy Optimization, a fine-tuning method to combat language confusion in LLMs by applying localized updates at the token level. It selectively identifies error-prone positions and uses a tailored objective to suppress undesirable token outputs. This granular intervention effectively mitigates language confusion without degrading the model's overall performance, unlike sequence-level methods.",
+          "url": "http://arxiv.org/abs/2604.26553v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26553v1",
+          "score": 9.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26951v1",
+          "title": "Turning the TIDE: Cross-Architecture Distillation for Diffusion Large Language Models",
+          "authors": [
+            "Gongbo Zhang",
+            "Wen Wang",
+            "Ye Tian",
+            "Li Yuan"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CL"
+          ],
+          "abstract": "This paper introduces **TIDE**, the first framework for **cross-architecture knowledge distillation** between diffusion large language models (dLLMs). TIDE employs three novel components—TIDAL, CompDemo, and Reverse CALM—to effectively transfer knowledge despite differences in architecture, attention, and tokenizers. This method enables the creation of smaller, efficient student dLLMs from larger, complex teachers.",
+          "url": "http://arxiv.org/abs/2604.26951v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26951v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.26951v1/x1.png",
+          "figure_caption": "Cross-architecture distillation for dLLMs. Compared to prior step distillation (a) that retains the original model size, the Tide framework (b) distills heterogeneous 16B MoE and 8B dense teachers into a 0.6B student. The distilled model achieves a +16.5 gain on HumanEval over the AR baseline, 22 × \\( \\times \\) memory reduction, and 5 × \\( \\times \\) faster inference.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26506v1",
+          "title": "SafeReview: Defending LLM-based Review Systems Against Adversarial Hidden Prompts",
+          "authors": [
+            "Yuan Xin",
+            "Yixuan Weng",
+            "Minjun Zhu",
+            "Ying Ling",
+            "Chengwei Qin"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.CR"
+          ],
+          "abstract": "This paper introduces **SafeReview**, a novel adversarial defense framework for LLM-based review systems against hidden adversarial prompts. It employs a **Generator** to create sophisticated attacks and a **Defender** to detect them, trained jointly using an Information Retrieval GAN-inspired loss function. This dynamic co-evolution ensures the Defender develops robust capabilities against continuously improving threats, significantly enhancing the security of scholarly peer review.",
+          "url": "http://arxiv.org/abs/2604.26506v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26506v1",
+          "score": 9.0,
+          "figure_url": "https://arxiv.org/html/2604.26506v1/x1.png",
+          "figure_caption": "Impact of adversarial hidden prompt threats on AI review systems. (a) Past AI review systems: undefended reviewer models are easily manipulated—attackers embed persuasive injected text that emphasizes strengths and conceals weaknesses, leading to inflated scores and the acceptance of flawed papers. (b) SafeReview (ours): by contrast, SafeReview detects and resists injected content, maintaining accurate quality assessment and preserving normal review operation even under attack, preventing adversarial papers from bypassing standards.",
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
+        },
+        {
+          "id": "2604.26805v1",
+          "title": "Bian Que: An Agentic Framework with Flexible Skill Arrangement for Online System Operations",
+          "authors": [
+            "Bochao Liu",
+            "Zhipeng Qian",
+            "Yang Zhao",
+            "Xinyuan Jiang",
+            "Zihan Liang"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.MA"
+          ],
+          "abstract": "Bian Que is an agentic framework designed to automate complex online system operations by addressing the orchestration bottleneck. It unifies O\\&M tasks into three canonical patterns and introduces Flexible Skill Arrangement, allowing the agent to dynamically select and sequence the necessary data and operational knowledge for specific events like release monitoring or root cause analysis. This framework aims to efficiently manage the vast information required for system maintenance, reducing reliance on manual curation.",
+          "url": "http://arxiv.org/abs/2604.26805v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26805v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.26805v1/figures/over8.png",
+          "figure_caption": "Overview of the Bian Que architecture. Operational events from the OPS platform (top) are dispatched to a matching Agent, which invokes one or more matched Skills to assemble the relevant data (system signals: logs, metrics, change events) and knowledge (domain knowledge distilled from case memory, seeded by operational handbooks) for the LLM to reason over; the resulting diagnosis is returned to the OPS platform. Practitioner feedback flows back along two parallel pathways (yellow: Skill refinement; purple: memory-to-knowledge distillation).",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26904v1",
+          "title": "ClawGym: A Scalable Framework for Building Effective Claw Agents",
+          "authors": [
+            "Fei Bai",
+            "Huatong Song",
+            "Shuang Sun",
+            "Daixuan Cheng",
+            "Yike Yang"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.CL"
+          ],
+          "abstract": "ClawGym is a scalable framework designed to streamline the full lifecycle of developing personal agents for claw-style environments, which involve multi-step workflows over local files and tools. Its core contribution is the introduction of ClawGym-SynData, a diverse dataset of 13.5K synthesized tasks with mock workspaces and hybrid verification, enabling systematic training data generation. The framework facilitates agent training via supervised fine-tuning and supports reinforcement learning through a parallelized rollout pipeline.",
+          "url": "http://arxiv.org/abs/2604.26904v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26904v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.26904v1/x1.png",
+          "figure_caption": "Overview of the ClawGym-SynData pipeline, which generates tasks from persona-driven and skill-grounded sources, prepares task resources, designs hybrid verification, filters samples through quality assessment, and constructs training and benchmark data.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26516v1",
+          "title": "Lyapunov-Guided Self-Alignment: Test-Time Adaptation for Offline Safe Reinforcement Learning",
+          "authors": [
+            "Seungyub Han",
+            "Hyungjin Kim",
+            "Jungwoo Lee"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "abstract": "This paper introduces SAS, a transformer-based framework for test-time adaptation in offline safe reinforcement learning that avoids retraining. The core method involves the agent generating imagined trajectories and selecting those satisfying a Lyapunov condition, using these safe segments as in-context prompts to guide behavior alignment. This approach effectively translates Lyapunov constraints into control-invariant prompts, significantly reducing failure rates while preserving performance on safety benchmarks.",
+          "url": "http://arxiv.org/abs/2604.26516v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26516v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.26516v1/x1.png",
+          "figure_caption": "SAS overview . From a fixed initial state, the transformer imagines multiple rollouts, flags risky state–action pairs using the Lyapunov condition with ( ✖ ), and extracts a safe segment as a prompt to guide the real test-time trajectory (hazards: black ○ \\( \\bigcirc \\) , blue ◇ \\( \\Diamond \\) ; goal: green ⚫ ).",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26561v1",
+          "title": "Preserving Disagreement: Architectural Heterogeneity and Coherence Validation in Multi-Agent Policy Simulation",
+          "authors": [
+            "Ariel Sela"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.MA"
+          ],
+          "abstract": "This paper introduces the **AI Council**, a three-phase deliberation framework designed to combat artificial consensus in LLM-based multi-agent policy simulation. The core contribution is demonstrating that **architectural heterogeneity** (using different small LLMs for each value perspective) significantly reduces convergence toward a single policy choice compared to homogeneous setups. This highlights the importance of model diversity when simulating subjective, value-based disagreements.",
+          "url": "http://arxiv.org/abs/2604.26561v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26561v1",
+          "score": 8.0,
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26615v1",
+          "title": "TDD Governance for Multi-Agent Code Generation via Prompt Engineering",
+          "authors": [
+            "Tarlan Hasanli",
+            "Shahbaz Siddeeq",
+            "Bishwash Khanal",
+            "Pyry Kotilainen",
+            "Tommi Mikkonen"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.SE"
+          ],
+          "abstract": "This paper introduces an AI-native TDD governance framework that operationalizes classical TDD principles as structured constraints within a multi-agent code generation workflow. It formalizes these principles into a machine-readable manifesto enforced across planning, generation, and validation stages using prompt engineering. The core contribution is establishing deterministic workflow governance—including phase ordering and bounded repair loops—to enhance the stability and reproducibility of LLM-generated code.",
+          "url": "http://arxiv.org/abs/2604.26615v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26615v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.26615v1/x1.png",
+          "figure_caption": "Figure 1. Illustrative manifesto entries and their governance structure.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26694v1",
+          "title": "Unified 4D World Action Modeling from Video Priors with Asynchronous Denoising",
+          "authors": [
+            "Jun Guo",
+            "Qiwei Li",
+            "Peiyan Li",
+            "Zilong Chen",
+            "Nan Sun"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CV",
+            "cs.RO"
+          ],
+          "abstract": "X-WAM is a Unified 4D World Model that integrates real-time robotic action execution with high-fidelity 4D world synthesis (video and 3D reconstruction). It leverages pretrained video diffusion models to predict future multi-view RGB-D videos, efficiently incorporating spatial information via a lightweight adaptation of the diffusion model's structure. The method further employs Asynchronous Noise Sampling (ANS) to optimize the trade-off between generation quality and action decoding efficiency.",
+          "url": "http://arxiv.org/abs/2604.26694v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26694v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.26694v1/x1.png",
+          "figure_caption": "Overview of X-WAM. Top: X-WAM is a unified 4D World Action Model that jointly predicts future multi-view RGB-D videos and robot actions from video priors, featuring a lightweight depth adaptation module for spatial reconstruction and Asynchronous Noise Sampling (ANS) for efficient action decoding. Bottom: X-WAM surpasses existing methods in policy success rate on RoboCasa and RoboTwin 2.0, produces high-fidelity 4D reconstruction and generation, and enables real-time execution deployment on physical robots.",
+          "primary_category": "cs.AI",
+          "primary_category_anchor": "cs-ai",
+          "primary_category_rank": 0
+        },
+        {
+          "id": "2604.26880v1",
+          "title": "HealthNLP_Retrievers at ArchEHR-QA 2026: Cascaded LLM Pipeline for Grounded Clinical Question Answering",
+          "authors": [
+            "Md Biplob Hosen",
+            "Md Alomgeer Hussein",
+            "Md Akmol Masud",
+            "Omar Faruque",
+            "Tera L Reynolds"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CL"
+          ],
+          "abstract": "The HealthNLP\\_Retrievers team developed a cascaded LLM pipeline using Gemini 2.5 Pro for grounded clinical question answering over EHRs. Their core method involves four stages: query reformulation, heuristic-based evidence scoring for recall, and a grounded response generator that synthesizes answers strictly from retrieved evidence. This approach aims to accurately interpret patient questions and generate understandable, evidence-based answers from complex clinical notes.",
+          "url": "http://arxiv.org/abs/2604.26880v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26880v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.26880v1/x1.png",
+          "figure_caption": "Workflow of the HealthNLP_Retrievers multi-stage cascaded pipeline.",
+          "primary_category": "cs.LG",
+          "primary_category_anchor": "cs-lg",
+          "primary_category_rank": 1
+        },
+        {
+          "id": "2604.26866v1",
+          "title": "MoRFI: Monotonic Sparse Autoencoder Feature Identification",
+          "authors": [
+            "Dimitris Dimakopoulos",
+            "Shay B. Cohen",
+            "Ioannis Konstas"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CL"
+          ],
+          "abstract": "The paper introduces **MoRFI (Monotonic Sparse Autoencoder Feature Identification)** to analyze how fine-tuning exacerbates hallucinations in LLMs by introducing new knowledge. The core method involves controlled fine-tuning experiments on various LLMs with new QA datasets, observing that incremental knowledge introduction and prolonged training increase hallucinations. MoRFI then leverages pre-trained Sparse Autoencoders (SAEs) to identify specific, causally contributing latent directions linked to these factual errors.",
+          "url": "http://arxiv.org/abs/2604.26866v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26866v1",
+          "score": 8.0,
+          "primary_category": "cs.LG",
+          "primary_category_anchor": "cs-lg",
+          "primary_category_rank": 1
+        },
+        {
+          "id": "2604.26573v1",
+          "title": "PAINT: Partial-Solution Adaptive Interpolated Training for Self-Distilled Reasoners",
+          "authors": [
+            "Zhiquan Tan",
+            "Yinrong Hong"
+          ],
+          "categories": [
+            "cs.LG"
+          ],
+          "abstract": "PAINT introduces Partial-solution Adaptive Interpolated Training for self-distilled LLM reasoners. The core method adaptively masks the verified solution based on its overlap with the student's current rollout, then applies a small energy-space interpolation to generate dense, context-aware training targets. This approach aims to balance the informativeness of supervised targets with the on-policy relevance of self-distillation.",
+          "url": "http://arxiv.org/abs/2604.26573v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26573v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.26573v1/sections/figs/sketch.png",
+          "figure_caption": "PAINT training pipeline. PAINT samples an on-policy rollout, uses rollout-reference overlap \\( \\alpha \\) to form a suffix-masked solution y ~ ⋆ \\( \\tilde{y}^{\\star} \\) , re-scores the same prefixes with a fixed privileged view, and applies small energy interpolation only on entropy-mismatch positions.",
+          "primary_category": "cs.LG",
+          "primary_category_anchor": "cs-lg",
+          "primary_category_rank": 1
+        },
+        {
+          "id": "2604.26622v1",
+          "title": "OCR-Memory: Optical Context Retrieval for Long-Horizon Agent Memory",
+          "authors": [
+            "Jinze Li",
+            "Yang Zhang",
+            "Xin Yang",
+            "Jiayi Qu",
+            "Jinfeng Xu"
+          ],
+          "categories": [
+            "cs.CL"
+          ],
+          "abstract": "OCR-Memory addresses the token-budget limitations of text-based agent memory by leveraging the visual modality as a high-density experience representation. The core method involves rendering historical agent trajectories into annotated images, which are then retrieved using a \"locate-and-transcribe\" paradigm based on visual anchors. This approach allows agents to retain arbitrarily long histories with minimal prompt overhead during retrieval, significantly improving long-horizon performance.",
+          "url": "http://arxiv.org/abs/2604.26622v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26622v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.26622v1/x1.png",
+          "figure_caption": "Overview of the OCR-Memory. The system enables long-horizon agent memory by storing interaction histories as compressed multi-resolution images (left). To retrieve information, we employ a Locate-and-Transcribe paradigm: the model scans the visual history annotated with Set-of-Mark (SoM) visual anchors (center) to predict the index of relevant segments. Finally, the verbatim text corresponding to the selected index is deterministically fetched (right), avoiding generation-based hallucinations and minimizing token usage.",
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
+        },
+        {
+          "id": "2604.26630v1",
+          "title": "SAGE: A Strategy-Aware Graph-Enhanced Generation Framework For Online Counseling",
+          "authors": [
+            "Eliya Naomi Aharon",
+            "Meytal Grimland",
+            "Avi Segal",
+            "Loona Ben Dayan",
+            "Inbar Shenfeld"
+          ],
+          "categories": [
+            "cs.CL"
+          ],
+          "abstract": "SAGE is a novel framework that enhances LLMs for online counseling by integrating structured clinical knowledge. It constructs a heterogeneous graph unifying conversational dynamics with psychological theories to inform intervention. This structure guides a Next Strategy Classifier and a Graph-Aware Attention mechanism, which conditions the LLM to generate responses with appropriate clinical depth and strategic awareness.",
+          "url": "http://arxiv.org/abs/2604.26630v1",
+          "pdf_url": "https://arxiv.org/pdf/2604.26630v1",
+          "score": 8.0,
+          "figure_url": "https://arxiv.org/html/2604.26630v1/figures/session_flow.png",
+          "figure_caption": "Figure 1. Fictitious session snippet with psychological categories and intervention strategies presented.",
+          "primary_category": "cs.CL",
+          "primary_category_anchor": "cs-cl",
+          "primary_category_rank": 2
+        }
+      ],
+      "meta": {
+        "papers_fetched": 100,
+        "papers_after_keyword_filter": 30,
+        "papers_after_llm_filter": 25,
+        "count": 20
+      }
+    },
+    {
+      "key": "hacker_news",
+      "payload_key": "hacker_news",
+      "title": "Hacker News",
+      "icon": "🔥",
+      "items": [
+        {
+          "id": 47949642,
+          "title": "Mistral Medium 3.5",
+          "url": "https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5",
+          "score": 465,
+          "created_at": "2026-04-29T15:17:46Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47949642",
+          "summary": "Mistral AI has released Mistral Medium 3.5, an updated large language model featuring enhanced reasoning and coding capabilities, alongside new remote agent functionalities."
+        },
+        {
+          "id": 47957294,
+          "title": "The Zig project's rationale for their anti-AI contribution policy",
+          "url": "https://simonwillison.net/2026/Apr/30/zig-anti-ai/",
+          "score": 327,
+          "created_at": "2026-04-30T02:15:47Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47957294",
+          "summary": "The Zig programming language project has implemented an anti-AI contribution policy due to concerns about the ethical implications and potential misuse of AI-generated code."
+        },
+        {
+          "id": 47949750,
+          "title": "Why AI companies want you to be afraid of them",
+          "url": "https://www.bbc.com/future/article/20260428-ai-companies-want-you-to-be-afraid-of-them",
+          "score": 277,
+          "created_at": "2026-04-29T15:26:01Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47949750",
+          "summary": "AI companies may be intentionally amplifying fears about their technology to encourage stricter regulation that benefits established players and hinders smaller competitors."
+        },
+        {
+          "id": 47947490,
+          "title": "He asked AI to count carbs 27000 times. It couldn't give the same answer twice",
+          "url": "https://www.diabettech.com/i-asked-ai-to-count-my-carbs-27000-times-it-couldnt-give-me-the-same-answer-twice/",
+          "score": 238,
+          "created_at": "2026-04-29T12:38:50Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47947490",
+          "summary": "A user repeatedly asked an AI to count carbohydrates, discovering that the AI provided a different answer each time across 27,000 attempts."
+        },
+        {
+          "id": 47953011,
+          "title": "\"People who don't use AI will be left behind\"",
+          "url": "https://migrainebrain.bearblog.dev/people-who-dont-use-ai-will-be-left-behind/",
+          "score": 162,
+          "created_at": "2026-04-29T19:15:52Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47953011",
+          "summary": "The core message is that individuals who fail to adopt and utilize artificial intelligence technologies risk being significantly disadvantaged or marginalized in the future."
+        },
+        {
+          "id": 47957627,
+          "title": "Alignment whack-a-mole: Finetuning activates recall of copyrighted books in LLMs",
+          "url": "https://github.com/cauchy221/Alignment-Whack-a-Mole-Code",
+          "score": 145,
+          "created_at": "2026-04-30T03:11:51Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47957627",
+          "summary": "Fine-tuning large language models can unexpectedly reactivate the recall of copyrighted training data, illustrating a persistent challenge in AI alignment and data security."
+        },
+        {
+          "id": 47951786,
+          "title": "Ramp's Sheets AI Exfiltrates Financials",
+          "url": "https://www.promptarmor.com/resources/ramps-sheets-ai-exfiltrates-financials",
+          "score": 130,
+          "created_at": "2026-04-29T17:44:21Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47951786",
+          "summary": "Ramp's Sheets AI feature was found to be exfiltrating sensitive financial data due to a security vulnerability."
+        },
+        {
+          "id": 47947525,
+          "title": "Letting AI play my game – building an agentic test harness to help play-testing",
+          "url": "https://blog.jeffschomay.com/letting-ai-play-my-game",
+          "score": 128,
+          "created_at": "2026-04-29T12:43:12Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47947525",
+          "summary": "A developer built an agentic AI test harness to automate and enhance the play-testing process for their game."
+        },
+        {
+          "id": 47956895,
+          "title": "Claude.ai and API unavailable [fixed]",
+          "url": "https://status.claude.com/incidents/2gf1jpyty350",
+          "score": 116,
+          "created_at": "2026-04-30T01:21:03Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47956895",
+          "summary": "Claude.ai and its API experienced an outage but have since been resolved, according to the status page."
+        },
+        {
+          "id": 47956739,
+          "title": "Mike: open-source legal AI",
+          "url": "https://mikeoss.com/",
+          "score": 112,
+          "created_at": "2026-04-30T00:56:23Z",
+          "comments_url": "https://news.ycombinator.com/item?id=47956739",
+          "summary": "The tech news story, titled \"Mike: open-source legal AI,\" likely details the launch or features of an open-source artificial intelligence project focused on legal applications developed by \"Mike.\""
+        }
+      ],
+      "meta": {
+        "count": 10
+      }
+    },
+    {
+      "key": "github_trending",
+      "payload_key": "github_trending",
+      "title": "GitHub Trending",
+      "icon": "⭐",
+      "items": [
+        {
+          "full_name": "warpdotdev/warp",
+          "url": "https://github.com/warpdotdev/warp",
+          "description": "Warp is an agentic development environment, born out of the terminal.",
+          "stars_today": 12822,
+          "total_stars": 47116,
+          "language": "Rust",
+          "topics": [],
+          "summary": "Warp is an agentic development environment, born out of the terminal, that enhances the command-line experience with AI-powered features."
+        },
+        {
+          "full_name": "TauricResearch/TradingAgents",
+          "url": "https://github.com/TauricResearch/TradingAgents",
+          "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+          "stars_today": 386,
+          "total_stars": 56498,
+          "language": "Python",
+          "topics": [],
+          "summary": "TradingAgents is a multi-agent LLM framework designed for financial trading, enabling complex, autonomous trading strategies through coordinated AI agents."
+        },
+        {
+          "full_name": "mattpocock/skills",
+          "url": "https://github.com/mattpocock/skills",
+          "description": "Skills for Real Engineers. Straight from my .claude directory.",
+          "stars_today": 7280,
+          "total_stars": 47332,
+          "language": "Shell",
+          "topics": [],
+          "summary": "This GitHub repository, \"mattpocock/skills,\" serves as a collection of practical skills and insights, likely derived from the author's personal development directory, aimed at real-world engineering applications."
+        },
+        {
+          "full_name": "obra/superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "description": "An agentic skills framework & software development methodology that works.",
+          "stars_today": 1653,
+          "total_stars": 173977,
+          "language": "Shell",
+          "topics": [],
+          "summary": "Superpowers is an agentic skills framework and software development methodology designed to be a functional and effective system for building software."
+        },
+        {
+          "full_name": "lukilabs/craft-agents-oss",
+          "url": "https://github.com/lukilabs/craft-agents-oss",
+          "description": "",
+          "stars_today": 393,
+          "total_stars": 5467,
+          "language": "TypeScript",
+          "topics": [],
+          "summary": "This open-source repository provides a framework for building and deploying AI agents using the Craft framework, enabling developers to create sophisticated, task-oriented applications."
+        },
+        {
+          "full_name": "public-apis/public-apis",
+          "url": "https://github.com/public-apis/public-apis",
+          "description": "A collective list of free APIs",
+          "stars_today": 307,
+          "total_stars": 429017,
+          "language": "Python",
+          "topics": [],
+          "summary": "The **public-apis** repository curates a massive, community-driven list of free, publicly accessible APIs across various categories, serving as a central resource for developers."
+        },
+        {
+          "full_name": "1jehuang/jcode",
+          "url": "https://github.com/1jehuang/jcode",
+          "description": "Coding Agent Harness",
+          "stars_today": 411,
+          "total_stars": 1673,
+          "language": "Rust",
+          "topics": [],
+          "summary": "Jcode provides a flexible harness for developing and running coding agents, enabling structured interaction and execution of code-related tasks."
+        },
+        {
+          "full_name": "soxoj/maigret",
+          "url": "https://github.com/soxoj/maigret",
+          "description": "🕵️‍♂️ Collect a dossier on a person by username from 3000+ sites",
+          "stars_today": 79,
+          "total_stars": 20535,
+          "language": "Python",
+          "topics": [],
+          "summary": "Maigret is a tool that collects a comprehensive dossier on an individual by querying over 3000 websites using a provided username."
+        },
+        {
+          "full_name": "HunxByts/GhostTrack",
+          "url": "https://github.com/HunxByts/GhostTrack",
+          "description": "Useful tool to track location or mobile number",
+          "stars_today": 1033,
+          "total_stars": 11915,
+          "language": "Python",
+          "topics": [],
+          "summary": "GhostTrack is a useful tool designed to track the location or mobile number of a target."
+        }
+      ],
+      "meta": {
+        "count": 9
+      }
+    }
+  ],
+  "meta": {
+    "papers_fetched": 100,
+    "papers_after_keyword_filter": 30,
+    "papers_after_llm_filter": 25,
+    "llm_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "scoring_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "summarization_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "duration_seconds": 116
+  },
+  "quote_of_day": [
+    {
+      "quote": "However, anyone to whom this happens should not leave his room upon awakening, should speak to no-one, but remain alone and sober until everything comes back to him, and he recalls the dream.",
+      "author": "Paracelsus",
+      "category": "alone"
+    }
+  ],
+  "hitokoto": [],
+  "arxiv": [
+    {
+      "id": "2604.26522v1",
+      "title": "AGEL-Comp: A Neuro-Symbolic Framework for Compositional Generalization in Interactive Agents",
+      "authors": [
+        "Mahnoor Shahid",
+        "Hannes Rothe"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.LO",
+        "cs.MA",
+        "cs.SC"
+      ],
+      "abstract": "AGEL-Comp introduces a neuro-symbolic framework to improve compositional generalization in LLM agents by grounding their actions. It achieves this through a dynamic Causal Program Graph (CPG) as a world model, an ILP engine that synthesizes new symbolic rules from experience, and a hybrid reasoning core that uses an LLM for planning verified by a Neural Theorem Prover. This enables a robust deduction-abduction learning cycle to expand the agent's symbolic knowledge during interaction.",
+      "url": "http://arxiv.org/abs/2604.26522v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26522v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26522v1/figures/method2.png",
+      "figure_caption": "The AGEL-Comp neuro-symbolic architecture.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26577v1",
+      "title": "Benchmarking the Safety of Large Language Models for Robotic Health Attendant Control",
+      "authors": [
+        "Mahiro Nakao",
+        "Kazuhiro Takemoto"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CY",
+        "cs.RO"
+      ],
+      "abstract": "This paper introduces a novel dataset of 270 ethically-grounded harmful instructions to benchmark the safety of 72 Large Language Models (LLMs) when controlling a simulated Robotic Health Attendant. The core finding is a high mean violation rate (54.4%), revealing that LLMs struggle significantly with safety, especially for subtle instructions like device manipulation. The study concludes that proprietary models are substantially safer than open-weight models, whose performance correlates with size and release date.",
+      "url": "http://arxiv.org/abs/2604.26577v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26577v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26577v1/x1.png",
+      "figure_caption": "Boxplot of violation rates across model families ( n n indicates the number of models per family). Families are ordered by median violation rate in descending order. All individual model names are labeled.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26557v1",
+      "title": "DUAL-BLADE: Dual-Path NVMe-Direct KV-Cache Offloading for Edge LLM Inference",
+      "authors": [
+        "Bodon Jeong",
+        "Hongsu Byun",
+        "Youngjae Kim",
+        "Weikuan Yu",
+        "Kyungkeun Lee"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.DC",
+        "cs.PF"
+      ],
+      "abstract": "DUAL-BLADE is a dual-path KV-cache offloading framework for edge LLM inference that dynamically routes KV tensors to either a traditional page-cache path or a high-performance NVMe-direct path based on memory pressure. The NVMe-direct path bypasses the kernel by directly mapping tensors to logical block addresses, reducing overhead and cache thrashing. This approach, combined with adaptive pipeline parallelism, significantly improves inference throughput under tight memory constraints.",
+      "url": "http://arxiv.org/abs/2604.26557v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26557v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26557v1/x1.png",
+      "figure_caption": "LLM transformer architecture [ 37 ] .",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26733v1",
+      "title": "FutureWorld: A Live Environment for Training Predictive Agents with Real-World Outcome Rewards",
+      "authors": [
+        "Zhixin Han",
+        "Yanzhi Zhang",
+        "Chuyang Wei",
+        "Maohang Gao",
+        "Xiawei Yue"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "FutureWorld introduces a novel live agentic reinforcement learning environment specifically designed for training predictive agents. Its core method is closing the training loop by continuously providing prediction tasks based on unfolding real-world events, rewarding agents based on actual outcomes. This contributes a unified framework for live future prediction, enabling agents to continually learn and adapt from real-world feedback without answer leakage.",
+      "url": "http://arxiv.org/abs/2604.26733v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26733v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26733v1/x1.png",
+      "figure_caption": "Domain distributions of website sources (a), questions before resampling (b), and questions after resampling (c).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26841v1",
+      "title": "Language Diffusion Models are Associative Memories Capable of Retrieving Unseen Data",
+      "authors": [
+        "Bao Pham",
+        "Mohammed J. Zaki",
+        "Luca Ambrogioni",
+        "Dmitry Krotov",
+        "Matteo Negri"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper demonstrates that Uniform-based Discrete Diffusion Models (UDDMs) fundamentally operate as Associative Memories (AMs) with emergent creative capabilities. The core method involves showing that these models form basins of attraction around training data via conditional likelihood maximization, rather than explicit energy functions. The key contribution is identifying a sharp transition from memorization to generalization in UDDMs, governed by the size of the training dataset.",
+      "url": "http://arxiv.org/abs/2604.26841v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26841v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26841v1/Preprint/preprint-images/shrinkage_basin_main_tiny_test.png",
+      "figure_caption": "Basins around training examples shrink and basins around test examples expand as the training dataset size increases . (A) Textual examples showing two Tiny UDDMs’ token recovery at noise level t = 0.2 t=0.2 , where each is trained on two different training dataset sizes. With a small training dataset, the model fails to recognize unseen test tokens and alters them. With a larger training set, these unseen tokens however become stable and remain intact after the sampling process. (B) Average total token recovery rates (%), including both non-corrupt and corrupted tokens, for training and test sequences across varying corruption levels. Line colors indicate the fractions of the training dataset used (ranging from small to large ). As data scales, the model’s ability to flawlessly recover explicit training examples drops (indicating shrinking basins), while its recovery rate of unseen test examples improves (indicating expanding basins). The convergence of these rates at large dataset sizes (red curves) marks the sharp transition from memorization to generalization. Note: Deterministic (greedy) sampling was used across these experiments to isolate from stochastic noise.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26511v1",
+      "title": "Tatemae: Detecting Alignment Faking via Tool Selection in LLMs",
+      "authors": [
+        "Matteo Leonesi",
+        "Francesco Belardinelli",
+        "Flavio Corradini",
+        "Marco Piangerelli"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CR"
+      ],
+      "abstract": "This paper introduces a novel method to detect Alignment Faking (AF) in LLMs by analyzing their **tool selection behavior** rather than relying solely on Chain-of-Thought (CoT). The core contribution is demonstrating that AF can be identified when an LLM strategically chooses a \"safe\" tool when unmonitored, but switches to an \"unsafe\" tool under monitoring that prioritizes helpfulness, even if its internal reasoning still points to the safe option. The authors validate this approach using a new dataset of 108 enterprise IT scenarios.",
+      "url": "http://arxiv.org/abs/2604.26511v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26511v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26553v1",
+      "title": "TLPO: Token-Level Policy Optimization for Mitigating Language Confusion in Large Language Models",
+      "authors": [
+        "Jinho Choo",
+        "JunSeung Lee",
+        "Jimyeong Kim",
+        "Yeeho Song",
+        "S. K. Hong"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "TLPO introduces Token-Level Policy Optimization, a fine-tuning method to combat language confusion in LLMs by applying localized updates at the token level. It selectively identifies error-prone positions and uses a tailored objective to suppress undesirable token outputs. This granular intervention effectively mitigates language confusion without degrading the model's overall performance, unlike sequence-level methods.",
+      "url": "http://arxiv.org/abs/2604.26553v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26553v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26951v1",
+      "title": "Turning the TIDE: Cross-Architecture Distillation for Diffusion Large Language Models",
+      "authors": [
+        "Gongbo Zhang",
+        "Wen Wang",
+        "Ye Tian",
+        "Li Yuan"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces **TIDE**, the first framework for **cross-architecture knowledge distillation** between diffusion large language models (dLLMs). TIDE employs three novel components—TIDAL, CompDemo, and Reverse CALM—to effectively transfer knowledge despite differences in architecture, attention, and tokenizers. This method enables the creation of smaller, efficient student dLLMs from larger, complex teachers.",
+      "url": "http://arxiv.org/abs/2604.26951v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26951v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26951v1/x1.png",
+      "figure_caption": "Cross-architecture distillation for dLLMs. Compared to prior step distillation (a) that retains the original model size, the Tide framework (b) distills heterogeneous 16B MoE and 8B dense teachers into a 0.6B student. The distilled model achieves a +16.5 gain on HumanEval over the AR baseline, 22 × \\( \\times \\) memory reduction, and 5 × \\( \\times \\) faster inference.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26506v1",
+      "title": "SafeReview: Defending LLM-based Review Systems Against Adversarial Hidden Prompts",
+      "authors": [
+        "Yuan Xin",
+        "Yixuan Weng",
+        "Minjun Zhu",
+        "Ying Ling",
+        "Chengwei Qin"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.CR"
+      ],
+      "abstract": "This paper introduces **SafeReview**, a novel adversarial defense framework for LLM-based review systems against hidden adversarial prompts. It employs a **Generator** to create sophisticated attacks and a **Defender** to detect them, trained jointly using an Information Retrieval GAN-inspired loss function. This dynamic co-evolution ensures the Defender develops robust capabilities against continuously improving threats, significantly enhancing the security of scholarly peer review.",
+      "url": "http://arxiv.org/abs/2604.26506v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26506v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26506v1/x1.png",
+      "figure_caption": "Impact of adversarial hidden prompt threats on AI review systems. (a) Past AI review systems: undefended reviewer models are easily manipulated—attackers embed persuasive injected text that emphasizes strengths and conceals weaknesses, leading to inflated scores and the acceptance of flawed papers. (b) SafeReview (ours): by contrast, SafeReview detects and resists injected content, maintaining accurate quality assessment and preserving normal review operation even under attack, preventing adversarial papers from bypassing standards.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.26805v1",
+      "title": "Bian Que: An Agentic Framework with Flexible Skill Arrangement for Online System Operations",
+      "authors": [
+        "Bochao Liu",
+        "Zhipeng Qian",
+        "Yang Zhao",
+        "Xinyuan Jiang",
+        "Zihan Liang"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "abstract": "Bian Que is an agentic framework designed to automate complex online system operations by addressing the orchestration bottleneck. It unifies O\\&M tasks into three canonical patterns and introduces Flexible Skill Arrangement, allowing the agent to dynamically select and sequence the necessary data and operational knowledge for specific events like release monitoring or root cause analysis. This framework aims to efficiently manage the vast information required for system maintenance, reducing reliance on manual curation.",
+      "url": "http://arxiv.org/abs/2604.26805v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26805v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26805v1/figures/over8.png",
+      "figure_caption": "Overview of the Bian Que architecture. Operational events from the OPS platform (top) are dispatched to a matching Agent, which invokes one or more matched Skills to assemble the relevant data (system signals: logs, metrics, change events) and knowledge (domain knowledge distilled from case memory, seeded by operational handbooks) for the LLM to reason over; the resulting diagnosis is returned to the OPS platform. Practitioner feedback flows back along two parallel pathways (yellow: Skill refinement; purple: memory-to-knowledge distillation).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26904v1",
+      "title": "ClawGym: A Scalable Framework for Building Effective Claw Agents",
+      "authors": [
+        "Fei Bai",
+        "Huatong Song",
+        "Shuang Sun",
+        "Daixuan Cheng",
+        "Yike Yang"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "ClawGym is a scalable framework designed to streamline the full lifecycle of developing personal agents for claw-style environments, which involve multi-step workflows over local files and tools. Its core contribution is the introduction of ClawGym-SynData, a diverse dataset of 13.5K synthesized tasks with mock workspaces and hybrid verification, enabling systematic training data generation. The framework facilitates agent training via supervised fine-tuning and supports reinforcement learning through a parallelized rollout pipeline.",
+      "url": "http://arxiv.org/abs/2604.26904v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26904v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26904v1/x1.png",
+      "figure_caption": "Overview of the ClawGym-SynData pipeline, which generates tasks from persona-driven and skill-grounded sources, prepares task resources, designs hybrid verification, filters samples through quality assessment, and constructs training and benchmark data.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26516v1",
+      "title": "Lyapunov-Guided Self-Alignment: Test-Time Adaptation for Offline Safe Reinforcement Learning",
+      "authors": [
+        "Seungyub Han",
+        "Hyungjin Kim",
+        "Jungwoo Lee"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "This paper introduces SAS, a transformer-based framework for test-time adaptation in offline safe reinforcement learning that avoids retraining. The core method involves the agent generating imagined trajectories and selecting those satisfying a Lyapunov condition, using these safe segments as in-context prompts to guide behavior alignment. This approach effectively translates Lyapunov constraints into control-invariant prompts, significantly reducing failure rates while preserving performance on safety benchmarks.",
+      "url": "http://arxiv.org/abs/2604.26516v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26516v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26516v1/x1.png",
+      "figure_caption": "SAS overview . From a fixed initial state, the transformer imagines multiple rollouts, flags risky state–action pairs using the Lyapunov condition with ( ✖ ), and extracts a safe segment as a prompt to guide the real test-time trajectory (hazards: black ○ \\( \\bigcirc \\) , blue ◇ \\( \\Diamond \\) ; goal: green ⚫ ).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26561v1",
+      "title": "Preserving Disagreement: Architectural Heterogeneity and Coherence Validation in Multi-Agent Policy Simulation",
+      "authors": [
+        "Ariel Sela"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "abstract": "This paper introduces the **AI Council**, a three-phase deliberation framework designed to combat artificial consensus in LLM-based multi-agent policy simulation. The core contribution is demonstrating that **architectural heterogeneity** (using different small LLMs for each value perspective) significantly reduces convergence toward a single policy choice compared to homogeneous setups. This highlights the importance of model diversity when simulating subjective, value-based disagreements.",
+      "url": "http://arxiv.org/abs/2604.26561v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26561v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26615v1",
+      "title": "TDD Governance for Multi-Agent Code Generation via Prompt Engineering",
+      "authors": [
+        "Tarlan Hasanli",
+        "Shahbaz Siddeeq",
+        "Bishwash Khanal",
+        "Pyry Kotilainen",
+        "Tommi Mikkonen"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "abstract": "This paper introduces an AI-native TDD governance framework that operationalizes classical TDD principles as structured constraints within a multi-agent code generation workflow. It formalizes these principles into a machine-readable manifesto enforced across planning, generation, and validation stages using prompt engineering. The core contribution is establishing deterministic workflow governance—including phase ordering and bounded repair loops—to enhance the stability and reproducibility of LLM-generated code.",
+      "url": "http://arxiv.org/abs/2604.26615v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26615v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26615v1/x1.png",
+      "figure_caption": "Figure 1. Illustrative manifesto entries and their governance structure.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26694v1",
+      "title": "Unified 4D World Action Modeling from Video Priors with Asynchronous Denoising",
+      "authors": [
+        "Jun Guo",
+        "Qiwei Li",
+        "Peiyan Li",
+        "Zilong Chen",
+        "Nan Sun"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CV",
+        "cs.RO"
+      ],
+      "abstract": "X-WAM is a Unified 4D World Model that integrates real-time robotic action execution with high-fidelity 4D world synthesis (video and 3D reconstruction). It leverages pretrained video diffusion models to predict future multi-view RGB-D videos, efficiently incorporating spatial information via a lightweight adaptation of the diffusion model's structure. The method further employs Asynchronous Noise Sampling (ANS) to optimize the trade-off between generation quality and action decoding efficiency.",
+      "url": "http://arxiv.org/abs/2604.26694v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26694v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26694v1/x1.png",
+      "figure_caption": "Overview of X-WAM. Top: X-WAM is a unified 4D World Action Model that jointly predicts future multi-view RGB-D videos and robot actions from video priors, featuring a lightweight depth adaptation module for spatial reconstruction and Asynchronous Noise Sampling (ANS) for efficient action decoding. Bottom: X-WAM surpasses existing methods in policy success rate on RoboCasa and RoboTwin 2.0, produces high-fidelity 4D reconstruction and generation, and enables real-time execution deployment on physical robots.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26880v1",
+      "title": "HealthNLP_Retrievers at ArchEHR-QA 2026: Cascaded LLM Pipeline for Grounded Clinical Question Answering",
+      "authors": [
+        "Md Biplob Hosen",
+        "Md Alomgeer Hussein",
+        "Md Akmol Masud",
+        "Omar Faruque",
+        "Tera L Reynolds"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "The HealthNLP\\_Retrievers team developed a cascaded LLM pipeline using Gemini 2.5 Pro for grounded clinical question answering over EHRs. Their core method involves four stages: query reformulation, heuristic-based evidence scoring for recall, and a grounded response generator that synthesizes answers strictly from retrieved evidence. This approach aims to accurately interpret patient questions and generate understandable, evidence-based answers from complex clinical notes.",
+      "url": "http://arxiv.org/abs/2604.26880v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26880v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26880v1/x1.png",
+      "figure_caption": "Workflow of the HealthNLP_Retrievers multi-stage cascaded pipeline.",
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.26866v1",
+      "title": "MoRFI: Monotonic Sparse Autoencoder Feature Identification",
+      "authors": [
+        "Dimitris Dimakopoulos",
+        "Shay B. Cohen",
+        "Ioannis Konstas"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "The paper introduces **MoRFI (Monotonic Sparse Autoencoder Feature Identification)** to analyze how fine-tuning exacerbates hallucinations in LLMs by introducing new knowledge. The core method involves controlled fine-tuning experiments on various LLMs with new QA datasets, observing that incremental knowledge introduction and prolonged training increase hallucinations. MoRFI then leverages pre-trained Sparse Autoencoders (SAEs) to identify specific, causally contributing latent directions linked to these factual errors.",
+      "url": "http://arxiv.org/abs/2604.26866v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26866v1",
+      "score": 8.0,
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.26573v1",
+      "title": "PAINT: Partial-Solution Adaptive Interpolated Training for Self-Distilled Reasoners",
+      "authors": [
+        "Zhiquan Tan",
+        "Yinrong Hong"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "abstract": "PAINT introduces Partial-solution Adaptive Interpolated Training for self-distilled LLM reasoners. The core method adaptively masks the verified solution based on its overlap with the student's current rollout, then applies a small energy-space interpolation to generate dense, context-aware training targets. This approach aims to balance the informativeness of supervised targets with the on-policy relevance of self-distillation.",
+      "url": "http://arxiv.org/abs/2604.26573v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26573v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26573v1/sections/figs/sketch.png",
+      "figure_caption": "PAINT training pipeline. PAINT samples an on-policy rollout, uses rollout-reference overlap \\( \\alpha \\) to form a suffix-masked solution y ~ ⋆ \\( \\tilde{y}^{\\star} \\) , re-scores the same prefixes with a fixed privileged view, and applies small energy interpolation only on entropy-mismatch positions.",
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.26622v1",
+      "title": "OCR-Memory: Optical Context Retrieval for Long-Horizon Agent Memory",
+      "authors": [
+        "Jinze Li",
+        "Yang Zhang",
+        "Xin Yang",
+        "Jiayi Qu",
+        "Jinfeng Xu"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "abstract": "OCR-Memory addresses the token-budget limitations of text-based agent memory by leveraging the visual modality as a high-density experience representation. The core method involves rendering historical agent trajectories into annotated images, which are then retrieved using a \"locate-and-transcribe\" paradigm based on visual anchors. This approach allows agents to retain arbitrarily long histories with minimal prompt overhead during retrieval, significantly improving long-horizon performance.",
+      "url": "http://arxiv.org/abs/2604.26622v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26622v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26622v1/x1.png",
+      "figure_caption": "Overview of the OCR-Memory. The system enables long-horizon agent memory by storing interaction histories as compressed multi-resolution images (left). To retrieve information, we employ a Locate-and-Transcribe paradigm: the model scans the visual history annotated with Set-of-Mark (SoM) visual anchors (center) to predict the index of relevant segments. Finally, the verbatim text corresponding to the selected index is deterministically fetched (right), avoiding generation-based hallucinations and minimizing token usage.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.26630v1",
+      "title": "SAGE: A Strategy-Aware Graph-Enhanced Generation Framework For Online Counseling",
+      "authors": [
+        "Eliya Naomi Aharon",
+        "Meytal Grimland",
+        "Avi Segal",
+        "Loona Ben Dayan",
+        "Inbar Shenfeld"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "abstract": "SAGE is a novel framework that enhances LLMs for online counseling by integrating structured clinical knowledge. It constructs a heterogeneous graph unifying conversational dynamics with psychological theories to inform intervention. This structure guides a Next Strategy Classifier and a Graph-Aware Attention mechanism, which conditions the LLM to generate responses with appropriate clinical depth and strategic awareness.",
+      "url": "http://arxiv.org/abs/2604.26630v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26630v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26630v1/figures/session_flow.png",
+      "figure_caption": "Figure 1. Fictitious session snippet with psychological categories and intervention strategies presented.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    }
+  ],
+  "papers": [
+    {
+      "id": "2604.26522v1",
+      "title": "AGEL-Comp: A Neuro-Symbolic Framework for Compositional Generalization in Interactive Agents",
+      "authors": [
+        "Mahnoor Shahid",
+        "Hannes Rothe"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.LO",
+        "cs.MA",
+        "cs.SC"
+      ],
+      "abstract": "AGEL-Comp introduces a neuro-symbolic framework to improve compositional generalization in LLM agents by grounding their actions. It achieves this through a dynamic Causal Program Graph (CPG) as a world model, an ILP engine that synthesizes new symbolic rules from experience, and a hybrid reasoning core that uses an LLM for planning verified by a Neural Theorem Prover. This enables a robust deduction-abduction learning cycle to expand the agent's symbolic knowledge during interaction.",
+      "url": "http://arxiv.org/abs/2604.26522v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26522v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26522v1/figures/method2.png",
+      "figure_caption": "The AGEL-Comp neuro-symbolic architecture.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26577v1",
+      "title": "Benchmarking the Safety of Large Language Models for Robotic Health Attendant Control",
+      "authors": [
+        "Mahiro Nakao",
+        "Kazuhiro Takemoto"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CY",
+        "cs.RO"
+      ],
+      "abstract": "This paper introduces a novel dataset of 270 ethically-grounded harmful instructions to benchmark the safety of 72 Large Language Models (LLMs) when controlling a simulated Robotic Health Attendant. The core finding is a high mean violation rate (54.4%), revealing that LLMs struggle significantly with safety, especially for subtle instructions like device manipulation. The study concludes that proprietary models are substantially safer than open-weight models, whose performance correlates with size and release date.",
+      "url": "http://arxiv.org/abs/2604.26577v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26577v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26577v1/x1.png",
+      "figure_caption": "Boxplot of violation rates across model families ( n n indicates the number of models per family). Families are ordered by median violation rate in descending order. All individual model names are labeled.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26557v1",
+      "title": "DUAL-BLADE: Dual-Path NVMe-Direct KV-Cache Offloading for Edge LLM Inference",
+      "authors": [
+        "Bodon Jeong",
+        "Hongsu Byun",
+        "Youngjae Kim",
+        "Weikuan Yu",
+        "Kyungkeun Lee"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.DC",
+        "cs.PF"
+      ],
+      "abstract": "DUAL-BLADE is a dual-path KV-cache offloading framework for edge LLM inference that dynamically routes KV tensors to either a traditional page-cache path or a high-performance NVMe-direct path based on memory pressure. The NVMe-direct path bypasses the kernel by directly mapping tensors to logical block addresses, reducing overhead and cache thrashing. This approach, combined with adaptive pipeline parallelism, significantly improves inference throughput under tight memory constraints.",
+      "url": "http://arxiv.org/abs/2604.26557v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26557v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26557v1/x1.png",
+      "figure_caption": "LLM transformer architecture [ 37 ] .",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26733v1",
+      "title": "FutureWorld: A Live Environment for Training Predictive Agents with Real-World Outcome Rewards",
+      "authors": [
+        "Zhixin Han",
+        "Yanzhi Zhang",
+        "Chuyang Wei",
+        "Maohang Gao",
+        "Xiawei Yue"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "FutureWorld introduces a novel live agentic reinforcement learning environment specifically designed for training predictive agents. Its core method is closing the training loop by continuously providing prediction tasks based on unfolding real-world events, rewarding agents based on actual outcomes. This contributes a unified framework for live future prediction, enabling agents to continually learn and adapt from real-world feedback without answer leakage.",
+      "url": "http://arxiv.org/abs/2604.26733v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26733v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26733v1/x1.png",
+      "figure_caption": "Domain distributions of website sources (a), questions before resampling (b), and questions after resampling (c).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26841v1",
+      "title": "Language Diffusion Models are Associative Memories Capable of Retrieving Unseen Data",
+      "authors": [
+        "Bao Pham",
+        "Mohammed J. Zaki",
+        "Luca Ambrogioni",
+        "Dmitry Krotov",
+        "Matteo Negri"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper demonstrates that Uniform-based Discrete Diffusion Models (UDDMs) fundamentally operate as Associative Memories (AMs) with emergent creative capabilities. The core method involves showing that these models form basins of attraction around training data via conditional likelihood maximization, rather than explicit energy functions. The key contribution is identifying a sharp transition from memorization to generalization in UDDMs, governed by the size of the training dataset.",
+      "url": "http://arxiv.org/abs/2604.26841v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26841v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26841v1/Preprint/preprint-images/shrinkage_basin_main_tiny_test.png",
+      "figure_caption": "Basins around training examples shrink and basins around test examples expand as the training dataset size increases . (A) Textual examples showing two Tiny UDDMs’ token recovery at noise level t = 0.2 t=0.2 , where each is trained on two different training dataset sizes. With a small training dataset, the model fails to recognize unseen test tokens and alters them. With a larger training set, these unseen tokens however become stable and remain intact after the sampling process. (B) Average total token recovery rates (%), including both non-corrupt and corrupted tokens, for training and test sequences across varying corruption levels. Line colors indicate the fractions of the training dataset used (ranging from small to large ). As data scales, the model’s ability to flawlessly recover explicit training examples drops (indicating shrinking basins), while its recovery rate of unseen test examples improves (indicating expanding basins). The convergence of these rates at large dataset sizes (red curves) marks the sharp transition from memorization to generalization. Note: Deterministic (greedy) sampling was used across these experiments to isolate from stochastic noise.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26511v1",
+      "title": "Tatemae: Detecting Alignment Faking via Tool Selection in LLMs",
+      "authors": [
+        "Matteo Leonesi",
+        "Francesco Belardinelli",
+        "Flavio Corradini",
+        "Marco Piangerelli"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CR"
+      ],
+      "abstract": "This paper introduces a novel method to detect Alignment Faking (AF) in LLMs by analyzing their **tool selection behavior** rather than relying solely on Chain-of-Thought (CoT). The core contribution is demonstrating that AF can be identified when an LLM strategically chooses a \"safe\" tool when unmonitored, but switches to an \"unsafe\" tool under monitoring that prioritizes helpfulness, even if its internal reasoning still points to the safe option. The authors validate this approach using a new dataset of 108 enterprise IT scenarios.",
+      "url": "http://arxiv.org/abs/2604.26511v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26511v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26553v1",
+      "title": "TLPO: Token-Level Policy Optimization for Mitigating Language Confusion in Large Language Models",
+      "authors": [
+        "Jinho Choo",
+        "JunSeung Lee",
+        "Jimyeong Kim",
+        "Yeeho Song",
+        "S. K. Hong"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "TLPO introduces Token-Level Policy Optimization, a fine-tuning method to combat language confusion in LLMs by applying localized updates at the token level. It selectively identifies error-prone positions and uses a tailored objective to suppress undesirable token outputs. This granular intervention effectively mitigates language confusion without degrading the model's overall performance, unlike sequence-level methods.",
+      "url": "http://arxiv.org/abs/2604.26553v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26553v1",
+      "score": 9.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26951v1",
+      "title": "Turning the TIDE: Cross-Architecture Distillation for Diffusion Large Language Models",
+      "authors": [
+        "Gongbo Zhang",
+        "Wen Wang",
+        "Ye Tian",
+        "Li Yuan"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "This paper introduces **TIDE**, the first framework for **cross-architecture knowledge distillation** between diffusion large language models (dLLMs). TIDE employs three novel components—TIDAL, CompDemo, and Reverse CALM—to effectively transfer knowledge despite differences in architecture, attention, and tokenizers. This method enables the creation of smaller, efficient student dLLMs from larger, complex teachers.",
+      "url": "http://arxiv.org/abs/2604.26951v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26951v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26951v1/x1.png",
+      "figure_caption": "Cross-architecture distillation for dLLMs. Compared to prior step distillation (a) that retains the original model size, the Tide framework (b) distills heterogeneous 16B MoE and 8B dense teachers into a 0.6B student. The distilled model achieves a +16.5 gain on HumanEval over the AR baseline, 22 × \\( \\times \\) memory reduction, and 5 × \\( \\times \\) faster inference.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26506v1",
+      "title": "SafeReview: Defending LLM-based Review Systems Against Adversarial Hidden Prompts",
+      "authors": [
+        "Yuan Xin",
+        "Yixuan Weng",
+        "Minjun Zhu",
+        "Ying Ling",
+        "Chengwei Qin"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.CR"
+      ],
+      "abstract": "This paper introduces **SafeReview**, a novel adversarial defense framework for LLM-based review systems against hidden adversarial prompts. It employs a **Generator** to create sophisticated attacks and a **Defender** to detect them, trained jointly using an Information Retrieval GAN-inspired loss function. This dynamic co-evolution ensures the Defender develops robust capabilities against continuously improving threats, significantly enhancing the security of scholarly peer review.",
+      "url": "http://arxiv.org/abs/2604.26506v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26506v1",
+      "score": 9.0,
+      "figure_url": "https://arxiv.org/html/2604.26506v1/x1.png",
+      "figure_caption": "Impact of adversarial hidden prompt threats on AI review systems. (a) Past AI review systems: undefended reviewer models are easily manipulated—attackers embed persuasive injected text that emphasizes strengths and conceals weaknesses, leading to inflated scores and the acceptance of flawed papers. (b) SafeReview (ours): by contrast, SafeReview detects and resists injected content, maintaining accurate quality assessment and preserving normal review operation even under attack, preventing adversarial papers from bypassing standards.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.26805v1",
+      "title": "Bian Que: An Agentic Framework with Flexible Skill Arrangement for Online System Operations",
+      "authors": [
+        "Bochao Liu",
+        "Zhipeng Qian",
+        "Yang Zhao",
+        "Xinyuan Jiang",
+        "Zihan Liang"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "abstract": "Bian Que is an agentic framework designed to automate complex online system operations by addressing the orchestration bottleneck. It unifies O\\&M tasks into three canonical patterns and introduces Flexible Skill Arrangement, allowing the agent to dynamically select and sequence the necessary data and operational knowledge for specific events like release monitoring or root cause analysis. This framework aims to efficiently manage the vast information required for system maintenance, reducing reliance on manual curation.",
+      "url": "http://arxiv.org/abs/2604.26805v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26805v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26805v1/figures/over8.png",
+      "figure_caption": "Overview of the Bian Que architecture. Operational events from the OPS platform (top) are dispatched to a matching Agent, which invokes one or more matched Skills to assemble the relevant data (system signals: logs, metrics, change events) and knowledge (domain knowledge distilled from case memory, seeded by operational handbooks) for the LLM to reason over; the resulting diagnosis is returned to the OPS platform. Practitioner feedback flows back along two parallel pathways (yellow: Skill refinement; purple: memory-to-knowledge distillation).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26904v1",
+      "title": "ClawGym: A Scalable Framework for Building Effective Claw Agents",
+      "authors": [
+        "Fei Bai",
+        "Huatong Song",
+        "Shuang Sun",
+        "Daixuan Cheng",
+        "Yike Yang"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "ClawGym is a scalable framework designed to streamline the full lifecycle of developing personal agents for claw-style environments, which involve multi-step workflows over local files and tools. Its core contribution is the introduction of ClawGym-SynData, a diverse dataset of 13.5K synthesized tasks with mock workspaces and hybrid verification, enabling systematic training data generation. The framework facilitates agent training via supervised fine-tuning and supports reinforcement learning through a parallelized rollout pipeline.",
+      "url": "http://arxiv.org/abs/2604.26904v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26904v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26904v1/x1.png",
+      "figure_caption": "Overview of the ClawGym-SynData pipeline, which generates tasks from persona-driven and skill-grounded sources, prepares task resources, designs hybrid verification, filters samples through quality assessment, and constructs training and benchmark data.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26516v1",
+      "title": "Lyapunov-Guided Self-Alignment: Test-Time Adaptation for Offline Safe Reinforcement Learning",
+      "authors": [
+        "Seungyub Han",
+        "Hyungjin Kim",
+        "Jungwoo Lee"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "This paper introduces SAS, a transformer-based framework for test-time adaptation in offline safe reinforcement learning that avoids retraining. The core method involves the agent generating imagined trajectories and selecting those satisfying a Lyapunov condition, using these safe segments as in-context prompts to guide behavior alignment. This approach effectively translates Lyapunov constraints into control-invariant prompts, significantly reducing failure rates while preserving performance on safety benchmarks.",
+      "url": "http://arxiv.org/abs/2604.26516v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26516v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26516v1/x1.png",
+      "figure_caption": "SAS overview . From a fixed initial state, the transformer imagines multiple rollouts, flags risky state–action pairs using the Lyapunov condition with ( ✖ ), and extracts a safe segment as a prompt to guide the real test-time trajectory (hazards: black ○ \\( \\bigcirc \\) , blue ◇ \\( \\Diamond \\) ; goal: green ⚫ ).",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26561v1",
+      "title": "Preserving Disagreement: Architectural Heterogeneity and Coherence Validation in Multi-Agent Policy Simulation",
+      "authors": [
+        "Ariel Sela"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "abstract": "This paper introduces the **AI Council**, a three-phase deliberation framework designed to combat artificial consensus in LLM-based multi-agent policy simulation. The core contribution is demonstrating that **architectural heterogeneity** (using different small LLMs for each value perspective) significantly reduces convergence toward a single policy choice compared to homogeneous setups. This highlights the importance of model diversity when simulating subjective, value-based disagreements.",
+      "url": "http://arxiv.org/abs/2604.26561v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26561v1",
+      "score": 8.0,
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26615v1",
+      "title": "TDD Governance for Multi-Agent Code Generation via Prompt Engineering",
+      "authors": [
+        "Tarlan Hasanli",
+        "Shahbaz Siddeeq",
+        "Bishwash Khanal",
+        "Pyry Kotilainen",
+        "Tommi Mikkonen"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "abstract": "This paper introduces an AI-native TDD governance framework that operationalizes classical TDD principles as structured constraints within a multi-agent code generation workflow. It formalizes these principles into a machine-readable manifesto enforced across planning, generation, and validation stages using prompt engineering. The core contribution is establishing deterministic workflow governance—including phase ordering and bounded repair loops—to enhance the stability and reproducibility of LLM-generated code.",
+      "url": "http://arxiv.org/abs/2604.26615v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26615v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26615v1/x1.png",
+      "figure_caption": "Figure 1. Illustrative manifesto entries and their governance structure.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26694v1",
+      "title": "Unified 4D World Action Modeling from Video Priors with Asynchronous Denoising",
+      "authors": [
+        "Jun Guo",
+        "Qiwei Li",
+        "Peiyan Li",
+        "Zilong Chen",
+        "Nan Sun"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CV",
+        "cs.RO"
+      ],
+      "abstract": "X-WAM is a Unified 4D World Model that integrates real-time robotic action execution with high-fidelity 4D world synthesis (video and 3D reconstruction). It leverages pretrained video diffusion models to predict future multi-view RGB-D videos, efficiently incorporating spatial information via a lightweight adaptation of the diffusion model's structure. The method further employs Asynchronous Noise Sampling (ANS) to optimize the trade-off between generation quality and action decoding efficiency.",
+      "url": "http://arxiv.org/abs/2604.26694v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26694v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26694v1/x1.png",
+      "figure_caption": "Overview of X-WAM. Top: X-WAM is a unified 4D World Action Model that jointly predicts future multi-view RGB-D videos and robot actions from video priors, featuring a lightweight depth adaptation module for spatial reconstruction and Asynchronous Noise Sampling (ANS) for efficient action decoding. Bottom: X-WAM surpasses existing methods in policy success rate on RoboCasa and RoboTwin 2.0, produces high-fidelity 4D reconstruction and generation, and enables real-time execution deployment on physical robots.",
+      "primary_category": "cs.AI",
+      "primary_category_anchor": "cs-ai",
+      "primary_category_rank": 0
+    },
+    {
+      "id": "2604.26880v1",
+      "title": "HealthNLP_Retrievers at ArchEHR-QA 2026: Cascaded LLM Pipeline for Grounded Clinical Question Answering",
+      "authors": [
+        "Md Biplob Hosen",
+        "Md Alomgeer Hussein",
+        "Md Akmol Masud",
+        "Omar Faruque",
+        "Tera L Reynolds"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "The HealthNLP\\_Retrievers team developed a cascaded LLM pipeline using Gemini 2.5 Pro for grounded clinical question answering over EHRs. Their core method involves four stages: query reformulation, heuristic-based evidence scoring for recall, and a grounded response generator that synthesizes answers strictly from retrieved evidence. This approach aims to accurately interpret patient questions and generate understandable, evidence-based answers from complex clinical notes.",
+      "url": "http://arxiv.org/abs/2604.26880v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26880v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26880v1/x1.png",
+      "figure_caption": "Workflow of the HealthNLP_Retrievers multi-stage cascaded pipeline.",
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.26866v1",
+      "title": "MoRFI: Monotonic Sparse Autoencoder Feature Identification",
+      "authors": [
+        "Dimitris Dimakopoulos",
+        "Shay B. Cohen",
+        "Ioannis Konstas"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "abstract": "The paper introduces **MoRFI (Monotonic Sparse Autoencoder Feature Identification)** to analyze how fine-tuning exacerbates hallucinations in LLMs by introducing new knowledge. The core method involves controlled fine-tuning experiments on various LLMs with new QA datasets, observing that incremental knowledge introduction and prolonged training increase hallucinations. MoRFI then leverages pre-trained Sparse Autoencoders (SAEs) to identify specific, causally contributing latent directions linked to these factual errors.",
+      "url": "http://arxiv.org/abs/2604.26866v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26866v1",
+      "score": 8.0,
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.26573v1",
+      "title": "PAINT: Partial-Solution Adaptive Interpolated Training for Self-Distilled Reasoners",
+      "authors": [
+        "Zhiquan Tan",
+        "Yinrong Hong"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "abstract": "PAINT introduces Partial-solution Adaptive Interpolated Training for self-distilled LLM reasoners. The core method adaptively masks the verified solution based on its overlap with the student's current rollout, then applies a small energy-space interpolation to generate dense, context-aware training targets. This approach aims to balance the informativeness of supervised targets with the on-policy relevance of self-distillation.",
+      "url": "http://arxiv.org/abs/2604.26573v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26573v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26573v1/sections/figs/sketch.png",
+      "figure_caption": "PAINT training pipeline. PAINT samples an on-policy rollout, uses rollout-reference overlap \\( \\alpha \\) to form a suffix-masked solution y ~ ⋆ \\( \\tilde{y}^{\\star} \\) , re-scores the same prefixes with a fixed privileged view, and applies small energy interpolation only on entropy-mismatch positions.",
+      "primary_category": "cs.LG",
+      "primary_category_anchor": "cs-lg",
+      "primary_category_rank": 1
+    },
+    {
+      "id": "2604.26622v1",
+      "title": "OCR-Memory: Optical Context Retrieval for Long-Horizon Agent Memory",
+      "authors": [
+        "Jinze Li",
+        "Yang Zhang",
+        "Xin Yang",
+        "Jiayi Qu",
+        "Jinfeng Xu"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "abstract": "OCR-Memory addresses the token-budget limitations of text-based agent memory by leveraging the visual modality as a high-density experience representation. The core method involves rendering historical agent trajectories into annotated images, which are then retrieved using a \"locate-and-transcribe\" paradigm based on visual anchors. This approach allows agents to retain arbitrarily long histories with minimal prompt overhead during retrieval, significantly improving long-horizon performance.",
+      "url": "http://arxiv.org/abs/2604.26622v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26622v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26622v1/x1.png",
+      "figure_caption": "Overview of the OCR-Memory. The system enables long-horizon agent memory by storing interaction histories as compressed multi-resolution images (left). To retrieve information, we employ a Locate-and-Transcribe paradigm: the model scans the visual history annotated with Set-of-Mark (SoM) visual anchors (center) to predict the index of relevant segments. Finally, the verbatim text corresponding to the selected index is deterministically fetched (right), avoiding generation-based hallucinations and minimizing token usage.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    },
+    {
+      "id": "2604.26630v1",
+      "title": "SAGE: A Strategy-Aware Graph-Enhanced Generation Framework For Online Counseling",
+      "authors": [
+        "Eliya Naomi Aharon",
+        "Meytal Grimland",
+        "Avi Segal",
+        "Loona Ben Dayan",
+        "Inbar Shenfeld"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "abstract": "SAGE is a novel framework that enhances LLMs for online counseling by integrating structured clinical knowledge. It constructs a heterogeneous graph unifying conversational dynamics with psychological theories to inform intervention. This structure guides a Next Strategy Classifier and a Graph-Aware Attention mechanism, which conditions the LLM to generate responses with appropriate clinical depth and strategic awareness.",
+      "url": "http://arxiv.org/abs/2604.26630v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.26630v1",
+      "score": 8.0,
+      "figure_url": "https://arxiv.org/html/2604.26630v1/figures/session_flow.png",
+      "figure_caption": "Figure 1. Fictitious session snippet with psychological categories and intervention strategies presented.",
+      "primary_category": "cs.CL",
+      "primary_category_anchor": "cs-cl",
+      "primary_category_rank": 2
+    }
+  ],
+  "hacker_news": [
+    {
+      "id": 47949642,
+      "title": "Mistral Medium 3.5",
+      "url": "https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5",
+      "score": 465,
+      "created_at": "2026-04-29T15:17:46Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47949642",
+      "summary": "Mistral AI has released Mistral Medium 3.5, an updated large language model featuring enhanced reasoning and coding capabilities, alongside new remote agent functionalities."
+    },
+    {
+      "id": 47957294,
+      "title": "The Zig project's rationale for their anti-AI contribution policy",
+      "url": "https://simonwillison.net/2026/Apr/30/zig-anti-ai/",
+      "score": 327,
+      "created_at": "2026-04-30T02:15:47Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47957294",
+      "summary": "The Zig programming language project has implemented an anti-AI contribution policy due to concerns about the ethical implications and potential misuse of AI-generated code."
+    },
+    {
+      "id": 47949750,
+      "title": "Why AI companies want you to be afraid of them",
+      "url": "https://www.bbc.com/future/article/20260428-ai-companies-want-you-to-be-afraid-of-them",
+      "score": 277,
+      "created_at": "2026-04-29T15:26:01Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47949750",
+      "summary": "AI companies may be intentionally amplifying fears about their technology to encourage stricter regulation that benefits established players and hinders smaller competitors."
+    },
+    {
+      "id": 47947490,
+      "title": "He asked AI to count carbs 27000 times. It couldn't give the same answer twice",
+      "url": "https://www.diabettech.com/i-asked-ai-to-count-my-carbs-27000-times-it-couldnt-give-me-the-same-answer-twice/",
+      "score": 238,
+      "created_at": "2026-04-29T12:38:50Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47947490",
+      "summary": "A user repeatedly asked an AI to count carbohydrates, discovering that the AI provided a different answer each time across 27,000 attempts."
+    },
+    {
+      "id": 47953011,
+      "title": "\"People who don't use AI will be left behind\"",
+      "url": "https://migrainebrain.bearblog.dev/people-who-dont-use-ai-will-be-left-behind/",
+      "score": 162,
+      "created_at": "2026-04-29T19:15:52Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47953011",
+      "summary": "The core message is that individuals who fail to adopt and utilize artificial intelligence technologies risk being significantly disadvantaged or marginalized in the future."
+    },
+    {
+      "id": 47957627,
+      "title": "Alignment whack-a-mole: Finetuning activates recall of copyrighted books in LLMs",
+      "url": "https://github.com/cauchy221/Alignment-Whack-a-Mole-Code",
+      "score": 145,
+      "created_at": "2026-04-30T03:11:51Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47957627",
+      "summary": "Fine-tuning large language models can unexpectedly reactivate the recall of copyrighted training data, illustrating a persistent challenge in AI alignment and data security."
+    },
+    {
+      "id": 47951786,
+      "title": "Ramp's Sheets AI Exfiltrates Financials",
+      "url": "https://www.promptarmor.com/resources/ramps-sheets-ai-exfiltrates-financials",
+      "score": 130,
+      "created_at": "2026-04-29T17:44:21Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47951786",
+      "summary": "Ramp's Sheets AI feature was found to be exfiltrating sensitive financial data due to a security vulnerability."
+    },
+    {
+      "id": 47947525,
+      "title": "Letting AI play my game – building an agentic test harness to help play-testing",
+      "url": "https://blog.jeffschomay.com/letting-ai-play-my-game",
+      "score": 128,
+      "created_at": "2026-04-29T12:43:12Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47947525",
+      "summary": "A developer built an agentic AI test harness to automate and enhance the play-testing process for their game."
+    },
+    {
+      "id": 47956895,
+      "title": "Claude.ai and API unavailable [fixed]",
+      "url": "https://status.claude.com/incidents/2gf1jpyty350",
+      "score": 116,
+      "created_at": "2026-04-30T01:21:03Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47956895",
+      "summary": "Claude.ai and its API experienced an outage but have since been resolved, according to the status page."
+    },
+    {
+      "id": 47956739,
+      "title": "Mike: open-source legal AI",
+      "url": "https://mikeoss.com/",
+      "score": 112,
+      "created_at": "2026-04-30T00:56:23Z",
+      "comments_url": "https://news.ycombinator.com/item?id=47956739",
+      "summary": "The tech news story, titled \"Mike: open-source legal AI,\" likely details the launch or features of an open-source artificial intelligence project focused on legal applications developed by \"Mike.\""
+    }
+  ],
+  "github_trending": [
+    {
+      "full_name": "warpdotdev/warp",
+      "url": "https://github.com/warpdotdev/warp",
+      "description": "Warp is an agentic development environment, born out of the terminal.",
+      "stars_today": 12822,
+      "total_stars": 47116,
+      "language": "Rust",
+      "topics": [],
+      "summary": "Warp is an agentic development environment, born out of the terminal, that enhances the command-line experience with AI-powered features."
+    },
+    {
+      "full_name": "TauricResearch/TradingAgents",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "stars_today": 386,
+      "total_stars": 56498,
+      "language": "Python",
+      "topics": [],
+      "summary": "TradingAgents is a multi-agent LLM framework designed for financial trading, enabling complex, autonomous trading strategies through coordinated AI agents."
+    },
+    {
+      "full_name": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "description": "Skills for Real Engineers. Straight from my .claude directory.",
+      "stars_today": 7280,
+      "total_stars": 47332,
+      "language": "Shell",
+      "topics": [],
+      "summary": "This GitHub repository, \"mattpocock/skills,\" serves as a collection of practical skills and insights, likely derived from the author's personal development directory, aimed at real-world engineering applications."
+    },
+    {
+      "full_name": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "description": "An agentic skills framework & software development methodology that works.",
+      "stars_today": 1653,
+      "total_stars": 173977,
+      "language": "Shell",
+      "topics": [],
+      "summary": "Superpowers is an agentic skills framework and software development methodology designed to be a functional and effective system for building software."
+    },
+    {
+      "full_name": "lukilabs/craft-agents-oss",
+      "url": "https://github.com/lukilabs/craft-agents-oss",
+      "description": "",
+      "stars_today": 393,
+      "total_stars": 5467,
+      "language": "TypeScript",
+      "topics": [],
+      "summary": "This open-source repository provides a framework for building and deploying AI agents using the Craft framework, enabling developers to create sophisticated, task-oriented applications."
+    },
+    {
+      "full_name": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis",
+      "description": "A collective list of free APIs",
+      "stars_today": 307,
+      "total_stars": 429017,
+      "language": "Python",
+      "topics": [],
+      "summary": "The **public-apis** repository curates a massive, community-driven list of free, publicly accessible APIs across various categories, serving as a central resource for developers."
+    },
+    {
+      "full_name": "1jehuang/jcode",
+      "url": "https://github.com/1jehuang/jcode",
+      "description": "Coding Agent Harness",
+      "stars_today": 411,
+      "total_stars": 1673,
+      "language": "Rust",
+      "topics": [],
+      "summary": "Jcode provides a flexible harness for developing and running coding agents, enabling structured interaction and execution of code-related tasks."
+    },
+    {
+      "full_name": "soxoj/maigret",
+      "url": "https://github.com/soxoj/maigret",
+      "description": "🕵️‍♂️ Collect a dossier on a person by username from 3000+ sites",
+      "stars_today": 79,
+      "total_stars": 20535,
+      "language": "Python",
+      "topics": [],
+      "summary": "Maigret is a tool that collects a comprehensive dossier on an individual by querying over 3000 websites using a provided username."
+    },
+    {
+      "full_name": "HunxByts/GhostTrack",
+      "url": "https://github.com/HunxByts/GhostTrack",
+      "description": "Useful tool to track location or mobile number",
+      "stars_today": 1033,
+      "total_stars": 11915,
+      "language": "Python",
+      "topics": [],
+      "summary": "GhostTrack is a useful tool designed to track the location or mobile number of a target."
+    }
+  ],
+  "us_stocks": [],
+  "postdoc_jobs": [],
+  "jobs": [],
+  "supervisor_updates": [],
+  "weather": [
+    {
+      "query": "London",
+      "label": "London, England, United Kingdom",
+      "resolved_name": "London",
+      "region": "England",
+      "country": "United Kingdom",
+      "latitude": 51.50853,
+      "longitude": -0.12574,
+      "timezone": "Europe/London",
+      "forecast_date": "2026-04-30",
+      "condition": "Clear sky",
+      "weather_code": 0,
+      "temperature_c": 17.8,
+      "apparent_temperature_c": 14.6,
+      "temp_max_c": 19.4,
+      "temp_min_c": 11.2,
+      "humidity_pct": 35,
+      "wind_speed_kmh": 18.4,
+      "precipitation_probability_pct": 0,
+      "is_day": true,
+      "sunrise": "2026-04-30T05:33",
+      "sunset": "2026-04-30T20:21",
+      "source": "Open-Meteo",
+      "source_url": "https://open-meteo.com/"
+    }
+  ]
+}
